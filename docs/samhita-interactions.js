@@ -241,6 +241,35 @@
       });
 
       goToSlide(0);
+
+      // Auto-slide (the "Our Story" ladder-story slider only, per request) -
+      // pauses on hover/focus so a reader lingering on a slide isn't
+      // interrupted mid-read, and resumes from wherever it left off once
+      // they move away. Skipped entirely under prefers-reduced-motion,
+      // same as every other timed animation in this file.
+      if (slider.classList.contains("is-overview") && !reduceMotionSlider) {
+        var AUTO_SLIDE_INTERVAL = 5000;
+        var autoSlideTimer = null;
+
+        function startAutoSlide() {
+          stopAutoSlide();
+          autoSlideTimer = setInterval(function () {
+            goToSlide(current + 1);
+          }, AUTO_SLIDE_INTERVAL);
+        }
+        function stopAutoSlide() {
+          if (autoSlideTimer) {
+            clearInterval(autoSlideTimer);
+            autoSlideTimer = null;
+          }
+        }
+
+        startAutoSlide();
+        slider.addEventListener("mouseenter", stopAutoSlide);
+        slider.addEventListener("mouseleave", startAutoSlide);
+        slider.addEventListener("focusin", stopAutoSlide);
+        slider.addEventListener("focusout", startAutoSlide);
+      }
     });
 
     // --- Popup open/close (Connect / inquiry form) ---
@@ -546,6 +575,67 @@
       window.matchMedia &&
       window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+    // Scroll parallax for the hero photo: as the page scrolls through the
+    // hero fold, the photo shifts vertically at a fraction of scroll speed
+    // (lagging behind the heading/CTA above it, which scroll at the normal
+    // rate), giving it depth. Runs on every device/pointer type (unlike the
+    // cursor-tilt below), since scrolling itself is universal - only gated
+    // on prefers-reduced-motion.
+    //
+    // Shares one transform-state object + apply function with the cursor
+    // tilt below (both target the same .hero-bg-fixed element) so the two
+    // handlers compose into a single transform string instead of each
+    // stomping the other's inline style. HERO_BASE_SCALE permanently
+    // overscales the photo so both the parallax translate and the tilt
+    // rotate always have edge-to-spare, rather than only scaling up on
+    // hover like an earlier version of this effect did.
+    var heroSection = document.querySelector(".section-hero");
+    var heroBg = document.querySelector(".hero-bg-fixed");
+    if (heroSection && heroBg) {
+      var HERO_BASE_SCALE = 1.12;
+      var heroTransformState = { tiltX: 0, tiltY: 0, parallaxY: 0 };
+
+      var applyHeroTransform = function () {
+        heroBg.style.transform =
+          "translateY(" + heroTransformState.parallaxY.toFixed(1) + "px) " +
+          "rotateX(" + heroTransformState.tiltX.toFixed(2) + "deg) " +
+          "rotateY(" + heroTransformState.tiltY.toFixed(2) + "deg) " +
+          "scale(" + HERO_BASE_SCALE + ")";
+      };
+
+      if (!reduceMotionCursor) {
+        var HERO_PARALLAX_STRENGTH = 0.15;
+        var HERO_PARALLAX_MAX = 60;
+        var heroParallaxTicking = false;
+
+        var updateHeroParallax = function () {
+          heroParallaxTicking = false;
+          var rect = heroSection.getBoundingClientRect();
+          // Only bother once the hero is at least partly on screen - skips
+          // work for every scroll event on the rest of the page.
+          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+          var raw = -rect.top * HERO_PARALLAX_STRENGTH;
+          heroTransformState.parallaxY = Math.max(
+            -HERO_PARALLAX_MAX,
+            Math.min(HERO_PARALLAX_MAX, raw)
+          );
+          applyHeroTransform();
+        };
+
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (!heroParallaxTicking) {
+              heroParallaxTicking = true;
+              requestAnimationFrame(updateHeroParallax);
+            }
+          },
+          { passive: true }
+        );
+        updateHeroParallax();
+      }
+    }
+
     if (hasFinePointer && !reduceMotionCursor) {
       // Magnetic CTA buttons: nudges each .primary-button a few px toward
       // the cursor while hovered, capped well short of the button's own
@@ -584,24 +674,24 @@
       });
 
       // Cursor-tilt parallax on the hero image: a few degrees of
-      // rotateX/rotateY tied to pointer position within the hero, plus a
-      // slight scale-up (see samhita-theme.css's comment on .hero-bg-fixed
-      // for why) to hide the image's own edges at the tilt's extremes.
-      var heroSection = document.querySelector(".section-hero");
-      var heroBg = document.querySelector(".hero-bg-fixed");
+      // rotateX/rotateY tied to pointer position within the hero. Updates
+      // the same heroTransformState the scroll parallax above uses, and
+      // re-composes the full transform through applyHeroTransform() -
+      // this is what keeps the two effects from overwriting each other.
       if (heroSection && heroBg) {
         var HERO_TILT_MAX = 6;
         heroSection.addEventListener("mousemove", function (e) {
           var rect = heroSection.getBoundingClientRect();
           var px = (e.clientX - rect.left) / rect.width - 0.5;
           var py = (e.clientY - rect.top) / rect.height - 0.5;
-          heroBg.style.transform =
-            "rotateX(" + (-py * HERO_TILT_MAX).toFixed(2) + "deg) " +
-            "rotateY(" + (px * HERO_TILT_MAX).toFixed(2) + "deg) " +
-            "scale(1.03)";
+          heroTransformState.tiltX = -py * HERO_TILT_MAX;
+          heroTransformState.tiltY = px * HERO_TILT_MAX;
+          applyHeroTransform();
         });
         heroSection.addEventListener("mouseleave", function () {
-          heroBg.style.transform = "";
+          heroTransformState.tiltX = 0;
+          heroTransformState.tiltY = 0;
+          applyHeroTransform();
         });
       }
     }

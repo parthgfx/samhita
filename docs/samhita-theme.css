@@ -254,23 +254,22 @@ html {
 }
 
 /*
-  Hero photo: fixed background instead of a scrolling <img>, so the image
-  itself doesn't move as the fold scrolls (the heading/CTA above it still
-  scroll normally — only the photo stays anchored to the viewport until the
-  hero section scrolls out from in front of it). The image moved from an
-  <img> tag to a CSS background-image (set inline in samhita-home.html,
-  since it's a one-off) specifically so background-attachment: fixed can
-  apply — that property has no equivalent for a regular <img>.
-  Known limitation: iOS Safari ignores background-attachment: fixed and
-  silently falls back to normal scrolling behavior (a long-standing engine
-  limitation, not something fixable from CSS alone) — the hero still looks
-  and works fine there, it just won't have the fixed-photo effect.
+  Hero photo. Used to rely on background-attachment: fixed for a sense of
+  depth as the fold scrolls, but that has two problems: iOS Safari silently
+  ignores it (falls back to plain scrolling), and it doesn't compose with
+  samhita-interactions.js's scroll-parallax + cursor-tilt effect on this
+  same element (a transform on an element with a fixed background is
+  unreliable across browsers - some stop treating the background as
+  viewport-fixed the moment a transform is present). Replaced with a plain
+  scrolling background; the parallax motion itself now comes entirely from
+  that JS-driven transform (translateY tied to scroll position, see
+  samhita-interactions.js's "Scroll parallax for the hero photo"), which
+  works identically on every browser including iOS.
 */
 .hero-bg-fixed {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 /* Slight dark overlay over the hero photo, so the white heading/CTA text
@@ -1006,13 +1005,21 @@ html {
 }
 
 /*
-  Cursor-tilt parallax on the hero image (desktop only). samhita-
-  interactions.js applies a subtle rotateX/rotateY + slight scale-up to
-  .hero-bg-fixed on mousemove over the hero, gated to fine-pointer/hover-
-  capable devices (no persistent cursor on touch, so the effect is simply
-  never wired up there rather than being wired up and doing nothing) and
-  skipped under prefers-reduced-motion. `perspective` has to live on an
-  ancestor for rotateX/Y to read as real 3D depth rather than a flat skew.
+  Cursor-tilt + scroll-parallax on the hero image. samhita-interactions.js
+  applies a subtle rotateX/rotateY on mousemove (fine-pointer/hover-capable
+  devices only - no persistent cursor on touch, so it's simply never wired
+  up there rather than wired up and doing nothing) and a scroll-linked
+  translateY (every device - see that file's "Scroll parallax for the hero
+  photo") to .hero-bg-fixed, both skipped under prefers-reduced-motion.
+  `perspective` has to live on an ancestor for rotateX/Y to read as real 3D
+  depth rather than a flat skew.
+
+  No CSS transition on the transform itself, deliberately: a transition
+  would smooth the cursor-tilt's discrete mousemove updates, but it would
+  also lag the scroll-parallax translateY behind the actual scroll
+  position by that same transition duration, reading as swimmy/delayed
+  rather than tracking the scroll tightly - and the tilt already gets
+  plenty of update frequency from mousemove itself without one.
 
   On .section-hero, not .layout-centered.is-hero - a real, confirmed bug
   from an earlier version of this fix: `perspective` (like `transform`,
@@ -1031,12 +1038,23 @@ html {
   keeps it as the correct containing block (no change from before this
   feature existed) while still being a real ancestor of .hero-bg-fixed, so
   the 3D tilt itself is unaffected.
+
+  `overflow: hidden` here too - a real, confirmed bug from the first version
+  of the scroll-parallax feature above: samhita-interactions.js permanently
+  scales .hero-bg-fixed up 12% (HERO_BASE_SCALE) to give the tilt/parallax
+  transform room to move without exposing the photo's own edges. With
+  nothing clipping .section-hero, that extra 12% of photo simply rendered
+  past the section's own bottom edge, overlapping whatever section comes
+  next (confirmed: the stats bar's rows were visibly bleeding-through under
+  the hero photo). .section-hero already has no content that itself needs
+  to overflow outward, so clipping it to its own box removes the bleed with
+  no other effect.
 */
 .section-hero {
   perspective: 800px;
+  overflow: hidden;
 }
 .hero-bg-fixed {
-  transition: transform 0.3s ease-out;
   will-change: transform;
 }
 
@@ -1068,9 +1086,6 @@ html {
   grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-top: 2rem;
-}
-#section-partners-logos .container-standard.w-container {
-  max-width: none;
 }
 .partner-banner {
   background-color: white;
@@ -1162,3 +1177,76 @@ html {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* ── Stats Bar ──
+   Brand-font numerals with a two-line label sitting beside (not below)
+   each number, vertically centered against it.
+
+   Explicit grid breakpoints instead of relying on flex-wrap's natural
+   overflow: measured, the 4 items need ~1250px of content width to sit on
+   one line without crowding (each item is intrinsically sized by its own
+   label's max-width, so it doesn't shrink to fit a narrower row - it just
+   overflows). The template's own generic 991px section breakpoint is well
+   short of that, so between ~992-1319px wide viewports flex-wrap was
+   dropping to an uneven 3-then-1 split rather than a clean 2x2. Grid with
+   breakpoints tuned to the real content width (2 columns from 480-1319px,
+   1 column below 480px, 4-column single row only from 1320px up, where
+   the section's own container has enough room) replaces that with a
+   layout that's always either a clean single row, a clean 2x2, or a
+   clean single column - never a partial wrap. */
+.section-stats-bar {
+  background: #fff;
+  padding: 3.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1.75rem;
+  column-gap: 2rem;
+}
+
+.stats-bar-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.stats-bar-number {
+  font-family: var(--font--primary);
+  font-weight: 700;
+  font-size: 3.25rem;
+  line-height: 1;
+  color: #111827;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.stats-bar-label {
+  font-family: var(--font--primary);
+  font-size: 0.9rem;
+  color: #111827;
+  line-height: 1.35;
+  max-width: 150px;
+}
+
+@media screen and (min-width: 480px) {
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2rem;
+    column-gap: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 1320px) {
+  .stats-bar {
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+  }
+  .stats-bar-number {
+    font-size: 4.25rem;
+  }
+}
+

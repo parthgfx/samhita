@@ -3,3 +3,8 @@ node_modules/
 *.jpg
 *.zip
 .claude/settings.local.json
+
+# Unused candidate images (~240MB, not referenced by any page) - only the
+# ones actually used (docs/images/index/secondfold, .../theladdertoincomegrowth)
+# are tracked.
+docs/images/index/all/
