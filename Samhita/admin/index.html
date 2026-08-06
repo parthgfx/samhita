@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samhita CMS — Admin</title>
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f5f7; --surface: #fff; --border: #e0e0e0; --text: #1d1d1f;
+    --text-muted: #6e6e73; --accent: #0071e3; --accent-hover: #0060c0;
+    --danger: #e53935; --danger-hover: #c62828; --success: #2e7d32;
+    --radius: 10px; --shadow: 0 1px 3px rgba(0,0,0,.08);
+    --sidebar-w: 260px; --toolbar-h: 48px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; overflow: hidden; height: 100vh; }
+
+  .app { display: flex; height: 100vh; }
+  .sidebar { width: var(--sidebar-w); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
+  .sidebar-header { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+  .sidebar-header h1 { font-size: 15px; font-weight: 700; }
+  .sidebar-header .subtitle { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+  .sidebar-body { flex: 1; overflow-y: auto; padding: 6px 0; }
+  .sidebar-footer { padding: 10px 12px; border-top: 1px solid var(--border); }
+  .main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+  /* Toolbar */
+  .toolbar { height: var(--toolbar-h); display: flex; align-items: center; gap: 6px; padding: 0 14px; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .toolbar .page-title { font-size: 13px; font-weight: 700; margin-right: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .toolbar .sep { width: 1px; height: 22px; background: var(--border); }
+
+  /* Editor mode toggle */
+  .mode-toggle { display: flex; background: var(--bg); border-radius: 6px; border: 1px solid var(--border); overflow: hidden; }
+  .mode-toggle button { padding: 4px 12px; font-size: 11px; font-weight: 600; border: none; background: transparent; cursor: pointer; color: var(--text-muted); transition: all .15s; }
+  .mode-toggle button.active { background: var(--accent); color: #fff; }
+
+  /* Page tree */
+  .tree-page { margin-bottom: 1px; }
+  .tree-page-header { display: flex; align-items: center; gap: 5px; padding: 7px 12px; cursor: pointer; font-size: 12px; font-weight: 600; transition: background .1s; user-select: none; }
+  .tree-page-header:hover { background: #f0f0f2; }
+  .tree-page-header.active { background: var(--accent); color: #fff; }
+  .tree-page-header .arrow { font-size: 9px; width: 12px; transition: transform .15s; flex-shrink: 0; }
+  .tree-page-header.open .arrow { transform: rotate(90deg); }
+  .tree-children { display: none; }
+  .tree-children.open { display: block; }
+  .tree-section { display: flex; align-items: center; gap: 5px; padding: 4px 12px 4px 32px; font-size: 11px; color: var(--text-muted); cursor: pointer; transition: background .1s; }
+  .tree-section:hover { background: #f0f0f2; color: var(--text); }
+  .tree-section.active { background: #e3f0fc; color: var(--accent); font-weight: 600; }
+  .tree-section .type-badge { font-size: 9px; background: var(--bg); padding: 1px 4px; border-radius: 3px; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border: none; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all .15s; white-space: nowrap; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+  .btn-primary:disabled { background: #a0c4e8; cursor: default; opacity: .6; }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { background: var(--danger-hover); }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-outline:hover { background: var(--bg); }
+  .btn-sm { padding: 4px 8px; font-size: 11px; }
+  .btn-unsaved { background: #e65100; }
+  .btn-unsaved:hover:not(:disabled) { background: #bf360c; }
+
+  /* Visual editor iframe */
+  .editor-frame-wrap { flex: 1; position: relative; background: #e8e8ea; overflow: hidden; }
+  .editor-frame { border: none; transform-origin: top left; }
+  .editor-empty { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); text-align: center; }
+  .editor-empty h3 { margin-bottom: 6px; color: var(--text); font-size: 16px; }
+
+  /* Backend editor */
+  .backend-editor { flex: 1; overflow-y: auto; padding: 20px 28px; max-width: 900px; display: none; }
+  .backend-editor.active { display: block; }
+
+  /* SEO panel */
+  .seo-panel { max-height: 0; overflow: hidden; transition: max-height .3s ease; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .seo-panel.open { max-height: 800px; overflow-y: auto; }
+  .seo-panel-inner { padding: 14px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+  .seo-group { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .seo-group h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-muted); margin-bottom: 6px; }
+  .seo-group textarea { width: 100%; min-height: 80px; padding: 8px; border: 1px solid var(--border); border-radius: 5px; font-size: 11px; font-family: 'SF Mono', Monaco, Consolas, monospace; background: #fafafa; resize: vertical; line-height: 1.4; }
+  .seo-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,113,227,.12); }
+  .seo-group.full-width { grid-column: 1 / -1; }
+
+  /* Section cards (backend editor) */
+  .section-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 14px; box-shadow: var(--shadow); }
+  .section-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; cursor: pointer; user-select: none; border-bottom: 1px solid transparent; }
+  .section-header.open { border-bottom-color: var(--border); }
+  .section-header h3 { font-size: 13px; font-weight: 600; }
+  .section-header .badge { font-size: 10px; background: var(--bg); padding: 2px 7px; border-radius: 4px; color: var(--text-muted); }
+  .section-body { padding: 16px; display: none; }
+  .section-body.open { display: block; }
+  .section-move-btns { display: flex; gap: 3px; }
+  .section-move-btns button { padding: 2px 7px; font-size: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; }
+  .section-move-btns button:hover { background: var(--border); }
+
+  /* Fields */
+  .field-group { margin-bottom: 10px; }
+  .field-group label { display: block; font-size: 10px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .4px; }
+  .field-group input[type="text"], .field-group textarea, .field-group select { width: 100%; padding: 7px 9px; border: 1px solid var(--border); border-radius: 5px; font-size: 13px; font-family: inherit; background: var(--surface); }
+  .field-group textarea { min-height: 60px; resize: vertical; }
+  .field-group input:focus, .field-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,113,227,.12); }
+
+  /* Image fields */
+  .image-field-wrap { border: 1px dashed var(--border); border-radius: 8px; padding: 10px; background: #fafafa; }
+  .image-preview-large { width: 100%; max-height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 6px; display: block; background: var(--bg); }
+  .image-preview-large[src=""] { display: none; }
+  .image-controls { display: flex; gap: 6px; align-items: center; }
+  .image-controls input[type="text"] { flex: 1; padding: 5px 7px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px; }
+  .bg-image-wrap { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 6px; }
+  .bg-image-wrap img { width: 100%; max-height: 160px; object-fit: cover; display: block; }
+  .bg-image-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .2s; }
+  .bg-image-wrap:hover .bg-image-overlay { opacity: 1; }
+  .bg-image-overlay .btn { background: #fff; color: var(--text); }
+
+  /* Image gallery */
+  .image-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 6px; }
+  .image-gallery-item { position: relative; border-radius: 6px; overflow: hidden; aspect-ratio: 16/10; border: 1px solid var(--border); }
+  .image-gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Repeaters */
+  .repeater { border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; margin-bottom: 8px; background: #fafbfc; }
+  .repeater-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .repeater-header label { font-size: 11px; font-weight: 700; margin: 0; }
+  .repeater-item { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-bottom: 6px; }
+  .repeater-item .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .repeater-item .item-header span { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+
+  /* Quill overrides */
+  .quill-wrap { margin-bottom: 10px; }
+  .quill-wrap label { display: block; font-size: 10px; font-weight: 600; color: var(--text-muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .4px; }
+  .quill-wrap .ql-container { border-radius: 0 0 6px 6px; font-size: 13px; font-family: inherit; min-height: 50px; }
+  .quill-wrap .ql-toolbar { border-radius: 6px 6px 0 0; background: #fafafa; }
+  .quill-wrap.compact .ql-container { min-height: 30px; }
+  .quill-wrap.compact .ql-editor { padding: 5px 9px; }
+  .ql-editor { min-height: 50px; }
+  .quill-wrap.compact .ql-editor { min-height: 20px; }
+
+  /* Modal */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 100; display: none; align-items: center; justify-content: center; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: var(--surface); border-radius: var(--radius); padding: 20px; width: 400px; max-width: 90vw; }
+  .modal h3 { margin-bottom: 12px; font-size: 15px; }
+  .modal .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+  .hint-text { font-size: 11px; color: var(--text-muted); margin-top: 3px; font-style: italic; }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 20px; right: 20px; padding: 10px 18px; border-radius: 8px; color: #fff; font-size: 13px; font-weight: 500; z-index: 1000; opacity: 0; transform: translateY(10px); transition: all .3s; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.success { background: var(--success); }
+  .toast.error { background: var(--danger); }
+
+  /* Page meta section in backend editor */
+  .page-meta { margin-bottom: 20px; }
+  .page-meta h2 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>Samhita CMS</h1>
+      <div class="subtitle">Content Editor</div>
+    </div>
+    <div class="sidebar-body" id="pageTree"></div>
+    <div class="sidebar-footer">
+      <button class="btn btn-outline btn-sm" style="width:100%" onclick="showNewPageModal()">+ New Page</button>
+    </div>
+  </aside>
+  <div class="main-area">
+    <div class="toolbar" id="toolbar" style="display:none">
+      <span class="page-title" id="toolbarTitle"></span>
+      <div class="mode-toggle">
+        <button id="modeVisual" class="active" onclick="setEditorMode('visual')">Visual</button>
+        <button id="modeBackend" onclick="setEditorMode('backend')">Backend</button>
+      </div>
+      <div class="sep"></div>
+      <button class="btn btn-primary btn-save" id="saveBtn" disabled onclick="savePage()">Save Changes</button>
+      <div class="sep"></div>
+      <button class="btn btn-outline btn-sm" onclick="showAddSectionModal()">+ Section</button>
+      <button class="btn btn-outline btn-sm" id="seoToggle" onclick="toggleSEO()">SEO</button>
+      <div class="sep"></div>
+      <a class="btn btn-outline btn-sm" id="viewLiveLink" href="#" target="_blank">View Live</a>
+    </div>
+    <div class="seo-panel" id="seoPanel"></div>
+    <div class="editor-frame-wrap" id="editorWrap">
+      <div class="editor-empty" id="editorEmpty">
+        <div><h3>Select a page</h3><p>Choose a page from the sidebar to start editing.</p></div>
+      </div>
+      <iframe class="editor-frame" id="editorFrame" style="display:none"></iframe>
+    </div>
+    <div class="backend-editor" id="backendEditor"></div>
+  </div>
+</div>
+
+<!-- New Page Modal -->
+<div class="modal-overlay" id="newPageModal">
+  <div class="modal">
+    <h3>Create New Page</h3>
+    <div class="field-group"><label>Page Slug</label><input type="text" id="newSlug" placeholder="e.g. about-us"></div>
+    <div class="field-group"><label>Page Title</label><input type="text" id="newTitle" placeholder="e.g. About Us | Samhita"></div>
+    <div class="field-group"><label>Parent Page (optional)</label>
+      <select id="newParent"><option value="">— Root level —</option></select>
+    </div>
+    <div class="field-group"><label>Clone from (optional)</label>
+      <select id="newTemplate"><option value="">— blank —</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="hideModal('newPageModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="createPage()">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Section Modal -->
+<div class="modal-overlay" id="addSectionModal">
+  <div class="modal">
+    <h3>Add Section</h3>
+    <div class="field-group">
+      <label>Section ID</label>
+      <input type="text" id="sectionId" placeholder="e.g. section-about" value="section-">
+      <div class="hint-text">Use lowercase with hyphens. Convention: <strong>section-{name}</strong> (e.g. section-about, section-team).</div>
+    </div>
+    <div class="field-group"><label>Section Type</label><select id="sectionType"></select></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="hideModal('addSectionModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="addSection()">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script>
+// ── State ──
+let currentPage = null;
+let savedSnapshot = null;
+let pages = [];
+let sectionTypes = [];
+let activeSectionId = null;
+let editorMode = 'visual';
+let quillEditors = [];
+
+const RICH_FIELDS = new Set(['heading_line1','heading_line2','heading_line3','paragraph','description','quote']);
+const COMPACT_RICH = new Set(['heading_line1','heading_line2','heading_line3']);
+const IMAGE_KEYS = new Set(['image','logo','src','background_image','hero_image','image_right','image_left','quote_image']);
+const LONG_TEXT = new Set(['description','paragraph','quote','address']);
+
+function isImageKey(key) {
+  return IMAGE_KEYS.has(key) || key.includes('image') || key.includes('logo');
+}
+
+// ── Init ──
+async function init() {
+  sectionTypes = await fetch('/api/section-types').then(r => r.json());
+  await loadPages();
+  const hash = location.hash.slice(1);
+  if (hash) loadPage(hash);
+}
+
+async function loadPages() {
+  pages = await fetch('/api/pages').then(r => r.json());
+  renderPageTree();
+  document.getElementById('newTemplate').innerHTML = '<option value="">— blank —</option>' + pages.map(p => `<option value="${p.slug}">${esc(p.title)}</option>`).join('');
+  document.getElementById('newParent').innerHTML = '<option value="">— Root level —</option>' + pages.map(p => `<option value="${p.slug}">${esc(p.title)}</option>`).join('');
+}
+
+// ── Nested page tree ──
+function renderPageTree() {
+  const tree = document.getElementById('pageTree');
+  const roots = [], childMap = {};
+  for (const p of pages) {
+    if (!p.parent) roots.push(p);
+    else { (childMap[p.parent] = childMap[p.parent] || []).push(p); }
+  }
+  tree.innerHTML = renderTreeLevel(roots, childMap, 0);
+}
+
+function renderTreeLevel(list, childMap, depth) {
+  let html = '';
+  for (const page of list) {
+    const isActive = currentPage && currentPage.slug === page.slug;
+    const children = childMap[page.slug] || [];
+    const sections = isActive && currentPage.sections ? currentPage.sections : [];
+    const indent = depth * 16;
+    html += `<div class="tree-page" style="padding-left:${indent}px">
+      <div class="tree-page-header ${isActive ? 'active open' : ''}" onclick="loadPage('${page.slug}')">
+        <span class="arrow">${children.length || isActive ? '&#9656;' : '&nbsp;'}</span>
+        <span style="overflow:hidden;text-overflow:ellipsis">${esc(page.title)}</span>
+      </div>
+      <div class="tree-children ${isActive ? 'open' : ''}">
+        ${sections.map(s => `
+          <div class="tree-section ${activeSectionId === s.id ? 'active' : ''}" style="padding-left:${indent + 32}px" onclick="event.stopPropagation();scrollToSection('${s.id}')">
+            <span>${esc(s.id)}</span>
+            <span class="type-badge">${s.type}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+    if (children.length) html += renderTreeLevel(children, childMap, depth + 1);
+  }
+  return html;
+}
+
+// ── Load page ──
+async function loadPage(slug) {
+  if (currentPage && isDirty() && !confirm('You have unsaved changes. Discard?')) return;
+  const data = await fetch(`/api/pages/${slug}`).then(r => r.json());
+  if (!data.meta) data.meta = {};
+  currentPage = data;
+  savedSnapshot = JSON.stringify(data);
+  location.hash = slug;
+  document.getElementById('toolbar').style.display = 'flex';
+  document.getElementById('toolbarTitle').textContent = data.title;
+  document.getElementById('viewLiveLink').href = `/page/${slug}`;
+  document.getElementById('editorEmpty').style.display = 'none';
+  updateSaveButton();
+  renderPageTree();
+  renderSEOPanel();
+  if (editorMode === 'visual') loadVisualEditor();
+  else renderBackendEditor();
+}
+
+// ── Editor mode toggle ──
+function setEditorMode(mode) {
+  editorMode = mode;
+  document.getElementById('modeVisual').classList.toggle('active', mode === 'visual');
+  document.getElementById('modeBackend').classList.toggle('active', mode === 'backend');
+  if (mode === 'visual') {
+    document.getElementById('editorWrap').style.display = '';
+    document.getElementById('backendEditor').classList.remove('active');
+    if (currentPage) loadVisualEditor();
+  } else {
+    document.getElementById('editorWrap').style.display = 'none';
+    document.getElementById('editorFrame').style.display = 'none';
+    document.getElementById('backendEditor').classList.add('active');
+    if (currentPage) renderBackendEditor();
+  }
+}
+
+// ═══════════════════════════════════
+// VISUAL COMPOSER
+// ═══════════════════════════════════
+function loadVisualEditor() {
+  const frame = document.getElementById('editorFrame');
+  frame.style.display = 'block';
+  scaleEditorFrame(frame);
+  frame.src = `/page/${currentPage.slug}?t=${Date.now()}`;
+  frame.onload = () => setTimeout(() => injectEditorOverlay(frame), 300);
+}
+
+function scaleEditorFrame(frame) {
+  const wrap = frame.parentElement;
+  const wrapW = wrap.offsetWidth;
+  const wrapH = wrap.offsetHeight;
+  const TARGET_W = 1280;
+  const scale = wrapW / TARGET_W;
+  frame.style.width = TARGET_W + 'px';
+  frame.style.height = Math.round(wrapH / scale) + 'px';
+  frame.style.transform = `scale(${scale})`;
+}
+
+function injectEditorOverlay(frame) {
+  const doc = frame.contentDocument;
+  if (!doc) return;
+
+  const style = doc.createElement('style');
+  style.textContent = `
+    [data-cms-field], [data-cms-item-field] { outline: 2px solid transparent; outline-offset: 2px; transition: outline-color .15s, background .15s; cursor: pointer; }
+    [data-cms-field]:hover, [data-cms-item-field]:hover { outline-color: rgba(0,113,227,.4); background: rgba(0,113,227,.04); }
+    [data-cms-field]:focus, [data-cms-item-field]:focus, [contenteditable="true"]:focus { outline-color: #0071e3; background: rgba(0,113,227,.06); }
+    [contenteditable="true"] { cursor: text; }
+    [data-cms-section]:hover::before { content: attr(data-cms-section); position: absolute; top: -20px; left: 8px; font-size: 10px; background: #0071e3; color: #fff; padding: 2px 8px; border-radius: 3px; z-index: 9999; font-family: -apple-system, sans-serif; pointer-events: none; }
+    .cms-img-overlay { position: absolute; inset: 0; background: rgba(0,113,227,.3); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .2s; z-index: 100; cursor: pointer; }
+    .cms-img-overlay:hover { opacity: 1; }
+    .cms-img-overlay span { background: #fff; color: #1d1d1f; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; font-family: -apple-system, sans-serif; pointer-events: none; }
+  `;
+  doc.head.appendChild(style);
+
+  const win = frame.contentWindow;
+
+  // --- 1. Prevent link navigation (clicks would leave the editor) ---
+  // Only preventDefault (not stopPropagation) so contenteditable elements inside links still get focus
+  doc.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link) e.preventDefault();
+  }, true);
+
+  // --- 2. Kill GSAP / ScrollTrigger animations & reset visibility ---
+  try {
+    if (win.ScrollTrigger) {
+      win.ScrollTrigger.getAll().forEach(t => t.kill());
+    }
+    if (win.gsap) {
+      win.gsap.globalTimeline.clear();
+      doc.querySelectorAll('.gsap_split_line, .gsap_split_word, .levels-card, .experience-card, .instructors-benefit, .room-accordion-wrap, .tag-item, .slider-wrap, .overview-story-card, .overview-details, .section-cta .cta-content, .stay-media, .footer-header, .footer-nav-wrap, .check-icon').forEach(el => {
+        win.gsap.set(el, { clearProps: 'all' });
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    }
+  } catch(e) {}
+
+  // --- 3. Disable hero cursor-tilt parallax ---
+  const heroBg = doc.querySelector('.hero-bg-fixed');
+  if (heroBg) {
+    heroBg.style.transform = '';
+    const heroSection = doc.querySelector('.section-hero');
+    if (heroSection) {
+      const frozen = heroSection.cloneNode(false);
+      while (heroSection.firstChild) frozen.appendChild(heroSection.firstChild);
+      heroSection.parentNode.replaceChild(frozen, heroSection);
+    }
+  }
+
+  // --- 4. Fix count-up values (IntersectionObserver resets them to 0) ---
+  // Replace each .count-up element with a clone to disconnect from the observer,
+  // then set the correct final value.
+  doc.querySelectorAll('.count-up').forEach(el => {
+    const clone = el.cloneNode(true);
+    clone.classList.remove('count-up');
+    const countTo = clone.getAttribute('data-count-to');
+    const suffix = clone.getAttribute('data-count-suffix') || '';
+    if (countTo && !isNaN(parseInt(countTo))) {
+      clone.textContent = parseInt(countTo).toLocaleString('en-US') + suffix;
+    }
+    el.parentNode.replaceChild(clone, el);
+  });
+  // Restore repeater item values that were overwritten by count-up observer
+  if (currentPage) {
+    currentPage.sections.forEach(sec => {
+      const sectionEl = doc.querySelector(`[data-cms-section="${sec.id}"]`);
+      if (!sectionEl) return;
+      for (const [key, val] of Object.entries(sec.content)) {
+        if (!Array.isArray(val)) continue;
+        const repeater = sectionEl.querySelector(`[data-cms-repeat="${key}"]`);
+        if (!repeater) continue;
+        const items = repeater.children;
+        val.forEach((item, i) => {
+          if (i >= items.length) return;
+          items[i].querySelectorAll('[data-cms-item-field]').forEach(field => {
+            const fname = field.getAttribute('data-cms-item-field');
+            const fval = fname === 'self' ? item : (typeof item === 'object' ? item[fname] : undefined);
+            if (fval !== undefined && field.tagName !== 'IMG') {
+              if (field.hasAttribute('data-cms-html')) field.innerHTML = fval;
+              else field.textContent = fval;
+            }
+          });
+        });
+      }
+    });
+  }
+
+  doc.querySelectorAll('[data-cms-field]').forEach(el => {
+    const field = el.getAttribute('data-cms-field');
+    const section = el.closest('[data-cms-section]');
+    if (!section) return;
+    const sectionId = section.getAttribute('data-cms-section');
+
+    if (el.tagName === 'IMG') {
+      setupImageEditor(el, sectionId, field, doc);
+    } else if (el.hasAttribute('data-cms-bg')) {
+      setupBgImageEditor(el, sectionId, field, doc);
+    } else {
+      el.setAttribute('contenteditable', 'true');
+      el.setAttribute('spellcheck', 'false');
+      el.addEventListener('input', () => {
+        updateFieldInPage(sectionId, field, el.innerHTML);
+        updateSaveButton();
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          const tag = el.tagName.toLowerCase();
+          if (['h1','h2','h3','h4','span','a','div'].includes(tag) && !el.closest('.ql-editor')) {
+            e.preventDefault();
+          }
+        }
+      });
+    }
+  });
+
+  // Make repeater item fields editable
+  doc.querySelectorAll('[data-cms-repeat]').forEach(repeater => {
+    const repeatKey = repeater.getAttribute('data-cms-repeat');
+    const section = repeater.closest('[data-cms-section]');
+    if (!section) return;
+    const sectionId = section.getAttribute('data-cms-section');
+    Array.from(repeater.children).forEach((item, idx) => {
+      item.querySelectorAll('[data-cms-item-field]').forEach(el => {
+        if (el.tagName === 'IMG' || el._cmsItemSetup) return;
+        el._cmsItemSetup = true;
+        const fieldName = el.getAttribute('data-cms-item-field');
+        el.setAttribute('contenteditable', 'true');
+        el.setAttribute('spellcheck', 'false');
+        el.addEventListener('input', () => {
+          updateRepeaterItemField(sectionId, repeatKey, idx, fieldName, el.textContent);
+          updateSaveButton();
+        });
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && !e.shiftKey) e.preventDefault();
+        });
+      });
+    });
+  });
+
+  // Background image elements that have data-cms-bg but may not have data-cms-field
+  doc.querySelectorAll('[data-cms-bg]').forEach(el => {
+    if (el._cmsSetup) return;
+    el._cmsSetup = true;
+    const field = el.getAttribute('data-cms-field') || 'background_image';
+    const section = el.closest('[data-cms-section]');
+    if (!section) return;
+    setupBgImageEditor(el, section.getAttribute('data-cms-section'), field, doc);
+  });
+}
+
+function setupImageEditor(img, sectionId, field, doc) {
+  const wrapper = doc.createElement('div');
+  wrapper.style.cssText = 'position:relative;display:inline-block;';
+  img.parentNode.insertBefore(wrapper, img);
+  wrapper.appendChild(img);
+  const overlay = doc.createElement('div');
+  overlay.className = 'cms-img-overlay';
+  overlay.innerHTML = '<span>Change Image</span>';
+  wrapper.appendChild(overlay);
+  const fileInput = doc.createElement('input');
+  fileInput.type = 'file'; fileInput.accept = 'image/*'; fileInput.style.display = 'none';
+  wrapper.appendChild(fileInput);
+  overlay.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files[0]; if (!file) return;
+    const fd = new FormData(); fd.append('image', file);
+    try {
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      const data = await res.json();
+      img.src = data.url;
+      updateFieldInPage(sectionId, field, data.url);
+      updateSaveButton();
+      showToast('Image updated', 'success');
+    } catch (e) { showToast('Upload failed', 'error'); }
+  });
+}
+
+function setupBgImageEditor(el, sectionId, field, doc) {
+  if (el.querySelector('.cms-img-overlay')) return;
+  const pos = doc.defaultView.getComputedStyle(el).position;
+  if (pos === 'static') el.style.position = 'relative';
+  const overlay = doc.createElement('div');
+  overlay.className = 'cms-img-overlay';
+  overlay.innerHTML = '<span>Change Background</span>';
+  el.appendChild(overlay);
+  const fileInput = doc.createElement('input');
+  fileInput.type = 'file'; fileInput.accept = 'image/*'; fileInput.style.display = 'none';
+  el.appendChild(fileInput);
+  overlay.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files[0]; if (!file) return;
+    const fd = new FormData(); fd.append('image', file);
+    try {
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      const data = await res.json();
+      el.style.backgroundImage = `url('${data.url}')`;
+      updateFieldInPage(sectionId, field, data.url);
+      updateSaveButton();
+      showToast('Background updated', 'success');
+    } catch (e) { showToast('Upload failed', 'error'); }
+  });
+}
+
+function updateFieldInPage(sectionId, fieldPath, value) {
+  if (!currentPage) return;
+  const section = currentPage.sections.find(s => s.id === sectionId);
+  if (!section) return;
+  const parts = fieldPath.split('.');
+  let obj = section.content;
+  for (let i = 0; i < parts.length - 1; i++) { obj = obj[parts[i]]; if (!obj) return; }
+  obj[parts[parts.length - 1]] = value;
+}
+
+function updateRepeaterItemField(sectionId, repeatKey, itemIndex, fieldName, value) {
+  if (!currentPage) return;
+  const section = currentPage.sections.find(s => s.id === sectionId);
+  if (!section || !section.content[repeatKey]) return;
+  const arr = section.content[repeatKey];
+  if (itemIndex >= arr.length) return;
+  if (fieldName === 'self') { arr[itemIndex] = value; }
+  else { arr[itemIndex][fieldName] = value; }
+}
+
+function scrollToSection(sectionId) {
+  activeSectionId = sectionId;
+  renderPageTree();
+  if (editorMode === 'visual') {
+    const doc = document.getElementById('editorFrame').contentDocument;
+    if (!doc) return;
+    const el = doc.querySelector(`[data-cms-section="${sectionId}"]`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.style.outline = '3px solid #0071e3';
+      el.style.outlineOffset = '4px';
+      setTimeout(() => { el.style.outline = ''; el.style.outlineOffset = ''; }, 2000);
+    }
+  } else {
+    const card = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (card) {
+      const header = card.querySelector('.section-header');
+      const body = card.querySelector('.section-body');
+      if (!body.classList.contains('open')) { header.classList.add('open'); body.classList.add('open'); initQuillInSection(card); }
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+// ═══════════════════════════════════
+// BACKEND EDITOR (form fields)
+// ═══════════════════════════════════
+function renderBackendEditor() {
+  quillEditors = [];
+  const el = document.getElementById('backendEditor');
+  if (!currentPage) { el.innerHTML = ''; return; }
+
+  let html = `<div class="page-meta">
+    <h2>${esc(currentPage.title)}</h2>
+    <div class="field-group"><label>Page Title</label>
+      <input type="text" value="${esc(currentPage.title)}" oninput="currentPage.title=this.value;updateSaveButton()"></div>
+  </div>`;
+
+  for (let i = 0; i < currentPage.sections.length; i++) {
+    html += renderSectionCard(currentPage.sections[i], i);
+  }
+  el.innerHTML = html;
+}
+
+function renderSectionCard(section, idx) {
+  const total = currentPage.sections.length;
+  return `<div class="section-card" data-section-id="${section.id}" data-idx="${idx}">
+    <div class="section-header" onclick="toggleSectionCard(this)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <h3>${esc(section.id)}</h3>
+        <span class="badge">${section.type}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="section-move-btns">
+          ${idx > 0 ? `<button onclick="event.stopPropagation();moveSection(${idx},-1)" title="Move up">&#9650;</button>` : ''}
+          ${idx < total - 1 ? `<button onclick="event.stopPropagation();moveSection(${idx},1)" title="Move down">&#9660;</button>` : ''}
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();removeSection(${idx})">Remove</button>
+      </div>
+    </div>
+    <div class="section-body">${renderSectionFields(section.content, [idx])}</div>
+  </div>`;
+}
+
+function renderSectionFields(obj, pathParts, depth = 0) {
+  let html = '';
+  for (const [key, value] of Object.entries(obj)) {
+    const fp = [...pathParts, key];
+    if (Array.isArray(value)) {
+      html += value.length > 0 && typeof value[0] === 'object' ? renderRepeater(key, value, fp) : renderStringArray(key, value, fp);
+    } else if (typeof value === 'object' && value !== null) {
+      html += `<div style="margin-left:${depth > 0 ? 14 : 0}px;margin-bottom:10px">
+        <label style="font-size:11px;font-weight:700;margin-bottom:4px;display:block">${formatLabel(key)}</label>
+        ${renderSectionFields(value, fp, depth + 1)}</div>`;
+    } else if (isImageKey(key)) {
+      html += renderImageField(key, value, fp);
+    } else if (RICH_FIELDS.has(key)) {
+      html += renderRichField(key, value, fp);
+    } else if (LONG_TEXT.has(key)) {
+      html += renderTextarea(key, value, fp);
+    } else {
+      html += renderPlainField(key, value, fp);
+    }
+  }
+  return html;
+}
+
+function renderPlainField(key, value, pp) {
+  return `<div class="field-group"><label>${formatLabel(key)}</label>
+    <input type="text" value="${esc(String(value))}" oninput="${buildPathExpr(pp)}=this.value;markDirty()"></div>`;
+}
+function renderTextarea(key, value, pp) {
+  return `<div class="field-group"><label>${formatLabel(key)}</label>
+    <textarea oninput="${buildPathExpr(pp)}=this.value;markDirty()">${esc(String(value))}</textarea></div>`;
+}
+function renderRichField(key, value, pp) {
+  const compact = COMPACT_RICH.has(key);
+  const id = 'quill-' + pp.join('-');
+  return `<div class="quill-wrap ${compact ? 'compact' : ''}" data-quill-id="${id}" data-path="${esc(JSON.stringify(pp))}" data-compact="${compact ? '1' : '0'}">
+    <label>${formatLabel(key)}</label><div id="${id}"></div></div>`;
+}
+
+function renderImageField(key, value, pp) {
+  const pe = buildPathExpr(pp);
+  const src = resolvePreviewSrc(value);
+  const id = 'img-' + pp.join('-');
+  const isBg = key.includes('background');
+  if (isBg) {
+    return `<div class="field-group"><label>${formatLabel(key)}</label>
+      <div class="bg-image-wrap">
+        <img id="${id}-preview" src="${esc(src)}" onerror="this.style.display='none'" style="min-height:60px;background:var(--bg)">
+        <div class="bg-image-overlay"><label class="btn" style="cursor:pointer">Change Image
+          <input type="file" accept="image/*" style="display:none" onchange="uploadImageFor(this,'${pe}','${id}-preview')"></label></div>
+      </div>
+      <div class="image-controls" style="margin-top:4px">
+        <input type="text" value="${esc(value)}" oninput="${pe}=this.value;document.getElementById('${id}-preview').src=resolvePreviewSrc(this.value);markDirty()">
+      </div></div>`;
+  }
+  return `<div class="field-group"><label>${formatLabel(key)}</label>
+    <div class="image-field-wrap">
+      <img id="${id}-preview" class="image-preview-large" src="${esc(src)}" onerror="this.style.display='none'">
+      <div class="image-controls">
+        <input type="text" value="${esc(value)}" oninput="${pe}=this.value;document.getElementById('${id}-preview').src=resolvePreviewSrc(this.value);markDirty()">
+        <label class="btn btn-sm btn-outline" style="cursor:pointer;white-space:nowrap">Upload
+          <input type="file" accept="image/*" style="display:none" onchange="uploadImageFor(this,'${pe}','${id}-preview')"></label>
+      </div></div></div>`;
+}
+
+function renderRepeater(key, items, pp) {
+  const pe = buildPathExpr(pp);
+  let html = `<div class="repeater"><div class="repeater-header">
+    <label>${formatLabel(key)} (${items.length})</label>
+    <button class="btn btn-sm btn-outline" onclick="addRepeaterItem(${pe});markDirty();renderBackendEditor()">+ Add</button></div>`;
+  for (let i = 0; i < items.length; i++) {
+    html += `<div class="repeater-item"><div class="item-header"><span>Item ${i + 1}</span>
+      <button class="btn btn-danger btn-sm" onclick="${pe}.splice(${i},1);markDirty();renderBackendEditor()">Remove</button>
+    </div>${renderSectionFields(items[i], [...pp, i], 1)}</div>`;
+  }
+  return html + `</div>`;
+}
+
+function renderStringArray(key, items, pp) {
+  const pe = buildPathExpr(pp);
+  let html = `<div class="field-group"><label>${formatLabel(key)}</label>`;
+  for (let i = 0; i < items.length; i++) {
+    html += `<div style="display:flex;gap:4px;margin-bottom:3px">
+      <input type="text" value="${esc(items[i])}" oninput="${pe}[${i}]=this.value;markDirty()" style="flex:1">
+      <button class="btn btn-danger btn-sm" onclick="${pe}.splice(${i},1);markDirty();renderBackendEditor()">x</button></div>`;
+  }
+  return html + `<button class="btn btn-outline btn-sm" onclick="${pe}.push('');markDirty();renderBackendEditor()">+ Add</button></div>`;
+}
+
+// ── Quill ──
+function initQuillInSection(card) {
+  card.querySelectorAll('.quill-wrap').forEach(wrap => {
+    const id = wrap.dataset.quillId;
+    if (quillEditors.find(e => e.id === id)) return;
+    const pp = JSON.parse(wrap.dataset.path);
+    const compact = wrap.dataset.compact === '1';
+    const container = document.getElementById(id);
+    if (!container || container.querySelector('.ql-editor')) return;
+    const toolbarOpts = compact
+      ? [['bold', 'italic', 'underline', 'strike'], [{ 'color': [] }]]
+      : [[{ 'header': [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ 'list': 'ordered' }, { 'list': 'bullet' }], [{ 'color': [] }, { 'background': [] }], ['link', 'clean']];
+    const quill = new Quill(container, { theme: 'snow', modules: { toolbar: toolbarOpts } });
+    const val = getByPath(currentPage.sections, pp);
+    if (val) quill.root.innerHTML = val;
+    quill.on('text-change', () => {
+      let html = quill.root.innerHTML;
+      if (html === '<p><br></p>') html = '';
+      if (compact) html = stripOuterP(html);
+      setByPath(currentPage.sections, pp, html);
+      markDirty();
+    });
+    quillEditors.push({ id, quill, pp });
+  });
+}
+
+function toggleSectionCard(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+  if (header.classList.contains('open')) initQuillInSection(header.closest('.section-card'));
+}
+
+function moveSection(idx, dir) {
+  const s = currentPage.sections;
+  [s[idx], s[idx + dir]] = [s[idx + dir], s[idx]];
+  markDirty();
+  renderBackendEditor();
+  renderPageTree();
+}
+
+function removeSection(idx) {
+  if (!confirm('Remove this section?')) return;
+  currentPage.sections.splice(idx, 1);
+  markDirty();
+  renderBackendEditor();
+  renderPageTree();
+}
+
+function addRepeaterItem(arr) {
+  if (arr.length > 0) {
+    const t = JSON.parse(JSON.stringify(arr[0]));
+    clearValues(t); arr.push(t);
+  } else arr.push({});
+}
+function clearValues(obj) {
+  for (const k in obj) {
+    if (typeof obj[k] === 'string') obj[k] = '';
+    else if (typeof obj[k] === 'number') obj[k] = 0;
+    else if (Array.isArray(obj[k])) obj[k] = [];
+    else if (typeof obj[k] === 'object' && obj[k]) clearValues(obj[k]);
+  }
+}
+
+// ═══════════════════════════════════
+// SEO PANEL (raw HTML textareas)
+// ═══════════════════════════════════
+function toggleSEO() {
+  document.getElementById('seoPanel').classList.toggle('open');
+  document.getElementById('seoToggle').classList.toggle('btn-primary');
+  document.getElementById('seoToggle').classList.toggle('btn-outline');
+}
+
+function renderSEOPanel() {
+  if (!currentPage) return;
+  const m = currentPage.meta || {};
+  document.getElementById('seoPanel').innerHTML = `<div class="seo-panel-inner">
+    ${seoBlock('Primary Meta', 'primary', m.primary, 'Description, keywords, author, robots')}
+    ${seoBlock('Open Graph', 'og', m.og, 'OG title, description, image, type, URL')}
+    ${seoBlock('Twitter Card', 'twitter', m.twitter, 'Twitter card type, title, description, image')}
+    ${seoBlock('Technical SEO', 'technical', m.technical, 'Canonical URL, theme-color, language')}
+    ${seoBlock('Analytics', 'analytics', m.analytics, 'GA4, GTM, or other tracking scripts')}
+    ${seoBlock('Structured Data', 'structured_data', m.structured_data, 'JSON-LD script block', true)}
+  </div>`;
+}
+
+function seoBlock(label, key, value, placeholder, fullWidth) {
+  return `<div class="seo-group ${fullWidth ? 'full-width' : ''}">
+    <h4>${label}</h4>
+    <textarea placeholder="Paste ${placeholder} HTML here..." oninput="currentPage.meta['${key}']=this.value;updateSaveButton()">${esc(value || '')}</textarea>
+  </div>`;
+}
+
+// ═══════════════════════════════════
+// SAVE / DIRTY STATE
+// ═══════════════════════════════════
+function isDirty() {
+  if (!currentPage || !savedSnapshot) return false;
+  return JSON.stringify(currentPage) !== savedSnapshot;
+}
+
+function markDirty() { updateSaveButton(); }
+
+function updateSaveButton() {
+  const btn = document.getElementById('saveBtn');
+  if (!btn) return;
+  const dirty = isDirty();
+  btn.disabled = !dirty;
+  btn.textContent = dirty ? 'Save Changes *' : 'Save Changes';
+  btn.classList.toggle('btn-unsaved', dirty);
+}
+
+async function savePage() {
+  const btn = document.getElementById('saveBtn');
+  btn.textContent = 'Saving...'; btn.disabled = true;
+  try {
+    const resp = await fetch(`/api/pages/${currentPage.slug}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(currentPage)
+    });
+    if (!resp.ok) throw new Error('Server returned ' + resp.status);
+    savedSnapshot = JSON.stringify(currentPage);
+    updateSaveButton();
+    showToast('Page saved', 'success');
+    if (editorMode === 'visual') {
+      const frame = document.getElementById('editorFrame');
+      scaleEditorFrame(frame);
+      frame.src = `/page/${currentPage.slug}?t=${Date.now()}`;
+      frame.onload = () => setTimeout(() => injectEditorOverlay(frame), 300);
+    }
+  } catch (e) {
+    btn.disabled = false; btn.textContent = 'Save Changes *';
+    showToast('Save failed: ' + e.message, 'error');
+  }
+}
+
+// ── Upload ──
+async function uploadImageFor(input, pathExpr, previewId) {
+  const file = input.files[0]; if (!file) return;
+  const fd = new FormData(); fd.append('image', file);
+  try {
+    const res = await fetch('/api/upload', { method: 'POST', body: fd });
+    const data = await res.json();
+    eval(`${pathExpr} = "${data.url}"`);
+    const preview = document.getElementById(previewId);
+    if (preview) { preview.src = data.url; preview.style.display = 'block'; }
+    markDirty();
+    showToast('Image uploaded', 'success');
+  } catch (e) { showToast('Upload failed', 'error'); }
+}
+
+// ── Modals ──
+function showModal(id) { document.getElementById(id).classList.add('show'); }
+function hideModal(id) { document.getElementById(id).classList.remove('show'); }
+function showNewPageModal() { showModal('newPageModal'); }
+function showAddSectionModal() {
+  document.getElementById('sectionType').innerHTML = sectionTypes.map(t => `<option value="${t.type}">${t.label}</option>`).join('');
+  document.getElementById('sectionId').value = 'section-';
+  showModal('addSectionModal');
+}
+
+async function createPage() {
+  const slug = document.getElementById('newSlug').value.trim();
+  const title = document.getElementById('newTitle').value.trim();
+  const templateFrom = document.getElementById('newTemplate').value;
+  const parent = document.getElementById('newParent').value || null;
+  if (!slug || !title) { showToast('Slug and title required', 'error'); return; }
+  try {
+    const resp = await fetch('/api/pages', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug, title, templateFrom })
+    });
+    if (!resp.ok) { showToast('Create failed', 'error'); return; }
+    if (parent) {
+      const pd = await fetch(`/api/pages/${slug}`).then(r => r.json());
+      pd.parent = parent;
+      await fetch(`/api/pages/${slug}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(pd) });
+    }
+    hideModal('newPageModal');
+    await loadPages();
+    loadPage(slug);
+    showToast('Page created', 'success');
+  } catch (e) { showToast('Create failed', 'error'); }
+}
+
+function addSection() {
+  const id = document.getElementById('sectionId').value.trim();
+  const type = document.getElementById('sectionType').value;
+  if (!id) { showToast('Section ID required', 'error'); return; }
+  if (currentPage.sections.some(s => s.id === id)) { showToast('Section ID already exists', 'error'); return; }
+  const defaults = {
+    'hero': { eyebrow: '', heading_line1: '', heading_line2: '', cta_text: 'Connect Now', stat_number: '0', stat_suffix: '', stat_text: '', background_image: '' },
+    'story': { eyebrow: '', heading_line1: '', heading_line2: '', heading_line3: '', tags: [], paragraph: '', cta_text: '' },
+    'audience-cards': { eyebrow: '', heading_line1: '', heading_line2: '', cta_text: '', cta_link: '#', cards: [] },
+    'ecosystem-accordions': { eyebrow: '', heading_line1: '', heading_line2: '', description: '', hero_image: '', accordions: [] },
+    'initiative-cards': { eyebrow: '', heading_line1: '', heading_line2: '', description: '', cards: [] },
+    'cta-banner': { eyebrow: '', heading_line1: '', heading_line2: '', cta_text: '', background_image: '' },
+    'partners-showcase': { eyebrow: '', heading_line1: '', heading_line2: '', description: '', slider_images: [], stats: [], partner_banners: [] },
+    'final-cta': { heading_line1: '', heading_line2: '', description: '', cta_text: '', image_right: '', image_left: '' },
+    'footer': { logo: '', address: '', phone: '', social_links: {}, nav_columns: [], copyright: '' }
+  };
+  currentPage.sections.push({ id, type, content: defaults[type] || {} });
+  hideModal('addSectionModal');
+  markDirty();
+  renderPageTree();
+  if (editorMode === 'backend') renderBackendEditor();
+  showToast('Section added', 'success');
+}
+
+// ── Helpers ──
+function buildPathExpr(pp) {
+  let expr = `currentPage.sections[${pp[0]}].content`;
+  for (let i = 1; i < pp.length; i++) {
+    expr += typeof pp[i] === 'number' ? `[${pp[i]}]` : `['${pp[i]}']`;
+  }
+  return expr;
+}
+function getByPath(sections, pp) {
+  let obj = sections;
+  for (let i = 0; i < pp.length; i++) {
+    if (i === 0 && typeof pp[i] === 'number') obj = obj[pp[i]]?.content;
+    else obj = obj?.[pp[i]];
+  }
+  return obj;
+}
+function setByPath(sections, pp, value) {
+  let obj = sections;
+  for (let i = 0; i < pp.length - 1; i++) {
+    if (i === 0 && typeof pp[i] === 'number') obj = obj[pp[i]]?.content;
+    else obj = obj?.[pp[i]];
+  }
+  if (obj) obj[pp[pp.length - 1]] = value;
+}
+function stripOuterP(html) {
+  html = html.trim();
+  if (html.startsWith('<p>') && html.endsWith('</p>') && html.indexOf('<p>', 1) === -1) return html.slice(3, -4);
+  return html;
+}
+function resolvePreviewSrc(src) {
+  if (!src) return '';
+  if (src.startsWith('/uploads/') || src.startsWith('http')) return src;
+  if (src.startsWith('./')) return '/assets/' + src.slice(2);
+  return '/assets/' + src;
+}
+function formatLabel(key) { return key.replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2'); }
+function esc(str) {
+  if (str == null) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast show ${type}`;
+  setTimeout(() => t.className = 'toast', 3000);
+}
+
+init();
+</script>
+</body>
+</html>

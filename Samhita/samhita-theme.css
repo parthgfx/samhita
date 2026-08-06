@@ -1,0 +1,1164 @@
+/*
+  Samhita brand theme for the Waveyu template.
+  This file OVERRIDES CSS custom properties already defined by the original
+  template stylesheets (waveyu.webflow.shared.*.min.css and
+  waveyu.webflow.*.min.css). It must be linked AFTER those two files.
+  The original template files are never edited — only these variables,
+  plus a small number of hardcoded exceptions noted below, are touched.
+  Colors sourced from https://samhita.org/ (see HANDOVER.md for the audit).
+*/
+
+:root {
+  /* Typography (was "Bricolage Grotesque", Arial, sans-serif). Suisse Int'l
+     is samhita.org's real brand typeface but is a paid Swiss Typefaces
+     license - no font files are bundled here, so it only renders for a
+     visitor who already has it installed locally (rare). Everyone else
+     falls through to Open Sans, which - unlike Suisse Int'l - is free and
+     actually loaded via Google Fonts in samhita-home.html's <head>, so the
+     fallback is a real, working font rather than a silent gap. If licensed
+     Suisse Int'l font files (woff2) become available, self-host them with
+     an @font-face block (same pattern the original template already uses
+     for Bricolage Grotesque) and this variable needs no further change. */
+  --font--primary: "Suisse Int'l", "Open Sans", sans-serif;
+
+  /* Brand accent: Samhita coral (was Waveyu lime #cee253 / #bdd725) */
+  --color--base--accent: #ef4266;
+  --color--base--accent-dark: #c43654;
+
+  /* Body/heading ink (was #212121) */
+  --color--base--black: #111827;
+
+  /* Page + subtle backgrounds (was #f7f7f7 / #eaeaea) */
+  --color--backgrounds--bg-page: #f9fafb;
+  --color--backgrounds--bg-subtle: #ebf5f8;
+
+  /* Dark contrast sections: footer blur, dropdown bg, popup overlay (was dark green #0f2916) */
+  --color--backgrounds--bg-green: #041c33;
+
+  /* Muted text (was #707070 / #8d8d8d) */
+  --color--text--text-muted: #6b7280;
+  --color--text--heading-accent: #4b5563;
+
+  /* Hairline borders (was rgba(33,33,33,.2)) */
+  --border--color-size--border-subtle: #11182733;
+
+  /* Navbar: solid and fully opaque at all times (no transparent-over-hero
+     state — see HANDOVER.md). Background has zero transparency by request;
+     the border stays a subtle divider since borders are meant to be quiet
+     regardless. */
+  --navbar--scroll-invert--border-initial: rgba(17, 24, 39, 0.16);
+  --navbar--scroll-invert--bg-initial: rgb(255, 255, 255);
+  --navbar--scroll-invert--item-initial: rgb(17, 24, 39);
+  --navbar--scroll-invert--dropdown-bg-initial: #041c33;
+
+  /* Additive token: Samhita's secondary teal accent. Not part of the
+     original Waveyu token set; used sparingly for icons/badges that want
+     a second brand color instead of the coral primary. */
+  --color--base--accent-teal: #42aaaa;
+  --color--base--accent-teal-dark: #2d9b9b;
+
+  /* Logo blue: used as the arrow-tail-button's own color (was the CTA
+     button's hover-fill color - reassigned, see "Arrow-tail buttons" and
+     "CTA button hover" further below in this file for why). */
+  --color--base--accent-blue: #0ca5d0;
+  --color--base--accent-blue-dark: #0a86ab;
+
+  /* Logo yellow: used for footer link hover, and the CSR/FCRA banner */
+  --color--base--accent-yellow: #fed340;
+  --color--base--accent-yellow-dark: #e6b820;
+
+  /* Neutral grayscale: the accordion's own expand/collapse chevron button
+     (distinct from the arrow-tail-button above) - see ".chevron-button"
+     further below for why this is grayscale rather than another brand
+     color. */
+  --color--backgrounds--bg-gray: #e5e7eb;
+  --color--backgrounds--bg-gray-dark: #d1d5db;
+}
+
+html {
+  overflow-x: hidden;
+  background-color: var(--color--backgrounds--bg-green);
+}
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Text selection (highlighting text with the mouse/cursor): logo yellow
+   with black text, site-wide, instead of the browser's own default blue.
+   Two separate rules, not a comma-separated selector list - ::-moz-selection
+   is Firefox's own legacy prefix, and older/stricter CSS parsers drop an
+   entire rule if any one selector in a comma list is unrecognized, so
+   combining them risks losing both browsers' styling instead of just one. */
+::selection {
+  background-color: var(--color--base--accent-yellow);
+  color: #111827;
+}
+::-moz-selection {
+  background-color: var(--color--base--accent-yellow);
+  color: #111827;
+}
+
+/*
+  Fixes a real, confirmed bug in the "Who We Serve" cards (For CSR Clients /
+  Foundations / Government / Financial Institutions): the original template
+  gives .levels-card a fixed height (26rem) at wide breakpoints, but
+  switches to height:auto below 767px so each card sizes to its own content
+  instead. That's fine in principle, but our specific card copy has
+  noticeably different paragraph lengths per card - at some widths within
+  that range (confirmed reproduced at 600px, though not at 767px itself,
+  since it depends on exactly where each paragraph's own text happens to
+  wrap), three of the four paragraphs wrap to one more line than the
+  shortest (Financial Institutions'), making that one card visibly shorter
+  than the other three once stacked in a single column. Not an intentional
+  design choice (no card is meant to read as different from the others) -
+  min-height (not a rigid height, so unusually long future copy can still
+  grow a card taller without clipping) restores the same uniform height the
+  wide-breakpoint design already uses, at the same breakpoint the original
+  template switches away from it.
+*/
+@media screen and (max-width: 767px) {
+  .levels-card {
+    min-height: 26rem;
+  }
+}
+
+/*
+  Hardcoded (non-variable) colors in the original stylesheet that the
+  :root override above cannot reach. Re-declared here with Samhita
+  equivalents. Kept to the minimum necessary — see HANDOVER.md.
+*/
+
+/* Form success message background (was lime #cee05c) */
+.success-message {
+  background-color: #fbd5dd;
+}
+
+/* Footer frosted-glass backdrop (was dark-green rgba, #0f291675) */
+.footer-bg-blur {
+  background-color: #041c33bf;
+}
+
+/* Footer's own solid background (was fully transparent, #0f291600 - the
+   original template relies entirely on the absolutely-positioned photo +
+   blur overlay layered inside .footer for its dark look, with zero
+   fallback color on .footer itself). Both of those inner layers are
+   independently positioned with sub-pixel heights, so any rounding gap
+   between them and the footer's own box lets the page's light background
+   bleed through as a thin white seam right at the bottom edge. A solid
+   navy background directly on .footer (sitting beneath those layers,
+   invisible under normal correct rendering) closes that gap without
+   changing anything else about how the footer looks. */
+.footer {
+  background-color: var(--color--backgrounds--bg-green);
+}
+
+.meta-link-row {
+  justify-content: center;
+  width: 100%;
+}
+
+/* The giant "samhita" letters (.big-letter, font-size in vw, line-height 1)
+   have a text line box taller than their grid track, and nothing in the
+   original template clips it. On viewports wider than ~960px that
+   invisible line-box overflow escapes the footer's bottom edge and adds
+   ~18px of scrollable empty space below the footer. Clipping it here is
+   safe: the word "samhita" has no descenders, so the clipped region is
+   empty glyph space - nothing visible is cut off. */
+.big-letters {
+  overflow: hidden;
+}
+
+/* .big-letter's font-size is set entirely in vw/rem units by the original
+   template with no corresponding letter-spacing adjustment, so the rendered
+   word "samhita" is wider than the space .big-letters actually has - each
+   of the 7 letters' own edge clips off the container's left/right bounds
+   (worst case: right at the 1440px breakpoint, where font-size jumps to a
+   fixed 24rem while the container is still its narrowest pre-1440 width -
+   confirmed via direct measurement, ~128px of clipping per side there).
+   -0.12em tightens the letters enough to fit with margin to spare at every
+   width from 375px to 1920px+ (re-verified at 375/479/767/991/1439/1440/
+   1920px - the widest overflow before this fix, and the safety margin
+   after, both scale down together since letter-spacing is in em and moves
+   with .big-letter's own font-size). */
+.big-letter {
+  letter-spacing: -0.12em;
+}
+
+/* Popup overlay tint (was dark-green rgba, #1c2317a6) */
+.popup-form {
+  background-color: #041c33a6;
+}
+
+/* Form error text stays semantic red on purpose - not overridden. */
+
+/* Browser scrollbar color (requested teal, #52c0a6 - distinct from the
+   existing --color--base--accent-teal token, used only here). Firefox uses
+   scrollbar-color on a single element; WebKit browsers (Chrome/Safari/Edge)
+   need the ::-webkit-scrollbar-* pseudo-elements instead - both are set so
+   the color is consistent across browsers. */
+html {
+  scrollbar-color: #52c0a6 var(--color--backgrounds--bg-page);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color--backgrounds--bg-page);
+}
+::-webkit-scrollbar-thumb {
+  background-color: #52c0a6;
+  border-radius: 8px;
+  border: 2px solid var(--color--backgrounds--bg-page);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #439781;
+}
+
+/*
+  Navbar brand: logo + "Catalysing Prosperity. Together." tagline.
+  The original template aligns this row with align-items: baseline (fine
+  for Waveyu's own logo+dates, which are both plain text at similar font
+  sizes). Samhita's brand mark is an <img>, and a replaced element's
+  "baseline" for flex alignment purposes is its bottom margin edge, not
+  its visual center — so baseline alignment here was pinning the bottom of
+  the logo to the tagline's text baseline instead of centering the two
+  against each other. Overriding to center fixes that regardless of the
+  logo's own height.
+*/
+.navbar-brand-wrap {
+  align-items: center;
+}
+
+/* Popup close button: converted from a plain <div> to a real <button> so
+   it's keyboard-focusable (it previously had no way to be reached without a
+   mouse) - .close-button's own rules already cover all the visual styling
+   (size, radius, background, position), this just resets the couple of
+   default browser <button> chrome properties that class didn't set. */
+.close-button {
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+
+/* Footer "Follow us on Social Media" block (moved here from the final CTA
+   section, sitting just above the phone number in the same contact
+   column) — a simple label-over-icon-row stack, matching the vertical
+   rhythm of the other footer contact items around it. */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap--xs);
+  margin-bottom: 1.5rem;
+}
+
+/*
+  Hero photo: fixed background instead of a scrolling <img>, so the image
+  itself doesn't move as the fold scrolls (the heading/CTA above it still
+  scroll normally — only the photo stays anchored to the viewport until the
+  hero section scrolls out from in front of it). The image moved from an
+  <img> tag to a CSS background-image (set inline in samhita-home.html,
+  since it's a one-off) specifically so background-attachment: fixed can
+  apply — that property has no equivalent for a regular <img>.
+  Known limitation: iOS Safari ignores background-attachment: fixed and
+  silently falls back to normal scrolling behavior (a long-standing engine
+  limitation, not something fixable from CSS alone) — the hero still looks
+  and works fine there, it just won't have the fixed-photo effect.
+*/
+.hero-bg-fixed {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Slight dark overlay over the hero photo, so the white heading/CTA text
+   has reliable contrast regardless of how light the photo underneath it
+   is. Flat tint, not a gradient — the earlier hero scrim work was replaced
+   by this simpler version. Sits above the photo but below the text, since
+   .hero-content/.hero-stats have their own z-index: 1 and this is z-index: 0. */
+.hero-bg-fixed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(4, 28, 51, 0.4);
+  pointer-events: none;
+}
+
+/*
+  All CTA buttons: pink default, a darker pink fills in left-to-right on
+  hover.
+    - default: solid coral/pink fill, white text, no outline (the
+      arrow-tail-button - the page's other "brand button" - has no outline
+      either, so this drops the outline to match rather than being the odd
+      one out)
+    - hover/focus: a darker shade of the same coral wipes in from left to
+      right over the pink — text stays white throughout
+
+  This used to wipe in logo-blue (#0ca5d0) instead of a darker coral - moved
+  off blue because blue is now the arrow-tail-button's own permanent color
+  (see "Arrow-tail buttons" below); reusing it here too would make blue mean
+  two different things (a hover state here, a resting brand color there).
+
+  Kept deliberately minimal: just the color wipe, no added lift/scale/
+  shadow on top of it - an earlier pass added those and they read as too
+  busy for a CTA that should feel calm and confident, not showy.
+
+  Implementation: the button's own background is solid pink. A ::before
+  pseudo-element sits on top with the darker-pink color, initially hidden
+  via clip-path: inset(0 100% 0 0) (right edge fully inset = nothing
+  visible). On hover, clip-path animates to inset(0 0 0 0) (fully visible),
+  making the fill appear to sweep left-to-right. On mouse-out, the same
+  transition reverses. Both states define clip-path explicitly so the
+  browser can interpolate in both directions (no fade on first hover).
+*/
+.primary-button {
+  position: relative;
+  background-color: var(--color--base--accent);
+  color: white;
+  overflow: hidden;
+}
+.primary-button:hover,
+.primary-button:focus {
+  color: white;
+}
+.primary-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--color--base--accent-dark);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  pointer-events: none;
+}
+.primary-button:hover::before,
+.primary-button:focus::before {
+  clip-path: inset(0 0 0 0);
+}
+.primary-button .button-text-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/*
+  Micro-interactions.
+  The original template drove these purely through Webflow's compiled IX2
+  JS (bound to this page's specific old element IDs — see HANDOVER.md), so
+  they went silent when the content was adapted. Scroll-reveal animations
+  are restored separately via GSAP/ScrollTrigger in samhita-motion.js; the
+  hover-driven ones below are simple enough to rebuild in plain CSS instead,
+  which is more robust (works even if JS is blocked) and needs no library.
+*/
+
+/* Nav link underline: sweeps in left-to-right on hover/focus.
+   .nav-underline-wrap stays governed by the original's own mobile media
+   query (hidden under 992px, where hover doesn't apply anyway) — only the
+   underline's own transform is touched here. */
+.nav-underline {
+  display: block;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.navbar-link:hover .nav-underline,
+.navbar-link:focus-visible .nav-underline,
+.navbar-dropdown-toggle:hover .nav-underline,
+.navbar-dropdown-toggle:focus-visible .nav-underline {
+  transform: scaleX(1);
+}
+
+/* Footer link underline sweep (Company / Resources columns) */
+.line-fill-color {
+  display: block;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.footer-link:hover .line-fill-color,
+.footer-link:focus-visible .line-fill-color {
+  transform: scaleX(1);
+}
+
+/* Footer link hover: yellow from the Samhita logo instead of pink.
+   Two extra overrides are needed beyond .footer-link itself:
+   - .contact-link-wrap (the phone number's own inner wrapper div) sets its
+     own hover color, which wins over .footer-link's for the text inside it
+     since it's the nearer ancestor for CSS inheritance purposes - not an
+     original bug, just how the original template's own rule was scoped.
+   - .social-link (icon circles) hover/focus set background-color directly,
+     unrelated to text color inheritance entirely. */
+.footer-link:hover,
+.footer-link:focus {
+  color: var(--color--base--accent-yellow);
+}
+.footer-link .line-fill-color {
+  background-color: var(--color--base--accent-yellow);
+}
+.contact-link-wrap:hover {
+  color: var(--color--base--accent-yellow);
+}
+.social-link:hover,
+.social-link:focus {
+  background-color: var(--color--base--accent-yellow);
+}
+
+/* Button arrow nudges toward the top-right on hover/focus */
+.arrow-tail-icon {
+  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.secondary-button:hover .arrow-tail-icon,
+.secondary-button:focus-visible .arrow-tail-icon,
+.primary-button:hover .arrow-tail-icon,
+.primary-button:focus-visible .arrow-tail-icon,
+.footer-link:hover .arrow-tail-icon.is-absolute,
+.footer-link:focus-visible .arrow-tail-icon.is-absolute {
+  transform: translate(3px, -3px);
+}
+
+/*
+  Arrow-tail buttons: the small circular "↗" buttons that trail every
+  "Learn More" / "View Impact Dashboard" secondary-button link. These were
+  still the original template's pale-blue `--color--backgrounds--bg-subtle`
+  (#ebf5f8) - a neutral fill, not one of Samhita's own brand colors, and
+  barely visible against the page's own near-white background. Recolored to
+  the Samhita logo's blue instead (also freeing that blue up from the CTA
+  hover-fill above, so it now has exactly one meaning site-wide: this
+  button). White icon + text for contrast against the solid blue fill.
+  No outline (matches the original template's own arrow-tail-button, which
+  never had one either).
+
+  Hover/focus: kept to color only (deepens to the darker blue shade) -
+  no scale/shadow. An earlier pass added a scale(1.08) here, which grows
+  the button a few px past its own edge; several of these buttons sit right
+  at the edge of `.room-content-wrap` (the "Who We Work With" accordion's
+  own overflow:hidden wrapper - needed for its expand/collapse animation,
+  see the Webflow grid-rows 0fr/1fr trick in the original CSS), so the
+  scaled-up edge was getting clipped by that ancestor's overflow on hover.
+  Dropping the scale fixes the clipping and matches the "keep hover minimal"
+  request at the same time - the existing arrow-nudge transform (above)
+  already carries the interaction, this doesn't also need to grow.
+*/
+.arrow-tail-button {
+  background-color: var(--color--base--accent-blue);
+  color: white;
+  transition: background-color 0.25s ease;
+}
+.secondary-button:hover .arrow-tail-button,
+.secondary-button:focus-visible .arrow-tail-button {
+  background-color: var(--color--base--accent-blue-dark);
+}
+
+/*
+  Slider "track" - the wrapper samhita-interactions.js injects inside every
+  .w-slider-mask, moving each .w-slide into it (see that file's "Slider
+  carousels" section for the full story of the bug this fixes: transforming
+  .w-slider-mask directly, an earlier version of this fix, moved the fixed
+  clipping viewport itself instead of the slide content within it, which
+  rendered every slide but the first as entirely invisible). The mask keeps
+  its own overflow:hidden and never moves; this track is the thing that's
+  allowed to overflow to (slide count x 100%) width and gets transformed
+  left/right to advance slides within that fixed window.
+  flex, not inline-block+white-space:nowrap - simpler to reason about, and
+  flex:none on each slide (not the shared stylesheet's own .w-slide{width:
+  100%}) is what stops flexbox's own default shrink-to-fit from squeezing
+  all the slides into the mask's width instead of letting them overflow it.
+*/
+.slider-track {
+  display: flex;
+  height: 100%;
+}
+.slider-track > .w-slide {
+  flex: none;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+  Accordion chevron button ("Who We Work With" expand/collapse toggle) -
+  a different circular button from the arrow-tail-button above (this one
+  rotates 180deg open/closed rather than trailing a link), but it shared
+  the same pale-blue `--color--backgrounds--bg-subtle` in the original
+  template. Left as neutral grayscale rather than recolored to a brand
+  color: it's a plain UI control (open/close), not a branded call-to-
+  action, so it reads better as quiet chrome than another blue accent
+  competing with the arrow-tail-button's now-blue identity.
+*/
+.chevron-button {
+  background-color: var(--color--backgrounds--bg-gray);
+  transition: background-color 0.25s ease, transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.room-accordion-header:hover .chevron-button {
+  background-color: var(--color--backgrounds--bg-gray-dark);
+}
+
+/*
+  CSR/FCRA compliance banner. This reuses the same .tag-item/.check-icon
+  markup as the "Our Story" section's ladder-rung tags elsewhere on the
+  page, but is scoped to its own .tag-list-banner class rather than
+  restyling .tag-list globally - the two lists share markup but not
+  intent: the ladder-rung tags are minor supporting labels, while
+  "100% CSR & FCRA Compliant" / "Aligned with the UN SDGs" are compliance/
+  trust claims worth calling out as their own banner, per request.
+
+  No hover state, and corners flattened to a modest radius rather than the
+  full pill every real button on this page uses (border-radius:100vh) -
+  both deliberate, so the static trust badge never reads as a clickable
+  button (an earlier version that combined a pill shape + yellow fill +
+  hover-darken did read that way).
+
+  Currently lives inside the "Make your CSR rupee work harder. Up to 20x
+  harder." CTA (.section-cta#section-catalytic), between the heading and
+  the "Explore Catalytic Finance" button - moved here from the final CTA
+  section per request. Styled as the ".is-glass" variant below to match
+  that CTA's own dark photo background (the same frosted-glass language
+  the back-to-top button uses elsewhere on the page - see
+  ".back-to-top-button" further below - rather than a solid fill, which
+  would sit as an opaque block on top of the photo instead of feeling like
+  part of the same glass-on-photo surface).
+*/
+.tag-list-banner {
+  color: white;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2rem;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+}
+.tag-list-banner .tag-item {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.tag-list-banner .check-icon {
+  color: white;
+}
+
+/* Liquid-glass variant: translucent frosted panel instead of a solid
+   fill - same blur/saturate/border/shadow recipe as .back-to-top-button,
+   reused verbatim so both read as the same material rather than two
+   different "glass" looks by coincidence. */
+.tag-list-banner.is-glass {
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 8px 24px -8px rgba(4, 28, 51, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* Subtle lift on hoverable cards for tactile feedback */
+.levels-card,
+.experience-card,
+.overview-story-card,
+.room-accordion-wrap {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.levels-card:hover,
+.experience-card:hover,
+.overview-story-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -12px rgba(17, 24, 39, 0.18);
+}
+
+/*
+  Page loader: full-screen navy overlay shown while the page's images load,
+  with a real (not fake/simulated) percentage - see HANDOVER.md "Page loader"
+  for the full brief on how the percentage is calculated and the site-wide
+  pattern to carry onto every future page. z-index is intentionally the
+  highest of any fixed overlay on the page (above the popup's 101, the
+  scroll progress bar's 105, everything) since it must cover the entire page
+  including the navbar while active. Fades out via opacity/visibility rather
+  than being removed outright, then is set display:none once the fade
+  finishes - the same "safe hidden state" pattern as the back-to-top button.
+*/
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background-color: var(--color--backgrounds--bg-green);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.page-loader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+/* Background: the exact same photo + frosted navy blur the footer uses
+   (.image-wrap.u-absolute-full + .footer-bg-blur, reused verbatim rather
+   than approximated with new CSS, so the two are guaranteed to look
+   identical and stay in sync with any future tweak to the footer's own
+   version of this look). Explicit z-index:0 plus position:relative + z-
+   index:1 on the loader's own text content below guarantees the logo/bar/
+   percentage always render above this background layer. */
+.page-loader .image-wrap.u-absolute-full {
+  z-index: 0;
+}
+.page-loader-logo,
+.page-loader-bar-track,
+.page-loader-percent {
+  position: relative;
+  z-index: 1;
+}
+.page-loader-logo {
+  width: 8.5rem;
+  height: auto;
+}
+.page-loader-bar-track {
+  width: 14rem;
+  max-width: 60vw;
+  height: 4px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+.page-loader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--color--base--accent);
+  border-radius: 4px;
+  transition: width 0.25s ease;
+}
+.page-loader-percent {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-loader,
+  .page-loader-bar-fill {
+    transition: none;
+  }
+}
+
+/*
+  Scroll progress bar: a thin fixed strip at the very top edge of the
+  viewport, filling left-to-right as the page (0-100%) scrolls. Sits above
+  the navbar (z-index) since it's meant to always be visible as a sliver
+  across the top regardless of what's scrolled beneath it. This is a
+  site-wide component - see HANDOVER.md "Scroll progress bar" for the brief
+  to carry this same block + the JS scroll listener + the HTML div onto
+  every future page built from this template. No per-page selector to
+  update (unlike the back-to-top button) - it tracks the whole document's
+  scroll position, which needs no knowledge of any specific section.
+*/
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  z-index: 105;
+  background-color: var(--color--base--accent);
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-bar {
+    transition: none;
+  }
+}
+
+/*
+  Back-to-top button: fixed bottom-right, "liquid glass" pill — dark-tinted
+  translucent blur (not white-tinted) specifically so the white arrow stroke
+  keeps enough contrast regardless of what's scrolled behind it, since this
+  button floats over both the light page background and the dark footer/hero.
+  Hidden by default; .is-visible is toggled by samhita-interactions.js once
+  the hero (.section-hero) scrolls out of the viewport. This is a site-wide
+  component - see HANDOVER.md "Back-to-top button" for the brief to carry
+  this same block + the JS observer + the HTML button markup onto every
+  future page built from this template.
+
+  z-index: the original template's own .footer sets z-index:100 with
+  position:relative, which put it in a higher stacking context than this
+  button's earlier z-index:90 - the footer visually covered the button
+  whenever they overlapped near the bottom of the page. 100 matches the
+  footer/navbar's own level (both also 100 at some breakpoints) and wins any
+  tie because this button's markup sits later in the DOM than the footer;
+  staying at 100 (not higher) deliberately keeps it below the popup's
+  z-index:101, so an open popup still visually covers this button rather
+  than floating above the modal.
+*/
+.back-to-top-button {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 100;
+  width: 3.25rem;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: rgba(4, 28, 51, 0.35);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    0 8px 24px -6px rgba(4, 28, 51, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 6px rgba(4, 28, 51, 0.25);
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.9);
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    visibility 0.3s, background-color 0.25s ease;
+}
+.back-to-top-button.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.back-to-top-button:hover,
+.back-to-top-button:focus-visible {
+  background-color: rgba(4, 28, 51, 0.5);
+  transform: translateY(-3px) scale(1.05);
+}
+.back-to-top-button.is-visible:active {
+  transform: translateY(-1px) scale(0.96);
+}
+.back-to-top-icon {
+  stroke: white;
+  pointer-events: none;
+}
+
+/*
+  Navbar: dropdown redesign, mobile menu panel, burger-to-X animation, logo
+  micro-interaction.
+
+  IMPORTANT CONTEXT: the dropdown and mobile menu were previously completely
+  non-functional (not just plainly styled) - see samhita-interactions.js's
+  top comment and HANDOVER.md "Navbar dropdown + mobile menu were non-
+  functional" for the full story. The CSS below both makes them work
+  (display/visibility toggled by the "w--open" class samhita-interactions.js
+  now adds) and gives them a more modern look, since both needed doing
+  together - there was nothing to visually polish on a dropdown that never
+  opened.
+*/
+
+/* Dropdown panel (About / Impact): was the original template's solid-coral
+   block with no shadow, no gap from the toggle, and instant show/hide (once
+   its JS ran at all). Redesigned as a white card - shadow, rounded corners,
+   a small gap below the toggle, generous link padding - with a smooth fade
+   + slide-down entrance instead of an instant appear/disappear.
+   Always rendered at `display:flex` (overriding the shared stylesheet's
+   `display:none`) and toggled via opacity/visibility/transform instead,
+   specifically so these can transition at all - `display` itself can't be
+   animated, and the dropdown is absolutely positioned (inherited from the
+   original template's own `.w-dropdown`/`.w-dropdown-list` rules) so an
+   always-present-but-invisible panel has no layout impact while closed. */
+.navbar-dropdown-list {
+  display: flex !important;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 16px 32px -12px rgba(17, 24, 39, 0.22);
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.2s;
+}
+.navbar-dropdown-list.w--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.navbar-dropdown-link {
+  opacity: 1 !important;
+  color: var(--color--base--black);
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+.navbar-dropdown-link:hover,
+.navbar-dropdown-link:focus-visible {
+  background-color: var(--color--backgrounds--bg-gray);
+}
+
+/* Mobile menu panel: same non-functional -> now-functional story as the
+   dropdown above. Kept close to the original template's own mobile
+   breakpoint styles (background, border, padding already defined there) -
+   just adds the open/close transition and a shadow so it reads as a
+   panel dropping in, not an instant swap.
+   Scoped to the same max-width:991px breakpoint the original template
+   already uses to collapse the navbar (where .navbar-menu-wrap becomes a
+   toggleable overlay instead of an always-visible flex row) - an earlier
+   version of this rule had no media query and hid the desktop nav links
+   entirely above 991px, since opacity:0/visibility:hidden applied
+   unconditionally.
+
+   `display: flex !important` is also needed here (not just opacity/
+   visibility): this element carries both `.navbar-menu-wrap` (the page's
+   own class, `display:block` at this breakpoint) and `.w-nav-menu` (the
+   shared Webflow framework class, `display:none` at this breakpoint) at
+   equal specificity - testing showed the shared stylesheet's `display:none`
+   was winning the cascade, so the panel stayed at `display:none` even once
+   `.w--open` correctly set opacity/visibility to visible (confirmed via
+   computed style: opacity:1, visibility:visible, display:none, rendering
+   as a zero-size box). Forcing `display:flex` here - the same "always
+   rendered, toggle opacity/visibility only" technique as the dropdown
+   above - resolves it regardless of which stylesheet the cascade favors. */
+@media screen and (max-width: 991px) {
+  .navbar-menu-wrap {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+    background-color: white;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.25s;
+  }
+  .navbar-menu-wrap.w--open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    box-shadow: 0 16px 32px -12px rgba(17, 24, 39, 0.22);
+  }
+
+  /* The original template's own .navbar-menu-center/.navbar-menu-right
+     rules keep them side by side at 50% width each at this breakpoint
+     (confirmed via computed style - not something this pass changed),
+     which is fine for a wide toggled panel but overflowed a narrow phone
+     viewport (the "Connect Now" button rendered partly off-screen to the
+     right). Stacked full-width instead, which is the standard mobile-menu
+     layout this kind of nav collapse is meant to produce. */
+  .navbar-menu-center,
+  .navbar-menu-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .navbar-menu-right {
+    padding: 1rem 1.5rem 1.5rem;
+  }
+  .navbar-link,
+  .navbar-dropdown {
+    width: 100%;
+  }
+}
+
+/* Burger icon -> X, on the same "w--open" class the mobile-menu toggle
+   above uses. The two outer lines fade out; the two already-overlapping
+   center lines (is-cross-1/-2 - see the HTML, they sit stacked in the same
+   spot by design) rotate apart into an X. */
+.burger-line {
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.burger-button.w--open .burger-line.is-top,
+.burger-button.w--open .burger-line.is-bottom {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.burger-button.w--open .burger-line.is-cross-1 {
+  transform: rotate(45deg);
+}
+.burger-button.w--open .burger-line.is-cross-2 {
+  transform: rotate(-45deg);
+}
+
+/* Fixes a real, confirmed bug found while testing the mobile menu above:
+   .navbar-mobile-dropdown-bg (an empty decorative <div>, see the HTML - it
+   has no text/functional content) sits absolutely positioned with
+   inset:0% inside .navbar-menu-wrap, and carries a w-variant class whose
+   background color resolves to --navbar--scroll-invert--dropdown-bg-initial
+   - the same dark-navy token the removed transparent-over-hero navbar
+   feature used to use (see the "Navbar: solid and fully opaque" note in
+   :root above). With that feature gone the navbar is permanently solid/
+   light, but this leftover div still painted its old dark-navy background
+   on top of the mobile menu panel once it actually started opening (it
+   couldn't before - the panel never opened at all until this pass), fully
+   covering the panel's own white background and reducing the near-black
+   nav-link text to near-invisible dark-on-dark. Confirmed via computed
+   style before this fix: the panel's own background genuinely was
+   `rgb(255,255,255)`, so the visible dark fill could only be this div
+   painting over it. Simplest correct fix: this div no longer has a purpose
+   once the panel supplies its own background directly, so hide it. */
+.navbar-mobile-dropdown-bg {
+  display: none;
+}
+
+/* Logo: a small, deliberately subtle hover tilt/scale - just enough to
+   register as "this is interactive branding," not a showy animation. */
+.brand-link {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.brand-link:hover,
+.brand-link:focus-visible {
+  transform: scale(1.04) rotate(-1deg);
+}
+
+/*
+  Magnetic CTA buttons: samhita-interactions.js tracks the cursor over
+  every .primary-button and nudges it a few px toward the pointer (mousemove
+  -> inline transform), resetting on mouseleave. This transition is what
+  smooths each of those discrete inline-style updates into a fluid follow
+  instead of a jump; the JS itself is gated to fine-pointer, hover-capable
+  devices and skips entirely under prefers-reduced-motion, so this
+  transition only ever fires somewhere it's wanted. */
+.primary-button {
+  transition: transform 0.15s ease-out;
+}
+
+/*
+  Cursor-aware spotlight on card hover (levels-cards, experience-cards):
+  samhita-interactions.js writes the cursor's position within each hovered
+  card to two CSS custom properties (--spot-x/--spot-y, in %); this
+  ::after radial-gradient follows those coordinates and only becomes
+  visible on :hover. `overflow:hidden` clips the gradient to the card's own
+  rounded corners (both cards already use the same --border-radius-outer
+  token, reused here via `border-radius:inherit` so this stays in sync with
+  either card's actual radius rather than a hardcoded duplicate value).
+  Kept subtle (low opacity, fades out entirely off-hover) - the point is a
+  soft highlight that tracks the cursor, not a visible spotlight beam.
+*/
+.levels-card,
+.experience-card {
+  position: relative;
+  overflow: hidden;
+}
+.levels-card::after,
+.experience-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(17, 24, 39, 0.06),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.levels-card:hover::after,
+.experience-card:hover::after {
+  opacity: 1;
+}
+
+/*
+  Auto-scrolling marquee for the partner-name strips ("Trusted by Leading
+  Corporates" / "Backed by Institutions & Government" - see the partners
+  slider markup). No real partner *logos* exist in this project to scroll
+  (see HANDOVER.md "Images" - inventing fake logo marks would be worse than
+  not having them), so this scrolls the same real partner names already in
+  each slide's own descriptive sentence, as a duplicated, auto-scrolling
+  list of plain-text chips instead. Marked aria-hidden - it's a decorative
+  duplicate of text that's already present and readable in the slide's own
+  paragraph just above it, not new information.
+  The track's markup already contains the name list duplicated exactly
+  once (see the HTML) specifically so that translateX(-50%) is a seamless
+  loop - the animation stops advancing at exactly the point where the
+  second (identical) copy sits where the first one started.
+  A mask-image fades the strip's own left/right edges to transparent so
+  chips don't visibly pop in/out at a hard edge as they scroll.
+*/
+.partner-marquee {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 0.5rem;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.partner-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+  animation: partner-marquee-scroll 22s linear infinite;
+}
+.partner-marquee:hover .partner-marquee-track {
+  animation-play-state: paused;
+}
+.partner-marquee-item {
+  flex: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+@keyframes partner-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/*
+  Cursor-tilt parallax on the hero image (desktop only). samhita-
+  interactions.js applies a subtle rotateX/rotateY + slight scale-up to
+  .hero-bg-fixed on mousemove over the hero, gated to fine-pointer/hover-
+  capable devices (no persistent cursor on touch, so the effect is simply
+  never wired up there rather than being wired up and doing nothing) and
+  skipped under prefers-reduced-motion. `perspective` has to live on an
+  ancestor for rotateX/Y to read as real 3D depth rather than a flat skew.
+
+  On .section-hero, not .layout-centered.is-hero - a real, confirmed bug
+  from an earlier version of this fix: `perspective` (like `transform`,
+  `filter`, or `will-change:transform`) makes the element it's set on the
+  containing block for any absolutely-positioned descendant, REGARDLESS of
+  that element's own `position` value staying `static`. .hero-bg-fixed
+  (the full-bleed background photo, `position:absolute;inset:0` via
+  `.u-absolute-full`) is a child of .layout-centered.is-hero specifically -
+  putting `perspective` there made that div the photo's containing block
+  instead of .section-hero, and since .layout-centered.is-hero sits nested
+  inside .padding-horizontal's own horizontal padding, the photo suddenly
+  inset itself by that same padding on both sides instead of reaching the
+  viewport's actual edges - the hero was no longer edge-to-edge.
+  .section-hero is already `position:relative` and already spans the full
+  section width with no padding of its own, so moving `perspective` there
+  keeps it as the correct containing block (no change from before this
+  feature existed) while still being a real ancestor of .hero-bg-fixed, so
+  the 3D tilt itself is unaffected.
+*/
+.section-hero {
+  perspective: 800px;
+}
+.hero-bg-fixed {
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+/*
+  Partner-name banners ("Trusted by Leading Corporates" / "Backed by
+  Institutions & Government") - extracted OUT of the partners slider
+  entirely, per request, into their own standalone banner row below the
+  slider/heading/stats grid in the same section.
+
+  History: this content used to live inside each slide as `.slide-popup` -
+  a small floating badge in the original template, `display:none` by
+  default there (meant to expand on a hover/click trigger from Webflow's
+  missing compiled JS - the same root cause documented throughout this
+  file). It went through two on-slide fixes (permanently visible, then
+  repositioned to a bottom caption bar after its `backdrop-filter:blur(25px)`
+  was found washing out the photo underneath when stretched to full-slide)
+  before being asked to move here instead. Removed from the slide markup
+  entirely now - each slide is back to being just its own photo, and this
+  content reads as its own banner rather than an overlay competing with
+  the image for attention.
+
+  Styled as plain light cards (not glass-on-photo like the CSR/FCRA
+  banner elsewhere - there's no photo behind these anymore, so a frosted-
+  glass treatment would have nothing to contrast against) side by side on
+  wide screens, stacked on narrow ones.
+*/
+.partner-banner-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+#section-partners-logos .container-standard.w-container {
+  max-width: none;
+}
+.partner-banner {
+  background-color: white;
+  border-radius: var(--border--color-size--radius-outer);
+  box-shadow: 0 12px 24px -16px rgba(17, 24, 39, 0.25);
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.partner-banner-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.partner-banner p {
+  color: var(--color--text--text-muted);
+  margin: 0;
+}
+.partner-banner .badge.u-frost.is-on-light {
+  background-color: var(--color--backgrounds--bg-gray);
+  color: var(--color--base--black);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  margin-top: auto;
+  width: fit-content;
+}
+@media screen and (max-width: 767px) {
+  .partner-banner-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The marquee's chip text was white (designed to sit on a photo, via the
+   old on-slide placement above) - dark instead now that it's on a plain
+   white card. */
+.partner-banner .partner-marquee-item {
+  color: var(--color--base--black);
+  opacity: 0.6;
+}
+
+/* Respect reduced-motion: no hover transforms/transitions for anyone who's asked for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav-underline,
+  .line-fill-color,
+  .arrow-tail-icon,
+  .levels-card,
+  .experience-card,
+  .overview-story-card,
+  .room-accordion-wrap,
+  .primary-button,
+  .arrow-tail-button,
+  .chevron-button,
+  .navbar-dropdown-list,
+  .navbar-menu-wrap,
+  .burger-line,
+  .brand-link,
+  .levels-card::after,
+  .experience-card::after,
+  .hero-bg-fixed {
+    transition: none !important;
+  }
+  .levels-card:hover,
+  .experience-card:hover,
+  .overview-story-card:hover,
+  .brand-link:hover,
+  .brand-link:focus-visible {
+    transform: none;
+    box-shadow: none;
+  }
+  .back-to-top-button {
+    transition: opacity 0.3s ease, visibility 0.3s !important;
+    transform: none !important;
+  }
+  .back-to-top-button:hover,
+  .back-to-top-button:focus-visible,
+  .back-to-top-button.is-visible:active {
+    transform: none !important;
+  }
+  .partner-marquee-track {
+    animation: none !important;
+  }
+}
+
+/* Fix layout-cards grid: Webflow uses w-node-* IDs for grid placement,
+   but the CMS repeater clones lack those IDs. Override to match the
+   original page: 4 columns at desktop, 2 at tablet, 1 at mobile. */
+@media screen and (min-width: 992px) {
+  .layout-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

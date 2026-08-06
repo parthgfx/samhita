@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Samhita.org Sitemap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f7f8;
+    --border: #e3e3e6;
+    --text: #1b1b1f;
+    --text-muted: #6b6b73;
+    --accent: #2f6f4f;
+    --accent-bg: #eaf3ee;
+    --warn: #9a5b13;
+    --warn-bg: #fbf1e3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17181c;
+      --surface: #1f2024;
+      --border: #303136;
+      --text: #eceef1;
+      --text-muted: #9a9ba3;
+      --accent: #6fbf98;
+      --accent-bg: #1c2b23;
+      --warn: #e0a854;
+      --warn-bg: #2c2312;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .wrap {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    padding: 28px 20px 40px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  h1 { font-size: 1.3rem; margin: 0 0 4px; }
+  .sub { color: var(--text-muted); font-size: 0.88rem; margin: 0 0 20px; }
+
+  .summary {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    min-width: 120px;
+  }
+  .stat .n { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+  .stat .l { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .tree-scroll { overflow-x: auto; }
+  .tree {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 560px;
+  }
+  .node {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    font-size: 0.86rem;
+  }
+  .node.root { background: var(--accent-bg); border-color: var(--accent); font-weight: 600; }
+  .node .path { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; color: var(--text-muted); }
+  .node .name { font-weight: 600; }
+  .node.l1 { margin-left: 28px; }
+  .node.l2 { margin-left: 56px; }
+  .tag {
+    font-size: 0.66rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .tag.missing { background: var(--warn-bg); color: var(--warn); }
+  .tag.dynamic { background: var(--accent-bg); color: var(--accent); }
+  .node .path.small { font-size: 0.72rem; }
+
+  .legend { margin-top: 18px; font-size: 0.78rem; color: var(--text-muted); display: flex; gap: 18px; flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  .note {
+    margin-top: 24px;
+    padding: 14px 16px;
+    background: var(--warn-bg);
+    border: 1px solid var(--warn);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+  .note strong { color: var(--warn); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2 class="sr-only">Sitemap of samhita.org showing 23 verified pages organized by navigation hierarchy: 13 static pages plus 10 individual job-posting subpages under Careers, with 2 pages missing from the site's own sitemap.xml and 1 broken footer link noted separately.</h2>
+
+  <h1>Sitemap — samhita.org</h1>
+  <p class="sub">Verified by rendering every URL in-browser (this is a client-side SPA, so raw HTTP checks return 200 for any path — titles/content had to be checked directly).</p>
+
+  <div class="summary">
+    <div class="stat"><div class="n">23</div><div class="l">Total pages</div></div>
+    <div class="stat"><div class="n">13</div><div class="l">Static pages</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Job-posting subpages</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">Missing from sitemap.xml</div></div>
+  </div>
+
+  <div class="tree-scroll">
+    <div class="tree">
+      <div class="node root"><span class="name">Home</span><span class="path">/</span></div>
+
+      <div class="node l1"><span class="name">About</span><span class="path">/about</span></div>
+      <div class="node l2"><span class="name">Our Teams</span><span class="path">/teams</span></div>
+
+      <div class="node l1"><span class="name">How We Do It</span><span class="path">/how-we-do-it</span></div>
+
+      <div class="node l1"><span class="name">Catalytic Finance</span><span class="path">/catalytic-finance</span><span class="tag missing">missing from sitemap.xml</span></div>
+
+      <div class="node l1"><span class="name">Knowledge Center (Pulse)</span><span class="path">/pulse</span></div>
+
+      <div class="node l1"><span class="name">Services — For CSR Clients</span><span class="path">/csr-clients</span></div>
+      <div class="node l1"><span class="name">Services — For Foundations</span><span class="path">/foundations</span></div>
+      <div class="node l1"><span class="name">Services — For Government</span><span class="path">/government</span></div>
+      <div class="node l1"><span class="name">Services — For Financial Institutions</span><span class="path">/financial-institution</span></div>
+
+      <div class="node l1"><span class="name">Connect</span><span class="path">/connect</span></div>
+
+      <div class="node l1"><span class="name">Careers</span><span class="path">/careers</span></div>
+      <div class="node l2"><span class="name">Associate/Sr. Associate – Catalytic Finance</span><span class="path small">/careers/46ec432f-6843-4473-8af7-db57b62d6d25</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Associate – Lender Relations &amp; Compliance</span><span class="path small">/careers/9967beed-bc99-4203-8b25-4e9c13122441</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Assistant Manager – IP &amp; Partner Relations</span><span class="path small">/careers/17ca43b7-4cca-46f4-af43-b0242f6e7474</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Manager – Credit Vertical (Maharashtra)</span><span class="path small">/careers/4faed6ee-efc0-485d-8f2d-c06a9f2abeae</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Sr. Associate/Associate Strategic Partnerships</span><span class="path small">/careers/65cec4fc-db6c-4991-aa85-095a4873991a</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Master Trainer (EDP) – Madhya Pradesh</span><span class="path small">/careers/b31fe2c8-e374-4c2d-8c78-71ea0abf650e</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Associate Director – MEL</span><span class="path small">/careers/8de96bac-df5d-41d1-8c1a-429396cf69e2</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Trainer/Mentor (MSME Training on AI)</span><span class="path small">/careers/76123ab1-1f66-4060-9dd0-f69ee1e05eaa</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Program Associate (Contractual)</span><span class="path small">/careers/3c5940e7-843b-4dba-9a1c-a74792685c02</span><span class="tag dynamic">job posting</span></div>
+      <div class="node l2"><span class="name">Manager/Sr. Manager – Growth, Innovation &amp; Strategy</span><span class="path small">/careers/e1da0dca-c9a1-4d9a-9168-2f3d15de7b6e</span><span class="tag dynamic">job posting</span></div>
+
+      <div class="node l1"><span class="name">Privacy Policy</span><span class="path">/privacy-policy</span><span class="tag missing">missing from sitemap.xml</span></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:var(--accent)"></span> Home</span>
+    <span><span class="tag missing" style="padding:1px 6px;">missing from sitemap.xml</span> real page, not declared in /sitemap.xml</span>
+    <span><span class="tag dynamic" style="padding:1px 6px;">job posting</span> live listing, rotates as roles open/close</span>
+  </div>
+
+  <div class="note">
+    <strong>Note on scope:</strong> The footer's "Financials" link points to <code>/financial-inclusion</code>, but that route renders no content of its own — it silently falls back to the homepage, so it isn't counted as a real page. The "CGF" nav item links out to <code>collectivegood.in</code>, a separate domain, and isn't counted either. Pulse's "View Story" cards and the case-study "Read More" buttons on the four service pages expand content in place without changing the URL, so they aren't separate pages. Only Careers' "View Details" buttons do a real client-side route push to a unique <code>/careers/&lt;id&gt;</code> URL — those 10 postings are a live list and will change as roles open and close.
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,393 @@
+{
+  "slug": "home",
+  "title": "Samhita | Catalysing Prosperity. Together.",
+  "meta": {
+    "primary": "<meta name=\"description\" content=\"Samhita supports workers, farmers and micro-entrepreneurs with skilling, formal credit, market linkages, employment and social security. We partner with Corporate CSR, governments, philanthropic foundations and financial institutions to help Indians achieve lasting income growth.\">\n<meta name=\"keywords\" content=\"social impact, CSR, corporate social responsibility, financial inclusion, skilling, job opportunities, credit access, social schemes, community development, sustainable development, UN SDGs\">\n<meta name=\"author\" content=\"Samhita\">\n<meta name=\"robots\" content=\"index, follow\">\n<meta http-equiv=\"content-language\" content=\"English\">\n<meta name=\"revisit-after\" content=\"7 days\">",
+    "og": "<meta property=\"og:type\" content=\"website\">\n<meta property=\"og:url\" content=\"https://samhita.org/\">\n<meta property=\"og:title\" content=\"Samhita | CSR, Philanthropy & Govt Partnerships to Enable Indian Citizens' Income Growth\">\n<meta property=\"og:description\" content=\"Samhita supports workers, farmers and micro-entrepreneurs with skilling, formal credit, market linkages, employment and social security.\">\n<meta property=\"og:image\" content=\"https://samhita.org/assets/images/logo.png\">\n<meta property=\"og:image:width\" content=\"1200\">\n<meta property=\"og:image:height\" content=\"630\">\n<meta property=\"og:site_name\" content=\"Samhita\">\n<meta property=\"og:locale\" content=\"en_US\">",
+    "twitter": "<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:url\" content=\"https://samhita.org/\">\n<meta name=\"twitter:title\" content=\"Samhita | CSR, Philanthropy & Govt Partnerships to Enable Indian Citizens' Income Growth\">\n<meta name=\"twitter:description\" content=\"Samhita supports workers, farmers and micro-entrepreneurs with skilling, formal credit, market linkages, employment and social security.\">\n<meta name=\"twitter:image\" content=\"https://samhita.org/assets/images/logo.png\">",
+    "technical": "<link rel=\"canonical\" href=\"https://samhita.org/\">\n<meta name=\"theme-color\" content=\"#1a365d\">",
+    "analytics": "<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-D81NZB1041\"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\"js\",new Date());gtag(\"config\",\"G-D81NZB1041\");</script>",
+    "structured_data": "<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Samhita\",\"url\":\"https://samhita.org\",\"logo\":\"https://samhita.org/assets/images/logo.png\",\"description\":\"Samhita supports workers, farmers and micro-entrepreneurs with skilling, formal credit, market linkages, employment and social security.\",\"foundingDate\":\"2010\",\"address\":{\"@type\":\"PostalAddress\",\"addressCountry\":\"IN\"},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"customer service\",\"email\":\"info@samhita.org\"},\"sameAs\":[\"https://www.linkedin.com/company/samhita-social-ventures/\",\"https://x.com/Samhitadotorg\",\"https://www.instagram.com/samhitadotorg/\"]}</script>"
+  },
+  "parent": null,
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "content": {
+        "eyebrow": "Powered by Catalytic Finance",
+        "heading_line1": "Building India's Citizen-Centric",
+        "heading_line2": "Livelihood Acceleration Network",
+        "cta_text": "Connect Now",
+        "stat_number": "17",
+        "stat_suffix": "M",
+        "stat_text": "lives impacted across our livelihood network",
+        "background_image": "./new-hero.webp"
+      }
+    },
+    {
+      "id": "navbar",
+      "type": "navbar",
+      "content": {
+        "tagline": "Catalysing Prosperity. Together.",
+        "nav_about": "About",
+        "nav_our_story": "Our Story",
+        "nav_how_we_work": "How We Work",
+        "nav_impact": "Impact",
+        "nav_our_partners": "Our Partners",
+        "nav_catalytic_finance": "Catalytic Finance",
+        "nav_careers": "Careers",
+        "nav_cta": "Connect Now"
+      }
+    },
+    {
+      "id": "section-story",
+      "type": "story",
+      "content": {
+        "eyebrow": "Our Story",
+        "heading_line1": "This is the ladder",
+        "heading_line2": "to an irreversible",
+        "heading_line3": "<p>increase in </p><p>income</p>",
+        "tags": [
+          "Skilling & Jobs",
+          "Credit & Market Linkages",
+          "Healthcare & Social Security"
+        ],
+        "paragraph": "<p>It's made up of skilling, jobs, market linkages, credit, healthcare, and social security. If one rung breaks — a missing skill, a health emergency, a business setback — the whole ladder becomes impossible to climb. Samhita builds it back, rung by rung.</p>",
+        "cta_text": "View Impact Dashboard",
+        "stats": [
+          {
+            "label": "Lives Impacted",
+            "value": "17",
+            "suffix": "M",
+            "extra": "+"
+          },
+          {
+            "label": "CSR Clients, Development Foundations, International Agency Partners & Donors",
+            "value": "300",
+            "suffix": "",
+            "extra": "+"
+          },
+          {
+            "label": "Impact Partners",
+            "value": "500",
+            "suffix": "",
+            "extra": "+"
+          },
+          {
+            "label": "Government Partnerships",
+            "value": "15",
+            "suffix": "",
+            "extra": "+"
+          }
+        ],
+        "slides": [
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a03831353b8db6ef0c265_b6839fc60b37bb6b1c84891fe3a95061_waterfall-group.avif",
+            "title": "The Ladder\nto Income Growth",
+            "description": "<p>Skilling, jobs, market linkages, credit, healthcare, and social security.</p>",
+            "alt": "A ladder representing the path to income growth."
+          },
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a03831353b8db6ef0c267_2ecaaccb7a9ce38a00cf69450609b359_surfing-beach.avif",
+            "title": "A Broken Rung\nBreaks the Climb",
+            "description": "<p>A missing skill, a health emergency, a business setback — this ladder cannot be climbed.</p>",
+            "alt": "A broken ladder representing a missing rung in the livelihood journey."
+          },
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a0389b48d64071034ecd8_d91358f588fd36e95e6cf9dc98c1eb0d_villa-jungle.avif",
+            "title": "Building It Back\nRung by Rung",
+            "description": "<p>CSR, philanthropy, financial institutions, governments and NGOs — holding the ladder at every step.</p>",
+            "alt": "A strong ladder representing Samhita's rebuilt livelihood network."
+          },
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a038e6d03694f97353aca_b82963d89e7e3a2be4c98622358a7b79_surfers-circle.avif",
+            "title": "One Livelihood\nNetwork for India",
+            "description": "<p>Fully aligned with the UN SDGs. 100% CSR and FCRA compliant.</p>",
+            "alt": "Samhita community members representing our mission."
+          }
+        ],
+        "quote": "<p>We have proven that when the ladder is strong,</p><p><br></p><p>India climbs.</p>",
+        "quote_image": "./Waveyu - Webflow HTML website template_files/697a03adf92d326f91b61a12_d47139b925e980bd7f348267a5d020ba_team-portrait-thumb.webp",
+        "quote_cta_text": "Read About Our Journey"
+      }
+    },
+    {
+      "id": "section-audiences",
+      "type": "audience-cards",
+      "content": {
+        "eyebrow": "Who We Serve",
+        "heading_line1": "Tailored partnerships",
+        "heading_line2": "for every stakeholder",
+        "cta_text": "See Catalytic Finance",
+        "cta_link": "#section-catalytic",
+        "cards": [
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a03b32e68f93f96ec6df1_14e5555be7a7f8277379e1e8e06b34d6_surfboard-on-grass.webp",
+            "badge": "csr clients",
+            "title": "For CSR Clients",
+            "description": "<p>CSR that is impact driven, compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your priorities and geographies.</p>"
+          },
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731c0_d765aab020006eaf824d7d186dccc259_surfboard-feet-action.webp",
+            "badge": "foundations",
+            "title": "For Foundations",
+            "description": "<p>We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and delivery on the ground.</p>"
+          },
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731c5_83c25036e9bf7235adbcd6900ebc9533_man-surfing-wave.webp",
+            "badge": "government",
+            "title": "For Government",
+            "description": "<p>The Government is the main engine of development, and we strengthen its ability to deliver — from local to state to central programs.</p>"
+          },
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731ca_ad958a0f63f8390724e20e016a17334e_shaka-hand.webp",
+            "badge": "financial institutions",
+            "title": "For Financial Institutions",
+            "description": "<p>Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal risk.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "id": "section-partners",
+      "type": "ecosystem-accordions",
+      "content": {
+        "eyebrow": "Ecosystem",
+        "heading_line1": "Partnering across <span class=\"heading-accent\">the entire</span>",
+        "heading_line2": "<span class=\"heading-accent\">ecosystem</span>",
+        "description": "We work across the ecosystem with philanthropic organisations, grassroots institutions, financial institutions, government bodies, and private sector partners.",
+        "hero_image": "./Waveyu - Webflow HTML website template_files/697ca2f13faa8a188cbfa5ba_947f6f5b9dca5b20e5bc11d802cfe6bc_villa.avif",
+        "accordions": [
+          {
+            "title": "Philanthropic Organisations, CSR Partners & HNIs",
+            "description": "We have worked with 15+ philanthropic funders to design and execute Catalytic Finance initiatives — unlocking up to ₹30 for citizens for every ₹1 of philanthropic funding, with 70–100% growth in incomes.",
+            "image": "./Waveyu - Webflow HTML website template_files/69848881e691d633d043c432_cover - twin room.webp",
+            "image_alt": "Partnership between funders and citizens.",
+            "cta_text": "Learn More"
+          },
+          {
+            "title": "Government & Public Sector Organisations",
+            "description": "Partnerships with large-scale government organisations enable us to scale rapidly — including the Common Service Centres network (5.5 lakh+ centres), Sector Skill Councils, and CGTMSE.",
+            "image": "./Waveyu - Webflow HTML website template_files/698488b71fa34569af7175d9_cover - double room.webp",
+            "image_alt": "ONDC and government digital infrastructure partners.",
+            "cta_text": "Learn More"
+          },
+          {
+            "title": "Banks, NBFCs & Financial Institutions",
+            "description": "Most banks want to lend to small business owners and farmers but don't, because they see the risk as too high. We also work with fintech partners so citizens can save and invest from as little as ₹100 a day.",
+            "image": "./Waveyu - Webflow HTML website template_files/69848966dc6b376f46000a41_cover - group suit.webp",
+            "image_alt": "Financial institution partners.",
+            "cta_text": "Learn More"
+          },
+          {
+            "title": "Private Sector Partnerships",
+            "description": "We co-create solutions with companies to support the farmers, micro-entrepreneurs, vendors, and gig workers behind their supply chains and products.",
+            "image": "./Waveyu - Webflow HTML website template_files/6984896daeae9b8ed29f9218_cover - common areas.webp",
+            "image_alt": "Private sector corporate partners.",
+            "cta_text": "Learn More"
+          },
+          {
+            "title": "Grassroots & Community Partners",
+            "description": "18 grassroots partner organisations across multiple states, building capacity to deliver affordable livelihood solutions in their communities.",
+            "image": "./Waveyu - Webflow HTML website template_files/6984f388c88f95e1d338c957_347f2d7c82fce5da93f1b2de18b8458f_surfing.avif",
+            "image_alt": "Grassroots and community partner organisations.",
+            "cta_text": "Learn More"
+          }
+        ]
+      }
+    },
+    {
+      "id": "section-initiatives",
+      "type": "initiative-cards",
+      "content": {
+        "eyebrow": "Catalytic Initiatives",
+        "heading_line1": "Advancing health, enterprise,",
+        "heading_line2": "and urban livelihoods",
+        "description": "<p>Three programs pushing beyond our core livelihood work into health, enterprise, and urban resilience.</p>",
+        "cards": [
+          {
+            "eyebrow": "health",
+            "title": "Samyak",
+            "description": "<p>Strengthening urban health systems to bridge inequities for the urban poor in small cities.</p>",
+            "image": "./Waveyu - Webflow HTML website template_files/6984ee22187bc8620b7688c5_1e6d877a07e38c980277c92af5077c63_waterfall.avif",
+            "image_alt": "Samyak initiative"
+          },
+          {
+            "eyebrow": "enterprise",
+            "title": "OneTAC",
+            "description": "<p>Building India's first digital backbone for tourism, arts, and culture to empower entrepreneurs.</p>",
+            "image": "./Waveyu - Webflow HTML website template_files/6984f2beb22e7b23ea7beb60_a9c84fab5712b209b4eb13c2a592edcb_villa.avif",
+            "image_alt": "OneTAC initiative"
+          },
+          {
+            "eyebrow": "mental health",
+            "title": "Centre for Public Mental Health",
+            "description": "<p>Scaling mental health solutions to build India's pathway to a zero-burden future for mental health.</p>",
+            "image": "./Waveyu - Webflow HTML website template_files/6989d7593ca898267847d6a2_0f06646be2753fe9e87d2f3ea46e1616_IMG_5010 1.webp",
+            "image_alt": "Centre for Public Mental Health initiative"
+          }
+        ]
+      }
+    },
+    {
+      "id": "section-cta-story",
+      "type": "cta-banner",
+      "content": {
+        "eyebrow": "Partner With Us",
+        "heading_line1": "Every ₹1 can become",
+        "heading_line2": "₹3 to ₹30 in citizens' hands",
+        "cta_text": "Submit a Funding Inquiry",
+        "background_image": "./Waveyu - Webflow HTML website template_files/6985bedd1ff7e892ea8f3c64_391f15da211cdf7ebf6680461b9bc00f_scooter-surf-motion.webp",
+        "background_alt": "Citizens supported through catalytic finance programs."
+      }
+    },
+    {
+      "id": "section-partners-logos",
+      "type": "partners-showcase",
+      "content": {
+        "eyebrow": "Partners",
+        "heading_line1": "The architects of",
+        "heading_line2": "<span class=\"heading-accent\">the ladder</span>",
+        "description": "Powering India's Livelihood Network Through Strategic Partnerships.",
+        "slider_images": [
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/6989d7593ca898267847d6a2_0f06646be2753fe9e87d2f3ea46e1616_IMG_5010 1.webp",
+            "alt": "Corporate and foundation partners powering Samhita's network."
+          },
+          {
+            "image": "./Waveyu - Webflow HTML website template_files/698cb98ac470da7b18a36b45_654236ffca4a57def56883d156d54b29_surf-coach-02.webp",
+            "alt": "Government and institutional partners backing Samhita's programs."
+          }
+        ],
+        "stats": [
+          {
+            "value": "654568",
+            "suffix": "",
+            "label": "Citizens",
+            "description": "received Employment Linked Skilling."
+          },
+          {
+            "value": "90",
+            "suffix": "%",
+            "label": "Job Placement",
+            "description": "with 80% retention rates."
+          }
+        ],
+        "partner_banners": [
+          {
+            "heading": "Trusted by Leading Corporates",
+            "description": "Accenture, Adidas, Bajaj Finserv, Cummins, DXC, Eureka Forbes, IndusInd Bank and more power our livelihood network through strategic CSR partnerships.",
+            "marquee_items": [
+              "Accenture",
+              "Adidas",
+              "Bajaj Finserv",
+              "Cummins",
+              "DXC",
+              "Eureka Forbes",
+              "IndusInd Bank"
+            ],
+            "badge_text": "21 Funding Partners"
+          },
+          {
+            "heading": "Backed by Institutions & Government",
+            "description": "Gates Foundation, Infosys Foundation, HCL Foundation, Walmart Foundation, CGTMSE, ONDC, and state governments across India strengthen our reach.",
+            "marquee_items": [
+              "Gates Foundation",
+              "Infosys Foundation",
+              "HCL Foundation",
+              "Walmart Foundation",
+              "CGTMSE",
+              "ONDC"
+            ],
+            "badge_text": "27 Grassroots Partners"
+          }
+        ]
+      }
+    },
+    {
+      "id": "section-catalytic",
+      "type": "cta-banner",
+      "content": {
+        "eyebrow": "Catalytic Finance",
+        "heading_line1": "Make your CSR rupee work harder.",
+        "heading_line2": "Up to 20x harder.",
+        "tags": [
+          "100% CSR & FCRA Compliant",
+          "Aligned with the UN SDGs"
+        ],
+        "cta_text": "Explore Catalytic Finance",
+        "background_image": "./Waveyu - Webflow HTML website template_files/698f45ac566b1cf5fb10eb01_3c07b832f3c7024462062b1d7ea5b208_tropical-leaf-macro.webp",
+        "background_alt": "Funding partners enabling catalytic finance."
+      }
+    },
+    {
+      "id": "final-cta",
+      "type": "final-cta",
+      "content": {
+        "heading_line1": "<span class=\"heading-accent\">Ready</span>",
+        "heading_line2": "to build the ladder with us?",
+        "description": "Samhita. Catalysing Prosperity. Together.",
+        "cta_text": "Connect Now",
+        "image_right": "./Waveyu - Webflow HTML website template_files/697a0394f4917471ddd35eb1_8d1583415df9b8e289faf714aac313a6_team-portrait.avif",
+        "image_left": "./Waveyu - Webflow HTML website template_files/6988c9518b240e4477f5b370_09ad5854278985630986a7dcb10615a4_surfers-palm-garden.avif"
+      }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "content": {
+        "logo": "./samhita-logo white.png",
+        "address": "Samhita CGF\nMumbai & Bengaluru, India",
+        "phone": "+91 98197 01728",
+        "social_links": {
+          "facebook": "https://www.facebook.com/samhitasocialventures",
+          "linkedin": "https://www.linkedin.com/company/samhita-social-ventures/",
+          "x": "https://x.com/Samhitadotorg",
+          "youtube": "https://www.youtube.com/channel/UCIwuu7bLNnhcnVytOva9QIg"
+        },
+        "social_title": "<strong>Follow us on Social Media</strong>",
+        "nav_company_title": "Company",
+        "nav_link_1": "Work With Us",
+        "nav_link_2": "Who We Are",
+        "nav_resources_title": "Resources",
+        "nav_link_3": "Reports",
+        "nav_link_4": "Financials",
+        "nav_link_5": "Privacy Policy",
+        "nav_columns": [
+          {
+            "title": "Company",
+            "links": [
+              {
+                "text": "Work With Us",
+                "url": "#"
+              },
+              {
+                "text": "Who We Are",
+                "url": "#"
+              }
+            ]
+          },
+          {
+            "title": "Resources",
+            "links": [
+              {
+                "text": "Reports",
+                "url": "#"
+              },
+              {
+                "text": "Financials",
+                "url": "#"
+              },
+              {
+                "text": "Privacy Policy",
+                "url": "#"
+              }
+            ]
+          }
+        ],
+        "copyright": "© 2025 Samhita CGF. All rights reserved."
+      }
+    }
+  ]
+}
