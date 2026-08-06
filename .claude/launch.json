@@ -4,13 +4,13 @@
     {
       "name": "samhita-preview",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "Samhita", "-l", "8091", "--no-clipboard"],
+      "runtimeArgs": ["serve", "docs", "-l", "8091", "--no-clipboard"],
       "port": 8091
     },
     {
       "name": "samhita-cms",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["Samhita/server.js"],
+      "runtimeArgs": ["docs/server.js"],
       "port": 3456
     }
   ]
