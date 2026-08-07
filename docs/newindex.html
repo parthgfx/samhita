@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="en" class="w-mod-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Samhita | Catalysing Prosperity. Together.</title>
+<meta content="Samhita builds India's citizen-centric livelihood network, powered by catalytic finance, connecting CSR, philanthropy, government and financial institutions." name="description">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<!--
+  Samhita homepage adaptation of the "Waveyu" Webflow template.
+  See HANDOVER.md (same folder) for the full brief: what changed, why,
+  what's still a placeholder, and how to extend this to other pages.
+  The original template file is untouched - this is a new, separate file
+  that reuses its (also untouched) CSS/JS assets from the
+  "Waveyu - Webflow HTML website template_files" folder, plus two new
+  files added only for this adaptation: samhita-theme.css (color
+  overrides) and samhita-interactions.js (accordion/popup behavior).
+-->
+<link rel="icon" type="image/png" href="./samhita-favicon.png">
+<link rel="apple-touch-icon" href="./samhita-favicon.png">
+<meta name="theme-color" content="#041c33">
+<!--
+  Social preview (Open Graph + Twitter Card): see HANDOVER.md "Social
+  preview meta" for the full brief on what's sitewide-constant vs.
+  per-page here, and what MUST become an absolute URL at deployment
+  (og:image / twitter:image / og:url are relative for now, which only
+  works for browser-rendered previews - not for Slack/LinkedIn/WhatsApp/
+  X link-unfurl bots, which require a fully-qualified URL).
+-->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://samhita.org/">
+<meta property="og:site_name" content="Samhita">
+<meta property="og:title" content="Samhita | Catalysing Prosperity. Together.">
+<meta property="og:description" content="Samhita builds India's citizen-centric livelihood network, powered by catalytic finance, connecting CSR, philanthropy, government and financial institutions.">
+<meta property="og:image" content="./samhita-favicon.png">
+<meta property="og:image:width" content="251">
+<meta property="og:image:height" content="249">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Samhita | Catalysing Prosperity. Together.">
+<meta name="twitter:description" content="Samhita builds India's citizen-centric livelihood network, powered by catalytic finance, connecting CSR, philanthropy, government and financial institutions.">
+<meta name="twitter:image" content="./samhita-favicon.png">
+<!--
+  Open Sans: the fallback for --font--primary (see samhita-theme.css). The
+  real brand typeface, Suisse Int'l, is a paid license with no font files
+  bundled here, so it won't render unless a visitor already has it installed
+  locally - Open Sans is loaded here so that fallback is an actual working
+  web font instead of silently dropping to the browser's generic sans-serif.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spectral:wght@300;400&display=swap" rel="stylesheet">
+<link href="./Waveyu - Webflow HTML website template_files/waveyu.webflow.shared.64b6c47da.min.css" rel="stylesheet" type="text/css">
+<link href="./Waveyu - Webflow HTML website template_files/waveyu.webflow.697a02e7f32a15a9f2b4ae30-6e088d5f9.min.css" rel="stylesheet" type="text/css">
+<link href="./samhita-theme.css?v=3" rel="stylesheet" type="text/css">
+<script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+</head>
+<body>
+
+<div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-label="Page loading">
+  <div class="image-wrap u-absolute-full">
+    <div class="footer-bg-blur"></div>
+    <img src="./Waveyu - Webflow HTML website template_files/6984f476176be0064e11ac20_aec255993fec0c4222fbfae5aa8d0d1e_surfers.avif" alt="">
+  </div>
+  <img src="./samhita-logo white.png" alt="" class="page-loader-logo">
+  <div class="page-loader-bar-track">
+    <div id="page-loader-bar-fill" class="page-loader-bar-fill"></div>
+  </div>
+  <div id="page-loader-percent" class="page-loader-percent">0%</div>
+</div>
+
+<div id="scroll-progress-bar" class="scroll-progress-bar" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+<header class="navbar-wrap">
+  <div data-animation="default" class="navbar w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 w-nav" data-wf--navbar--variant="scroll-invert" data-easing2="ease" data-easing="ease" data-collapse="medium" role="banner" data-duration="400">
+    <div class="navbar-inner-wrap">
+      <div class="navbar-brand-wrap">
+        <a href="#" aria-current="page" class="brand-link w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 w-nav-brand w--current" aria-label="home">
+          <img src="./samhita-logo.png" loading="eager" width="140" height="63" alt="Samhita logo">
+        </a>
+      </div>
+      <nav role="navigation" class="navbar-menu-wrap w-nav-menu">
+        <div class="navbar-menu-center">
+          <ul role="list" class="navbar-menu w-list-unstyled">
+            <li class="list-item">
+              <div data-delay="0" data-hover="false" class="navbar-dropdown w-dropdown">
+                <div class="navbar-dropdown-toggle w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
+                  <div class="navbar-dropdown-inner"><div>About</div><div class="navbar-dropdown-icon w-icon-dropdown-toggle" aria-hidden="true"></div></div>
+                  <div class="nav-underline-wrap"><div class="nav-underline w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424"></div></div>
+                </div>
+                <nav class="navbar-dropdown-list w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0">
+                  <a href="#section-story" class="navbar-dropdown-link w-dropdown-link" tabindex="0">Our Story</a>
+                  <a href="#section-audiences" class="navbar-dropdown-link w-dropdown-link" tabindex="0">How We Work</a>
+                </nav>
+              </div>
+            </li>
+            <li class="list-item">
+              <div data-delay="0" data-hover="false" class="navbar-dropdown w-dropdown">
+                <div class="navbar-dropdown-toggle w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 w-dropdown-toggle" id="w-dropdown-toggle-1" aria-controls="w-dropdown-list-1" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
+                  <div class="navbar-dropdown-inner"><div>Impact</div><div class="navbar-dropdown-icon w-icon-dropdown-toggle" aria-hidden="true"></div></div>
+                  <div class="nav-underline-wrap"><div class="nav-underline w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424"></div></div>
+                </div>
+                <nav class="navbar-dropdown-list w-dropdown-list" id="w-dropdown-list-1" aria-labelledby="w-dropdown-toggle-1">
+                  <a href="#section-partners-logos" class="navbar-dropdown-link w-dropdown-link" tabindex="0">Our Partners</a>
+                  <a href="#section-catalytic" class="navbar-dropdown-link w-dropdown-link" tabindex="0">Catalytic Finance</a>
+                </nav>
+              </div>
+            </li>
+            <li class="list-item">
+              <a href="#" class="navbar-link w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 w-inline-block"><!-- placeholder: Careers page not yet adapted -->
+                <div>Careers</div>
+                <div class="nav-underline-wrap"><div class="nav-underline w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424"></div></div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="navbar-menu-right">
+          <a aria-label="Connect Now - open inquiry form" href="#" data-open-popup="popup-form" data-wf--primary-button-popup--variant="primary" class="primary-button w-inline-block">
+            <div class="button-text-wrap"><div class="button-text">Connect Now</div></div>
+          </a>
+        </div>
+        <div class="navbar-mobile-dropdown-bg w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424"></div>
+      </nav>
+      <div class="burger-button w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 w-nav-button" aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
+        <div class="burger-icon">
+          <div class="burger-line w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 is-top"></div>
+          <div class="burger-cross">
+            <div class="burger-line w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 is-cross-1"></div>
+            <div class="burger-line w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 is-cross-2"></div>
+          </div>
+          <div class="burger-line w-variant-998d0b6a-a741-b52e-bbc7-76c0cc034424 is-bottom"></div>
+        </div>
+      </div>
+    </div>
+    <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+  </div>
+</header>
+
+<main class="main-wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="section-hero">
+    <div class="w-layout-blockcontainer container-standard w-container">
+      <div class="padding-horizontal">
+        <div class="padding-vertical is-no-padding">
+          <div class="layout-centered is-hero">
+            <div class="hero-content u-text-color-white">
+              <div class="lifecycle-stages" aria-label="Life-cycle stages: Design, Structure, Orchestrate, Implement">
+                <span class="lifecycle-stage">Design</span>
+                <span class="lifecycle-sep" aria-hidden="true">|</span>
+                <span class="lifecycle-stage">Structure</span>
+                <span class="lifecycle-sep" aria-hidden="true">|</span>
+                <span class="lifecycle-stage">Orchestrate</span>
+                <span class="lifecycle-sep" aria-hidden="true">|</span>
+                <span class="lifecycle-stage">Implement</span>
+              </div>
+              <h1 class="heading-h1 is-small" aria-label="One accountable partner from the first design conversation to last mile delivery">
+                <div class="gsap_split_word gsap_split_word1">One accountable partner,</div>
+                <div class="gsap_split_word gsap_split_word2">from design to last-mile delivery</div>
+              </h1>
+              <p class="hero-subline">Samhita, comprising two entities — Samhita Social Ventures and the Collective Good Foundation — aims to provide a continuous, irreversible increase in incomes for India's 10 million youth, job seekers, entrepreneurs and farmers.</p>
+              <a aria-label="Connect Now" href="#" data-open-popup="popup-form" class="primary-button w-variant-310b25ce-4b31-6d2f-4739-69828e9b5937 w-inline-block">
+                <div class="button-text-wrap"><div class="button-text">Connect Now</div></div>
+              </a>
+            </div>
+            <div id="w-node-dd7add53-aa2d-4531-54d5-fc58c9f7230a-f2b4ae30" class="hero-stats hero-trust u-text-color-white">
+              <div class="hero-trust-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>Fully aligned with the UN SDGs</div></div>
+              <div class="hero-trust-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>100% CSR and FCRA compliant</div></div>
+              <div class="hero-trust-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>Healthcare, climate resilience and gender equity</div></div>
+            </div>
+            <!-- Hero background. The still is a real CSS background-image, not
+                 just the video's poster: it paints from plain HTML/CSS with no
+                 decoding or buffering wait, so the fold is never empty while
+                 the video loads, and it stays as the permanent fallback if the
+                 video fails, is blocked, or is paused for reduced-motion. The
+                 video layers over it and the ::after scrim sits over both. -->
+            <div class="image-wrap u-absolute-full hero-bg-fixed" role="img" aria-label="A woman and a young girl embracing in a field at dusk" style="background-image: url('./images/index/hero/bgimg-hero.webp')" data-bg-src="./images/index/hero/bgimg-hero.webp">
+              <video class="hero-bg-video" autoplay muted loop playsinline preload="auto" poster="./images/index/hero/bgimg-hero.webp" aria-hidden="true" tabindex="-1">
+                <source src="./images/index/hero/bgvid.webm" type="video/webm">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IMPACT DASHBOARD TICKER (PDF fold 3) ============ -->
+  <section class="section-stats-bar">
+    <div class="padding-horizontal">
+      <div class="w-layout-blockcontainer container-standard w-container">
+        <div class="stats-bar-header">
+          <div class="icon-eyebrow-group">
+            <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+            <div class="eyebrow-section">Impact</div>
+          </div>
+          <h2 class="heading-h2 stats-bar-heading">Our Impact Across India's <span class="heading-accent">Livelihood Ecosystem</span></h2>
+          <p class="stats-bar-subheading">We have proven that when the ladder is strong, India climbs.</p>
+        </div>
+        <div class="stats-bar">
+          <div class="stats-bar-item">
+            <div class="stats-bar-number"><span class="count-up" data-count-to="17" data-count-suffix="M">0</span>+</div>
+            <div class="stats-bar-label">Lives Impacted</div>
+          </div>
+          <div class="stats-bar-item">
+            <div class="stats-bar-number"><span class="count-up" data-count-to="300">0</span>+</div>
+            <div class="stats-bar-label">CSR Clients, Foundations &amp; Donors</div>
+          </div>
+          <div class="stats-bar-item">
+            <div class="stats-bar-number"><span class="count-up" data-count-to="500">0</span>+</div>
+            <div class="stats-bar-label">Impact Partners</div>
+          </div>
+          <div class="stats-bar-item">
+            <div class="stats-bar-number"><span class="count-up" data-count-to="15">0</span>+</div>
+            <div class="stats-bar-label">Government Partnerships</div>
+          </div>
+        </div>
+        <div class="stats-bar-cta">
+          <a class="secondary-button w-inline-block" href="#"><!-- placeholder: Knowledge Centre → full impact dashboard -->
+            <div>View our full impact dashboard</div>
+            <div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIVELIHOOD LADDER STORY (PDF fold 2) ============ -->
+  <section id="section-story" class="section-overview">
+    <div class="padding-horizontal">
+      <div class="padding-vertical is-double-top">
+        <div class="w-layout-blockcontainer container-standard w-container">
+          <div class="w-layout-grid layout-grid">
+            <div id="w-node-_4ef50234-6607-ca98-5d4f-7d69c383a6b3-f2b4ae30" class="w-layout-grid overview-header">
+              <div class="title-wrap">
+                <div class="heading-wrap is-small">
+                  <div class="icon-eyebrow-group">
+                    <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+                    <div class="eyebrow-section">Our Story</div>
+                  </div>
+                  <h2 class="heading-h2">
+                    <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1">This is the ladder</div></div>
+                    <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2">to an irreversible</div></div>
+                    <div class="gsap_split_line-mask gsap_split_line3-mask"><div class="gsap_split_line gsap_split_line3">increase in <span class="heading-accent">income</span></div></div>
+                  </h2>
+                </div>
+                <div class="tag-list">
+                  <div class="tag-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>Skilling &amp; Jobs</div></div>
+                  <div class="tag-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>Market Linkages &amp; Credit</div></div>
+                  <div class="tag-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>Healthcare &amp; Social Security</div></div>
+                </div>
+                <p>Savings spent on a health emergency is a missing rung. Borrowing informally at predatory rates that consume earnings is another broken rung. A growing business with a broken machine and no credit to repair it is another. Fixing one rung doesn't help — we need a ladder that holds at every step.</p>
+                <p>As a Prosperity Accelerator, Samhita brings together those who build each rung: CSR, philanthropy, financial institutions, governments and NGOs. This is how we build a citizen-centric livelihood network so all of India can climb.</p>
+              </div>
+              <a id="w-node-b0ddc51f-e61c-3f56-ff0b-73b1f03337b1-f2b4ae30" class="secondary-button w-inline-block" href="#"><!-- placeholder: /about -->
+                <div>View Impact Dashboard</div>
+                <div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div>
+              </a>
+            </div>
+
+            <div id="w-node-de33da80-e37b-1289-5944-ecab6d664fa7-f2b4ae30" class="w-layout-grid overview-body">
+              <div id="w-node-_4ef50234-6607-ca98-5d4f-7d69c383a709-f2b4ae30" class="overview-details">
+                <div class="overview-detail"><div class="u-text-color-muted">Lives Impacted</div><div><strong><span class="count-up" data-count-to="17" data-count-suffix="M">0M</span>+</strong></div></div>
+                <div class="overview-detail"><div class="u-text-color-muted">CSR Clients, Development Foundations, International Agency Partners &amp; Donors</div><div><strong><span class="count-up" data-count-to="300">0</span>+</strong></div></div>
+                <div class="overview-detail"><div class="u-text-color-muted">Impact Partners</div><div><strong><span class="count-up" data-count-to="500">0</span>+</strong></div></div>
+                <div class="overview-detail"><div class="u-text-color-muted">Government Partnerships</div><div><strong><span class="count-up" data-count-to="15">0</span>+</strong></div></div>
+              </div>
+
+              <div id="w-node-_4ef50234-6607-ca98-5d4f-7d69c383a6d4-f2b4ae30" class="slider-wrap">
+                <div class="slider is-overview w-slider">
+                  <div class="badge u-frost is-absolute"><div>the ladder story</div></div>
+                  <div id="w-slider-mask-0" class="w-slider-mask">
+                    <div class="slide w-slide">
+                      <div class="image-wrap u-absolute-full"><img src="./images/index/theladdertoincomegrowth/magnific_create-a-realistic-cinema_lJwY3fNgv9.png" alt="Two women artisans building bamboo ladders, representing the path to income growth."></div>
+                      <div class="slide-content"><div class="slide-content-text u-text-color-white">
+                        <div class="u-text-size-large">The Ladder<br>to Income Growth</div>
+                        <div>Skilling, jobs, market linkages, credit, healthcare, and social security.</div>
+                      </div></div>
+                    </div>
+                    <div class="slide w-slide">
+                      <div class="image-wrap u-absolute-full"><img src="./images/index/theladdertoincomegrowth/magnific_create-a-realistic-cinema_tCasM4rmZJ.png" alt="A shopkeeper climbing a wooden ladder in her store, representing a livelihood at risk without support."></div>
+                      <div class="slide-content"><div class="slide-content-text u-text-color-white">
+                        <div class="u-text-size-large">A Broken Rung<br>Breaks the Climb</div>
+                        <div>Savings spent on a health emergency. Informal borrowing at predatory rates. A machine that breaks with no credit to repair it.</div>
+                      </div></div>
+                    </div>
+                    <div class="slide w-slide">
+                      <div class="image-wrap u-absolute-full"><img src="./images/index/theladdertoincomegrowth/magnific_create-a-realistic-cinema_xSlA2cwjfW.png" alt="A woman factory worker climbing a metal ladder, representing Samhita's rebuilt livelihood network."></div>
+                      <div class="slide-content"><div class="slide-content-text u-text-color-white">
+                        <div class="u-text-size-large">Fixing One Rung<br>Isn't Enough</div>
+                        <div>We need to build a strong ladder — one that holds at every step.</div>
+                      </div></div>
+                    </div>
+                    <div class="slide w-slide">
+                      <div class="image-wrap u-absolute-full"><img src="./images/index/theladdertoincomegrowth/magnific_create-a-realistic-cinema_lJwY3fNgv9.png" alt="Samhita community members representing our mission."></div>
+                      <div class="slide-content"><div class="slide-content-text u-text-color-white">
+                        <div class="u-text-size-large">A Prosperity<br>Accelerator</div>
+                        <div>CSR, philanthropy, financial institutions, governments and NGOs — building every rung, so all of India can climb.</div>
+                      </div></div>
+                    </div>
+                    <div class="w-slider-aria-label">Slide 1 of 4.</div>
+                  </div>
+                  <div class="left-arrow is-frost-on-image u-absolute-top-right w-slider-arrow-left"><div class="arrow-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" style="transform:rotate(0deg)" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                  <div class="right-arrow is-frost-on-image u-absolute-top-right w-slider-arrow-right"><div class="arrow-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" style="transform:rotate(0deg)" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                  <div class="slide-nav is-hidden w-slider-nav w-round"><div class="w-slider-dot w-active"></div><div class="w-slider-dot"></div><div class="w-slider-dot"></div><div class="w-slider-dot"></div></div>
+                </div>
+              </div>
+
+              <div id="w-node-_4ef50234-6607-ca98-5d4f-7d69c383a71c-f2b4ae30" class="overview-story-card">
+                <div class="image-circle-wrap"><img src="./Waveyu - Webflow HTML website template_files/697a03adf92d326f91b61a12_d47139b925e980bd7f348267a5d020ba_team-portrait-thumb.webp" alt="Samhita community members."></div>
+                <blockquote>A continuum of scholarships, skills, jobs, affordable credit, market linkages and government benefits.</blockquote>
+                <a class="secondary-button w-inline-block" href="#"><!-- placeholder: /about -->
+                  <div>Read About Our Journey</div>
+                  <div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARTNERS (PDF fold 4 — kept, tiles link to partner subpages) ============ -->
+  <section id="section-partners-logos" class="section-instructors">
+    <div class="padding-horizontal">
+      <div class="padding-vertical">
+        <div class="w-layout-blockcontainer container-standard w-container">
+          <div class="w-layout-grid layout-grid">
+            <div id="w-node-_43e575a5-747b-91e3-85a8-60a43d77cd9b-f2b4ae30" class="slider-wrap">
+              <div class="slider is-instructors w-slider">
+                <div id="w-slider-mask-1" class="w-slider-mask">
+                  <div class="slide is-instructors w-slide">
+                    <div class="image-wrap u-absolute-full"><img src="./images/index/secondfold/buildingladder.png" alt="Illustration of women building an income-growth ladder together, piece by piece."></div>
+                  </div>
+                  <div class="w-slider-aria-label">Slide 1 of 1.</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_43e575a5-747b-91e3-85a8-60a43d77cdd1-f2b4ae30" class="heading-wrap is-small">
+              <div class="icon-eyebrow-group">
+                <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+                <div class="eyebrow-section">Partners</div>
+              </div>
+              <h2 class="heading-h2">
+                <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1">The architects of</div></div>
+                <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2"><span class="heading-accent">the ladder</span></div></div>
+              </h2>
+            </div>
+            <p id="w-node-_43e575a5-747b-91e3-85a8-60a43d77cdda-f2b4ae30">Powering India's Livelihood Network Through Strategic Partnerships.</p>
+            <div id="w-node-_43e575a5-747b-91e3-85a8-60a43d77cddf-f2b4ae30" class="instructors-benefits">
+              <div class="instructors-benefit">
+                <div class="thumbs-up-icon w-embed"><svg class="lucide lucide-thumbs-up-icon lucide-thumbs-up" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path><path d="M7 10v12"></path></svg></div>
+                <div><strong><span class="count-up" data-count-to="654568">0</span> Citizens</strong></div>
+                <p>received Employment Linked Skilling.</p>
+              </div>
+              <div class="instructors-benefit">
+                <div class="thumbs-up-icon w-embed"><svg class="lucide lucide-thumbs-up-icon lucide-thumbs-up" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"></path><path d="M7 10v12"></path></svg></div>
+                <div><strong><span class="count-up" data-count-to="90" data-count-suffix="%">0%</span> Job Placement</strong></div>
+                <p>with 80% retention rates.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="partner-banner-list">
+            <div class="partner-banner">
+              <div class="partner-banner-heading">Trusted by Leading Corporates</div>
+              <p>Accenture, Adidas, Bajaj Finserv, Cummins, DXC, Eureka Forbes, IndusInd Bank and more power our livelihood network through strategic CSR partnerships.</p>
+              <div class="partner-marquee" aria-hidden="true">
+                <div class="partner-marquee-track">
+                  <span class="partner-marquee-item">Accenture</span>
+                  <span class="partner-marquee-item">Adidas</span>
+                  <span class="partner-marquee-item">Bajaj Finserv</span>
+                  <span class="partner-marquee-item">Cummins</span>
+                  <span class="partner-marquee-item">DXC</span>
+                  <span class="partner-marquee-item">Eureka Forbes</span>
+                  <span class="partner-marquee-item">IndusInd Bank</span>
+                  <span class="partner-marquee-item">Accenture</span>
+                  <span class="partner-marquee-item">Adidas</span>
+                  <span class="partner-marquee-item">Bajaj Finserv</span>
+                  <span class="partner-marquee-item">Cummins</span>
+                  <span class="partner-marquee-item">DXC</span>
+                  <span class="partner-marquee-item">Eureka Forbes</span>
+                  <span class="partner-marquee-item">IndusInd Bank</span>
+                </div>
+              </div>
+              <div class="badge u-frost is-on-light"><div>21 Funding Partners</div></div>
+            </div>
+            <div class="partner-banner">
+              <div class="partner-banner-heading">Backed by Institutions &amp; Government</div>
+              <p>Gates Foundation, Infosys Foundation, HCL Foundation, Walmart Foundation, CGTMSE, ONDC, and state governments across India strengthen our reach.</p>
+              <div class="partner-marquee" aria-hidden="true">
+                <div class="partner-marquee-track">
+                  <span class="partner-marquee-item">Gates Foundation</span>
+                  <span class="partner-marquee-item">Infosys Foundation</span>
+                  <span class="partner-marquee-item">HCL Foundation</span>
+                  <span class="partner-marquee-item">Walmart Foundation</span>
+                  <span class="partner-marquee-item">CGTMSE</span>
+                  <span class="partner-marquee-item">ONDC</span>
+                  <span class="partner-marquee-item">Gates Foundation</span>
+                  <span class="partner-marquee-item">Infosys Foundation</span>
+                  <span class="partner-marquee-item">HCL Foundation</span>
+                  <span class="partner-marquee-item">Walmart Foundation</span>
+                  <span class="partner-marquee-item">CGTMSE</span>
+                  <span class="partner-marquee-item">ONDC</span>
+                </div>
+              </div>
+              <div class="badge u-frost is-on-light"><div>27 Grassroots Partners</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STRENGTHENING EVERY RUNG (PDF fold 5 — sector capabilities) ============ -->
+  <section id="section-rungs" class="section-stay">
+    <div class="padding-horizontal">
+      <div class="padding-vertical">
+        <div id="w-node-_5749e172-c283-2744-41d4-11c2c60d747f-f2b4ae30" class="w-layout-blockcontainer container-standard w-container">
+          <div class="layout-stack">
+            <div class="w-layout-grid stay-header">
+              <div id="w-node-_5749e172-c283-2744-41d4-11c2c60d7482-f2b4ae30" class="heading-wrap is-small">
+                <div class="icon-eyebrow-group">
+                  <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+                  <div class="eyebrow-section">Sector Capabilities</div>
+                </div>
+                <h2 class="heading-h2">
+                  <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1">Strengthening</div></div>
+                  <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2"><span class="heading-accent">every rung</span></div></div>
+                </h2>
+              </div>
+              <p id="w-node-_5749e172-c283-2744-41d4-11c2c60d748c-f2b4ae30">Each rung of the ladder is a sector we build in. Every one links through to its own sector page.</p>
+            </div>
+
+            <div class="w-layout-grid stay-body">
+              <div class="stay-media">
+                <div class="badge u-frost is-absolute"><div>Our Rungs</div></div>
+                <div class="image-wrap u-absolute-full"><img src="./Waveyu - Webflow HTML website template_files/697ca2f13faa8a188cbfa5ba_947f6f5b9dca5b20e5bc11d802cfe6bc_villa.avif" alt="Citizens climbing the livelihood ladder across sectors."></div>
+              </div>
+
+              <div class="room-list">
+                <div class="room-accordion-wrap">
+                  <div class="room-accordion">
+                    <div class="room-accordion-header"><h3 class="u-heading-h3-small">Livelihood</h3>
+                      <div class="chevron-button is-active"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="room-accordion-body is-active">
+                      <div class="room-content-wrap"><div class="room-content">
+                        <div class="room-text"><p>Skilling, jobs, social schemes and market linkages — the core rungs of the ladder to an irreversible increase in income.</p>
+                          <a class="secondary-button w-inline-block" href="#"><!-- placeholder: /sectors/livelihood --><div>Learn More</div><div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div></a>
+                        </div>
+                        <div class="room-media"><img src="./Waveyu - Webflow HTML website template_files/69848881e691d633d043c432_cover - twin room.webp" alt="Skilling, jobs, social schemes and market linkages."></div>
+                      </div></div>
+                      <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-absolute-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="room-accordion-wrap">
+                  <div class="room-accordion">
+                    <div class="room-accordion-header"><h3 class="u-heading-h3-small">Catalytic Finance</h3>
+                      <div class="chevron-button"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="room-accordion-body">
+                      <div class="room-content-wrap"><div class="room-content">
+                        <div class="room-text"><p>Bringing CSR, philanthropy and financial institutions together so capital reaches citizens as affordable credit rather than stopping at a grant.</p>
+                          <a class="secondary-button w-inline-block" href="#"><!-- placeholder: /sectors/catalytic-finance --><div>Learn More</div><div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div></a>
+                        </div>
+                        <div id="w-node-_382c5b73-8505-0a5a-9fc5-21d9c4a3d474-f2b4ae30" class="room-media"><img src="./Waveyu - Webflow HTML website template_files/698488b71fa34569af7175d9_cover - double room.webp" alt="Catalytic finance partners."></div>
+                      </div></div>
+                      <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-absolute-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="room-accordion-wrap">
+                  <div class="room-accordion">
+                    <div class="room-accordion-header"><h3 class="u-heading-h3-small">Health &amp; Nutrition</h3>
+                      <div class="chevron-button"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="room-accordion-body">
+                      <div class="room-content-wrap"><div class="room-content">
+                        <div class="room-text"><p>A health emergency is one of the most common broken rungs. We work to keep it from wiping out the savings a household has climbed to build.</p>
+                          <a class="secondary-button w-inline-block" href="#"><!-- placeholder: /sectors/health-nutrition --><div>Learn More</div><div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div></a>
+                        </div>
+                        <div id="w-node-_80821f16-092b-df1c-04e2-4636a23aa34d-f2b4ae30" class="room-media"><img src="./Waveyu - Webflow HTML website template_files/69848966dc6b376f46000a41_cover - group suit.webp" alt="Health and nutrition programs."></div>
+                      </div></div>
+                      <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-absolute-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="room-accordion-wrap">
+                  <div class="room-accordion">
+                    <div class="room-accordion-header"><h3 class="u-heading-h3-small">Education</h3>
+                      <div class="chevron-button"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="room-accordion-body">
+                      <div class="room-content-wrap"><div class="room-content">
+                        <div class="room-text"><p>Scholarships and learning pathways that put citizens on the first rung of the ladder and keep them climbing.</p>
+                          <a class="secondary-button w-inline-block" href="#"><!-- placeholder: /sectors/education --><div>Learn More</div><div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div></a>
+                        </div>
+                        <div class="room-media"><img src="./Waveyu - Webflow HTML website template_files/6984896daeae9b8ed29f9218_cover - common areas.webp" alt="Education and scholarship programs."></div>
+                      </div></div>
+                      <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-absolute-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="room-accordion-wrap">
+                  <div class="room-accordion">
+                    <div class="room-accordion-header"><h3 class="u-heading-h3-small">Climate</h3>
+                      <div class="chevron-button"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="room-accordion-body">
+                      <div class="room-content-wrap"><div class="room-content">
+                        <div class="room-text"><p>Building climate resilience into livelihoods, so incomes hold steady as conditions on the ground change.</p>
+                          <a class="secondary-button w-inline-block" href="#"><!-- placeholder: /sectors/climate --><div>Learn More</div><div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div></a>
+                        </div>
+                        <div class="room-media"><img src="./Waveyu - Webflow HTML website template_files/6984f388c88f95e1d338c957_347f2d7c82fce5da93f1b2de18b8458f_surfing.avif" alt="Climate resilience programs."></div>
+                      </div></div>
+                      <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-absolute-full"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES (PDF fold 6) ============ -->
+  <section id="section-services" class="section-levels">
+    <div class="padding-horizontal">
+      <div class="padding-vertical">
+        <div class="w-layout-blockcontainer container-standard w-container">
+          <div class="layout-stack">
+            <div class="w-layout-grid levels-header">
+              <div id="w-node-_94ea0941-3c75-c816-7244-83836e27ee14-f2b4ae30" class="heading-wrap is-small">
+                <div class="icon-eyebrow-group">
+                  <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+                  <div class="eyebrow-section">Services</div>
+                </div>
+                <h2 class="heading-h2">
+                  <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1">How we work</div></div>
+                  <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2"><span class="heading-accent">alongside you</span></div></div>
+                </h2>
+              </div>
+              <a id="w-node-_2704896c-3de3-55f5-e1d5-f6b918351b71-f2b4ae30" class="secondary-button w-inline-block" href="#section-catalytic">
+                <div>See Catalytic Finance</div>
+                <div class="arrow-tail-button"><div class="arrow-tail-icon w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div></div>
+              </a>
+            </div>
+            <div>
+              <div class="w-layout-grid layout-cards">
+
+                <div class="levels-card">
+                  <div class="u-flex-row">
+                    <div class="image-circle-wrap"><img src="./Waveyu - Webflow HTML website template_files/697a03b32e68f93f96ec6df1_14e5555be7a7f8277379e1e8e06b34d6_surfboard-on-grass.webp" alt=""></div>
+                    <div class="badge"><div>pmu</div></div>
+                  </div>
+                  <div class="levels-card-content">
+                    <div class="levels-card-header"><h3>PMU</h3>
+                      <div class="chevron-button is-hidden-desktop"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="levels-card-body"><div class="line-spacer-wrap"><div class="line-base"></div></div>
+                      <p>The programme management unit that carries a project from the first design conversation through to on-ground delivery.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="levels-card">
+                  <div class="u-flex-row">
+                    <div class="image-circle-wrap"><img src="./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731c0_d765aab020006eaf824d7d186dccc259_surfboard-feet-action.webp" alt=""></div>
+                    <div class="badge"><div>technology</div></div>
+                  </div>
+                  <div class="levels-card-content">
+                    <div class="levels-card-header"><h3>Technology</h3>
+                      <div class="chevron-button is-hidden-desktop"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="levels-card-body"><div class="line-spacer-wrap"><div class="line-base"></div></div>
+                      <p>Digital platforms and infrastructure that let a programme reach citizens at scale and stay accountable while it does.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="levels-card">
+                  <div class="u-flex-row">
+                    <div class="image-circle-wrap"><img src="./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731c5_83c25036e9bf7235adbcd6900ebc9533_man-surfing-wave.webp" alt=""></div>
+                    <div class="badge"><div>mel</div></div>
+                  </div>
+                  <div class="levels-card-content">
+                    <div class="levels-card-header"><h3>MEL</h3>
+                      <div class="chevron-button is-hidden-desktop"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="levels-card-body"><div class="line-spacer-wrap"><div class="line-base"></div></div>
+                      <p>Monitoring, evaluation and learning that shows what actually changed for citizens — and feeds it back into how the programme runs.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="levels-card">
+                  <div class="u-flex-row">
+                    <div class="image-circle-wrap"><img src="./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731ca_ad958a0f63f8390724e20e016a17334e_shaka-hand.webp" alt=""></div>
+                    <div class="badge"><div>strategy</div></div>
+                  </div>
+                  <div class="levels-card-content">
+                    <div class="levels-card-header"><h3>Strategy</h3>
+                      <div class="chevron-button is-hidden-desktop"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="levels-card-body"><div class="line-spacer-wrap"><div class="line-base"></div></div>
+                      <p>Co-creating the plan — where to work, what to fund, and how the rungs of the ladder fit together into one continuum.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="levels-card">
+                  <div class="u-flex-row">
+                    <div class="image-circle-wrap"><img src="./Waveyu - Webflow HTML website template_files/697a03adf92d326f91b61a12_d47139b925e980bd7f348267a5d020ba_team-portrait-thumb.webp" alt=""></div>
+                    <div class="badge"><div>communications</div></div>
+                  </div>
+                  <div class="levels-card-content">
+                    <div class="levels-card-header"><h3>Communications</h3>
+                      <div class="chevron-button is-hidden-desktop"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="levels-card-body"><div class="line-spacer-wrap"><div class="line-base"></div></div>
+                      <p>Telling the story of the work — to funders, to partners, and to the citizens the programme is built for.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="levels-card">
+                  <div class="u-flex-row">
+                    <div class="image-circle-wrap"><img src="./Waveyu - Webflow HTML website template_files/698cb98ac470da7b18a36b45_654236ffca4a57def56883d156d54b29_surf-coach-02.webp" alt=""></div>
+                    <div class="badge"><div>alliance building</div></div>
+                  </div>
+                  <div class="levels-card-content">
+                    <div class="levels-card-header"><h3>Alliance Building &amp; Liaisoning</h3>
+                      <div class="chevron-button is-hidden-desktop"><div class="chevron-icon w-embed"><svg class="lucide lucide-chevron-down-icon lucide-chevron-down" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"></path></svg></div></div>
+                    </div>
+                    <div class="levels-card-body"><div class="line-spacer-wrap"><div class="line-base"></div></div>
+                      <p>Convening CSR, philanthropy, financial institutions, government and NGOs — and holding those relationships together over the life of the work.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUCCESS STORIES (PDF fold 7) ============ -->
+  <section id="section-initiatives" class="section-experience">
+    <div class="padding-horizontal">
+      <div class="padding-vertical">
+        <div class="w-layout-blockcontainer container-standard w-container">
+          <div class="w-layout-grid layout-grid">
+            <div id="w-node-_309f40c5-e3b5-1b6c-5dea-79914643a64d-f2b4ae30" class="experience-column-left">
+              <div class="experience-header is-sticky">
+                <div class="heading-wrap">
+                  <div class="icon-eyebrow-group">
+                    <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+                    <div class="eyebrow-section">Success Stories</div>
+                  </div>
+                  <h2 class="heading-h2">
+                    <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1">Proof the ladder</div></div>
+                    <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2"><span class="heading-accent">holds</span></div></div>
+                  </h2>
+                </div>
+                <p>Outcomes from projects across our livelihood network.</p>
+              </div>
+            </div>
+            <div id="w-node-_309f40c5-e3b5-1b6c-5dea-79914643a661-f2b4ae30" class="experience-column-right">
+              <div class="w-layout-grid experience-cards">
+                <div class="experience-card">
+                  <div class="experience-card-content-wrap">
+                    <div class="eyebrow-item">market linkages</div>
+                    <div class="experience-card-text"><h3 class="u-heading-h3-small">147% income increase</h3>
+                      <p>In our market linkage project with ONDC.</p>
+                    </div>
+                  </div>
+                  <div class="emoji-wrap"><img class="emoji" src="./Waveyu - Webflow HTML website template_files/6984ee22187bc8620b7688c5_1e6d877a07e38c980277c92af5077c63_waterfall.avif" alt="Samyak initiative"></div>
+                </div>
+                <div id="w-node-_309f40c5-e3b5-1b6c-5dea-79914643a66f-f2b4ae30" class="experience-card">
+                  <div class="experience-card-content-wrap">
+                    <div class="eyebrow-item">skilling</div>
+                    <div class="experience-card-text"><h3 class="u-heading-h3-small">90% job retention rate</h3>
+                      <p>In our skilling project with <span class="copy-placeholder">[partner name TBC]</span>.</p>
+                    </div>
+                  </div>
+                  <div class="emoji-wrap"><img class="emoji" src="./Waveyu - Webflow HTML website template_files/6984f2beb22e7b23ea7beb60_a9c84fab5712b209b4eb13c2a592edcb_villa.avif" alt="OneTAC initiative"></div>
+                </div>
+                <div class="experience-card">
+                  <div class="experience-card-content-wrap">
+                    <div class="eyebrow-item">catalytic finance</div>
+                    <div class="experience-card-text"><h3 class="u-heading-h3-small">Up to ₹30 unlocked per ₹1</h3>
+                      <p>For citizens, for every ₹1 of philanthropic funding — with 70–100% growth in incomes.</p>
+                    </div>
+                  </div>
+                  <div class="emoji-wrap"><img class="emoji" src="./Waveyu - Webflow HTML website template_files/6989d7593ca898267847d6a2_0f06646be2753fe9e87d2f3ea46e1616_IMG_5010 1.webp" alt="Centre for Public Mental Health initiative"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AWARDS TICKER (PDF fold 8) ============
+       Horizontal ticker of awards won. Each item is: award logo + awarding
+       organisation + award name, per the PDF. The organisation/award names
+       are deliberately left as visible [placeholders] - no real award data
+       was supplied, and inventing recognitions would be a factual claim
+       about the organisation. Swap the placeholder text and drop the real
+       logo into .award-logo when the list is available.
+       Reuses the existing .partner-marquee CSS (auto-scroll, pause-on-hover,
+       edge fade); the item list is duplicated once so translateX(-50%) is a
+       seamless loop, same as the partner marquee elsewhere on the page. -->
+  <section id="section-awards" class="section-awards">
+    <div class="padding-horizontal">
+      <div class="padding-vertical is-half-mobile">
+        <div class="w-layout-blockcontainer container-standard w-container">
+          <div class="awards-header">
+            <div class="icon-eyebrow-group">
+              <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+              <div class="eyebrow-section">Recognition</div>
+            </div>
+            <h2 class="heading-h2 awards-heading">Awards <span class="heading-accent">we have won</span></h2>
+          </div>
+          <div class="partner-marquee awards-marquee">
+            <div class="partner-marquee-track">
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 1]</div>
+                <div class="award-name copy-placeholder">[Name of award won 1]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 2]</div>
+                <div class="award-name copy-placeholder">[Name of award won 2]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 3]</div>
+                <div class="award-name copy-placeholder">[Name of award won 3]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 4]</div>
+                <div class="award-name copy-placeholder">[Name of award won 4]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 5]</div>
+                <div class="award-name copy-placeholder">[Name of award won 5]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 6]</div>
+                <div class="award-name copy-placeholder">[Name of award won 6]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 1]</div>
+                <div class="award-name copy-placeholder">[Name of award won 1]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 2]</div>
+                <div class="award-name copy-placeholder">[Name of award won 2]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 3]</div>
+                <div class="award-name copy-placeholder">[Name of award won 3]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 4]</div>
+                <div class="award-name copy-placeholder">[Name of award won 4]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 5]</div>
+                <div class="award-name copy-placeholder">[Name of award won 5]</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+              </div>
+              <div class="award-text">
+                <div class="award-org copy-placeholder">[Awarding organisation 6]</div>
+                <div class="award-name copy-placeholder">[Name of award won 6]</div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MID-PAGE CTA (was section-cta-1) ============ -->
+  <section id="section-cta-story" class="section-cta">
+    <div class="padding-horizontal">
+      <div class="padding-vertical is-half-mobile">
+        <div class="w-layout-blockcontainer container-standard is-radius-card-outer w-container">
+          <div class="layout-centered is-cta">
+            <div class="cta-content u-text-color-white">
+              <div class="icon-eyebrow-group">
+                <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+                <div class="eyebrow-section">Partner With Us</div>
+              </div>
+              <h2 class="heading-h2">
+                <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1">Every ₹1 can become</div></div>
+                <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2">₹3 to ₹30 in citizens' hands</div></div>
+              </h2>
+              <a href="#" data-open-popup="popup-form" class="primary-button w-variant-405759d0-2ba3-9573-cacd-4e5cac629705 w-inline-block">
+                <div class="button-text-wrap"><div class="button-text">Submit a Funding Inquiry</div></div>
+              </a>
+            </div>
+            <div class="image-wrap u-absolute-full"><img src="./images/index/banner/bluuredtractor.webp" alt="A farmer driving a tractor through green fields, captured in motion."></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATALYTIC FINANCE TEASER (was section-cta-2) ============ -->
+  <section id="section-catalytic" class="section-cta">
+    <div class="padding-horizontal">
+      <div class="padding-vertical is-half-mobile">
+        <div class="w-layout-blockcontainer container-standard is-radius-card-outer w-container">
+          <div class="layout-centered is-cta">
+            <div class="cta-content u-text-color-white">
+              <div class="icon-eyebrow-group">
+                <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+                <div class="eyebrow-section">Catalytic Finance</div>
+              </div>
+              <h2 class="heading-h2">
+                <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1">Make your CSR rupee work harder.</div></div>
+                <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2">Up to 20x harder.</div></div>
+              </h2>
+              <div class="tag-list tag-list-banner is-glass">
+                <div class="tag-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>100% CSR &amp; FCRA Compliant</div></div>
+                <div class="tag-item"><div class="check-icon w-embed"><svg class="lucide lucide-check-icon lucide-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></div><div>Aligned with the UN SDGs</div></div>
+              </div>
+              <a href="#" data-open-popup="popup-form" class="primary-button w-variant-405759d0-2ba3-9573-cacd-4e5cac629705 w-inline-block">
+                <div class="button-text-wrap"><div class="button-text">Explore Catalytic Finance</div></div>
+              </a>
+            </div>
+            <div class="image-wrap u-absolute-full"><img src="./Waveyu - Webflow HTML website template_files/698f45ac566b1cf5fb10eb01_3c07b832f3c7024462062b1d7ea5b208_tropical-leaf-macro.webp" alt="Funding partners enabling catalytic finance."></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ CONNECT / INQUIRY POPUP (was popup-form) ============ -->
+<section id="popup-form" class="popup-form" role="dialog" aria-modal="true" aria-labelledby="popup-form-heading">
+  <div class="padding-popup">
+    <div class="w-layout-blockcontainer container-small w-container">
+      <div class="layout-popup">
+        <div id="w-node-_32c714b9-8c51-3c0f-f735-e2aff119834a-f1198346" class="form-header">
+          <div class="heading-wrap">
+            <div class="icon-eyebrow-group">
+              <div class="star-icon w-embed"><svg width="100%" height="100%" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7.24994 2.5V4.64746L9.289 3.98437C9.94554 3.77105 10.6508 4.13058 10.8642 4.78711C11.0775 5.44356 10.7188 6.14883 10.0624 6.3623L8.01849 7.02637L9.28119 8.76562C9.68687 9.3242 9.5634 10.106 9.00482 10.5117C8.44625 10.9173 7.66437 10.7929 7.25872 10.2344L5.99603 8.49609L4.73333 10.2324C4.32753 10.7908 3.54571 10.9145 2.98724 10.5088C2.42881 10.103 2.30511 9.32117 2.71087 8.76269L3.97454 7.02539L1.93451 6.3623C1.27801 6.14897 0.918527 5.44363 1.13177 4.78711C1.34508 4.13061 2.05046 3.77119 2.70697 3.98437L4.74994 4.64844V2.5C4.74994 1.8098 5.3098 1.25026 5.99994 1.25C6.69029 1.25 7.24994 1.80964 7.24994 2.5Z" fill="currentColor"></path></svg></div>
+              <div class="eyebrow-section">Connect</div>
+            </div>
+            <h2 id="popup-form-heading"><span class="heading-accent">Partner</span> with Samhita</h2>
+          </div>
+          <p>Fill out the form below and our team will get back to you shortly.</p>
+        </div>
+        <div id="w-node-_32c714b9-8c51-3c0f-f735-e2aff1198357-f1198346" class="form-body w-form">
+          <form id="contact-form" class="contact-form">
+            <div id="w-node-_32c714b9-8c51-3c0f-f735-e2aff1198359-f1198346" class="form-field-2col">
+              <div class="input-wrap"><label class="label" for="contact-name">Name</label><input id="contact-name" name="contact-name" class="form-input w-input" type="text"></div>
+              <div class="input-wrap"><label class="label" for="contact-email">Email</label><input id="contact-email" name="contact-email" class="form-input w-input" type="email"></div>
+            </div>
+            <div class="input-wrap"><label class="label" for="contact-org">Organisation</label><input id="contact-org" name="contact-org" class="form-input w-input" type="text"></div>
+            <div class="input-wrap">
+              <label class="label" for="contact-interest">I'm interested in</label>
+              <select id="contact-interest" name="contact-interest" class="form-input is-select w-select">
+                <option value="">I'm interested in...</option>
+                <option value="csr">CSR Partnership</option>
+                <option value="foundation">Foundation Grant</option>
+                <option value="government">Government Collaboration</option>
+                <option value="financial-institution">Financial Institution Partnership</option>
+                <option value="general">General Inquiry</option>
+              </select>
+            </div>
+            <div class="input-wrap"><label class="label" for="contact-message">Message</label><textarea id="contact-message" name="contact-message" class="form-input w-input" rows="4"></textarea></div>
+            <label class="w-checkbox form-checkbox">
+              <div class="w-checkbox-input w-checkbox-input--inputType-custom form-checkbox-icon"></div>
+              <input id="contact-checkbox" type="checkbox" style="opacity:0;position:absolute;z-index:-1">
+              <span class="u-text-color-muted w-form-label">You agree to Samhita's <a class="text-link-underline" href="#">privacy policy</a>.</span>
+            </label>
+            <div id="w-node-_32c714b9-8c51-3c0f-f735-e2aff1198371-f1198346" class="form-button-wrap">
+              <button type="submit" class="primary-button w-button"><div class="button-text-wrap"><div class="button-text">Send Inquiry</div></div></button>
+            </div>
+          </form>
+          <div class="success-message w-form-done"><div class="success-text">Thank you! Your submission has been received!</div></div>
+          <div class="error-message w-form-fail"><div class="error-text">Oops! Something went wrong while submitting the form.</div></div>
+        </div>
+        <button type="button" class="close-button" aria-label="Close"><div class="x-close-icon w-embed" aria-hidden="true"><svg class="lucide lucide-x-icon lucide-x" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></div></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA (was section-final-cta) ============ -->
+<section class="section-final-cta">
+  <div class="padding-horizontal">
+    <div class="padding-vertical is-no-top">
+      <div class="w-layout-blockcontainer container-standard w-container">
+        <div class="layout-centered is-cta">
+          <div class="cta-body">
+            <div id="w-node-_3cffe78e-13a0-55e4-99f0-d7bd9a85ca19-f2b4ae30" class="cta-content is-small">
+              <h2 class="heading-h2">
+                <div class="gsap_split_line-mask gsap_split_line1-mask"><div class="gsap_split_line gsap_split_line1"><span class="heading-accent">Ready</span></div></div>
+                <div class="gsap_split_line-mask gsap_split_line2-mask"><div class="gsap_split_line gsap_split_line2">to build the ladder with us?</div></div>
+              </h2>
+              <p>Samhita. Catalysing Prosperity. Together.</p>
+              <a href="#" data-open-popup="popup-form" class="primary-button w-inline-block">
+                <div class="button-text-wrap"><div class="button-text">Connect Now</div></div>
+              </a>
+            </div>
+            <div id="w-node-_3cffe78e-13a0-55e4-99f0-d7bd9a85ca25-f2b4ae30" class="cta-media">
+              <div id="w-node-_3cffe78e-13a0-55e4-99f0-d7bd9a85ca26-f2b4ae30" class="cta-media-item-right">
+                <div id="w-node-_3cffe78e-13a0-55e4-99f0-d7bd9a85ca27-f2b4ae30" class="cta-image-wrap is-absolute"><img src="./Waveyu - Webflow HTML website template_files/697a0394f4917471ddd35eb1_8d1583415df9b8e289faf714aac313a6_team-portrait.avif" alt="Samhita community members representing our mission."></div>
+              </div>
+              <div class="cta-media-item-left">
+                <div class="cta-image-wrap"><img src="./Waveyu - Webflow HTML website template_files/6988c9518b240e4477f5b370_09ad5854278985630986a7dcb10615a4_surfers-palm-garden.avif" alt="Partnership between Samhita and its stakeholders."></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="padding-horizontal">
+    <div class="padding-footer">
+      <div class="w-layout-blockcontainer container-standard w-container">
+        <div class="layout-footer">
+          <div id="w-node-f644f11b-e52f-04c1-6275-c38e5c9b3c20-5c9b3c1b" class="footer-header">
+            <div class="footer-main-col">
+              <a class="footer-brand-link w-nav-brand" href="#">
+                <img src="./samhita-logo white.png" alt="Samhita logo" width="140" height="34">
+              </a>
+              <div class="u-text-color-frost">
+                Samhita CGF<br>
+                Mumbai &amp; Bengaluru, India
+              </div>
+            </div>
+            <div class="contact-link-col">
+              <div class="footer-social">
+                <div class="u-text-size-small u-text-color-frost"><strong>Follow us on Social Media</strong></div>
+                <div class="social-link-row">
+                  <a class="social-link w-inline-block" href="https://www.facebook.com/samhitasocialventures" target="_blank" rel="noopener"><div class="social-icon w-embed"><svg height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" fill="currentColor"></path></svg></div></a>
+                  <a class="social-link w-inline-block" href="https://www.linkedin.com/company/samhita-social-ventures/" target="_blank" rel="noopener"><div class="social-icon w-embed"><svg height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" fill="currentColor"></path></svg></div></a>
+                  <a class="social-link w-inline-block" href="https://x.com/Samhitadotorg" target="_blank" rel="noopener"><div class="social-icon w-embed"><svg height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" fill="currentColor"></path></svg></div></a>
+                  <a class="social-link w-inline-block" href="https://www.youtube.com/channel/UCIwuu7bLNnhcnVytOva9QIg" target="_blank" rel="noopener"><div class="social-icon w-embed"><svg height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"></path></svg></div></a>
+                </div>
+              </div>
+              <a class="footer-link w-inline-block" href="tel:+919819701728">
+                <div class="contact-link-wrap">
+                  <div class="contact-icon-wrap"><div class="contact-icon w-embed"><svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" fill-rule="evenodd"></path></svg></div></div>
+                  <div>+91 98197 01728</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div id="w-node-f644f11b-e52f-04c1-6275-c38e5c9b3c3a-5c9b3c1b" class="footer-nav-wrap">
+            <div class="footer-nav">
+              <div class="footer-nav-title u-text-color-frost">Company<br></div>
+              <div class="nav-link-col">
+                <a class="footer-link w-inline-block" href="#">
+                  <div class="nav-link-wrap"><div>Work With Us</div>
+                    <div class="arrow-tail-icon is-absolute w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div>
+                    <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-invert u-absolute-full"></div></div>
+                  </div>
+                </a>
+                <a class="footer-link w-inline-block" href="#">
+                  <div class="nav-link-wrap"><div>Who We Are</div>
+                    <div class="arrow-tail-icon is-absolute w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div>
+                    <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-invert u-absolute-full"></div></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="footer-nav">
+              <div class="footer-nav-title u-text-color-frost">Resources</div>
+              <div class="nav-link-col">
+                <a class="footer-link w-inline-block" href="#">
+                  <div class="nav-link-wrap"><div>Reports</div>
+                    <div class="arrow-tail-icon is-absolute w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div>
+                    <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-invert u-absolute-full"></div></div>
+                  </div>
+                </a>
+                <a class="footer-link w-inline-block" href="#">
+                  <div class="nav-link-wrap"><div>Financials</div>
+                    <div class="arrow-tail-icon is-absolute w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div>
+                    <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-invert u-absolute-full"></div></div>
+                  </div>
+                </a>
+                <a class="footer-link w-inline-block" href="#">
+                  <div class="nav-link-wrap"><div>Privacy Policy</div>
+                    <div class="arrow-tail-icon is-absolute w-embed"><svg class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div>
+                    <div class="line-fill-wrap"><div class="line-fill-color"></div><div class="line-base u-invert u-absolute-full"></div></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div id="w-node-f644f11b-e52f-04c1-6275-c38e5c9b3c85-5c9b3c1b" class="footer-bottom">
+            <div class="big-letters">
+              <div class="big-letter-wrap"><div class="big-letter">s</div></div>
+              <div class="big-letter-wrap"><div class="big-letter">a</div></div>
+              <div class="big-letter-wrap"><div class="big-letter">m</div></div>
+              <div class="big-letter-wrap"><div class="big-letter">h</div></div>
+              <div class="big-letter-wrap"><div class="big-letter">i</div></div>
+              <div class="big-letter-wrap"><div class="big-letter">t</div></div>
+              <div class="big-letter-wrap"><div class="big-letter">a</div></div>
+            </div>
+            <div class="footer-meta">
+              <div class="meta-link-row">
+                <div class="u-text-size-small u-text-color-frost">© 2025 Samhita CGF. All rights reserved.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="image-wrap u-absolute-full">
+          <div class="footer-bg-blur"></div>
+          <img src="./Waveyu - Webflow HTML website template_files/6984f476176be0064e11ac20_aec255993fec0c4222fbfae5aa8d0d1e_surfers.avif" alt="Samhita community members representing our mission.">
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button type="button" id="back-to-top" class="back-to-top-button" aria-label="Back to top">
+  <svg class="back-to-top-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5"></path>
+    <path d="M5 12l7-7 7 7"></path>
+  </svg>
+</button>
+
+<script src="./Waveyu - Webflow HTML website template_files/jquery-3.5.1.min.dc5e7f18c8.js"></script>
+<script src="./Waveyu - Webflow HTML website template_files/webflow.85a1c9ed.d7f63c770377a12f.js"></script>
+<script src="./Waveyu - Webflow HTML website template_files/gsap.min.js"></script>
+<script src="./Waveyu - Webflow HTML website template_files/ScrollTrigger.min.js"></script>
+<script src="./samhita-interactions.js?v=2"></script>
+<script src="./samhita-motion.js?v=2"></script>
+</body>
+</html>

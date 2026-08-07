@@ -81,12 +81,9 @@
       // has to scroll to reach (below, where there's always been real time
       // for JS to run) gets the scroll-triggered reveal treatment.
 
-      // Repeating card/item groups: fade + rise, staggered
+      // Small inline chips keep the original one-shot staggered entrance -
+      // they're too small for a scrubbed fade to read as anything but flicker.
       var groupSelectors = [
-        ".layout-cards .levels-card",
-        ".experience-cards .experience-card",
-        ".instructors-benefits .instructors-benefit",
-        ".room-list .room-accordion-wrap",
         ".tag-list .tag-item"
       ];
       groupSelectors.forEach(function (sel) {
@@ -102,13 +99,11 @@
         });
       });
 
-      // Standalone blocks: sliders, story card, stat groups, CTA content
+      // Footer blocks: one-shot entrance. Deliberately NOT scrubbed - the
+      // footer is the last thing on the page, so it can never scroll up and
+      // out again, and a scrubbed exit it can never reach would just mean it
+      // sits permanently mid-fade.
       var soloSelectors = [
-        ".slider-wrap",
-        ".overview-story-card",
-        ".overview-details",
-        ".section-cta .cta-content",
-        ".stay-media",
         ".footer-header",
         ".footer-nav-wrap"
       ];
@@ -122,6 +117,130 @@
             scrollTrigger: { trigger: el, start: "top 88%", once: true }
           });
         });
+      });
+
+      // ── Scroll-linked (scrubbed) entry AND exit for every tile/box ──
+      // Instead of firing once at a threshold, each tile's opacity/position
+      // is tied directly to how far it has travelled through the viewport:
+      // it fades and rises in as it comes up from the bottom, sits fully
+      // visible through the middle, then fades and drifts out as it leaves
+      // through the top. Scrolling back up replays it exactly in reverse,
+      // because nothing here is a one-shot trigger.
+      //
+      // One timeline per element, not two triggers - two separate triggers
+      // both writing opacity/y to the same element fight each other wherever
+      // their ranges overlap. The single timeline spans the element's whole
+      // traversal (top-hits-viewport-bottom -> bottom-hits-viewport-top) and
+      // splits it into fade-in / hold / fade-out phases, so the states can
+      // never contradict.
+      //
+      // scrub:0.6 rather than `true` adds a little catch-up easing, which
+      // keeps fast trackpad flicks from looking jittery.
+      var SCRUB_SELECTORS = [
+        ".stats-bar-item",
+        ".trust-bar-item",
+        ".overview-details",
+        ".slider-wrap",
+        ".overview-story-card",
+        ".layout-cards .levels-card",
+        ".room-list .room-accordion-wrap",
+        ".stay-media",
+        ".experience-cards .experience-card",
+        ".instructors-benefits .instructors-benefit",
+        ".partner-banner",
+        ".awards-marquee",
+        ".section-cta .cta-content"
+      ];
+
+      var scrubEls = [];
+      SCRUB_SELECTORS.forEach(function (sel) {
+        gsap.utils.toArray(sel).forEach(function (el) {
+          // Never the hero (see the note above), and never twice.
+          if (el.closest(".hero-content, .hero-stats")) return;
+          if (scrubEls.indexOf(el) === -1) scrubEls.push(el);
+        });
+      });
+
+      // Each tile swings in from whichever side of the page it actually sits
+      // on - left-hand tiles arrive from the left, right-hand ones from the
+      // right - rotating flat as they land and receding back out as they
+      // leave. Direction comes from the element's own horizontal position, so
+      // a 3-up grid, a 4-up grid and a full-width row all organise themselves
+      // without any per-section configuration.
+      //
+      // Full-width blocks (accordion rows, banners) sit dead centre, so their
+      // offset is meaningless - those alternate side by index instead, which
+      // gives a left/right zig-zag down the column.
+      //
+      // The perspective is applied per-element via GSAP's transformPerspective
+      // rather than as CSS `perspective` on a parent. That is deliberate: CSS
+      // perspective on an ancestor turns it into the containing block for its
+      // absolutely-positioned descendants, which is exactly the bug that once
+      // knocked the hero photo out of full-bleed (see samhita-theme.css's note
+      // on .section-hero). Keeping perspective on the element itself has no
+      // such side effect on anything around it.
+      var SWING_X = 90;      // px the tile starts/ends off to its own side
+      var SWING_ROTY = 14;   // deg of Y-rotation, i.e. how "hinged" it looks
+      var SWING_Z = 160;     // px it starts/ends pushed back into the screen
+      var SWING_PERSPECTIVE = 900;
+
+      scrubEls.forEach(function (el, i) {
+        var rect = el.getBoundingClientRect();
+        var offset = rect.left + rect.width / 2 - window.innerWidth / 2;
+        // > 8% of the viewport off-centre counts as "genuinely on that side"
+        var dir = Math.abs(offset) > window.innerWidth * 0.08
+          ? (offset > 0 ? 1 : -1)
+          : (i % 2 === 0 ? -1 : 1);
+
+        // Never swing a tile past the edge of the viewport. Tiles that sit
+        // near an edge (the outer stats figures, and any full-width row) have
+        // very little lateral room, and pushing them the full SWING_X shoved
+        // them off-screen: with html{overflow-x:hidden} that reads as the tile
+        // being clipped rather than as deliberate motion, and it left the
+        // document horizontally scrollable by ~80px. Clamping to the room the
+        // tile actually has keeps the travel on-screen; those tiles still get
+        // the full rotation, depth and fade, so the 3D entrance still reads.
+        var room = dir < 0 ? rect.left : window.innerWidth - rect.right;
+        var swingX = Math.max(0, Math.min(SWING_X, room));
+
+        gsap
+          .timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.6
+            }
+          })
+          // Entering: swings in from its own side, angled and set back.
+          .fromTo(
+            el,
+            {
+              opacity: 0,
+              x: dir * swingX,
+              y: 24,
+              z: -SWING_Z,
+              rotateY: dir * SWING_ROTY,
+              transformPerspective: SWING_PERSPECTIVE,
+              transformOrigin: "center center"
+            },
+            { opacity: 1, x: 0, y: 0, z: 0, rotateY: 0, duration: 0.3 }
+          )
+          // Held flat and square on while it crosses the middle of the screen.
+          .to(el, { opacity: 1, x: 0, y: 0, z: 0, rotateY: 0, duration: 0.42 })
+          // Leaving: rotates away and recedes back toward the same side.
+          .to(
+            el,
+            {
+              opacity: 0,
+              x: dir * (swingX * 0.65),
+              y: -24,
+              z: -SWING_Z * 0.75,
+              rotateY: dir * (SWING_ROTY * 0.8),
+              duration: 0.28
+            }
+          );
       });
       // Failsafe: if any animated element is still invisible after 3 seconds
       // (e.g. ScrollTrigger miscalculated positions, rAF was throttled, or a
@@ -138,6 +257,24 @@
           if (el.closest(".hero-content, .hero-stats")) return;
           var s = el.style;
           if (s.opacity === "0" || parseFloat(getComputedStyle(el).opacity) < 0.1) {
+            gsap.set(el, { clearProps: "all" });
+          }
+        });
+
+        // The scrubbed tiles above need a different test: for them opacity 0
+        // is a legitimate state (they really are meant to be invisible while
+        // off-screen), so "invisible" alone can't mean "broken". What the
+        // timeline does guarantee is that anything sitting in the middle band
+        // of the viewport is inside its `hold` phase and therefore fully
+        // opaque - so an element that is centred on screen and still
+        // transparent is the one case that can only be a failure.
+        var bandTop = window.innerHeight * 0.25;
+        var bandBottom = window.innerHeight * 0.75;
+        scrubEls.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          var centre = r.top + r.height / 2;
+          var inBand = centre > bandTop && centre < bandBottom;
+          if (inBand && parseFloat(getComputedStyle(el).opacity) < 0.1) {
             gsap.set(el, { clearProps: "all" });
           }
         });

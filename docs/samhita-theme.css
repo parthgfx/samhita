@@ -1081,11 +1081,32 @@ html {
   glass treatment would have nothing to contrast against) side by side on
   wide screens, stacked on narrow ones.
 */
+/* minmax(0, 1fr) rather than a bare 1fr - a real, confirmed bug. A `1fr`
+   track carries an automatic minimum of `auto` (i.e. min-content), so the
+   track can never size below its widest item's min-content width. Each
+   .partner-banner wraps a .partner-marquee whose track is `width:max-content`
+   (the duplicated partner-name strip, ~1300px), and although the marquee sets
+   overflow:hidden, the banner itself is what refuses to shrink: measured, the
+   track resolved to 1500px inside a 1336px container, pushing the whole
+   document 100-130px wider than the viewport. Only html{overflow-x:hidden}
+   was hiding it, and that stops user scrolling but not programmatic scrolling
+   (window.scrollTo really did move the page sideways by ~80px before this).
+   minmax(0, …) drops that automatic minimum to zero so the track obeys the
+   container; verified after the change that scrollWidth == clientWidth. */
 .partner-banner-list {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
   margin-top: 2rem;
+}
+/* Both banners share one row on desktop. Each track still carries the
+   minmax(0, …) floor for the reason above - two columns makes each track
+   narrower, so the min-content trap it avoids would bite harder here, not
+   less. */
+@media screen and (min-width: 992px) {
+  .partner-banner-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 .partner-banner {
   background-color: white;
@@ -1114,7 +1135,7 @@ html {
 }
 @media screen and (max-width: 767px) {
   .partner-banner-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1250,3 +1271,254 @@ html {
   }
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PDF-CONTENT PAGE STYLES (newindex.html / newcontextindex.html only)
+
+   Everything below is scoped to class/ID names that exist ONLY on those two
+   pages, so index.html renders byte-identically to before this block was
+   added. Do not reuse these selectors on index.html without checking the
+   knock-on effect there first.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Hero: life-cycle stage row (Design | Structure | Orchestrate | Implement)
+   and the supporting sub-line under the H1. */
+.lifecycle-stages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.lifecycle-sep {
+  opacity: 0.45;
+  font-weight: 400;
+}
+.hero-subline {
+  max-width: 46rem;
+  margin: 0 auto;
+  /* The template sets its own muted grey on every <p>, which wins over the
+     white inherited from .hero-content's .u-text-color-white - unreadable
+     against the hero photo. Forced back to white here. */
+  color: var(--color--base--white);
+  opacity: 0.92;
+}
+
+/* Trust bar: the "Fully aligned with the UN SDGs | 100% CSR and FCRA
+   compliant | ..." strip that sits directly under the hero. Three equal
+   claims on one row at desktop, stacked on narrow screens. */
+.section-trust-bar {
+  background: #fff;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.trust-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem 2.5rem;
+}
+.trust-bar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  max-width: 24rem;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: var(--color--base--black);
+}
+.trust-bar-item .check-icon {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--color--base--accent);
+}
+@media screen and (max-width: 767px) {
+  .trust-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Impact dashboard ticker: heading + sub-heading + "view full dashboard"
+   CTA wrapped around the existing .stats-bar number row. */
+.stats-bar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+.stats-bar-heading {
+  font-size: 2.25rem;
+  overflow: visible;
+}
+.stats-bar-subheading {
+  color: var(--color--text--text-muted);
+  margin: 0;
+  max-width: 40rem;
+}
+.stats-bar-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+@media screen and (max-width: 767px) {
+  .stats-bar-heading {
+    font-size: 1.75rem;
+  }
+}
+
+/* Services: six cards read better as 3 x 2 than as the 4-up grid the other
+   card sections use (which would leave a ragged 4 + 2 last row). */
+@media screen and (min-width: 992px) {
+  #section-services .layout-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Awards ticker: reuses .partner-marquee (auto-scroll + pause-on-hover +
+   edge fade) with award-shaped items instead of plain text chips. */
+.section-awards {
+  background: #fff;
+}
+.awards-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.awards-heading {
+  font-size: 2.25rem;
+  overflow: visible;
+}
+.awards-marquee {
+  margin-top: 0;
+}
+.award-item {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--border--color-size--border-subtle);
+  border-radius: var(--border--color-size--radius-inner);
+  background: #fff;
+  white-space: nowrap;
+}
+.award-logo {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color--backgrounds--bg-gray);
+  color: var(--color--base--black);
+}
+.award-logo svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.award-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  line-height: 1.3;
+}
+.award-org {
+  font-size: 0.8rem;
+  color: var(--color--text--text-muted);
+}
+.award-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+@media screen and (max-width: 767px) {
+  .awards-heading {
+    font-size: 1.75rem;
+  }
+}
+
+/* Unfilled copy marker: makes every "[placeholder]" left in these two pages
+   visually obvious, so nothing ships as real copy by accident. */
+.copy-placeholder {
+  color: var(--color--text--text-muted);
+  font-style: italic;
+}
+
+/* Hero trust row (index.html): three tick-marked claims sitting where the
+   "17M+ lives impacted" stat used to be - grid row 3 of .layout-centered
+   .is-hero, pinned to the bottom of the fold by .hero-stats' own rules,
+   which this reuses rather than re-deriving.
+
+   Deliberately NOT built on .tag-list/.tag-item, even though the markup
+   would be near-identical: samhita-motion.js animates every .tag-list's
+   check icons in from scale 0, and pops each .tag-item in on scroll. Both
+   are one-shot scroll-triggered entrances, and the hero must never depend
+   on a scroll trigger to become visible (see that file's note on why the
+   hero gets no JS-driven entrance at all). Keeping these on their own class
+   names means no GSAP selector matches them and they are painted from plain
+   CSS immediately. Sitting inside .hero-stats also puts them behind
+   motion.js's existing `closest('.hero-content, .hero-stats')` guard. */
+.hero-stats.hero-trust {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 2.75rem;
+}
+.hero-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+/* .check-icon's own default is the muted grey used on light sections; on the
+   hero photo the ticks have to be white to read at all. */
+.hero-trust-item .check-icon {
+  color: #fff;
+  width: 1rem;
+  height: 1rem;
+}
+@media screen and (max-width: 767px) {
+  .hero-stats.hero-trust {
+    gap: 0.6rem 1.5rem;
+  }
+  .hero-trust-item {
+    font-size: 0.8rem;
+  }
+}
+
+/* Hero background video (index.html). Sits inside .hero-bg-fixed, on top of
+   that element's own background-image (the still fallback) and underneath its
+   ::after scrim - the scrim is a later-in-tree-order positioned box at the
+   same z-index, so it paints above this without needing a higher one.
+   object-fit:cover matches the still's framing so there is no visible jump
+   when the video takes over. Inherits the scroll/tilt transform from its
+   parent, so it stays pinned exactly like the still did. */
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+/* Reduced motion: the video is paused by samhita-interactions.js, but hide it
+   outright too so a paused first frame can't differ from the still beneath. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-video {
+    display: none;
+  }
+}

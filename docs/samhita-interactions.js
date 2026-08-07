@@ -575,24 +575,43 @@
       window.matchMedia &&
       window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-    // Scroll parallax for the hero photo: as the page scrolls through the
-    // hero fold, the photo shifts vertically at a fraction of scroll speed
-    // (lagging behind the heading/CTA above it, which scroll at the normal
-    // rate), giving it depth. Runs on every device/pointer type (unlike the
-    // cursor-tilt below), since scrolling itself is universal - only gated
-    // on prefers-reduced-motion.
+    // Hero background video: paused (and, via CSS, hidden) for anyone who has
+    // asked for reduced motion, leaving the still image behind it. The pause
+    // matters on top of the CSS `display:none` because a display:none video
+    // still plays - it would keep a decode loop running for something nobody
+    // can see. Autoplay stays declared in the HTML rather than being started
+    // here, so the video does not depend on this script having run.
+    var heroVideo = document.querySelector(".hero-bg-video");
+    if (heroVideo && reduceMotionCursor) {
+      heroVideo.autoplay = false;
+      heroVideo.pause();
+      heroVideo.removeAttribute("autoplay");
+    }
+
+    // Hero photo stays put while the page scrolls: the heading/CTA and every
+    // section below scroll normally, but the photo itself does not move at
+    // all - the hero section's own overflow:hidden turns it into a shrinking
+    // window onto a stationary image.
+    //
+    // Done with a scroll-linked transform rather than CSS
+    // `background-attachment: fixed` or `position: fixed`, both of which fail
+    // here: iOS Safari silently ignores background-attachment:fixed, and
+    // .section-hero already sets `perspective` for the cursor tilt, which
+    // makes it the containing block for any position:fixed descendant (so a
+    // fixed photo would scroll with the section anyway). Translating the
+    // photo down by exactly the distance the section has scrolled up
+    // (parallaxY = -rect.top) cancels the scroll out exactly, and works
+    // identically on every browser including iOS.
     //
     // Shares one transform-state object + apply function with the cursor
     // tilt below (both target the same .hero-bg-fixed element) so the two
     // handlers compose into a single transform string instead of each
-    // stomping the other's inline style. HERO_BASE_SCALE permanently
-    // overscales the photo so both the parallax translate and the tilt
-    // rotate always have edge-to-spare, rather than only scaling up on
-    // hover like an earlier version of this effect did.
+    // stomping the other's inline style. HERO_BASE_SCALE overscales the photo
+    // slightly so the tilt's rotation always has edge to spare.
     var heroSection = document.querySelector(".section-hero");
     var heroBg = document.querySelector(".hero-bg-fixed");
     if (heroSection && heroBg) {
-      var HERO_BASE_SCALE = 1.12;
+      var HERO_BASE_SCALE = 1.06;
       var heroTransformState = { tiltX: 0, tiltY: 0, parallaxY: 0 };
 
       var applyHeroTransform = function () {
@@ -604,8 +623,6 @@
       };
 
       if (!reduceMotionCursor) {
-        var HERO_PARALLAX_STRENGTH = 0.15;
-        var HERO_PARALLAX_MAX = 60;
         var heroParallaxTicking = false;
 
         var updateHeroParallax = function () {
@@ -614,11 +631,8 @@
           // Only bother once the hero is at least partly on screen - skips
           // work for every scroll event on the rest of the page.
           if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-          var raw = -rect.top * HERO_PARALLAX_STRENGTH;
-          heroTransformState.parallaxY = Math.max(
-            -HERO_PARALLAX_MAX,
-            Math.min(HERO_PARALLAX_MAX, raw)
-          );
+          // 1:1 with the scroll, so the photo is visually stationary.
+          heroTransformState.parallaxY = -rect.top;
           applyHeroTransform();
         };
 

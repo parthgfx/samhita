@@ -8,3 +8,19 @@ node_modules/
 # ones actually used (docs/images/index/secondfold, .../theladdertoincomegrowth)
 # are tracked.
 docs/images/index/all/
+
+# Uncompressed source assets. These are the masters the shipped versions were
+# encoded from, not files any page loads: bgvid.mp4 -> bgvid.webm (7.2MB -> 1.1MB)
+# and bgimg.webp -> bgimg-hero.webp (4.4MB -> 184KB). Keeping them out of git
+# avoids ~11MB of permanent history for bytes no visitor ever downloads; they
+# still sit in the working tree for re-encoding.
+docs/images/index/hero/bgvid.mp4
+docs/images/index/hero/bgimg.webp
+
+# Superseded hero stills, no longer referenced by any page.
+docs/new-hero copy.webp
+docs/new-hero2.webp
+
+# Internal source brief. This repo is public (GitHub Pages serves from it), so
+# committing the client copy deck would publish it. Deliberately excluded.
+*.pptx.pdf
