@@ -65,8 +65,14 @@
       window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     var medias = panels.map(function (p) { return p.querySelector(".ag-panel__media"); });
-    var bars = panels.map(function (p) { return p.querySelector(".ag-panel__bar"); });
-    var texts = panels.map(function (p) { return p.querySelector(".ag-panel__text"); });
+    // Whatever the caption is made of, rather than a fixed bar + text pair.
+    // The original hard-codes those two elements, so changing the caption's
+    // shape (here: a title and a supporting line, matching the ladder-story
+    // slides) silently disabled the reveal - the guard below saw a null bar
+    // and skipped the whole tween.
+    var captions = panels.map(function (p) {
+      return Array.prototype.slice.call(p.querySelectorAll(".ag-panel__label > *"));
+    });
 
     var active = clamp(opts.defaultIndex, 0, count - 1);
     var mediaSize = 320;
@@ -110,7 +116,7 @@
           }, 0);
         }
 
-        if (opts.showLabels && bars[i] && texts[i]) {
+        if (opts.showLabels && captions[i].length) {
           if (isActive) {
             // Held back until the panel is most of the way open. The original
             // starts the caption at 0, so on a long label ("Market Linkages"
@@ -118,12 +124,12 @@
             // faded in while the panel was still narrow and was visibly
             // clipped for the first part of every transition. Starting at 35%
             // of the duration means the width is there before the words are.
-            tl.to([bars[i], texts[i]], {
+            tl.to(captions[i], {
               opacity: 1, x: 0, duration: dur * 0.65, ease: opts.ease,
               stagger: reduced ? 0 : opts.stagger
             }, dur * 0.35);
           } else {
-            tl.to([bars[i], texts[i]], {
+            tl.to(captions[i], {
               opacity: 0, x: -14, duration: dur * 0.6, ease: opts.ease
             }, 0);
           }

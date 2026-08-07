@@ -396,19 +396,34 @@ Strengthening
 Every Rung
 
 #### section-rungs-gallery.04 · span
-Livelihood (skilling, jobs, social schemes, market linkages)
+Livelihood
 
 #### section-rungs-gallery.05 · span
-Catalytic Finance
+Skilling, jobs, social schemes and market linkages.
 
 #### section-rungs-gallery.06 · span
-Health &amp; Nutrition
+Catalytic Finance
 
 #### section-rungs-gallery.07 · span
-Education
+Bringing CSR, philanthropy and financial institutions together so capital reaches citizens.
 
 #### section-rungs-gallery.08 · span
+Health &amp; Nutrition
+
+#### section-rungs-gallery.09 · span
+A health emergency is one of the most common broken rungs.
+
+#### section-rungs-gallery.10 · span
+Education
+
+#### section-rungs-gallery.11 · span
+Scholarships and learning pathways that put citizens on the first rung.
+
+#### section-rungs-gallery.12 · span
 Climate
+
+#### section-rungs-gallery.13 · span
+Building climate resilience into livelihoods, so incomes hold steady.
 
 ## section-initiatives
 

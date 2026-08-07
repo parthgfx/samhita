@@ -111,41 +111,50 @@
    instead — so a long caption slides out from behind the edge rather than
    appearing pre-truncated with an ellipsis. Capped to the expanded width so a
    very long label can still never escape its panel. */
+/* ADDITION 4 — captions match the ladder-story slides: a large light title
+   with a supporting line beneath it, stacked bottom-left on the same 1.5rem
+   inset those slides use, rather than the original's inline bar + single
+   label. */
 .ag-panel__label {
   position: absolute;
-  left: 20px;
-  bottom: 20px;
+  left: 1.5rem;
+  bottom: 1.5rem;
   right: auto;
   width: max-content;
-  max-width: calc(var(--ag-media-size) - 40px);
+  max-width: calc(var(--ag-media-size) - 3rem);
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
   pointer-events: none;
   z-index: 2;
 }
 
-.ag-panel__bar {
-  flex: 0 0 auto;
-  width: 3px;
-  height: 26px;
-  border-radius: 3px;
-  background: var(--ag-accent);
-  opacity: 0;
-  box-shadow: 0 0 12px color-mix(in srgb, var(--ag-accent) 60%, transparent);
-}
-
+/* .u-text-size-large's own values (2.25rem / 300 / 110%) so the rung titles
+   read at exactly the weight and size the slide titles do. Still nowrap: the
+   supporting line below carries the detail, so no title needs to wrap, and
+   nowrap is what keeps a title from reflowing mid-transition. */
 .ag-panel__text {
   color: var(--ag-text);
   font-family: inherit;
-  font-weight: 600;
-  font-size: clamp(1rem, 1.4vw, 1.4rem);
-  letter-spacing: 0.01em;
+  font-weight: 300;
+  font-size: 2.25rem;
+  line-height: 110%;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   opacity: 0;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+.ag-panel__desc {
+  color: var(--ag-text);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 130%;
+  opacity: 0;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+@media screen and (max-width: 767px) {
+  .ag-panel__text { font-size: 1.75rem; }
+  .ag-panel__desc { font-size: 0.9rem; }
 }
 
 /* ADDITION 1 — no-JS / pre-JS fallback.
@@ -158,8 +167,8 @@
 .ag-panel.is-default-open {
   flex-grow: 1.7;
 }
-.ag-panel.is-default-open .ag-panel__bar,
-.ag-panel.is-default-open .ag-panel__text {
+.ag-panel.is-default-open .ag-panel__text,
+.ag-panel.is-default-open .ag-panel__desc {
   opacity: 1;
 }
 .ag-panel.is-default-open .ag-panel__media {
