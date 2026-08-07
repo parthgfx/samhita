@@ -223,167 +223,6 @@ Impact Partners
 #### section-stats-bar.12 · stat label
 Government Partnerships
 
-## section-partners-logos
-
-#### section-partners-logos.01 · div
-Slide 1 of 1.
-
-#### section-partners-logos.02 · eyebrow
-Partners
-
-#### section-partners-logos.03 · heading line
-The architects of
-
-#### section-partners-logos.04 · h2
-the ladder
-
-#### section-partners-logos.05 · paragraph
-Powering India's Livelihood Network Through Strategic Partnerships.
-
-#### section-partners-logos.06 · bold
-0
-
-#### section-partners-logos.07 · bold
-Citizens
-
-#### section-partners-logos.08 · paragraph
-received Employment Linked Skilling.
-
-#### section-partners-logos.09 · bold
-0%
-
-#### section-partners-logos.10 · bold
-Job Placement
-
-#### section-partners-logos.11 · paragraph
-with 80% retention rates.
-
-#### section-partners-logos.12 · div
-csr clients
-
-#### section-partners-logos.13 · h3
-CSR Clients
-
-#### section-partners-logos.14 · paragraph
-CSR that is compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your goals and then design, run, and track impact-driven programs that deliver measurable results. Our programs are tailored both to your priorities and to the communities you want to serve, anywhere in the country. We enable long-term, transformational outcomes using measurable metrics, ensuring that your funding is both catalytic and compliant.
-
-#### section-partners-logos.15 · span
-Accenture
-
-#### section-partners-logos.16 · span
-Adidas
-
-#### section-partners-logos.17 · span
-Cummins
-
-#### section-partners-logos.18 · span
-DXC
-
-#### section-partners-logos.19 · span
-Eureka Forbes
-
-#### section-partners-logos.20 · span
-Accenture
-
-#### section-partners-logos.21 · span
-Adidas
-
-#### section-partners-logos.22 · span
-Cummins
-
-#### section-partners-logos.23 · span
-DXC
-
-#### section-partners-logos.24 · span
-Eureka Forbes
-
-#### section-partners-logos.25 · div
-foundations
-
-#### section-partners-logos.26 · h3
-Foundations
-
-#### section-partners-logos.27 · paragraph
-We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and extensive local networks. Together, we build programs that go the distance, deliver real change for communities, and lasting value for your legacy. We create and drive large-scale collaboratives, anchored by foundations, that bring together formidable stakeholders across the private, public, philanthropic, social, and financial sectors to enable catalytic philanthropy.
-
-#### section-partners-logos.28 · span
-Gates Foundation
-
-#### section-partners-logos.29 · span
-Infosys Foundation
-
-#### section-partners-logos.30 · span
-HCL Foundation
-
-#### section-partners-logos.31 · span
-Walmart Foundation
-
-#### section-partners-logos.32 · span
-Gates Foundation
-
-#### section-partners-logos.33 · span
-Infosys Foundation
-
-#### section-partners-logos.34 · span
-HCL Foundation
-
-#### section-partners-logos.35 · span
-Walmart Foundation
-
-#### section-partners-logos.36 · div
-government
-
-#### section-partners-logos.37 · h3
-Government
-
-#### section-partners-logos.38 · paragraph
-The Government is the main engine of development, and we strengthen its ability to deliver. We support the adoption of India’s Digital Public Infrastructure, build scalable public goods, and enhance the delivery of schemes and services so they reach the right citizens with greater speed, inclusion, and accountability.
-
-#### section-partners-logos.39 · span
-CGTMSE
-
-#### section-partners-logos.40 · span
-ONDC
-
-#### section-partners-logos.41 · span
-Common Service Centres
-
-#### section-partners-logos.42 · span
-Sector Skill Councils
-
-#### section-partners-logos.43 · span
-CGTMSE
-
-#### section-partners-logos.44 · span
-ONDC
-
-#### section-partners-logos.45 · span
-Common Service Centres
-
-#### section-partners-logos.46 · span
-Sector Skill Councils
-
-#### section-partners-logos.47 · div
-financial institutions
-
-#### section-partners-logos.48 · h3
-Financial Institutions
-
-#### section-partners-logos.49 · paragraph
-Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal effort and maximum efficiency. Smart tools help you assess eligibility and tap into government and philanthropic guarantees, so you can confidently grow your portfolio, expand your customer base, and keep risks under control.
-
-#### section-partners-logos.50 · span
-Bajaj Finserv
-
-#### section-partners-logos.51 · span
-IndusInd Bank
-
-#### section-partners-logos.52 · span
-Bajaj Finserv
-
-#### section-partners-logos.53 · span
-IndusInd Bank
-
 ## section-rungs-gallery
 
 #### section-rungs-gallery.01 · eyebrow
@@ -519,67 +358,163 @@ Reach the right customers, faster and smarter. We connect you to creditworthy bo
 ## section-partners
 
 #### section-partners.01 · eyebrow
-Ecosystem
+Partners
 
 #### section-partners.02 · heading line
-Partnering across
+The architects of
 
 #### section-partners.03 · h2
-the entire
+the ladder
 
-#### section-partners.04 · h2
-ecosystem
+#### section-partners.04 · paragraph
+Powering India's Livelihood Network Through Strategic Partnerships.
 
-#### section-partners.05 · paragraph
-We work across the ecosystem with philanthropic organisations, grassroots institutions, financial institutions, government bodies, and private sector partners.
-
-#### section-partners.06 · div
+#### section-partners.05 · div
 Our Network
 
-#### section-partners.07 · h3
-Philanthropic Organisations, CSR Partners &amp; HNIs
+#### section-partners.06 · h3
+CSR Clients
 
-#### section-partners.08 · paragraph
-We have worked with 15+ philanthropic funders to design and execute Catalytic Finance initiatives — unlocking up to ₹30 for citizens for every ₹1 of philanthropic funding, with 70–100% growth in incomes.
+#### section-partners.07 · paragraph
+CSR that is compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your goals and then design, run, and track impact-driven programs that deliver measurable results. Our programs are tailored both to your priorities and to the communities you want to serve, anywhere in the country. We enable long-term, transformational outcomes using measurable metrics, ensuring that your funding is both catalytic and compliant.
 
-#### section-partners.09 · div
-Learn More
+#### section-partners.08 · span
+Accenture
 
-#### section-partners.10 · h3
-Government &amp; Public Sector Organisations
+#### section-partners.09 · span
+Adidas
 
-#### section-partners.11 · paragraph
-Partnerships with large-scale government organisations enable us to scale rapidly — including the Common Service Centres network (5.5 lakh+ centres), Sector Skill Councils, and CGTMSE.
+#### section-partners.10 · span
+Cummins
 
-#### section-partners.12 · div
-Learn More
+#### section-partners.11 · span
+DXC
 
-#### section-partners.13 · h3
-Banks, NBFCs &amp; Financial Institutions
+#### section-partners.12 · span
+Eureka Forbes
 
-#### section-partners.14 · paragraph
-Most banks want to lend to small business owners and farmers but don't, because they see the risk as too high. We also work with fintech partners so citizens can save and invest from as little as ₹100 a day.
+#### section-partners.13 · span
+Accenture
 
-#### section-partners.15 · div
-Learn More
+#### section-partners.14 · span
+Adidas
 
-#### section-partners.16 · h3
-Private Sector Partnerships
+#### section-partners.15 · span
+Cummins
 
-#### section-partners.17 · paragraph
-We co-create solutions with companies to support the farmers, micro-entrepreneurs, vendors, and gig workers behind their supply chains and products.
+#### section-partners.16 · span
+DXC
+
+#### section-partners.17 · span
+Eureka Forbes
 
 #### section-partners.18 · div
 Learn More
 
 #### section-partners.19 · h3
-Grassroots &amp; Community Partners
+Foundations
 
 #### section-partners.20 · paragraph
-18 grassroots partner organisations across multiple states, building capacity to deliver affordable livelihood solutions in their communities.
+We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and extensive local networks. Together, we build programs that go the distance, deliver real change for communities, and lasting value for your legacy. We create and drive large-scale collaboratives, anchored by foundations, that bring together formidable stakeholders across the private, public, philanthropic, social, and financial sectors to enable catalytic philanthropy.
 
-#### section-partners.21 · div
+#### section-partners.21 · span
+Gates Foundation
+
+#### section-partners.22 · span
+Infosys Foundation
+
+#### section-partners.23 · span
+HCL Foundation
+
+#### section-partners.24 · span
+Walmart Foundation
+
+#### section-partners.25 · span
+Gates Foundation
+
+#### section-partners.26 · span
+Infosys Foundation
+
+#### section-partners.27 · span
+HCL Foundation
+
+#### section-partners.28 · span
+Walmart Foundation
+
+#### section-partners.29 · div
 Learn More
+
+#### section-partners.30 · h3
+Government
+
+#### section-partners.31 · paragraph
+The Government is the main engine of development, and we strengthen its ability to deliver. We support the adoption of India’s Digital Public Infrastructure, build scalable public goods, and enhance the delivery of schemes and services so they reach the right citizens with greater speed, inclusion, and accountability.
+
+#### section-partners.32 · span
+CGTMSE
+
+#### section-partners.33 · span
+ONDC
+
+#### section-partners.34 · span
+Common Service Centres
+
+#### section-partners.35 · span
+Sector Skill Councils
+
+#### section-partners.36 · span
+CGTMSE
+
+#### section-partners.37 · span
+ONDC
+
+#### section-partners.38 · span
+Common Service Centres
+
+#### section-partners.39 · span
+Sector Skill Councils
+
+#### section-partners.40 · div
+Learn More
+
+#### section-partners.41 · h3
+Financial Institutions
+
+#### section-partners.42 · paragraph
+Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal effort and maximum efficiency. Smart tools help you assess eligibility and tap into government and philanthropic guarantees, so you can confidently grow your portfolio, expand your customer base, and keep risks under control.
+
+#### section-partners.43 · span
+Bajaj Finserv
+
+#### section-partners.44 · span
+IndusInd Bank
+
+#### section-partners.45 · span
+Bajaj Finserv
+
+#### section-partners.46 · span
+IndusInd Bank
+
+#### section-partners.47 · div
+Learn More
+
+#### section-partners.48 · bold
+0
+
+#### section-partners.49 · bold
+Citizens
+
+#### section-partners.50 · paragraph
+received Employment Linked Skilling.
+
+#### section-partners.51 · bold
+0%
+
+#### section-partners.52 · bold
+Job Placement
+
+#### section-partners.53 · paragraph
+with 80% retention rates.
 
 ## section-cta-story
 

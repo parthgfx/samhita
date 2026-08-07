@@ -1606,3 +1606,23 @@ html {
     font-size: 1.75rem;
   }
 }
+
+/* Accordion rows that carry copy + a logo strip instead of a photo.
+   .room-content is a fixed-height two-column grid (65%/1fr, 14-20rem tall)
+   built around a .room-media image. With the image gone the text would sit in
+   a 65% column beside dead space, and the long partner copy would overflow the
+   fixed height. Single column, height driven by the content. */
+.room-content.is-no-media {
+  grid-template-columns: minmax(0, 1fr);
+  height: auto;
+}
+/* .room-text clips its overflow to protect the fixed-height layout above;
+   without that height there is nothing to protect, and the clip would cut the
+   marquee's edge fade. */
+.room-content.is-no-media .room-text {
+  overflow: visible;
+  gap: 1.25rem;
+}
+.room-content.is-no-media .partner-logo-marquee {
+  width: 100%;
+}
