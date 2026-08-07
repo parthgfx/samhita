@@ -76,6 +76,15 @@
   height: var(--ag-media-size);
 }
 
+/* --ag-media-size is derived from the row's long axis, which is the HEIGHT
+   when vertical - so capping the caption with it (as the horizontal rule
+   below does) constrains a caption by a height, and the long Livelihood label
+   was truncated despite the panel being full-width. Vertically stacked panels
+   span the container, so the cap here is the panel's own width. */
+.accordion-gallery--vertical .ag-panel__label {
+  max-width: calc(100% - 40px);
+}
+
 .ag-panel__media img {
   width: 100%;
   height: 100%;

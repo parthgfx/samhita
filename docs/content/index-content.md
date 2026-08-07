@@ -390,22 +390,25 @@ IndusInd Bank
 The Rungs
 
 #### section-rungs-gallery.02 · h2
-Every rung,
+Strengthening
 
 #### section-rungs-gallery.03 · h2
-in practice
+Every Rung
 
 #### section-rungs-gallery.04 · span
-Skilling
+Livelihood (skilling, jobs, social schemes, market linkages)
 
 #### section-rungs-gallery.05 · span
-Jobs
+Catalytic Finance
 
 #### section-rungs-gallery.06 · span
-Market Linkages
+Health &amp; Nutrition
 
 #### section-rungs-gallery.07 · span
-Credit
+Education
+
+#### section-rungs-gallery.08 · span
+Climate
 
 ## section-initiatives
 
