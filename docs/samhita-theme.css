@@ -1522,3 +1522,65 @@ html {
     display: none;
   }
 }
+
+/* ── "The architects of the ladder" partner tiles ──
+   Four cards reusing .levels-card wholesale, so they read as the same object
+   as the "Tailored partnerships" cards. Two per row rather than four: the
+   stakeholder copy runs 300-470 characters, which at the 4-up width (~328px)
+   became a very tall, very narrow column of text. */
+@media screen and (min-width: 992px) {
+  .layout-cards.partner-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* .levels-card is pinned to 26rem at wide breakpoints and this copy overflows
+   it. Sizing to content keeps every word visible; the grid still stretches the
+   pair in each row to a common height, so rows stay level. */
+.partner-cards .levels-card {
+  height: auto;
+}
+
+/* Logo strip: reuses .partner-marquee (overflow clip + edge fade +
+   pause-on-hover) and its scroll keyframes. .is-ltr flips the travel so the
+   strip runs left-to-right; the keyframes themselves are shared rather than
+   duplicated, so both directions stay in sync if the timing is ever changed. */
+.partner-logo-marquee {
+  margin-top: 1rem;
+}
+.partner-marquee-track.is-ltr {
+  animation-direction: reverse;
+}
+.partner-logo-marquee .partner-marquee-track {
+  gap: 0.5rem;
+  align-items: center;
+}
+/* Sized so a real <img> logo and the interim text placeholder occupy the same
+   box - dropping the image files in needs no CSS change and won't shift the
+   strip's height. */
+.partner-logo {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--border--color-size--border-subtle);
+  border-radius: 0.4rem;
+  background: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color--text--text-muted);
+  white-space: nowrap;
+}
+.partner-logo img {
+  max-height: 1.3rem;
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+.partner-logo:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}

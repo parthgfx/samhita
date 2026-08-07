@@ -258,101 +258,131 @@ Job Placement
 #### section-partners-logos.11 · paragraph
 with 80% retention rates.
 
-#### section-partners-logos.12 · tile heading
-Trusted by Leading Corporates
+#### section-partners-logos.12 · div
+csr clients
 
-#### section-partners-logos.13 · paragraph
-Accenture, Adidas, Bajaj Finserv, Cummins, DXC, Eureka Forbes, IndusInd Bank and more power our livelihood network through strategic CSR partnerships.
+#### section-partners-logos.13 · h3
+CSR Clients
 
-#### section-partners-logos.14 · marquee chip
+#### section-partners-logos.14 · paragraph
+CSR that is compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your goals and then design, run, and track impact-driven programs that deliver measurable results. Our programs are tailored both to your priorities and to the communities you want to serve, anywhere in the country. We enable long-term, transformational outcomes using measurable metrics, ensuring that your funding is both catalytic and compliant.
+
+#### section-partners-logos.15 · span
 Accenture
 
-#### section-partners-logos.15 · marquee chip
+#### section-partners-logos.16 · span
 Adidas
 
-#### section-partners-logos.16 · marquee chip
-Bajaj Finserv
-
-#### section-partners-logos.17 · marquee chip
+#### section-partners-logos.17 · span
 Cummins
 
-#### section-partners-logos.18 · marquee chip
+#### section-partners-logos.18 · span
 DXC
 
-#### section-partners-logos.19 · marquee chip
+#### section-partners-logos.19 · span
 Eureka Forbes
 
-#### section-partners-logos.20 · marquee chip
-IndusInd Bank
-
-#### section-partners-logos.21 · marquee chip
+#### section-partners-logos.20 · span
 Accenture
 
-#### section-partners-logos.22 · marquee chip
+#### section-partners-logos.21 · span
 Adidas
 
-#### section-partners-logos.23 · marquee chip
-Bajaj Finserv
-
-#### section-partners-logos.24 · marquee chip
+#### section-partners-logos.22 · span
 Cummins
 
-#### section-partners-logos.25 · marquee chip
+#### section-partners-logos.23 · span
 DXC
 
-#### section-partners-logos.26 · marquee chip
+#### section-partners-logos.24 · span
 Eureka Forbes
 
-#### section-partners-logos.27 · marquee chip
+#### section-partners-logos.25 · div
+foundations
+
+#### section-partners-logos.26 · h3
+Foundations
+
+#### section-partners-logos.27 · paragraph
+We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and extensive local networks. Together, we build programs that go the distance, deliver real change for communities, and lasting value for your legacy. We create and drive large-scale collaboratives, anchored by foundations, that bring together formidable stakeholders across the private, public, philanthropic, social, and financial sectors to enable catalytic philanthropy.
+
+#### section-partners-logos.28 · span
+Gates Foundation
+
+#### section-partners-logos.29 · span
+Infosys Foundation
+
+#### section-partners-logos.30 · span
+HCL Foundation
+
+#### section-partners-logos.31 · span
+Walmart Foundation
+
+#### section-partners-logos.32 · span
+Gates Foundation
+
+#### section-partners-logos.33 · span
+Infosys Foundation
+
+#### section-partners-logos.34 · span
+HCL Foundation
+
+#### section-partners-logos.35 · span
+Walmart Foundation
+
+#### section-partners-logos.36 · div
+government
+
+#### section-partners-logos.37 · h3
+Government
+
+#### section-partners-logos.38 · paragraph
+The Government is the main engine of development, and we strengthen its ability to deliver. We support the adoption of India’s Digital Public Infrastructure, build scalable public goods, and enhance the delivery of schemes and services so they reach the right citizens with greater speed, inclusion, and accountability.
+
+#### section-partners-logos.39 · span
+CGTMSE
+
+#### section-partners-logos.40 · span
+ONDC
+
+#### section-partners-logos.41 · span
+Common Service Centres
+
+#### section-partners-logos.42 · span
+Sector Skill Councils
+
+#### section-partners-logos.43 · span
+CGTMSE
+
+#### section-partners-logos.44 · span
+ONDC
+
+#### section-partners-logos.45 · span
+Common Service Centres
+
+#### section-partners-logos.46 · span
+Sector Skill Councils
+
+#### section-partners-logos.47 · div
+financial institutions
+
+#### section-partners-logos.48 · h3
+Financial Institutions
+
+#### section-partners-logos.49 · paragraph
+Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal effort and maximum efficiency. Smart tools help you assess eligibility and tap into government and philanthropic guarantees, so you can confidently grow your portfolio, expand your customer base, and keep risks under control.
+
+#### section-partners-logos.50 · span
+Bajaj Finserv
+
+#### section-partners-logos.51 · span
 IndusInd Bank
 
-#### section-partners-logos.28 · div
-21 Funding Partners
+#### section-partners-logos.52 · span
+Bajaj Finserv
 
-#### section-partners-logos.29 · tile heading
-Backed by Institutions &amp; Government
-
-#### section-partners-logos.30 · paragraph
-Gates Foundation, Infosys Foundation, HCL Foundation, Walmart Foundation, CGTMSE, ONDC, and state governments across India strengthen our reach.
-
-#### section-partners-logos.31 · marquee chip
-Gates Foundation
-
-#### section-partners-logos.32 · marquee chip
-Infosys Foundation
-
-#### section-partners-logos.33 · marquee chip
-HCL Foundation
-
-#### section-partners-logos.34 · marquee chip
-Walmart Foundation
-
-#### section-partners-logos.35 · marquee chip
-CGTMSE
-
-#### section-partners-logos.36 · marquee chip
-ONDC
-
-#### section-partners-logos.37 · marquee chip
-Gates Foundation
-
-#### section-partners-logos.38 · marquee chip
-Infosys Foundation
-
-#### section-partners-logos.39 · marquee chip
-HCL Foundation
-
-#### section-partners-logos.40 · marquee chip
-Walmart Foundation
-
-#### section-partners-logos.41 · marquee chip
-CGTMSE
-
-#### section-partners-logos.42 · marquee chip
-ONDC
-
-#### section-partners-logos.43 · div
-27 Grassroots Partners
+#### section-partners-logos.53 · span
+IndusInd Bank
 
 ## section-audiences
 
