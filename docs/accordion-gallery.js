@@ -112,10 +112,16 @@
 
         if (opts.showLabels && bars[i] && texts[i]) {
           if (isActive) {
+            // Held back until the panel is most of the way open. The original
+            // starts the caption at 0, so on a long label ("Market Linkages"
+            // needs 159px against a 158px box in a collapsed panel) the text
+            // faded in while the panel was still narrow and was visibly
+            // clipped for the first part of every transition. Starting at 35%
+            // of the duration means the width is there before the words are.
             tl.to([bars[i], texts[i]], {
-              opacity: 1, x: 0, duration: dur, ease: opts.ease,
+              opacity: 1, x: 0, duration: dur * 0.65, ease: opts.ease,
               stagger: reduced ? 0 : opts.stagger
-            }, 0);
+            }, dur * 0.35);
           } else {
             tl.to([bars[i], texts[i]], {
               opacity: 0, x: -14, duration: dur * 0.6, ease: opts.ease

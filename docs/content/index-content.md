@@ -730,4 +730,4 @@ t
 a
 
 #### footer.19 · div
-© 2025 Samhita CGF. All rights reserved.
+© 2026 Samhita CGF. All rights reserved.

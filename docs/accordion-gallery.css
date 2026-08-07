@@ -94,11 +94,21 @@
     color-mix(in srgb, var(--ag-overlay) calc(var(--ag-dim, 0.35) * 100%), transparent);
 }
 
+/* ADDITION 3 — the caption box is sized to its own words, not to the panel.
+   The original pins it to both edges (left:20px; right:20px), so on a
+   collapsed panel the box shrinks to ~158px and .ag-panel__text's
+   text-overflow:ellipsis truncates anything longer. Because the panel itself
+   already has overflow:hidden, a max-content box is clipped by the panel edge
+   instead — so a long caption slides out from behind the edge rather than
+   appearing pre-truncated with an ellipsis. Capped to the expanded width so a
+   very long label can still never escape its panel. */
 .ag-panel__label {
   position: absolute;
   left: 20px;
   bottom: 20px;
-  right: 20px;
+  right: auto;
+  width: max-content;
+  max-width: calc(var(--ag-media-size) - 40px);
   display: flex;
   align-items: center;
   gap: 12px;
