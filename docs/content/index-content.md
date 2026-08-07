@@ -384,16 +384,77 @@ Bajaj Finserv
 #### section-partners-logos.53 · span
 IndusInd Bank
 
+## section-rungs-gallery
+
+#### section-rungs-gallery.01 · eyebrow
+The Rungs
+
+#### section-rungs-gallery.02 · h2
+Every rung,
+
+#### section-rungs-gallery.03 · h2
+in practice
+
+#### section-rungs-gallery.04 · span
+Skilling
+
+#### section-rungs-gallery.05 · span
+Jobs
+
+#### section-rungs-gallery.06 · span
+Market Linkages
+
+#### section-rungs-gallery.07 · span
+Credit
+
+## section-initiatives
+
+#### section-initiatives.01 · eyebrow
+Success Stories
+
+#### section-initiatives.02 · h2
+Success Stories
+
+#### section-initiatives.03 · paragraph
+Three programs pushing beyond our core livelihood work into health, enterprise, and urban resilience.
+
+#### section-initiatives.04 · card eyebrow
+health
+
+#### section-initiatives.05 · h3
+Samyak
+
+#### section-initiatives.06 · paragraph
+Strengthening urban health systems to bridge inequities for the urban poor in small cities.
+
+#### section-initiatives.07 · card eyebrow
+enterprise
+
+#### section-initiatives.08 · h3
+OneTAC
+
+#### section-initiatives.09 · paragraph
+Building India's first digital backbone for tourism, arts, and culture to empower entrepreneurs.
+
+#### section-initiatives.10 · card eyebrow
+mental health
+
+#### section-initiatives.11 · h3
+Centre for Public Mental Health
+
+#### section-initiatives.12 · paragraph
+Scaling mental health solutions to build India's pathway to a zero-burden future for mental health.
+
 ## section-audiences
 
 #### section-audiences.01 · eyebrow
-Who We Serve
+Testimonials
 
 #### section-audiences.02 · heading line
-Tailored partnerships
+What our
 
 #### section-audiences.03 · h2
-for every stakeholder
+partners say
 
 #### section-audiences.04 · div
 See Catalytic Finance
@@ -402,7 +463,7 @@ See Catalytic Finance
 csr clients
 
 #### section-audiences.06 · h3
-For CSR Clients
+Priya Sharma
 
 #### section-audiences.07 · paragraph
 CSR that is impact driven, compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your priorities and geographies.
@@ -411,7 +472,7 @@ CSR that is impact driven, compliant, cost-efficient, and catalytic. We co-creat
 foundations
 
 #### section-audiences.09 · h3
-For Foundations
+Rahul Deshmukh
 
 #### section-audiences.10 · paragraph
 We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and delivery on the ground.
@@ -420,7 +481,7 @@ We turn your impact vision into action. From bold new ideas to scaling what work
 government
 
 #### section-audiences.12 · h3
-For Government
+Ananya Iyer
 
 #### section-audiences.13 · paragraph
 The Government is the main engine of development, and we strengthen its ability to deliver — from local to state to central programs.
@@ -429,7 +490,7 @@ The Government is the main engine of development, and we strengthen its ability 
 financial institutions
 
 #### section-audiences.15 · h3
-For Financial Institutions
+Vikram Nair
 
 #### section-audiences.16 · paragraph
 Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal risk.
@@ -498,47 +559,6 @@ Grassroots &amp; Community Partners
 
 #### section-partners.21 · div
 Learn More
-
-## section-initiatives
-
-#### section-initiatives.01 · eyebrow
-Catalytic Initiatives
-
-#### section-initiatives.02 · heading line
-Advancing health, enterprise,
-
-#### section-initiatives.03 · h2
-and urban livelihoods
-
-#### section-initiatives.04 · paragraph
-Three programs pushing beyond our core livelihood work into health, enterprise, and urban resilience.
-
-#### section-initiatives.05 · card eyebrow
-health
-
-#### section-initiatives.06 · h3
-Samyak
-
-#### section-initiatives.07 · paragraph
-Strengthening urban health systems to bridge inequities for the urban poor in small cities.
-
-#### section-initiatives.08 · card eyebrow
-enterprise
-
-#### section-initiatives.09 · h3
-OneTAC
-
-#### section-initiatives.10 · paragraph
-Building India's first digital backbone for tourism, arts, and culture to empower entrepreneurs.
-
-#### section-initiatives.11 · card eyebrow
-mental health
-
-#### section-initiatives.12 · h3
-Centre for Public Mental Health
-
-#### section-initiatives.13 · paragraph
-Scaling mental health solutions to build India's pathway to a zero-burden future for mental health.
 
 ## section-cta-story
 

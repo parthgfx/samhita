@@ -1584,3 +1584,25 @@ html {
   filter: grayscale(0);
   opacity: 1;
 }
+
+/* Section wrapper for the AccordionGallery. The component's own styles live in
+   accordion-gallery.css; this is only the surrounding section chrome, matching
+   the other sections' eyebrow + heading treatment. */
+.section-rungs-gallery {
+  background: var(--color--backgrounds--bg-page);
+}
+.rungs-gallery-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.rungs-gallery-heading {
+  font-size: 2.25rem;
+  overflow: visible;
+}
+@media screen and (max-width: 767px) {
+  .rungs-gallery-heading {
+    font-size: 1.75rem;
+  }
+}
