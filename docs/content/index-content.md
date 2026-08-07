@@ -430,38 +430,41 @@ Building climate resilience into livelihoods, so incomes hold steady.
 #### section-initiatives.01 · eyebrow
 Success Stories
 
-#### section-initiatives.02 · h2
-Success Stories
+#### section-initiatives.02 · heading line
+Success
 
-#### section-initiatives.03 · paragraph
-Three programs pushing beyond our core livelihood work into health, enterprise, and urban resilience.
+#### section-initiatives.03 · h2
+Stories
 
-#### section-initiatives.04 · card eyebrow
-health
+#### section-initiatives.04 · paragraph
+Outcomes from projects across our livelihood network.
 
-#### section-initiatives.05 · h3
-Samyak
+#### section-initiatives.05 · card eyebrow
+market linkages
 
-#### section-initiatives.06 · paragraph
-Strengthening urban health systems to bridge inequities for the urban poor in small cities.
+#### section-initiatives.06 · h3
+“147% income increase in our market linkage project with ONDC”
 
-#### section-initiatives.07 · card eyebrow
-enterprise
+#### section-initiatives.07 · paragraph
+Market linkages that connect producers directly to buyers.
 
-#### section-initiatives.08 · h3
-OneTAC
+#### section-initiatives.08 · card eyebrow
+skilling
 
-#### section-initiatives.09 · paragraph
-Building India's first digital backbone for tourism, arts, and culture to empower entrepreneurs.
+#### section-initiatives.09 · h3
+“90% job retention rate in our skilling project with X”
 
-#### section-initiatives.10 · card eyebrow
-mental health
+#### section-initiatives.10 · paragraph
+Employment-linked skilling, measured on whether people stay in the job.
 
-#### section-initiatives.11 · h3
-Centre for Public Mental Health
+#### section-initiatives.11 · card eyebrow
+example
 
-#### section-initiatives.12 · paragraph
-Scaling mental health solutions to build India's pathway to a zero-burden future for mental health.
+#### section-initiatives.12 · h3
+“[Example story — replace with a real result]”
+
+#### section-initiatives.13 · paragraph
+[Add the metric, the project and the partner, in the same shape as the two above.]
 
 ## section-audiences
 
