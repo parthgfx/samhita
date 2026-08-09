@@ -223,138 +223,6 @@ Impact Partners
 #### section-stats-bar.12 · stat label
 Government Partnerships
 
-## section-rungs-gallery
-
-#### section-rungs-gallery.01 · eyebrow
-The Rungs
-
-#### section-rungs-gallery.02 · h2
-Strengthening
-
-#### section-rungs-gallery.03 · h2
-Every Rung
-
-#### section-rungs-gallery.04 · span
-Livelihood
-
-#### section-rungs-gallery.05 · span
-Skilling, jobs, social schemes and market linkages.
-
-#### section-rungs-gallery.06 · span
-Catalytic Finance
-
-#### section-rungs-gallery.07 · span
-Bringing CSR, philanthropy and financial institutions together so capital reaches citizens.
-
-#### section-rungs-gallery.08 · span
-Health &amp; Nutrition
-
-#### section-rungs-gallery.09 · span
-A health emergency is one of the most common broken rungs.
-
-#### section-rungs-gallery.10 · span
-Education
-
-#### section-rungs-gallery.11 · span
-Scholarships and learning pathways that put citizens on the first rung.
-
-#### section-rungs-gallery.12 · span
-Climate
-
-#### section-rungs-gallery.13 · span
-Building climate resilience into livelihoods, so incomes hold steady.
-
-## section-initiatives
-
-#### section-initiatives.01 · eyebrow
-Success Stories
-
-#### section-initiatives.02 · heading line
-Success
-
-#### section-initiatives.03 · h2
-Stories
-
-#### section-initiatives.04 · paragraph
-Outcomes from projects across our livelihood network.
-
-#### section-initiatives.05 · card eyebrow
-market linkages
-
-#### section-initiatives.06 · h3
-“147% income increase in our market linkage project with ONDC”
-
-#### section-initiatives.07 · paragraph
-Market linkages that connect producers directly to buyers.
-
-#### section-initiatives.08 · card eyebrow
-skilling
-
-#### section-initiatives.09 · h3
-“90% job retention rate in our skilling project with X”
-
-#### section-initiatives.10 · paragraph
-Employment-linked skilling, measured on whether people stay in the job.
-
-#### section-initiatives.11 · card eyebrow
-example
-
-#### section-initiatives.12 · h3
-“[Example story — replace with a real result]”
-
-#### section-initiatives.13 · paragraph
-[Add the metric, the project and the partner, in the same shape as the two above.]
-
-## section-audiences
-
-#### section-audiences.01 · eyebrow
-Testimonials
-
-#### section-audiences.02 · heading line
-What our
-
-#### section-audiences.03 · h2
-partners say
-
-#### section-audiences.04 · div
-See Catalytic Finance
-
-#### section-audiences.05 · div
-csr clients
-
-#### section-audiences.06 · h3
-Priya Sharma
-
-#### section-audiences.07 · paragraph
-CSR that is impact driven, compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your priorities and geographies.
-
-#### section-audiences.08 · div
-foundations
-
-#### section-audiences.09 · h3
-Rahul Deshmukh
-
-#### section-audiences.10 · paragraph
-We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and delivery on the ground.
-
-#### section-audiences.11 · div
-government
-
-#### section-audiences.12 · h3
-Ananya Iyer
-
-#### section-audiences.13 · paragraph
-The Government is the main engine of development, and we strengthen its ability to deliver — from local to state to central programs.
-
-#### section-audiences.14 · div
-financial institutions
-
-#### section-audiences.15 · h3
-Vikram Nair
-
-#### section-audiences.16 · paragraph
-Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal risk.
-
 ## section-partners
 
 #### section-partners.01 · eyebrow
@@ -515,6 +383,138 @@ Job Placement
 
 #### section-partners.53 · paragraph
 with 80% retention rates.
+
+## section-rungs-gallery
+
+#### section-rungs-gallery.01 · eyebrow
+The Rungs
+
+#### section-rungs-gallery.02 · h2
+Strengthening
+
+#### section-rungs-gallery.03 · h2
+Every Rung
+
+#### section-rungs-gallery.04 · span
+Livelihood
+
+#### section-rungs-gallery.05 · span
+Skilling, jobs, social schemes and market linkages.
+
+#### section-rungs-gallery.06 · span
+Catalytic Finance
+
+#### section-rungs-gallery.07 · span
+Bringing CSR, philanthropy and financial institutions together so capital reaches citizens.
+
+#### section-rungs-gallery.08 · span
+Health &amp; Nutrition
+
+#### section-rungs-gallery.09 · span
+A health emergency is one of the most common broken rungs.
+
+#### section-rungs-gallery.10 · span
+Education
+
+#### section-rungs-gallery.11 · span
+Scholarships and learning pathways that put citizens on the first rung.
+
+#### section-rungs-gallery.12 · span
+Climate
+
+#### section-rungs-gallery.13 · span
+Building climate resilience into livelihoods, so incomes hold steady.
+
+## section-initiatives
+
+#### section-initiatives.01 · eyebrow
+Success Stories
+
+#### section-initiatives.02 · heading line
+Success
+
+#### section-initiatives.03 · h2
+Stories
+
+#### section-initiatives.04 · paragraph
+Outcomes from projects across our livelihood network.
+
+#### section-initiatives.05 · card eyebrow
+market linkages
+
+#### section-initiatives.06 · h3
+“147% income increase in our market linkage project with ONDC”
+
+#### section-initiatives.07 · paragraph
+Market linkages that connect producers directly to buyers.
+
+#### section-initiatives.08 · card eyebrow
+skilling
+
+#### section-initiatives.09 · h3
+“90% job retention rate in our skilling project with X”
+
+#### section-initiatives.10 · paragraph
+Employment-linked skilling, measured on whether people stay in the job.
+
+#### section-initiatives.11 · card eyebrow
+example
+
+#### section-initiatives.12 · h3
+“[Example story — replace with a real result]”
+
+#### section-initiatives.13 · paragraph
+[Add the metric, the project and the partner, in the same shape as the two above.]
+
+## section-audiences
+
+#### section-audiences.01 · eyebrow
+Testimonials
+
+#### section-audiences.02 · heading line
+What our
+
+#### section-audiences.03 · h2
+partners say
+
+#### section-audiences.04 · div
+See Catalytic Finance
+
+#### section-audiences.05 · div
+csr clients
+
+#### section-audiences.06 · h3
+Priya Sharma
+
+#### section-audiences.07 · paragraph
+CSR that is impact driven, compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your priorities and geographies.
+
+#### section-audiences.08 · div
+foundations
+
+#### section-audiences.09 · h3
+Rahul Deshmukh
+
+#### section-audiences.10 · paragraph
+We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and delivery on the ground.
+
+#### section-audiences.11 · div
+government
+
+#### section-audiences.12 · h3
+Ananya Iyer
+
+#### section-audiences.13 · paragraph
+The Government is the main engine of development, and we strengthen its ability to deliver — from local to state to central programs.
+
+#### section-audiences.14 · div
+financial institutions
+
+#### section-audiences.15 · h3
+Vikram Nair
+
+#### section-audiences.16 · paragraph
+Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal risk.
 
 ## section-cta-story
 

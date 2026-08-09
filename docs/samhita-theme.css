@@ -1626,3 +1626,40 @@ html {
 .room-content.is-no-media .partner-logo-marquee {
   width: 100%;
 }
+
+/* Architects fold: show the illustration whole, at its own proportions.
+   .stay-media is built for a photo used as a background - height:100% with a
+   37rem min-height, the image absolutely positioned across it and cropped to
+   fill. That is right for a photograph but wrong for this illustration, whose
+   figures and ladder get cut off at the frame edges. Pinning the container to
+   the artwork's own 1402x1122 ratio means the box always matches the image, so
+   nothing is cropped at any width; object-fit:contain is belt-and-braces
+   against sub-pixel rounding rather than a second mechanism. */
+#section-partners .stay-media {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1402 / 1122;
+}
+/* Stays absolutely positioned, as the template intends. Making it relative
+   put it back in flow, so it contributed its own height to a parent whose
+   height was being derived from aspect-ratio - circular, and the box settled
+   at neither the source ratio nor the old fixed height. The padding reset is
+   because .image-wrap.u-absolute-full carries a 3rem inset meant for the
+   caption overlays this class is also used for. */
+#section-partners .stay-media .image-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+#section-partners .stay-media .image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* The grid row is as tall as the accordion column, so without this the media
+   would stretch and re-crop; align-self keeps it at its own aspect height. */
+#section-partners .stay-body {
+  align-items: start;
+}
