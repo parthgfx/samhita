@@ -814,7 +814,7 @@ html {
    as a zero-size box). Forcing `display:flex` here - the same "always
    rendered, toggle opacity/visibility only" technique as the dropdown
    above - resolves it regardless of which stylesheet the cascade favors. */
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1199px) {
   .navbar-menu-wrap {
     display: flex !important;
     flex-direction: column;
@@ -1831,4 +1831,53 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none; transform: none; }
+}
+
+/* ── Navbar: 7 top-level menus ──
+   The IA grew from 3 items to 7 dropdowns. At the template's 16px/24px-padding
+   sizing the menu needs ~1099px inside an 879px slot at 1440px wide, so it
+   overflowed its own wrapper. Smaller type and tighter padding bring it back
+   inside with room to spare, and the smaller label size is what was asked for
+   in its own right. */
+.navbar-menu .navbar-dropdown-toggle,
+.navbar-menu .navbar-link {
+  font-size: 0.875rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.navbar-menu {
+  column-gap: 0.25rem;
+}
+/* Dropdown panels: the longest child label ("Alliance building/Liasoning")
+   is wider than the template's default panel, so let each panel size to its
+   own content instead of wrapping mid-label. */
+.navbar-dropdown-list .navbar-dropdown-link {
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+/* The template collapses the navbar to a burger only below 992px. With 7
+   top-level menus the horizontal row needs ~825px inside a 627px slot at
+   1000px wide, so between 992px and 1199px "Home" hid behind the logo and
+   "Careers and Connect" collided with the Connect Now button (confirmed by
+   measurement and screenshot). Extend the collapse up to 1199px: the panel
+   styling itself comes from the max-width:1199px block above, and this
+   supplies the two things the template only provides below 992px - a visible
+   burger, and the menu positioned as a drop-down overlay rather than an
+   in-flow flex row. Values match the computed styles at 900px so the panel
+   is identical on either side of 992px. */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .burger-button {
+    display: block;
+  }
+  .navbar-menu-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 48px 32px 24px;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(17, 24, 39, 0.2);
+    z-index: 98;
+  }
 }
