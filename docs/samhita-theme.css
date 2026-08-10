@@ -1364,10 +1364,15 @@ html {
   margin: 0;
   max-width: 40rem;
 }
+/* The CTA is a child of the .stats-bar grid, so without an explicit span it
+   drops into column 1 of a new row and reads as left-aligned even though it is
+   centred inside its own (narrow) track. 1 / -1 spans whatever column count the
+   current breakpoint resolved to. */
 .stats-bar-cta {
+  grid-column: 1 / -1;
   display: flex;
   justify-content: center;
-  margin-top: 2.5rem;
+  margin-top: 0.75rem;
 }
 @media screen and (max-width: 767px) {
   .stats-bar-heading {

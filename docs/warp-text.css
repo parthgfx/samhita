@@ -1,0 +1,23 @@
+/*
+  WarpText — the component's own stylesheet, adapted for progressive
+  enhancement. The original mounts an empty div and paints everything in
+  WebGL; here the real "samhita" letters are already in the footer markup and
+  stay visible until the canvas is actually running, so a browser without
+  WebGL2 (or under prefers-reduced-motion) keeps the wordmark instead of an
+  empty footer. .is-warping is added by the script only after the context and
+  shaders have compiled.
+*/
+.warp-text {
+  position: relative;
+  isolation: isolate;
+}
+.warp-text__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.warp-text.is-warping .big-letter-wrap {
+  visibility: hidden;
+}
