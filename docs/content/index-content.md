@@ -45,25 +45,61 @@ Connect Now
 
 ## section-hero
 
-#### section-hero.01 · div
-Powered by Catalytic Finance
+#### section-hero.01 · h1
+Building India's Citizen-Centric Livelihood Acceleration Network
 
-#### section-hero.02 · heading line
-Building India's Citizen-Centric
+#### section-hero.02 · span
+Design
 
-#### section-hero.03 · heading line
-Livelihood Acceleration Network
+#### section-hero.03 · span
+|
 
-#### section-hero.04 · button
+#### section-hero.04 · span
+Structure
+
+#### section-hero.05 · span
+|
+
+#### section-hero.06 · span
+Orchestrate
+
+#### section-hero.07 · span
+|
+
+#### section-hero.08 · span
+Implement
+
+#### section-hero.09 · paragraph
+End to end: from the first design conversation to on-ground, last-mile delivery, with Samhita-CGF you have one accountable partner throughout.
+
+#### section-hero.10 · div
+India&rsquo;s Citizen Centric Livelihood Network, powered by Catalytic Finance
+
+#### section-hero.11 · div
+75+ partners, 1.08 million citizens, 147% average income growth
+
+#### section-hero.12 · paragraph
+Connecting credit, skilling, jobs and markets into a single path to irreversible income increase.
+
+#### section-hero.13 · div
+Livelihood Account
+
+#### section-hero.14 · div
+A Portable Economic Identity, Owned by the Citizen
+
+#### section-hero.15 · paragraph
+Turning work, skills and repayment history into trusted proof that unlocks credit, jobs and markets. So progress in one system counts in every system.
+
+#### section-hero.16 · button
 Connect Now
 
-#### section-hero.05 · div
+#### section-hero.17 · div
 Fully aligned with the UN SDGs
 
-#### section-hero.06 · div
+#### section-hero.18 · div
 100% CSR &amp; FCRA compliant
 
-#### section-hero.07 · div
+#### section-hero.19 · div
 Healthcare, climate &amp; gender focus
 
 ## section-story

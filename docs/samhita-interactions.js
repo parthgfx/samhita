@@ -575,6 +575,70 @@
       window.matchMedia &&
       window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+    // --- Hero banner rotation ---
+    // Three text banners cycle in the same spot. Deliberately plain CSS class
+    // toggling plus a CSS transition rather than a GSAP tween: the hero must
+    // never depend on a JS animation library to be readable (see the note in
+    // samhita-motion.js about the hero getting no scroll-driven entrance), so
+    // if this script fails the first banner simply stays put, fully visible,
+    // because .is-active is already in the HTML.
+    //
+    // Pauses while hovered or focused so a banner can't change out from under
+    // someone mid-sentence, and does not rotate at all under reduced motion.
+    var heroSlidesRoot = document.querySelector("[data-hero-slides]");
+    if (heroSlidesRoot) {
+      var heroSlides = Array.prototype.slice.call(
+        heroSlidesRoot.querySelectorAll(".hero-slide")
+      );
+      var heroDots = Array.prototype.slice.call(
+        document.querySelectorAll("[data-hero-dots] .hero-slide-dot")
+      );
+      var reduceMotionHero =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (heroSlides.length > 1 && !reduceMotionHero) {
+        var HERO_SLIDE_MS = 6000;
+        var heroIndex = 0;
+        var heroTimer = null;
+
+        var showHeroSlide = function (next) {
+          heroSlides.forEach(function (el, i) {
+            el.classList.toggle("is-active", i === next);
+          });
+          heroDots.forEach(function (d, i) {
+            d.classList.toggle("is-active", i === next);
+          });
+          heroIndex = next;
+        };
+        var advanceHero = function () {
+          showHeroSlide((heroIndex + 1) % heroSlides.length);
+        };
+        var startHero = function () {
+          stopHero();
+          heroTimer = setInterval(advanceHero, HERO_SLIDE_MS);
+        };
+        var stopHero = function () {
+          if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+        };
+
+        startHero();
+        var heroSection = document.querySelector(".section-hero");
+        if (heroSection) {
+          heroSection.addEventListener("mouseenter", stopHero);
+          heroSection.addEventListener("mouseleave", startHero);
+          heroSection.addEventListener("focusin", stopHero);
+          heroSection.addEventListener("focusout", startHero);
+        }
+        // Nothing is animating off-screen: a background tab throttles the
+        // timer anyway, but this stops it advancing several banners at once
+        // the moment the tab is restored.
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) stopHero(); else startHero();
+        });
+      }
+    }
+
     // Hero background video: paused (and, via CSS, hidden) for anyone who has
     // asked for reduced motion, leaving the still image behind it. The pause
     // matters on top of the CSS `display:none` because a display:none video

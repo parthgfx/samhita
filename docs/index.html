@@ -145,11 +145,40 @@
         <div class="padding-vertical is-no-padding">
           <div class="layout-centered is-hero">
             <div class="hero-content u-text-color-white">
-              <div>Powered by Catalytic Finance</div>
-              <h1 class="heading-h1 is-small" aria-label="Building India's Citizen Centric Livelihood Acceleration Network">
-                <div class="gsap_split_word gsap_split_word1">Building India's Citizen-Centric</div>
-                <div class="gsap_split_word gsap_split_word2">Livelihood Acceleration Network</div>
-              </h1>
+              <!-- One real <h1> for the page, kept out of the rotation. The
+                   banners below cycle, and a heading that changes every few
+                   seconds is a poor document title for search engines and for
+                   anyone navigating by headings - so the banner headings are
+                   plain elements and this carries the page's actual heading. -->
+              <h1 class="u-sr-only">Building India's Citizen-Centric Livelihood Acceleration Network</h1>
+
+              <div class="hero-slides" data-hero-slides aria-roledescription="carousel" aria-label="Samhita-CGF highlights">
+                <div class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                  <div class="hero-slide__heading hero-slide__stages">
+                    <span>Design</span><span class="hero-slide__sep" aria-hidden="true">|</span><span>Structure</span><span class="hero-slide__sep" aria-hidden="true">|</span><span>Orchestrate</span><span class="hero-slide__sep" aria-hidden="true">|</span><span>Implement</span>
+                  </div>
+                  <p class="hero-slide__body">End to end: from the first design conversation to on-ground, last-mile delivery, with Samhita-CGF you have one accountable partner throughout.</p>
+                </div>
+
+                <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+                  <div class="hero-slide__heading">India&rsquo;s Citizen Centric Livelihood Network, powered by Catalytic Finance</div>
+                  <div class="hero-slide__sub">75+ partners, 1.08 million citizens, 147% average income growth</div>
+                  <p class="hero-slide__body">Connecting credit, skilling, jobs and markets into a single path to irreversible income increase.</p>
+                </div>
+
+                <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+                  <div class="hero-slide__heading">Livelihood Account</div>
+                  <div class="hero-slide__sub">A Portable Economic Identity, Owned by the Citizen</div>
+                  <p class="hero-slide__body">Turning work, skills and repayment history into trusted proof that unlocks credit, jobs and markets. So progress in one system counts in every system.</p>
+                </div>
+              </div>
+
+              <div class="hero-slide-dots" data-hero-dots aria-hidden="true">
+                <button class="hero-slide-dot is-active" type="button" tabindex="-1"></button>
+                <button class="hero-slide-dot" type="button" tabindex="-1"></button>
+                <button class="hero-slide-dot" type="button" tabindex="-1"></button>
+              </div>
+
               <a aria-label="Connect Now" href="#" data-open-popup="popup-form" class="primary-button w-variant-310b25ce-4b31-6d2f-4739-69828e9b5937 w-inline-block">
                 <div class="button-text-wrap"><div class="button-text">Connect Now</div></div>
               </a>
