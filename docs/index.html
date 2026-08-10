@@ -262,10 +262,17 @@
                  the video loads, and it stays as the permanent fallback if the
                  video fails, is blocked, or is paused for reduced-motion. The
                  video layers over it and the ::after scrim sits over both. -->
-            <div class="image-wrap u-absolute-full hero-bg-fixed" role="img" aria-label="A woman and a young girl embracing in a field at dusk" style="background-image: url('./images/index/hero/bgimg-hero.webp')" data-bg-src="./images/index/hero/bgimg-hero.webp">
-              <video class="hero-bg-video" autoplay muted loop playsinline preload="auto" poster="./images/index/hero/bgimg-hero.webp" aria-hidden="true" tabindex="-1">
+            <div class="image-wrap u-absolute-full hero-bg-fixed" role="img" aria-label="A woman and a young girl embracing in a field at dusk, with the brand's yellow blocks behind them" style="background-image: url('./images/index/hero/bgimg-hero-v2.webp')" data-bg-src="./images/index/hero/bgimg-hero-v2.webp">
+              <!-- The background video is commented out, not deleted. It sat on top
+                   of this background at full opacity, so the new art-directed still
+                   (which carries the brand's yellow blocks) would never have been
+                   visible with it in place. Uncomment to bring the video back; if
+                   you want BOTH, the still needs to become the poster only and the
+                   video needs to be what the yellow blocks are composited onto.
+              <video class="hero-bg-video" autoplay muted loop playsinline preload="auto" poster="./images/index/hero/bgimg-hero-v2.webp" aria-hidden="true" tabindex="-1">
                 <source src="./images/index/hero/bgvid.webm" type="video/webm">
               </video>
+              -->
             </div>
           </div>
         </div>
