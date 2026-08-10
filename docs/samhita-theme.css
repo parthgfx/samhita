@@ -1713,7 +1713,7 @@ html {
 .hero-slide__sub {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color--base--accent);
+  color: var(--color--base--white);
 }
 .hero-slide__body {
   max-width: 46rem;
@@ -1728,18 +1728,37 @@ html {
   gap: 0.5rem;
 }
 .hero-slide-dot {
-  width: 7px;
-  height: 7px;
+  position: relative;
+  width: 8px;
+  height: 8px;
   padding: 0;
   border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.38);
-  cursor: default;
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
+/* The dot itself stays small, but the tappable area is padded out to 44px so
+   it clears the minimum touch-target size without changing how it looks. */
+.hero-slide-dot::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+.hero-slide-dot:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+.hero-slide-dot:focus-visible {
+  outline: 2px solid var(--color--base--white);
+  outline-offset: 4px;
+}
 .hero-slide-dot.is-active {
-  background: var(--color--base--accent);
-  transform: scale(1.25);
+  background: var(--color--base--white);
+  transform: scale(1.4);
 }
 
 /* Screen-reader-only, for the page's real <h1> above. */

@@ -608,27 +608,45 @@
           });
           heroDots.forEach(function (d, i) {
             d.classList.toggle("is-active", i === next);
+            d.setAttribute("aria-selected", i === next ? "true" : "false");
           });
           heroIndex = next;
         };
         var advanceHero = function () {
           showHeroSlide((heroIndex + 1) % heroSlides.length);
         };
-        var startHero = function () {
-          stopHero();
-          heroTimer = setInterval(advanceHero, HERO_SLIDE_MS);
-        };
+        // Paused is a state, not just "timer cleared". Clicking a dot restarts
+        // the interval, and without tracking this a click while the pointer is
+        // still over the hero would resume rotation - defeating pause-on-hover
+        // and changing the banner out from under whoever just chose it.
+        var heroPaused = false;
         var stopHero = function () {
           if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
         };
+        var startHero = function () {
+          stopHero();
+          if (!heroPaused) heroTimer = setInterval(advanceHero, HERO_SLIDE_MS);
+        };
+        var pauseHero = function () { heroPaused = true; stopHero(); };
+        var resumeHero = function () { heroPaused = false; startHero(); };
+
+        // Dots jump straight to a banner. The timer restarts on click so the
+        // chosen banner gets a full interval rather than whatever was left of
+        // the previous one.
+        heroDots.forEach(function (dot, i) {
+          dot.addEventListener("click", function () {
+            showHeroSlide(i);
+            startHero();
+          });
+        });
 
         startHero();
         var heroSection = document.querySelector(".section-hero");
         if (heroSection) {
-          heroSection.addEventListener("mouseenter", stopHero);
-          heroSection.addEventListener("mouseleave", startHero);
-          heroSection.addEventListener("focusin", stopHero);
-          heroSection.addEventListener("focusout", startHero);
+          heroSection.addEventListener("mouseenter", pauseHero);
+          heroSection.addEventListener("mouseleave", resumeHero);
+          heroSection.addEventListener("focusin", pauseHero);
+          heroSection.addEventListener("focusout", resumeHero);
         }
         // Nothing is animating off-screen: a background tab throttles the
         // timer anyway, but this stops it advancing several banners at once
