@@ -182,6 +182,11 @@ body {
    with .big-letter's own font-size). */
 .big-letter {
   letter-spacing: -0.12em;
+  /* Solid white at full opacity, replacing the template's frosted tint. This
+     covers the no-WebGL and reduced-motion paths; the WebGL path takes its
+     colour from data-warp-color on the host, which matches. */
+  color: #fff;
+  opacity: 1;
 }
 
 /* Popup overlay tint (was dark-green rgba, #1c2317a6) */
@@ -1228,10 +1233,15 @@ html {
   column-gap: 2rem;
 }
 
+/* Below the 4-across desktop layout the tracks are wider than their content,
+   so left-aligned pairs sit off-centre in their own column. Centre them; the
+   1320px block below puts them back to flush-left for the single-row layout. */
 .stats-bar-item {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 0.9rem;
 }
 
@@ -1265,6 +1275,10 @@ html {
   .stats-bar {
     grid-template-columns: repeat(4, auto);
     justify-content: space-between;
+  }
+  .stats-bar-item {
+    justify-content: flex-start;
+    text-align: left;
   }
   .stats-bar-number {
     font-size: 4.25rem;
@@ -1645,6 +1659,16 @@ html {
   min-height: 0;
   aspect-ratio: 1402 / 1122;
 }
+/* Webflow's base CSS gives .w-slider a hard `height: 300px`. Once this media
+   became a carousel that 300px box sat inside the 730px aspect-ratio box and
+   the image was letterboxed by ~430px. Every level of the slider has to be
+   told to fill the box the ratio establishes. */
+#section-partners .stay-media .slider,
+#section-partners .stay-media .w-slider-mask,
+#section-partners .stay-media .slide {
+  height: 100%;
+  min-height: 0;
+}
 /* Stays absolutely positioned, as the template intends. Making it relative
    put it back in flow, so it contributed its own height to a parent whose
    height was being derived from aspect-ratio - circular, and the box settled
@@ -1658,10 +1682,17 @@ html {
   height: 100%;
   padding: 0;
 }
+/* contain, not cover: the box ratio is the illustration's, so any other slide
+   in the carousel would be cropped to fit. contain guarantees every image is
+   shown whole, at its own aspect ratio, whatever shape it is - the box stays
+   fixed so the layout never jumps, and the letterbox is left transparent so
+   the section background reads as plain whitespace. */
 #section-partners .stay-media .image-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
 }
 /* The grid row is as tall as the accordion column, so without this the media
    would stretch and re-crop; align-self keeps it at its own aspect height. */
