@@ -824,3 +824,55 @@
     }
   });
 })();
+
+/* ── Pathways tabs (#section-pathways) ──
+   All three panels ship in the DOM so the copy is crawlable and the section is
+   fully readable with JS off (every panel just renders stacked). This wires the
+   tablist: click or arrow-key to switch, `hidden` toggled on the panels, and
+   aria-selected/tabindex kept in step so the roving-tabindex pattern screen
+   readers expect actually holds. */
+(function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    var section = document.querySelector("#section-pathways");
+    if (!section) return;
+    var tabs = Array.prototype.slice.call(
+      section.querySelectorAll(".pathways-tab")
+    );
+    var panels = Array.prototype.slice.call(
+      section.querySelectorAll(".pathways-panel")
+    );
+    if (tabs.length === 0 || tabs.length !== panels.length) return;
+
+    function select(index, focusTab) {
+      tabs.forEach(function (tab, i) {
+        var on = i === index;
+        tab.classList.toggle("is-active", on);
+        tab.setAttribute("aria-selected", String(on));
+        tab.tabIndex = on ? 0 : -1;
+        panels[i].classList.toggle("is-active", on);
+        if (on) {
+          panels[i].removeAttribute("hidden");
+        } else {
+          panels[i].setAttribute("hidden", "");
+        }
+      });
+      if (focusTab) tabs[index].focus();
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        select(i, false);
+      });
+      tab.addEventListener("keydown", function (e) {
+        var next = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (i + 1) % tabs.length;
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = tabs.length - 1;
+        if (next === null) return;
+        e.preventDefault();
+        select(next, true);
+      });
+    });
+  });
+})();
