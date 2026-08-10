@@ -1951,3 +1951,131 @@ html {
     grid-row: 1 / span 2;
   }
 }
+
+/* ── Mobile / collapsed nav: full-screen menu with expand-below sub-menus ──
+   Three problems this fixes, all in the sub-1200px collapsed nav:
+
+   1. The panel was only as tall as its content (max-height:calc(100vh-4.5rem))
+      with the page visible under it. Now a true full-screen sheet.
+   2. The sub-menus were still the desktop dropdown: position:relative at this
+      breakpoint, so every CLOSED panel occupied its full height in flow -
+      measured 155px per list-item and a 1603px menu inside a 740px panel. That
+      dead space, not the item padding, was the "too much vertical spacing".
+      Collapsed to max-height:0 so they expand below their label instead.
+   3. Item padding trimmed now that the rows are real rows. */
+@media screen and (max-width: 1199px) {
+  .navbar-menu-wrap {
+    /* dvh so the sheet is not cut off by mobile browser chrome; vh first as
+       the fallback for anything without dvh support. */
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    /* clears the navbar bar, which sits above this at z-index 100 so the logo
+       and the burger-turned-X stay visible and tappable */
+    padding: 4.5rem 1.5rem 2rem;
+    justify-content: flex-start;
+    overscroll-behavior: contain;
+  }
+
+  /* Sub-menus expand below their label rather than floating over the page. */
+  .navbar-dropdown-list {
+    position: static;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+    transition: max-height 0.28s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s ease;
+  }
+  .navbar-dropdown-list.w--open {
+    /* comfortably past the tallest sub-menu (6 items); the transition runs on
+       max-height, so this only needs to be an upper bound */
+    max-height: 24rem;
+    transform: none;
+    padding-bottom: 0.25rem;
+  }
+  .navbar-dropdown-list .navbar-dropdown-link {
+    padding: 0.55rem 0.75rem 0.55rem 1.5rem;
+  }
+
+  /* Tighter rows. */
+  .navbar-menu .navbar-dropdown-toggle,
+  .navbar-menu .navbar-link {
+    padding: 0.6rem 0;
+    font-size: 1rem;
+  }
+  .navbar-menu-right {
+    padding: 1.25rem 0 0;
+  }
+
+  /* Chevron flips while its section is expanded, so an open row reads as open
+     the way an accordion does. */
+  .navbar-dropdown-icon {
+    transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .navbar-dropdown:has(.navbar-dropdown-list.w--open) .navbar-dropdown-icon {
+    transform: rotate(180deg);
+  }
+}
+@media screen and (max-width: 1199px) and (prefers-reduced-motion: reduce) {
+  .navbar-dropdown-list,
+  .navbar-dropdown-icon {
+    transition: none !important;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  /* The panel is positioned (z-index 98) and .navbar-brand-wrap is static, so
+     the panel painted over the logo - the sheet opened with only the X in the
+     bar. Lift the brand into the positioned layer just above it. */
+  .navbar-brand-wrap {
+    position: relative;
+    z-index: 99;
+  }
+  /* Rows read as an accordion, so the labels and their chevrons sit flush left
+     rather than centred like the desktop bar's. */
+  .navbar-menu .navbar-dropdown-toggle,
+  .navbar-menu .navbar-link {
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .navbar-menu .navbar-dropdown-inner {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+  .navbar-menu-right {
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  /* The template centres .navbar-menu-center / .navbar-menu / .list-item, which
+     kept the labels floating in the middle of the sheet (measured 145px from
+     the left inside a 24px-padded panel) even once the toggles themselves were
+     left-aligned. Stretch them so each row is a full-width band starting at the
+     panel's padding edge. */
+  .navbar-menu-center,
+  .navbar-menu,
+  .navbar-menu .list-item {
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  /* The last thing holding the top-level labels in the middle was an auto
+     horizontal margin on the toggle itself (measured `0 121.39px` inside a
+     327px row) - not any text-align or justify-content. Zero it and let the
+     toggle fill the row, which also makes the whole row a tap target rather
+     than just the label. */
+  .navbar-menu .navbar-dropdown-toggle,
+  .navbar-menu .navbar-link {
+    width: 100%;
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
