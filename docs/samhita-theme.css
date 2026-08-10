@@ -1222,7 +1222,9 @@ html {
    clean single column - never a partial wrap. */
 .section-stats-bar {
   background: #fff;
-  padding: 3.5rem 0;
+  /* 3rem = the 48px every other fold's .padding-vertical resolves to, so this
+     band matches the rest rather than sitting 8px taller on each side. */
+  padding: 3rem 0;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -1248,7 +1250,8 @@ html {
 .stats-bar-number {
   font-family: var(--font--primary);
   font-weight: 700;
-  font-size: 3.25rem;
+  /* 20% down from 3.25rem. The stats-bar CTA is deliberately left alone. */
+  font-size: 2.6rem;
   line-height: 1;
   color: #111827;
   letter-spacing: -0.02em;
@@ -1257,10 +1260,12 @@ html {
 
 .stats-bar-label {
   font-family: var(--font--primary);
-  font-size: 0.9rem;
+  /* 20% down from 0.9rem; the wrap width scales with it so the labels break
+     over the same number of lines as before rather than going wider. */
+  font-size: 0.72rem;
   color: #111827;
   line-height: 1.35;
-  max-width: 150px;
+  max-width: 120px;
 }
 
 @media screen and (min-width: 480px) {
@@ -1281,7 +1286,8 @@ html {
     text-align: left;
   }
   .stats-bar-number {
-    font-size: 4.25rem;
+    /* 20% down from 4.25rem */
+    font-size: 3.4rem;
   }
 }
 
@@ -1848,12 +1854,24 @@ html {
 .navbar-menu {
   column-gap: 0.25rem;
 }
-/* Dropdown panels: the longest child label ("Alliance building/Liasoning")
-   is wider than the template's default panel, so let each panel size to its
-   own content instead of wrapping mid-label. */
+/* Dropdown panels are a vertical menu, not the row the template's flex
+   default produced - as a row the Services panel rendered 775px wide and ran
+   off the right edge of a 1440px viewport. Column + stretch also gives each
+   link the full panel width, so the hover background spans the whole panel
+   rather than hugging the text, and the labels sit flush left. nowrap keeps
+   the panel sized to its longest label ("Alliance building/Liasoning")
+   instead of wrapping mid-label. */
+.navbar-dropdown-list {
+  flex-direction: column;
+  align-items: stretch;
+}
 .navbar-dropdown-list .navbar-dropdown-link {
+  display: block;
+  width: 100%;
   font-size: 0.875rem;
+  text-align: left;
   white-space: nowrap;
+  padding: 0.6rem 0.9rem;
 }
 
 /* The template collapses the navbar to a burger only below 992px. With 7
@@ -1879,5 +1897,57 @@ html {
     background-color: #fff;
     border-bottom: 1px solid rgba(17, 24, 39, 0.2);
     z-index: 98;
+  }
+}
+
+/* ── Nav underline, made actually visible ──
+   The sweep was already wired up (see .nav-underline above) but the template
+   draws it as a 1px hairline in near-black under a label with 16px of padding
+   below it, so in practice it reads as no effect at all. 2px in the brand
+   accent, and it also stays extended while that menu's dropdown is open, so
+   the open menu is marked rather than only the one under the cursor. */
+.navbar-menu .nav-underline-wrap {
+  height: 2px;
+}
+.navbar-menu .nav-underline {
+  height: 2px;
+  background-color: var(--color--base--accent);
+}
+.navbar-dropdown:has(.navbar-dropdown-list.w--open) .nav-underline {
+  transform: scaleX(1);
+}
+
+/* ── Architects: accordions top-align with the heading ──
+   The template puts the heading in its own full-width row (.stay-header) above
+   the media|accordion row (.stay-body), so the accordion column started ~120px
+   below the heading. Flatten both wrappers with display:contents so their
+   children become direct items of one grid, then place the heading and media
+   in column 1 (rows 1 and 2) and give the accordion list column 2 spanning
+   both rows - so its first accordion sits level with the heading's top.
+   Nothing moves in the DOM, so the reading order and the GSAP targets are
+   unchanged. */
+@media screen and (min-width: 992px) {
+  #section-partners .layout-stack {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 4rem;
+    row-gap: 2rem;
+    align-items: start;
+  }
+  #section-partners .stay-header,
+  #section-partners .stay-body {
+    display: contents;
+  }
+  #section-partners .stay-header > .heading-wrap {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  #section-partners .stay-media {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  #section-partners .room-list {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 }

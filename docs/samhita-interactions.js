@@ -390,6 +390,37 @@
           closeAllNavDropdowns();
         });
       });
+
+      // Open on hover as well as click, but only on the horizontal desktop
+      // bar. Below 1200px the navbar is the collapsed burger panel, where the
+      // menus are stacked and a pointer crossing one on its way to another
+      // would flap them open and shut; and on touch there is no hover at all,
+      // so the click handler above stays the only way in. Listening on the
+      // whole .navbar-dropdown (not the toggle) means moving down from the
+      // label into the panel does not count as leaving.
+      var canHover = window.matchMedia(
+        "(min-width: 1200px) and (hover: hover) and (pointer: fine)"
+      );
+      var closeTimer = null;
+      dd.addEventListener("mouseenter", function () {
+        if (!canHover.matches) return;
+        if (closeTimer) {
+          clearTimeout(closeTimer);
+          closeTimer = null;
+        }
+        closeAllNavDropdowns(dd);
+        list.classList.add("w--open");
+        toggle.setAttribute("aria-expanded", "true");
+      });
+      dd.addEventListener("mouseleave", function () {
+        if (!canHover.matches) return;
+        // Small grace period so a pointer clipping the gap between the label
+        // and the panel below it does not snap the menu shut mid-move.
+        closeTimer = setTimeout(function () {
+          list.classList.remove("w--open");
+          toggle.setAttribute("aria-expanded", "false");
+        }, 120);
+      });
     });
     document.addEventListener("click", function (e) {
       if (!e.target.closest(".navbar-dropdown")) closeAllNavDropdowns();
