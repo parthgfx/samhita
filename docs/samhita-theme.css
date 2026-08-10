@@ -2300,19 +2300,34 @@ html {
    same below. That min-height suits a much taller CTA than this one. Dropping
    all three leaves the fold as 48px + content + 48px, matching every other
    fold. */
-/* Not min-height:0 though: .cta-media's two photos are absolutely positioned
-   decoration inside a zero-size anchor, sized for the taller box, and at 0 the
-   lower one hung 22px past the section into the footer. 20rem is the smallest
-   value that still contains the art (content 246px + 22px of overhang at each
-   end), and still saves 240px against the original 560px. */
+/* min-height goes entirely: with it, the TEXT block was centred but the two
+   photos hang below that block, so the painted content sat high in the box -
+   measured 85px above and 15px below at 1440px. At min-height:0 the top gap is
+   exactly the 48px padding, and the only thing left is the art's overhang past
+   the bottom of .cta-body, which a matching bottom margin absorbs so the
+   section's painted edges are equidistant.
+
+   The overhang is not one number: the photos are fixed-px and anchored to
+   .cta-body, so it shrinks as the body grows taller. Measured need:
+     1440px / 1000px -> 71px   (two-column, body 246px)
+      600px          -> 12px   (stacked,   body 508px)
+      375px          -> 10px   (stacked,   body 496px)
+   Hence the two values, switching at the same 991px breakpoint the layout
+   already stacks at. Verified 48/48 at 1440 and within 2px at 375. */
 .section-final-cta .layout-centered.is-cta {
-  min-height: 20rem;
+  min-height: 0;
 }
 .section-final-cta .cta-body {
   margin-top: 0;
-  margin-bottom: 0;
+  /* absorbs the art's overhang; see the note above */
+  margin-bottom: 71px;
   padding-top: 0;
   padding-bottom: 0;
+}
+@media screen and (max-width: 991px) {
+  .section-final-cta .cta-body {
+    margin-bottom: 12px;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -2395,5 +2410,58 @@ html {
   }
   .field-eyebrow {
     margin-bottom: 1.75rem;
+  }
+}
+
+/* ── Catalytic Initiatives tiles ──
+   Two tiles side by side in the #section-catalytic banner, replacing the single
+   compliance tag strip that used to sit between the heading and the CTA button.
+   They reuse the same frosted-glass recipe as .tag-list-banner.is-glass and
+   .back-to-top-button - deliberately the identical blur/saturate/border/shadow
+   values rather than a second, near-miss "glass" look. */
+.initiative-tiles {
+  display: grid;
+  /* minmax(0,...) so a long line cannot push a tile wider than its track */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: left;
+}
+.initiative-tile {
+  padding: 1.5rem;
+  border-radius: var(--border--color-size--radius-inner);
+  color: #fff;
+}
+.initiative-tile.is-glass {
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 8px 24px -8px rgba(4, 28, 51, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+.initiative-tile-name {
+  margin: 0 0 0.5rem;
+  font-family: var(--font--primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: #fff;
+}
+.initiative-tile-text {
+  margin: 0;
+  font-family: var(--font--primary);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+@media screen and (max-width: 767px) {
+  .initiative-tiles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .initiative-tile {
+    padding: 1.25rem;
   }
 }
