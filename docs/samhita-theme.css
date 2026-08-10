@@ -2264,16 +2264,34 @@ html {
    a pseudo-element on that element would sit inside the animated stacking
    context. The wrapper is a plain static box, so the rails never move. */
 .rungs-rails {
-  border-top: 6px solid var(--color--base--accent);
-  border-bottom: 6px solid var(--color--base--accent);
+  border-top: 2px solid var(--color--base--accent);
+  border-bottom: 2px solid var(--color--base--accent);
   padding: 1.5rem 0;
 }
 @media screen and (max-width: 991px) {
   .rungs-rails {
     border-top: 0;
     border-bottom: 0;
-    border-left: 6px solid var(--color--base--accent);
-    border-right: 6px solid var(--color--base--accent);
+    border-left: 2px solid var(--color--base--accent);
+    border-right: 2px solid var(--color--base--accent);
     padding: 0 1rem;
   }
+}
+
+/* The template's .heading-h2 carries overflow:hidden because its own headings
+   wrap each line in a .gsap_split_line-mask for the reveal animation. This
+   heading has no masks, so that overflow clipped the glyphs directly - measured
+   84px of text in a 79px box at 600px wide, taking the top off "built" and the
+   descender off "gets". Nothing here needs clipping, so let it show. */
+.pathways-heading {
+  overflow: visible;
+  line-height: 1.15;
+}
+
+/* Final CTA: .padding-vertical was already the standard 48px, but .cta-body
+   added another 32px top and bottom on top of it, making this fold read as
+   80px-padded against every other fold's 48px. */
+.section-final-cta .cta-body {
+  padding-top: 0;
+  padding-bottom: 0;
 }
