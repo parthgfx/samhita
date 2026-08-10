@@ -2288,10 +2288,112 @@ html {
   line-height: 1.15;
 }
 
-/* Final CTA: .padding-vertical was already the standard 48px, but .cta-body
-   added another 32px top and bottom on top of it, making this fold read as
-   80px-padded against every other fold's 48px. */
+/* Final CTA whitespace. Three separate things were stacking above the heading
+   on top of the standard 48px .padding-vertical, measured at 1440px:
+
+     .layout-centered.is-cta  min-height: 560px, content centred  -> ~141px
+     .cta-body                margin-top: 32px                    -> 32px
+     .cta-body                padding: 32px 0                     -> 32px
+
+   The min-height is the big one and it is dead space at both ends: the content
+   block is 278px tall, so a 560px box parks ~141px of nothing above it and the
+   same below. That min-height suits a much taller CTA than this one. Dropping
+   all three leaves the fold as 48px + content + 48px, matching every other
+   fold. */
+/* Not min-height:0 though: .cta-media's two photos are absolutely positioned
+   decoration inside a zero-size anchor, sized for the taller box, and at 0 the
+   lower one hung 22px past the section into the footer. 20rem is the smallest
+   value that still contains the art (content 246px + 22px of overhang at each
+   end), and still saves 240px against the original 560px. */
+.section-final-cta .layout-centered.is-cta {
+  min-height: 20rem;
+}
 .section-final-cta .cta-body {
+  margin-top: 0;
+  margin-bottom: 0;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FROM THE FIELD (#section-field)
+
+   Two stories side by side, deliberately staggered: the right-hand one starts
+   lower and its photo is shorter, so the pair reads as an editorial spread
+   rather than a symmetrical two-up card grid. Same brand type and accent as
+   the rest of the site rather than the reference's rust-on-cream.
+   ═══════════════════════════════════════════════════════════════════════ */
+.section-field {
+  background: var(--color--backgrounds--bg-page);
+}
+.field-eyebrow {
+  margin: 0 0 2.5rem;
+  font-family: var(--font--primary);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color--text--text-muted);
+}
+.field-grid {
+  display: grid;
+  /* minmax(0,...) so a long title cannot widen its column past its track */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: start;
+}
+/* The stagger. The offset is on the second story only, so the first sits at
+   the top of the section and the second drops below it. */
+.field-story--2 {
+  margin-top: 7rem;
+}
+.field-story-media {
+  /* fixed ratios rather than natural height, so the two photos always relate
+     to each other the same way whatever files end up in them */
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--border--color-size--radius-outer);
+  margin-bottom: 2rem;
+}
+.field-story--2 .field-story-media {
+  aspect-ratio: 3 / 2;
+}
+.field-story-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.field-story-title {
+  margin: 0 0 1rem;
+  font-family: var(--font--primary);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color--base--black);
+}
+.field-story-body {
+  margin: 0;
+  font-family: var(--font--primary);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--color--text--text-muted);
+  max-width: 32rem;
+}
+
+@media screen and (max-width: 991px) {
+  .field-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+  /* the stagger is a two-column effect; stacked it would just be a big gap */
+  .field-story--2 {
+    margin-top: 0;
+  }
+  .field-story-title {
+    font-size: 1.5rem;
+  }
+  .field-eyebrow {
+    margin-bottom: 1.75rem;
+  }
 }
