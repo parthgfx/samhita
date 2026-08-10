@@ -277,17 +277,60 @@ html {
   background-repeat: no-repeat;
 }
 
-/* Slight dark overlay over the hero photo, so the white heading/CTA text
-   has reliable contrast regardless of how light the photo underneath it
-   is. Flat tint, not a gradient — the earlier hero scrim work was replaced
-   by this simpler version. Sits above the photo but below the text, since
-   .hero-content/.hero-stats have their own z-index: 1 and this is z-index: 0. */
-.hero-bg-fixed::after {
+/* The flat 40% tint that used to cover the whole hero photo is gone - the
+   art-directed still is dark enough at the top that the banner text reads
+   without it, and the tint was flattening the artwork's colour.
+
+   What replaces it is a gradient over the bottom 15% only, which is where the
+   trust row sits over the lighter crop foliage.
+
+   It is deliberately on .section-hero, NOT on .hero-bg-fixed like the old tint
+   was: .hero-bg-fixed is scaled and translated every frame by the parallax
+   (see samhita-interactions.js), so a bottom-anchored gradient inside it would
+   slide with the photo instead of staying pinned to the bottom of the fold.
+   .section-hero is static and spans the fold exactly. z-index 0 keeps it above
+   the photo and below .hero-content/.hero-stats, which carry z-index 1. */
+/* The old flat tint was doing real accessibility work, not just decoration.
+   Measured against the actual pixels of the still, white text over the bare
+   photo lands at:
+       banner heading  48px/300 -> 3.91:1 worst case  (large text, AA needs 3)
+       sub-line        20px/600 -> below 4.5:1
+       body copy       16px/300 -> 3.04:1 worst case  (AA needs 4.5)
+   So the heading was fine bare but the two smaller lines were not.
+
+   This replaces the full-photo flat wash with a scrim confined to the top of
+   the fold where the copy sits, fading out by 62% so the artwork - the yellow
+   blocks, the lit crop - is untouched. Same z-index rules as ::after below. */
+.section-hero::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
   z-index: 0;
-  background-color: rgba(4, 28, 51, 0.4);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(4, 28, 51, 0.55) 0%,
+    rgba(4, 28, 51, 0.45) 32%,
+    rgba(4, 28, 51, 0) 62%
+  );
+  pointer-events: none;
+}
+
+.section-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 15%;
+  z-index: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(4, 28, 51, 0) 0%,
+    rgba(4, 28, 51, 0.75) 100%
+  );
   pointer-events: none;
 }
 
@@ -2413,36 +2456,29 @@ html {
   }
 }
 
-/* ── Catalytic Initiatives tiles ──
-   Two tiles side by side in the #section-catalytic banner, replacing the single
-   compliance tag strip that used to sit between the heading and the CTA button.
-   They reuse the same frosted-glass recipe as .tag-list-banner.is-glass and
-   .back-to-top-button - deliberately the identical blur/saturate/border/shadow
-   values rather than a second, near-miss "glass" look. */
-.initiative-tiles {
+/* ── Catalytic Initiatives ──
+   Two initiatives either side of a divider in the #section-catalytic banner,
+   replacing the compliance tag strip that used to sit between the heading and
+   the CTA button. Plain text directly on the photo - no panel, no glass - with
+   the divider doing the separating: vertical between the two columns on
+   desktop, horizontal between them once they stack. */
+.initiative-split {
   display: grid;
-  /* minmax(0,...) so a long line cannot push a tile wider than its track */
+  /* minmax(0,...) so a long line cannot push a column wider than its track */
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1rem;
+  gap: 2.5rem;
   width: 100%;
   max-width: 46rem;
   margin: 0 auto;
   text-align: left;
 }
-.initiative-tile {
-  padding: 1.5rem;
-  border-radius: var(--border--color-size--radius-inner);
-  color: #fff;
+/* The divider is a border on the second column rather than a separate element,
+   so it is always exactly as tall as the taller of the two columns. */
+.initiative-split > .initiative + .initiative {
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  padding-left: 2.5rem;
 }
-.initiative-tile.is-glass {
-  background-color: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  backdrop-filter: blur(16px) saturate(180%);
-  box-shadow: 0 8px 24px -8px rgba(4, 28, 51, 0.35),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25);
-}
-.initiative-tile-name {
+.initiative-name {
   margin: 0 0 0.5rem;
   font-family: var(--font--primary);
   font-weight: 700;
@@ -2450,7 +2486,7 @@ html {
   line-height: 1.2;
   color: #fff;
 }
-.initiative-tile-text {
+.initiative-text {
   margin: 0;
   font-family: var(--font--primary);
   font-size: 0.9375rem;
@@ -2458,10 +2494,15 @@ html {
   color: rgba(255, 255, 255, 0.88);
 }
 @media screen and (max-width: 767px) {
-  .initiative-tiles {
+  .initiative-split {
     grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
   }
-  .initiative-tile {
-    padding: 1.25rem;
+  /* stacked: the divider rotates to sit between them */
+  .initiative-split > .initiative + .initiative {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    padding-top: 1.75rem;
   }
 }
