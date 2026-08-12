@@ -21,6 +21,15 @@ docs/images/index/hero/bgvid.mp4
 docs/images/index/hero/bgimg.webp
 docs/images/index/partnering/partnering.png
 
+# Same deal: the source .jpg masters for "Strengthening Every Rung" and the
+# final-CTA photos, now shipped as .webp (Skilling.jpg -> Skilling.webp, etc.,
+# ~60-70% smaller). Already caught by the blanket *.jpg rule above; listed
+# here so it's clear the omission is deliberate, not the bug the blanket rule
+# caused for Sunita-Devi.jpg below.
+docs/images/index/Strengthening every rung/*.jpg
+docs/images/index/footer/Footer-01.jpg
+docs/images/index/footer/Footer-02.jpg
+
 # Superseded hero stills, no longer referenced by any page.
 docs/new-hero copy.webp
 docs/new-hero2.webp
