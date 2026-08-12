@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en" class="x3-root">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Samhita | Catalysing Prosperity. Together.</title>
+<meta content="Samhita builds India's citizen-centric livelihood network, powered by catalytic finance, connecting CSR, philanthropy, government and financial institutions." name="description">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<!--
+  EXPERIMENT3.HTML — "THE CLIMB", take three.
+
+  A scroll-driven, WebGL, gamified re-staging of index.html, taking its
+  motion language from trionn.com but replacing that site's rotating
+  star with a 3D ladder the visitor climbs from the first pixel to the
+  last.
+
+  Ground rules this file holds itself to:
+
+  * COPY IS UNTOUCHED. Every heading, paragraph, label, stat, caption,
+    alt text and link label is lifted verbatim from index.html, in the
+    same order, section for section. Only the presentation is new.
+  * BRAND ONLY. Colors and type come from samhita-theme.css's :root —
+    coral #ef4266, blue #0ca5d0, yellow #fed340, teal #42aaaa, navy
+    #041c33, Suisse Int'l -> Open Sans, Spectral for the pull quote.
+  * THE FOUR SQUARES. The logo's four plain colour squares are the
+    recurring device: the loader, the cursor, the HUD rung pips, the
+    section markers, the list bullets — and, in 3D, the rungs of the
+    ladder itself.
+  * NO CDN, NO BUILD STEP. GSAP 3.15 + ScrollTrigger + SplitText are the
+    copies already vendored in "Waveyu - Webflow HTML website template_files".
+    The renderer in experiment3.js is hand-written WebGL — no three.js —
+    so this page runs offline exactly like the rest of ./docs.
+  * LEGIBILITY FIRST. No body copy ever sits directly on the moving 3D:
+    every block rides a frosted panel over a local scrim, and the
+    canvas dims itself under whichever section is in view.
+  * DEGRADES. No WebGL -> a CSS aurora stage. prefers-reduced-motion ->
+    no auto-motion, no scroll-driven camera, panels simply appear.
+-->
+<link rel="icon" type="image/png" href="./samhita-favicon.png">
+<link rel="apple-touch-icon" href="./samhita-favicon.png">
+<meta name="theme-color" content="#041c33">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://samhita.org/">
+<meta property="og:site_name" content="Samhita">
+<meta property="og:title" content="Samhita | Catalysing Prosperity. Together.">
+<meta property="og:description" content="Samhita builds India's citizen-centric livelihood network, powered by catalytic finance, connecting CSR, philanthropy, government and financial institutions.">
+<meta property="og:image" content="./samhita-favicon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Samhita | Catalysing Prosperity. Together.">
+<meta name="twitter:description" content="Samhita builds India's citizen-centric livelihood network, powered by catalytic finance, connecting CSR, philanthropy, government and financial institutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="./experiment3.css?v=1" rel="stylesheet" type="text/css">
+</head>
+<body class="x3-body">
+
+<!-- ============================================================
+     BOOT — the four brand squares stack into a ladder
+     ============================================================ -->
+<div id="x3-boot" class="x3-boot" role="status" aria-live="polite" aria-label="Page loading">
+  <div class="x3-boot-inner">
+    <div class="x3-boot-ladder" aria-hidden="true">
+      <span class="x3-boot-rung" style="--c:var(--brand-coral)"></span>
+      <span class="x3-boot-rung" style="--c:var(--brand-blue)"></span>
+      <span class="x3-boot-rung" style="--c:var(--brand-yellow)"></span>
+      <span class="x3-boot-rung" style="--c:var(--brand-teal)"></span>
+    </div>
+    <img src="./samhita-logo white.png" alt="" class="x3-boot-logo">
+    <div class="x3-boot-meter"><i id="x3-boot-fill"></i></div>
+    <div class="x3-boot-pct"><span id="x3-boot-pct">0</span>%</div>
+    <div class="x3-boot-word">Catalysing Prosperity. Together.</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     THE STAGE — WebGL ladder canvas, its scrim, grain and vignette
+     ============================================================ -->
+<div class="x3-stage" aria-hidden="true">
+  <canvas id="x3-gl" class="x3-gl"></canvas>
+  <div class="x3-stage-fallback"></div>
+  <div id="x3-scrim" class="x3-scrim"></div>
+  <div class="x3-grain"></div>
+  <div class="x3-vignette"></div>
+</div>
+
+<!-- Cursor: a brand square, its lagging outline, and a state label -->
+<div id="x3-cursor" class="x3-cursor" aria-hidden="true">
+  <div class="x3-cursor-dot"></div>
+  <div class="x3-cursor-ring"><span class="x3-cursor-label"></span></div>
+</div>
+
+<!-- Top scroll rail -->
+<div id="x3-progress" class="x3-progress" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+
+<!-- ============================================================
+     CLIMB HUD — the gamified rung tracker
+     ============================================================ -->
+<aside id="x3-hud" class="x3-hud" aria-label="Climb progress">
+  <div class="x3-hud-ladder">
+  <ol class="x3-hud-rungs" id="x3-hud-rungs">
+    <li><a href="#x3-hero" data-rung="0"><i></i><span>Base camp</span></a></li>
+    <li><a href="#section-story" data-rung="1"><i></i><span>The ladder</span></a></li>
+    <li><a href="#section-proof" data-rung="2"><i></i><span>The proof</span></a></li>
+    <li><a href="#section-partners" data-rung="3"><i></i><span>The architects</span></a></li>
+    <li><a href="#section-rungs-gallery" data-rung="4"><i></i><span>Every rung</span></a></li>
+    <li><a href="#section-pathways" data-rung="5"><i></i><span>Three ways</span></a></li>
+    <li><a href="#section-field" data-rung="6"><i></i><span>From the field</span></a></li>
+    <li><a href="#section-audiences" data-rung="7"><i></i><span>Partners say</span></a></li>
+    <li><a href="#section-catalytic" data-rung="8"><i></i><span>Catalytic</span></a></li>
+    <li><a href="#section-final" data-rung="9"><i></i><span>The summit</span></a></li>
+  </ol>
+  </div>
+</aside>
+
+<!-- Milestone toast: fires as each rung is reached -->
+<div id="x3-toast" class="x3-toast" aria-live="polite">
+  <span class="x3-toast-sq"></span>
+  <span class="x3-toast-text"><b>Rung 01</b> reached</span>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="x3-nav" id="x3-nav">
+  <div class="x3-nav-inner">
+    <a href="#x3-hero" class="x3-brand" aria-label="home" data-cursor="link">
+      <img src="./samhita-logo white.png" width="140" height="63" alt="Samhita logo">
+    </a>
+
+    <nav class="x3-nav-menu" id="x3-nav-menu" role="navigation">
+      <ul class="x3-nav-list">
+        <li class="x3-nav-item">
+          <button class="x3-nav-toggle" type="button" aria-expanded="false">Home<i></i></button>
+          <div class="x3-nav-drop">
+            <a href="./index.html">Homepage</a>
+            <a href="#section-story">About</a>
+          </div>
+        </li>
+        <li class="x3-nav-item">
+          <button class="x3-nav-toggle" type="button" aria-expanded="false">CGF<i></i></button>
+          <div class="x3-nav-drop">
+            <a href="#">Homepage</a>
+            <a href="#">Annual + Audit Reports</a>
+          </div>
+        </li>
+        <li class="x3-nav-item">
+          <button class="x3-nav-toggle" type="button" aria-expanded="false">Partners<i></i></button>
+          <div class="x3-nav-drop">
+            <a href="#section-partners">CSR</a>
+            <a href="#section-partners">Financial Institutions</a>
+            <a href="#section-partners">Government</a>
+            <a href="#section-partners">Philanthropy</a>
+          </div>
+        </li>
+        <li class="x3-nav-item">
+          <button class="x3-nav-toggle" type="button" aria-expanded="false">Sectors<i></i></button>
+          <div class="x3-nav-drop">
+            <a href="#section-rungs-gallery">Livelihoods</a>
+            <a href="#section-catalytic">Catalytic Finance</a>
+            <a href="#section-rungs-gallery">Health &amp; Nutrition</a>
+            <a href="#section-rungs-gallery">Education</a>
+            <a href="#section-rungs-gallery">Climate</a>
+          </div>
+        </li>
+        <li class="x3-nav-item">
+          <button class="x3-nav-toggle" type="button" aria-expanded="false">Services<i></i></button>
+          <div class="x3-nav-drop">
+            <a href="#">Strategy</a>
+            <a href="#">PMU</a>
+            <a href="#">Technology</a>
+            <a href="#">MEL</a>
+            <a href="#">Communications</a>
+            <a href="#">Alliance building/Liasoning</a>
+          </div>
+        </li>
+        <li class="x3-nav-item">
+          <button class="x3-nav-toggle" type="button" aria-expanded="false">Knowledge Centre<i></i></button>
+          <div class="x3-nav-drop">
+            <a href="#section-field">Stories</a>
+            <a href="#">Reports</a>
+            <a href="#">Dashboard</a>
+            <a href="#">Blogs</a>
+            <a href="#">In the Media</a>
+            <a href="#">Awards</a>
+          </div>
+        </li>
+        <li class="x3-nav-item">
+          <button class="x3-nav-toggle" type="button" aria-expanded="false">Careers and Connect<i></i></button>
+          <div class="x3-nav-drop">
+            <a href="#">Careers</a>
+            <a href="#" data-open-popup="popup-form">Connect</a>
+          </div>
+        </li>
+      </ul>
+      <a href="#" data-open-popup="popup-form" class="x3-btn x3-btn--solid x3-nav-cta" data-magnetic data-cursor="cta" aria-label="Connect Now - open inquiry form">
+        <span>Connect Now</span>
+      </a>
+    </nav>
+
+    <button class="x3-burger" id="x3-burger" type="button" aria-label="menu" aria-expanded="false">
+      <i></i><i></i><i></i>
+    </button>
+  </div>
+</header>
+
+<main class="x3-main">
+
+  <!-- ============================================================
+       RUNG 00 — HERO
+       ============================================================ -->
+  <section id="x3-hero" class="x3-sec x3-hero" data-rung="0"
+           data-cam-x="-8.5" data-cam-y="2.6" data-cam-fov="62" data-cam-twist="1.0" data-cam-roll="0.0" data-scrim="0.34">
+    <div class="x3-shell">
+      <h1 class="u-sr-only">Building India's Citizen-Centric Livelihood Acceleration Network</h1>
+
+      <div class="x3-hero-eyebrow">
+        <span class="x3-sq x3-sq--yellow"></span>
+        <span class="x3-sq x3-sq--blue"></span>
+        <span class="x3-sq x3-sq--coral"></span>
+        <span class="x3-sq x3-sq--teal"></span>
+        <em>Samhita &middot; the climb begins</em>
+      </div>
+
+      <div class="x3-hero-slides" data-hero-slides>
+        <article class="x3-hero-slide is-active" data-slide="0">
+          <div class="x3-hero-h x3-hero-h--stages" data-split>
+            <span>Design</span><span class="x3-sep" aria-hidden="true">|</span><span>Structure</span><span class="x3-sep" aria-hidden="true">|</span><span>Orchestrate</span><span class="x3-sep" aria-hidden="true">|</span><span>Implement</span>
+          </div>
+          <p class="x3-hero-body">End to end: from the first design conversation to on-ground, last-mile delivery, with Samhita-CGF you have one accountable partner throughout.</p>
+        </article>
+
+        <article class="x3-hero-slide" data-slide="1">
+          <div class="x3-hero-h" data-split>India&rsquo;s Citizen Centric Livelihood Network, powered by Catalytic Finance</div>
+          <div class="x3-hero-sub">75+ partners, 1.08 million citizens, 147% average income growth</div>
+          <p class="x3-hero-body">Connecting credit, skilling, jobs and markets into a single path to irreversible income increase.</p>
+        </article>
+
+        <article class="x3-hero-slide" data-slide="2">
+          <div class="x3-hero-h" data-split>Livelihood Account</div>
+          <div class="x3-hero-sub">A Portable Economic Identity, Owned by the Citizen</div>
+          <p class="x3-hero-body">Turning work, skills and repayment history into trusted proof that unlocks credit, jobs and markets. So progress in one system counts in every system.</p>
+        </article>
+      </div>
+
+      <div class="x3-hero-controls">
+        <div class="x3-dots" data-hero-dots role="tablist" aria-label="Choose a banner">
+          <button class="x3-dot is-active" type="button" role="tab" aria-selected="true" aria-label="Show banner 1 of 3"></button>
+          <button class="x3-dot" type="button" role="tab" aria-selected="false" aria-label="Show banner 2 of 3"></button>
+          <button class="x3-dot" type="button" role="tab" aria-selected="false" aria-label="Show banner 3 of 3"></button>
+        </div>
+        <a href="#" data-open-popup="popup-form" class="x3-btn x3-btn--solid" data-magnetic data-cursor="cta" aria-label="Connect Now"><span>Connect Now</span></a>
+      </div>
+
+      <ul class="x3-trust">
+        <li><span class="x3-tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Fully aligned with the UN SDGs</li>
+        <li><span class="x3-tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>100% CSR &amp; FCRA compliant</li>
+        <li><span class="x3-tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Healthcare, climate &amp; gender focus</li>
+      </ul>
+    </div>
+
+    <div class="x3-scrollcue" aria-hidden="true">
+      <span>Scroll to climb</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 01 — OUR STORY
+       ============================================================ -->
+  <section id="section-story" class="x3-sec x3-story" data-rung="1"
+           data-cam-x="8.2" data-cam-y="-1.8" data-cam-fov="55" data-cam-twist="1.9" data-cam-roll="-0.08" data-scrim="0.62">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--coral"></span>Rung 01 &middot; the ladder</div>
+
+      <div class="x3-story-top">
+        <div class="x3-story-headwrap">
+          <h2 class="x3-h2" data-split>This is the ladder to an irreversible increase in <em>income</em></h2>
+          <ul class="x3-tags">
+            <li><span class="x3-sq x3-sq--yellow"></span>Skilling &amp; Jobs</li>
+            <li><span class="x3-sq x3-sq--blue"></span>Credit &amp; Market Linkages</li>
+            <li><span class="x3-sq x3-sq--teal"></span>Healthcare &amp; Social Security</li>
+          </ul>
+          <p class="x3-lead">It's made up of skilling, jobs, market linkages, credit, healthcare, and social security. If one rung breaks — a missing skill, a health emergency, a business setback — the whole ladder becomes impossible to climb. Samhita builds it back, rung by rung.</p>
+          <a class="x3-btn x3-btn--ghost" href="#" data-magnetic data-cursor="link"><span>View Impact Dashboard</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+        </div>
+
+        <div class="x3-story-figures">
+          <div class="x3-figure" data-tilt>
+            <span class="x3-figure-label">Lives Impacted</span>
+            <strong><span class="x3-count" data-count-to="17" data-count-suffix="M">0M</span>+</strong>
+          </div>
+          <div class="x3-figure" data-tilt>
+            <span class="x3-figure-label">CSR Clients, Development Foundations, International Agency Partners &amp; Donors</span>
+            <strong><span class="x3-count" data-count-to="300">0</span>+</strong>
+          </div>
+          <div class="x3-figure" data-tilt>
+            <span class="x3-figure-label">Impact Partners</span>
+            <strong><span class="x3-count" data-count-to="500">0</span>+</strong>
+          </div>
+          <div class="x3-figure" data-tilt>
+            <span class="x3-figure-label">Government Partnerships</span>
+            <strong><span class="x3-count" data-count-to="15">0</span>+</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The ladder story: four cards flown past on a pinned horizontal track -->
+    <div class="x3-track" id="x3-track" data-cursor-zone="drag">
+      <div class="x3-track-inner">
+        <div class="x3-track-head">
+          <span class="x3-badge">the ladder story</span>
+          <span class="x3-track-hint" aria-hidden="true">Keep scrolling &rarr;</span>
+        </div>
+        <div class="x3-track-rail" id="x3-track-rail">
+          <article class="x3-slab">
+            <div class="x3-slab-img"><img src="./images/index/theladdertoincomegrowth/magnific_create-a-realistic-cinema_lJwY3fNgv9.png" alt="Two women artisans building bamboo ladders, representing the path to income growth." loading="lazy"></div>
+            <div class="x3-slab-text">
+              <span class="x3-slab-num">01</span>
+              <h3>The Ladder<br>to Income Growth</h3>
+              <p>Skilling, jobs, market linkages, credit, healthcare, and social security.</p>
+            </div>
+          </article>
+          <article class="x3-slab">
+            <div class="x3-slab-img"><img src="./images/index/theladdertoincomegrowth/magnific_create-a-realistic-cinema_tCasM4rmZJ.png" alt="A shopkeeper climbing a wooden ladder in her store, representing a livelihood at risk without support." loading="lazy"></div>
+            <div class="x3-slab-text">
+              <span class="x3-slab-num">02</span>
+              <h3>A Broken Rung<br>Breaks the Climb</h3>
+              <p>A missing skill, a health emergency, a business setback — this ladder cannot be climbed.</p>
+            </div>
+          </article>
+          <article class="x3-slab">
+            <div class="x3-slab-img"><img src="./images/index/theladdertoincomegrowth/magnific_create-a-realistic-cinema_xSlA2cwjfW.png" alt="A woman factory worker climbing a metal ladder, representing Samhita's rebuilt livelihood network." loading="lazy"></div>
+            <div class="x3-slab-text">
+              <span class="x3-slab-num">03</span>
+              <h3>Building It Back<br>Rung by Rung</h3>
+              <p>CSR, philanthropy, financial institutions, governments and NGOs — holding the ladder at every step.</p>
+            </div>
+          </article>
+          <article class="x3-slab">
+            <div class="x3-slab-img"><img src="./images/index/theladdertoincomegrowth/laddermagnific_create-a-realistic-cinema_lJwY3fNgv9.png" alt="Two women building bamboo ladders together in a workshop." loading="lazy"></div>
+            <div class="x3-slab-text">
+              <span class="x3-slab-num">04</span>
+              <h3>One Livelihood<br>Network for India</h3>
+              <p>Fully aligned with the UN SDGs. 100% CSR and FCRA compliant.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="x3-shell">
+      <figure class="x3-quote" data-tilt>
+        <div class="x3-quote-face"><img src="./Waveyu - Webflow HTML website template_files/697a03adf92d326f91b61a12_d47139b925e980bd7f348267a5d020ba_team-portrait-thumb.webp" alt="Samhita community members." loading="lazy"></div>
+        <blockquote>We have proven that when the ladder is strong,<br>India climbs.</blockquote>
+        <a class="x3-btn x3-btn--ghost" href="#" data-magnetic data-cursor="link"><span>Read About Our Journey</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 02 — STATS BAR
+       ============================================================ -->
+  <section id="section-proof" class="x3-sec x3-proof" data-rung="2"
+           data-cam-x="-9.5" data-cam-y="2.2" data-cam-fov="70" data-cam-twist="2.6" data-cam-roll="0.1" data-scrim="0.5">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--blue"></span>Rung 02 &middot; the proof</div>
+      <div class="x3-statbar">
+        <div class="x3-stat" data-tilt>
+          <div class="x3-stat-num"><span class="x3-count" data-count-to="17" data-count-suffix="M">0</span>+</div>
+          <div class="x3-stat-label">Lives Impacted</div>
+        </div>
+        <div class="x3-stat" data-tilt>
+          <div class="x3-stat-num"><span class="x3-count" data-count-to="300">0</span>+</div>
+          <div class="x3-stat-label">CSR Clients, Foundations &amp; Donors</div>
+        </div>
+        <div class="x3-stat" data-tilt>
+          <div class="x3-stat-num"><span class="x3-count" data-count-to="500">0</span>+</div>
+          <div class="x3-stat-label">Impact Partners</div>
+        </div>
+        <div class="x3-stat" data-tilt>
+          <div class="x3-stat-num"><span class="x3-count" data-count-to="15">0</span>+</div>
+          <div class="x3-stat-label">Government Partnerships</div>
+        </div>
+        <div class="x3-stat-cta">
+          <a class="x3-btn x3-btn--ghost" href="#" data-magnetic data-cursor="link"><span>View Impact Dashboard</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 03 — THE ARCHITECTS OF THE LADDER
+       ============================================================ -->
+  <section id="section-partners" class="x3-sec x3-architects" data-rung="3"
+           data-cam-x="8.8" data-cam-y="1.6" data-cam-fov="52" data-cam-twist="1.2" data-cam-roll="-0.12" data-scrim="0.68">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--yellow"></span>Rung 03 &middot; who holds it</div>
+      <h2 class="x3-h2" data-split>The architects of <em>the ladder</em></h2>
+
+      <div class="x3-arch-grid">
+        <div class="x3-arch-media" data-tilt>
+          <div class="x3-arch-stack" id="x3-arch-stack">
+            <figure class="is-active"><img src="./images/index/secondfold/buildingladder.png" alt="Illustration of women building an income-growth ladder together, piece by piece." loading="lazy"></figure>
+            <figure><img src="./images/index/partnering/partnering.webp" alt="Women vendors seated behind sacks of grain and pulses at an open-air market." loading="lazy"></figure>
+          </div>
+          <div class="x3-arch-media-nav">
+            <button type="button" data-arch-prev aria-label="Previous image" data-cursor="link"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button type="button" data-arch-next aria-label="Next image" data-cursor="link"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+        </div>
+
+        <div class="x3-acc" id="x3-acc">
+          <div class="x3-acc-item is-open">
+            <button class="x3-acc-head" type="button" aria-expanded="true" data-cursor="link">
+              <span class="x3-sq x3-sq--coral"></span>
+              <h3>CSR Clients</h3>
+              <i class="x3-acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></i>
+            </button>
+            <div class="x3-acc-body">
+              <div class="x3-acc-inner">
+                <p>CSR that is compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your goals and then design, run, and track impact-driven programs that deliver measurable results. Our programs are tailored both to your priorities and to the communities you want to serve, anywhere in the country. We enable long-term, transformational outcomes using measurable metrics, ensuring that your funding is both catalytic and compliant.</p>
+                <div class="x3-marquee" aria-hidden="true"><div class="x3-marquee-track"><span>Accenture</span><span>Adidas</span><span>Cummins</span><span>DXC</span><span>Eureka Forbes</span><span>Accenture</span><span>Adidas</span><span>Cummins</span><span>DXC</span><span>Eureka Forbes</span></div></div>
+                <a class="x3-btn x3-btn--ghost" href="#" data-cursor="link"><span>Learn More</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="x3-acc-item">
+            <button class="x3-acc-head" type="button" aria-expanded="false" data-cursor="link">
+              <span class="x3-sq x3-sq--blue"></span>
+              <h3>Foundations</h3>
+              <i class="x3-acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></i>
+            </button>
+            <div class="x3-acc-body">
+              <div class="x3-acc-inner">
+                <p>We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and extensive local networks. Together, we build programs that go the distance, deliver real change for communities, and lasting value for your legacy. We create and drive large-scale collaboratives, anchored by foundations, that bring together formidable stakeholders across the private, public, philanthropic, social, and financial sectors to enable catalytic philanthropy.</p>
+                <div class="x3-marquee" aria-hidden="true"><div class="x3-marquee-track"><span>Gates Foundation</span><span>Infosys Foundation</span><span>HCL Foundation</span><span>Walmart Foundation</span><span>Gates Foundation</span><span>Infosys Foundation</span><span>HCL Foundation</span><span>Walmart Foundation</span></div></div>
+                <a class="x3-btn x3-btn--ghost" href="#" data-cursor="link"><span>Learn More</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="x3-acc-item">
+            <button class="x3-acc-head" type="button" aria-expanded="false" data-cursor="link">
+              <span class="x3-sq x3-sq--teal"></span>
+              <h3>Government</h3>
+              <i class="x3-acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></i>
+            </button>
+            <div class="x3-acc-body">
+              <div class="x3-acc-inner">
+                <p>The Government is the main engine of development, and we strengthen its ability to deliver. We support the adoption of India’s Digital Public Infrastructure, build scalable public goods, and enhance the delivery of schemes and services so they reach the right citizens with greater speed, inclusion, and accountability.</p>
+                <div class="x3-marquee" aria-hidden="true"><div class="x3-marquee-track"><span>CGTMSE</span><span>ONDC</span><span>Common Service Centres</span><span>Sector Skill Councils</span><span>CGTMSE</span><span>ONDC</span><span>Common Service Centres</span><span>Sector Skill Councils</span></div></div>
+                <a class="x3-btn x3-btn--ghost" href="#" data-cursor="link"><span>Learn More</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="x3-acc-item">
+            <button class="x3-acc-head" type="button" aria-expanded="false" data-cursor="link">
+              <span class="x3-sq x3-sq--yellow"></span>
+              <h3>Financial Institutions</h3>
+              <i class="x3-acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></i>
+            </button>
+            <div class="x3-acc-body">
+              <div class="x3-acc-inner">
+                <p>Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal effort and maximum efficiency. Smart tools help you assess eligibility and tap into government and philanthropic guarantees, so you can confidently grow your portfolio, expand your customer base, and keep risks under control.</p>
+                <div class="x3-marquee" aria-hidden="true"><div class="x3-marquee-track"><span>Bajaj Finserv</span><span>IndusInd Bank</span><span>Bajaj Finserv</span><span>IndusInd Bank</span><span>Bajaj Finserv</span><span>IndusInd Bank</span></div></div>
+                <a class="x3-btn x3-btn--ghost" href="#" data-cursor="link"><span>Learn More</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 04 — STRENGTHENING EVERY RUNG
+       ============================================================ -->
+  <section id="section-rungs-gallery" class="x3-sec x3-rungs" data-rung="4"
+           data-cam-x="-3.6" data-cam-y="5.2" data-cam-fov="76" data-cam-twist="3.4" data-cam-roll="0.06" data-scrim="0.6">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--teal"></span>Rung 04 &middot; the sectors</div>
+      <h2 class="x3-h2" data-split>Strengthening <em>Every Rung</em></h2>
+
+      <div class="x3-gallery" id="x3-gallery" role="list" aria-label="The rungs of the livelihood ladder">
+        <a class="x3-panel is-open" href="#" role="listitem" aria-label="Livelihood (skilling, jobs, social schemes, market linkages)" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/livelihood.webp" alt="Two women building bamboo ladders together in a workshop." draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">01</span>
+            <span class="x3-panel-title">Livelihood</span>
+            <span class="x3-panel-desc">Skilling, jobs, social schemes and market linkages.</span>
+          </span>
+        </a>
+        <a class="x3-panel" href="#" role="listitem" aria-label="Catalytic Finance" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/catalytic-finance.webp" alt="A farmer driving a tractor through green fields." draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">02</span>
+            <span class="x3-panel-title">Catalytic Finance</span>
+            <span class="x3-panel-desc">Bringing CSR, philanthropy and financial institutions together so capital reaches citizens.</span>
+          </span>
+        </a>
+        <a class="x3-panel" href="#" role="listitem" aria-label="Health &amp; Nutrition" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/health-nutrition.webp" alt="A shopkeeper reaching for stock on the shelves of her store." draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">03</span>
+            <span class="x3-panel-title">Health &amp; Nutrition</span>
+            <span class="x3-panel-desc">A health emergency is one of the most common broken rungs.</span>
+          </span>
+        </a>
+        <a class="x3-panel" href="#" role="listitem" aria-label="Education" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/education.webp" alt="A woman and a young girl in school uniform in a field at dusk." draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">04</span>
+            <span class="x3-panel-title">Education</span>
+            <span class="x3-panel-desc">Scholarships and learning pathways that put citizens on the first rung.</span>
+          </span>
+        </a>
+        <a class="x3-panel" href="#" role="listitem" aria-label="Climate" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/climate.webp" alt="Two women stacking and sorting stock in a warehouse." draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">05</span>
+            <span class="x3-panel-title">Climate</span>
+            <span class="x3-panel-desc">Building climate resilience into livelihoods, so incomes hold steady.</span>
+          </span>
+        </a>
+        <a class="x3-panel" href="#" role="listitem" aria-label="[Rung 6 &mdash; name TBC]" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/livelihood.webp" alt="" draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">06</span>
+            <span class="x3-panel-title is-placeholder">[Rung 6 &mdash; name TBC]</span>
+            <span class="x3-panel-desc is-placeholder">Replace with the sixth sector and its own image.</span>
+          </span>
+        </a>
+        <a class="x3-panel" href="#" role="listitem" aria-label="[Rung 7 &mdash; name TBC]" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/health-nutrition.webp" alt="" draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">07</span>
+            <span class="x3-panel-title is-placeholder">[Rung 7 &mdash; name TBC]</span>
+            <span class="x3-panel-desc is-placeholder">Replace with the seventh sector and its own image.</span>
+          </span>
+        </a>
+        <a class="x3-panel" href="#" role="listitem" aria-label="[Rung 8 &mdash; name TBC]" data-cursor="view">
+          <span class="x3-panel-media"><img src="./images/index/gallery/catalytic-finance.webp" alt="" draggable="false" loading="lazy"></span>
+          <span class="x3-panel-label">
+            <span class="x3-panel-idx">08</span>
+            <span class="x3-panel-title is-placeholder">[Rung 8 &mdash; name TBC]</span>
+            <span class="x3-panel-desc is-placeholder">Replace with the eighth sector and its own image.</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 05 — THREE WAYS A LIVELIHOOD GETS BUILT
+       ============================================================ -->
+  <section id="section-pathways" class="x3-sec x3-pathways" data-rung="5"
+           data-cam-x="-10.5" data-cam-y="-3.2" data-cam-fov="58" data-cam-twist="1.5" data-cam-roll="-0.05" data-scrim="0.56">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--coral"></span>Rung 05 &middot; the sequences</div>
+      <div class="x3-pathways-head">
+        <h2 class="x3-h2" data-split>Three ways a livelihood <em>gets built</em></h2>
+        <p class="x3-kicker">Pick a person. Follow the sequence.</p>
+      </div>
+
+      <div class="x3-tabs" role="tablist" aria-label="Choose a livelihood pathway">
+        <button class="x3-tab is-active" type="button" role="tab" id="x3-tab-micro" aria-controls="x3-panel-micro" aria-selected="true" tabindex="0" data-cursor="link">Micro-entrepreneur</button>
+        <button class="x3-tab" type="button" role="tab" id="x3-tab-gig" aria-controls="x3-panel-gig" aria-selected="false" tabindex="-1" data-cursor="link">Gig &amp; platform worker</button>
+        <button class="x3-tab" type="button" role="tab" id="x3-tab-first" aria-controls="x3-panel-first" aria-selected="false" tabindex="-1" data-cursor="link">First-time woman worker</button>
+      </div>
+
+      <div class="x3-tabpanel is-active" role="tabpanel" id="x3-panel-micro" aria-labelledby="x3-tab-micro">
+        <div class="x3-tabpanel-inner">
+          <div class="x3-who">
+            <div class="x3-who-label">Who</div>
+            <h3>Runs a shop, a kitchen, a tailoring unit</h3>
+            <div class="x3-rule"></div>
+            <div class="x3-who-label">Outcome</div>
+            <p class="x3-outcome">+38% median monthly income at 12 months</p>
+          </div>
+          <ol class="x3-steps">
+            <li><span class="x3-step-num">01</span><span class="x3-step-text">Identified through a local partner and verified in person</span></li>
+            <li><span class="x3-step-num">02</span><span class="x3-step-text">₹15,000–40,000 returnable grant released in tranches</span></li>
+            <li><span class="x3-step-num">03</span><span class="x3-step-text">Business basics: pricing, digital payments, inventory</span></li>
+            <li><span class="x3-step-num">04</span><span class="x3-step-text">Repayment recycles into the next three entrepreneurs</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="x3-tabpanel" role="tabpanel" id="x3-panel-gig" aria-labelledby="x3-tab-gig" hidden>
+        <div class="x3-tabpanel-inner">
+          <div class="x3-who">
+            <div class="x3-who-label">Who</div>
+            <h3>Rides, delivers, drives, cleans on demand</h3>
+            <div class="x3-rule"></div>
+            <div class="x3-who-label">Outcome</div>
+            <p class="x3-outcome">2.1× improvement in income stability</p>
+          </div>
+          <ol class="x3-steps">
+            <li><span class="x3-step-num">01</span><span class="x3-step-text">Onboarded through platform and aggregator partnerships</span></li>
+            <li><span class="x3-step-num">02</span><span class="x3-step-text">Asset finance for a vehicle, phone or equipment</span></li>
+            <li><span class="x3-step-num">03</span><span class="x3-step-text">Insurance, savings nudges and grievance support</span></li>
+            <li><span class="x3-step-num">04</span><span class="x3-step-text">Portable earnings record they actually own</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="x3-tabpanel" role="tabpanel" id="x3-panel-first" aria-labelledby="x3-tab-first" hidden>
+        <div class="x3-tabpanel-inner">
+          <div class="x3-who">
+            <div class="x3-who-label">Who</div>
+            <h3>Entering paid work, often against the odds</h3>
+            <div class="x3-rule"></div>
+            <div class="x3-who-label">Outcome</div>
+            <p class="x3-outcome">71% still employed after one year</p>
+          </div>
+          <ol class="x3-steps">
+            <li><span class="x3-step-num">01</span><span class="x3-step-text">Household conversation before enrolment — consent matters</span></li>
+            <li><span class="x3-step-num">02</span><span class="x3-step-text">Sector-matched skilling with childcare and travel covered</span></li>
+            <li><span class="x3-step-num">03</span><span class="x3-step-text">Placement with employers audited for safe workplaces</span></li>
+            <li><span class="x3-step-num">04</span><span class="x3-step-text">Six-month retention follow-up, not a placement photo</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 06 — FROM THE FIELD
+       ============================================================ -->
+  <section id="section-field" class="x3-sec x3-field" data-rung="6"
+           data-cam-x="7.4" data-cam-y="3.4" data-cam-fov="66" data-cam-twist="2.2" data-cam-roll="0.14" data-scrim="0.58">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--blue"></span>Rung 06 &middot; on the ground</div>
+      <p class="x3-eyebrow">From the field</p>
+      <div class="x3-field-grid">
+        <article class="x3-story-card" data-tilt data-cursor="view">
+          <div class="x3-story-media"><img src="./images/index/field/field-shg.webp" width="1200" height="912" alt="Five women of a village collective seated on a mat, counting cash beside open handwritten lending ledgers." loading="lazy"></div>
+          <h3>The ledger that outlived the grant</h3>
+          <p>In Chhindwara, a 14-woman collective turned one revolving pool into a village lending book that has now cycled four times without us.</p>
+        </article>
+        <article class="x3-story-card" data-tilt data-cursor="view">
+          <div class="x3-story-media"><img src="./images/index/field/field-gig.webp" width="1200" height="912" alt="A delivery rider in an orange uniform checking his phone beside his scooter on a busy street." loading="lazy"></div>
+          <h3>Earnings you can carry between apps</h3>
+          <p>A portable earnings record turned 4,200 riders from invisible borrowers into people a bank could actually underwrite.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 07 — WHAT OUR PARTNERS SAY
+       ============================================================ -->
+  <section id="section-audiences" class="x3-sec x3-voices" data-rung="7"
+           data-cam-x="-7.8" data-cam-y="-2.8" data-cam-fov="60" data-cam-twist="2.9" data-cam-roll="-0.16" data-scrim="0.64">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--yellow"></span>Rung 07 &middot; in their words</div>
+      <div class="x3-voices-head">
+        <h2 class="x3-h2" data-split>What our <em>partners say</em></h2>
+        <a class="x3-btn x3-btn--ghost" href="#section-catalytic" data-magnetic data-cursor="link"><span>See Catalytic Finance</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+      </div>
+
+      <div class="x3-voice-grid">
+        <article class="x3-voice" data-tilt>
+          <div class="x3-voice-top">
+            <div class="x3-voice-face"><img src="./Waveyu - Webflow HTML website template_files/697a03b32e68f93f96ec6df1_14e5555be7a7f8277379e1e8e06b34d6_surfboard-on-grass.webp" alt="" loading="lazy"></div>
+            <span class="x3-chip">csr clients</span>
+          </div>
+          <h3>Priya Sharma</h3>
+          <div class="x3-voice-rule"></div>
+          <p>CSR that is impact driven, compliant, cost-efficient, and catalytic. We co-create strategies with you that align with your priorities and geographies.</p>
+        </article>
+        <article class="x3-voice" data-tilt>
+          <div class="x3-voice-top">
+            <div class="x3-voice-face"><img src="./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731c0_d765aab020006eaf824d7d186dccc259_surfboard-feet-action.webp" alt="" loading="lazy"></div>
+            <span class="x3-chip">foundations</span>
+          </div>
+          <h3>Rahul Deshmukh</h3>
+          <div class="x3-voice-rule"></div>
+          <p>We turn your impact vision into action. From bold new ideas to scaling what works, we bring sharp strategy and delivery on the ground.</p>
+        </article>
+        <article class="x3-voice" data-tilt>
+          <div class="x3-voice-top">
+            <div class="x3-voice-face"><img src="./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731c5_83c25036e9bf7235adbcd6900ebc9533_man-surfing-wave.webp" alt="" loading="lazy"></div>
+            <span class="x3-chip">government</span>
+          </div>
+          <h3>Ananya Iyer</h3>
+          <div class="x3-voice-rule"></div>
+          <p>The Government is the main engine of development, and we strengthen its ability to deliver — from local to state to central programs.</p>
+        </article>
+        <article class="x3-voice" data-tilt>
+          <div class="x3-voice-top">
+            <div class="x3-voice-face"><img src="./Waveyu - Webflow HTML website template_files/697a03bafb2bc7b275e731ca_ad958a0f63f8390724e20e016a17334e_shaka-hand.webp" alt="" loading="lazy"></div>
+            <span class="x3-chip">financial institutions</span>
+          </div>
+          <h3>Vikram Nair</h3>
+          <div class="x3-voice-rule"></div>
+          <p>Reach the right customers, faster and smarter. We connect you to creditworthy borrowers with minimal risk.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 08 — CATALYTIC INITIATIVES
+       ============================================================ -->
+  <section id="section-catalytic" class="x3-sec x3-catalytic" data-rung="8"
+           data-cam-x="4.6" data-cam-y="5.6" data-cam-fov="84" data-cam-twist="4.2" data-cam-roll="0.2" data-scrim="0.42">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--teal"></span>Rung 08 &middot; catalytic finance</div>
+      <div class="x3-cat-card" data-tilt>
+        <div class="x3-cat-media"><img src="./images/index/banner/bluuredtractor.webp" alt="A farmer driving a tractor through green fields." loading="lazy"></div>
+        <div class="x3-cat-body">
+          <h2 class="x3-h2 x3-h2--center" data-split>Catalytic Initiatives</h2>
+          <div class="x3-split">
+            <div class="x3-init">
+              <h3>Samyak</h3>
+              <p>Strengthening urban health systems to bridge inequities for the urban poor in small cities.</p>
+            </div>
+            <div class="x3-split-rule" aria-hidden="true"></div>
+            <div class="x3-init">
+              <h3>CPMH</h3>
+              <p>Scale mental health solutions and build India's pathway to a zero-burden future for mental health.</p>
+            </div>
+          </div>
+          <a href="#" data-open-popup="popup-form" class="x3-btn x3-btn--solid" data-magnetic data-cursor="cta"><span>Explore Catalytic Finance</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RUNG 09 — FINAL CTA / THE SUMMIT
+       ============================================================ -->
+  <section id="section-final" class="x3-sec x3-final" data-rung="9"
+           data-cam-x="-5.6" data-cam-y="-4.6" data-cam-fov="48" data-cam-twist="0.7" data-cam-roll="0.0" data-scrim="0.46">
+    <div class="x3-shell">
+      <div class="x3-marker"><span class="x3-sq x3-sq--coral"></span>Rung 09 &middot; the summit</div>
+      <div class="x3-final-grid">
+        <div class="x3-final-copy">
+          <h2 class="x3-h2" data-split><em>Ready</em> to build the ladder with us?</h2>
+          <p class="x3-lead">Samhita. Catalysing Prosperity. Together.</p>
+          <a href="#" data-open-popup="popup-form" class="x3-btn x3-btn--solid" data-magnetic data-cursor="cta"><span>Connect Now</span></a>
+        </div>
+        <div class="x3-final-media">
+          <div class="x3-final-img x3-final-img--a" data-tilt><img src="./Waveyu - Webflow HTML website template_files/697a0394f4917471ddd35eb1_8d1583415df9b8e289faf714aac313a6_team-portrait.avif" alt="Samhita community members representing our mission." loading="lazy"></div>
+          <div class="x3-final-img x3-final-img--b" data-tilt><img src="./Waveyu - Webflow HTML website template_files/6988c9518b240e4477f5b370_09ad5854278985630986a7dcb10615a4_surfers-palm-garden.avif" alt="Partnership between Samhita and its stakeholders." loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     CONNECT / INQUIRY POPUP
+     ============================================================ -->
+<section id="popup-form" class="x3-popup" role="dialog" aria-modal="true" aria-labelledby="x3-popup-heading" hidden>
+  <div class="x3-popup-scrim" data-close-popup></div>
+  <div class="x3-popup-card">
+    <div class="x3-popup-head">
+      <h2 id="x3-popup-heading"><em>Partner</em> with Samhita</h2>
+      <p>Fill out the form below and our team will get back to you shortly.</p>
+    </div>
+    <form id="x3-contact-form" class="x3-form">
+      <div class="x3-form-2col">
+        <label class="x3-field"><span>Name</span><input id="x3-contact-name" name="contact-name" type="text"></label>
+        <label class="x3-field"><span>Email</span><input id="x3-contact-email" name="contact-email" type="email"></label>
+      </div>
+      <label class="x3-field"><span>Organisation</span><input id="x3-contact-org" name="contact-org" type="text"></label>
+      <label class="x3-field"><span>I'm interested in</span>
+        <select id="x3-contact-interest" name="contact-interest">
+          <option value="">I'm interested in...</option>
+          <option value="csr">CSR Partnership</option>
+          <option value="foundation">Foundation Grant</option>
+          <option value="government">Government Collaboration</option>
+          <option value="financial-institution">Financial Institution Partnership</option>
+          <option value="general">General Inquiry</option>
+        </select>
+      </label>
+      <label class="x3-field"><span>Message</span><textarea id="x3-contact-message" name="contact-message" rows="4"></textarea></label>
+      <label class="x3-check">
+        <input id="x3-contact-checkbox" type="checkbox">
+        <i aria-hidden="true"></i>
+        <span>You agree to Samhita's <a href="#">privacy policy</a>.</span>
+      </label>
+      <button type="submit" class="x3-btn x3-btn--solid" data-cursor="cta"><span>Send Inquiry</span></button>
+    </form>
+    <div class="x3-form-done" hidden>Thank you! Your submission has been received!</div>
+    <div class="x3-form-fail" hidden>Oops! Something went wrong while submitting the form.</div>
+    <button type="button" class="x3-popup-close" aria-label="Close" data-close-popup data-cursor="link">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="x3-footer">
+  <div class="x3-shell">
+    <div class="x3-footer-top">
+      <div class="x3-footer-brand">
+        <a class="x3-footer-logo" href="#x3-hero" data-cursor="link"><img src="./samhita-logo white.png" alt="Samhita logo" width="140" height="34"></a>
+        <div class="x3-footer-addr">Samhita CGF<br>Mumbai &amp; Bengaluru, India</div>
+        <div class="x3-footer-social">
+          <div class="x3-footer-social-title"><strong>Follow us on Social Media</strong></div>
+          <div class="x3-social-row">
+            <a href="https://www.facebook.com/samhitasocialventures" target="_blank" rel="noopener" data-cursor="link" aria-label="Facebook"><svg height="20" role="img" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" fill="currentColor"></path></svg></a>
+            <a href="https://www.linkedin.com/company/samhita-social-ventures/" target="_blank" rel="noopener" data-cursor="link" aria-label="LinkedIn"><svg height="20" role="img" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" fill="currentColor"></path></svg></a>
+            <a href="https://x.com/Samhitadotorg" target="_blank" rel="noopener" data-cursor="link" aria-label="X"><svg height="20" role="img" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" fill="currentColor"></path></svg></a>
+            <a href="https://www.youtube.com/channel/UCIwuu7bLNnhcnVytOva9QIg" target="_blank" rel="noopener" data-cursor="link" aria-label="YouTube"><svg height="20" role="img" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"></path></svg></a>
+          </div>
+        </div>
+        <a class="x3-footer-phone" href="tel:+919819701728" data-cursor="link">
+          <svg fill="currentColor" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" fill-rule="evenodd"></path></svg>
+          <span>+91 98197 01728</span>
+        </a>
+      </div>
+
+      <div class="x3-footer-nav">
+        <div class="x3-footer-col">
+          <div class="x3-footer-col-title">Company</div>
+          <a href="#" data-cursor="link"><span>Work With Us</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+          <a href="#" data-cursor="link"><span>Who We Are</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+        </div>
+        <div class="x3-footer-col">
+          <div class="x3-footer-col-title">Resources</div>
+          <a href="#" data-cursor="link"><span>Reports</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+          <a href="#" data-cursor="link"><span>Financials</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+          <a href="#" data-cursor="link"><span>Privacy Policy</span><i class="x3-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="x3-footer-word" id="x3-footer-word" aria-hidden="true">
+      <span>s</span><span>a</span><span>m</span><span>h</span><span>i</span><span>t</span><span>a</span>
+    </div>
+
+    <div class="x3-footer-bottom">
+      <div class="x3-footer-squares" aria-hidden="true">
+        <span class="x3-sq x3-sq--yellow"></span><span class="x3-sq x3-sq--blue"></span><span class="x3-sq x3-sq--coral"></span><span class="x3-sq x3-sq--teal"></span>
+      </div>
+      <div class="x3-footer-copy">© 2026 Samhita CGF. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<button type="button" id="x3-top" class="x3-top" aria-label="Back to top" data-cursor="link">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="./Waveyu - Webflow HTML website template_files/gsap.min.js"></script>
+<script src="./Waveyu - Webflow HTML website template_files/ScrollTrigger.min.js"></script>
+<script src="./Waveyu - Webflow HTML website template_files/SplitText.min.js"></script>
+<script src="./experiment3.js?v=1"></script>
+</body>
+</html>
