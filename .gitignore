@@ -30,6 +30,11 @@ docs/images/index/Strengthening every rung/*.jpg
 docs/images/index/footer/Footer-01.jpg
 docs/images/index/footer/Footer-02.jpg
 
+# Same deal again: the raw source photos for the Pathways personas
+# (7MB+ each), now shipped from docs/images/index/pathways/ as ~135-204KB
+# .webp files.
+docs/images/index/from the field/
+
 # Superseded hero stills, no longer referenced by any page.
 docs/new-hero copy.webp
 docs/new-hero2.webp

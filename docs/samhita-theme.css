@@ -37,7 +37,10 @@
 
   /* Muted text (was #707070 / #8d8d8d) */
   --color--text--text-muted: #6b7280;
-  --color--text--heading-accent: #4b5563;
+  /* Brand turquoise, per Parth (#53c0a6) - was grey (#4b5563). My first pass
+     used #0ca5d0 (--color--base--accent-blue below), sampled from the wrong
+     square in the logo mark; corrected here. */
+  --color--text--heading-accent: #53c0a6;
 
   /* Hairline borders (was rgba(33,33,33,.2)) */
   --border--color-size--border-subtle: #11182733;
@@ -81,6 +84,16 @@ html {
 }
 body {
   overscroll-behavior-y: none;
+}
+
+/* All heading-accent phrases ("9 in 10 Indians", "Initiatives", "the ladder",
+   "17 years", etc.) in brand turquoise instead of grey. The base template
+   carries a second .heading-accent rule (opacity:.5 over black) that would
+   otherwise fight the --color--text--heading-accent variable above for which
+   one wins - stated directly here, after both, so this always wins regardless. */
+.heading-accent {
+  color: var(--color--text--heading-accent);
+  opacity: 1;
 }
 
 /* Text selection (highlighting text with the mouse/cursor): logo yellow
@@ -2375,16 +2388,6 @@ html {
   align-items: center;
   justify-content: center;
 }
-/* Placeholder label; swap the whole <div> for an <img class="pathways-who-image">
-   (or nest one inside) when the real photo is ready. */
-.pathways-who-image span {
-  font-family: var(--font--primary);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color--text--text-muted);
-}
 .pathways-who-image img {
   width: 100%;
   height: 100%;
@@ -2730,155 +2733,77 @@ html {
    Navy + coral cards sitting directly on the page (the tractor photo / card box
    was removed). Each carries a mono eyebrow, a serif heading, a body line and a
    mono tagline, with a faint ring in the top-right corner. */
-#section-catalytic .layout-centered.is-cta.is-plain {
-  display: block;
-  min-height: 0;
-}
-/* Drop the section's bottom padding so it sits flush against the next fold. */
+/* ── Catalytic Initiatives: editorial layout on the page's own white ──
+   A thin coral-to-grey divider, a big left-aligned heading, and a two-column
+   list of initiatives on the right - each with a coloured left rule, a bold
+   name, plain body copy and a "Learn More" CTA identical to the architects
+   accordions'. Brand fonts and brand colours throughout; no dark/bright tile
+   backgrounds. */
 #section-catalytic .padding-vertical {
   padding-bottom: 0;
 }
-.catalytic-heading {
-  color: var(--color--base--black);
-  text-align: center;
-  margin-bottom: 2.75rem;
+.catalytic-divider {
+  height: 2px;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, var(--color--base--accent) 0 12%, #d1d5db 12% 100%);
 }
-/* The two tiles together span the page's full content width. The base
-   .cta-content carries max-width:640px (sized for a single-column CTA body),
-   which was capping the two-tile grid to less than half the page - override it. */
-#section-catalytic .cta-content {
-  width: 100%;
-  max-width: none;
-  margin: 0 auto;
-}
-.catalytic-tiles {
+.catalytic-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  width: 100%;
-  text-align: left;
+  gap: 2.5rem;
 }
-@media screen and (min-width: 768px) {
-  .catalytic-tiles {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
+@media screen and (min-width: 992px) {
+  .catalytic-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 3.5rem;
+    align-items: start;
   }
 }
-/* Two bright, horizontal cards: wordmark top-left, a line of plain text and an
-   accordion-style "Learn More" CTA anchored bottom-left, over a faint diagonal
-   line pattern. Brand fonts and brand colours only (coral / yellow). */
-/* No fixed aspect-ratio: a locked 16:9 box clipped its own text (overflow is
-   hidden, for the rounded corners and diagonal pattern) once the body copy
-   needed more height than that ratio gave it at in-between viewport widths -
-   min-height sets the visual floor and the tile grows with its content
-   instead of cropping it. */
-.catalytic-tile {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  padding: 2.5rem;
-  min-height: 20rem;
-  border-radius: var(--border--color-size--radius-inner);
+.catalytic-heading {
+  color: var(--color--base--black);
+  text-align: left;
+  margin: 0;
 }
-/* A faint repeating diagonal line pattern (both diagonals => soft cross-hatch)
-   across the whole card. currentColor so it tints to each tile's text colour. */
-.catalytic-tile::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  color: inherit;
-  opacity: 0.07;
-  background-image:
-    repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(-45deg, currentColor 0 1px, transparent 1px 22px);
+.catalytic-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
 }
-/* Whole tile is a link to its initiative. */
-a.catalytic-tile {
-  text-decoration: none;
-  transition: transform 0.25s ease;
+@media screen and (min-width: 640px) {
+  .catalytic-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
 }
-a.catalytic-tile:hover,
-a.catalytic-tile:focus-visible {
-  transform: translateY(-5px);
+.catalytic-item {
+  border-left: 3px solid;
+  padding-left: 1.5rem;
 }
-/* Bright brand colours: coral and yellow. */
-.catalytic-tile--coral {
-  background: linear-gradient(135deg, #ff6f7d 0%, var(--color--base--accent) 55%, #d92f52 100%);
-  color: var(--color--base--white);
+.catalytic-item--coral {
+  border-left-color: var(--color--base--accent);
 }
-.catalytic-tile--yellow {
-  background: linear-gradient(135deg, #ffe27a 0%, var(--color--base--accent-yellow) 55%, #f4b81f 100%);
-  /* Dark warm text: white is illegible on the bright yellow. */
-  color: #3a2c00;
+.catalytic-item--yellow {
+  border-left-color: var(--color--base--accent-yellow);
 }
-.catalytic-tile-mark {
+.catalytic-item-name {
   font-family: var(--font--primary);
   font-weight: 700;
-  font-size: 2.25rem;
-  line-height: 1;
-  letter-spacing: -0.01em;
-}
-/* Text + CTA pinned to the bottom of the card. */
-.catalytic-tile-foot {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-.catalytic-tile-text {
-  color: inherit;
-  font-family: var(--font--primary);
-  font-weight: 500;
   font-size: 1.5rem;
-  line-height: 1.3;
-  margin: 0;
-  max-width: 32rem;
+  line-height: 1.1;
+  color: var(--color--base--black);
+  margin: 0 0 0.75rem;
 }
-/* CTA matches the architects accordions: "Learn More" + a circular arrow
-   button, recoloured to the tile via currentColor. */
-.catalytic-tile-cta.secondary-button {
-  color: inherit;
-  align-self: flex-start;
-  justify-content: flex-start;
-  gap: 0.75rem;
+.catalytic-item-text {
+  font-family: var(--font--primary);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--color--text--text-muted);
+  margin: 0 0 1.25rem;
+  max-width: 26rem;
 }
-.catalytic-tile-cta .arrow-tail-button {
-  background: rgba(255, 255, 255, 0.2);
-}
-.catalytic-tile--yellow .catalytic-tile-cta .arrow-tail-button {
-  background: rgba(17, 24, 39, 0.12);
-}
-/* The site-wide hover rule (.secondary-button:hover .arrow-tail-button, up
-   near the arrow-tail-button definitions) turns the button blue on hover, and
-   ties in specificity with the yellow override above (3 class-level selectors
-   each) - CSS then falls back to source order, and the yellow rule comes
-   later, silently winning and blocking the hover colour on the CPMH tile only
-   (Samyak's plain-coral override has lower specificity, so it never fought the
-   hover rule). Restated here, after the yellow override, so hover wins on
-   both tiles again. */
-.catalytic-tile-cta:hover .arrow-tail-button,
-.catalytic-tile-cta:focus-visible .arrow-tail-button {
-  /* !important: empirically, the equal-specificity/later-source-order fix
-     above did not win the cascade in testing, so force it rather than keep
-     guessing at an invisible earlier rule. */
-  background: var(--color--base--accent-blue-dark) !important;
-}
-@media screen and (max-width: 767px) {
-  .catalytic-tile {
-    padding: 1.75rem;
-    min-height: 16rem;
-  }
-  .catalytic-tile-mark {
-    font-size: 1.875rem;
-  }
-  .catalytic-tile-text {
-    font-size: 1.25rem;
-  }
-}
+/* The rest (the "Learn More" + arrow-tail-button pairing) is the same
+   .secondary-button markup the architects accordions use, so it needs no
+   dedicated CSS here - it already matches by construction. */
 
 /* ── Testimonials (was "What our partners say" persona cards) ──
    Five quote cards; 3-up on desktop so five read as a clean 3 + 2, matching the
@@ -3100,6 +3025,16 @@ a.catalytic-tile:focus-visible {
     top: 120px; /* clears the fixed navbar */
     align-self: start;
   }
+}
+
+/* A short line under a section's h2 - used on "The architects of the ladder"
+   and "From the field" to carry the section's one-sentence framing. */
+.section-subheading {
+  margin: 0.75rem 0 0;
+  font-family: var(--font--primary);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color--text--text-muted);
 }
 
 /* ── "This is the ladder" right column: story card + carousel aspect ──
