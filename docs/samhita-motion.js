@@ -143,7 +143,6 @@
         ".slider-wrap",
         ".overview-story-card",
         ".layout-cards .levels-card",
-        ".room-list .room-accordion-wrap",
         ".stay-media",
         ".experience-cards .experience-card",
         ".instructors-benefits .instructors-benefit",
@@ -241,6 +240,74 @@
               duration: 0.28
             }
           );
+      });
+
+      // "The architects of the ladder" accordion rows are a special case: they
+      // must reach their final resting position (x:0, flat) by the time they
+      // enter the lower 10% of the viewport, and STAY there - no swing back out
+      // as they cross the screen. So instead of the full-viewport scrub above,
+      // their entrance is scrubbed across only the range from "row top at the
+      // viewport bottom" to "row top at the 90% line" (the lower-10% edge); x
+      // hits 0 exactly as the row crosses into that band, and holds after.
+      gsap.utils.toArray(".room-list .room-accordion-wrap").forEach(function (el, i) {
+        if (el.closest(".hero-content, .hero-stats")) return;
+        var rect = el.getBoundingClientRect();
+        var offset = rect.left + rect.width / 2 - window.innerWidth / 2;
+        var dir = Math.abs(offset) > window.innerWidth * 0.08
+          ? (offset > 0 ? 1 : -1)
+          : (i % 2 === 0 ? -1 : 1);
+        var room = dir < 0 ? rect.left : window.innerWidth - rect.right;
+        var swingX = Math.max(0, Math.min(SWING_X, room));
+
+        gsap.fromTo(
+          el,
+          {
+            opacity: 0,
+            x: dir * swingX,
+            y: 24,
+            z: -SWING_Z,
+            rotateY: dir * SWING_ROTY,
+            transformPerspective: SWING_PERSPECTIVE,
+            transformOrigin: "center center"
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            z: 0,
+            rotateY: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: "top 90%",
+              scrub: 0.6
+            }
+          }
+        );
+      });
+
+      // Brand ladder: instead of an infinite sway, scrub its rotation on scroll
+      // from the leftmost tilt (as its top enters the viewport) to the rightmost
+      // tilt (once it's fully in view). Rotates around its base. This whole file
+      // already bails out early under reduced motion (see the top return), which
+      // leaves the ladder at its CSS start tilt.
+      gsap.utils.toArray(".brand-ladder").forEach(function (el) {
+        gsap.fromTo(
+          el,
+          { rotate: -7 },
+          {
+            rotate: 7,
+            ease: "none",
+            transformOrigin: "50% 100%",
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: "bottom bottom",
+              scrub: 0.5
+            }
+          }
+        );
       });
       // Failsafe: if any animated element is still invisible after 3 seconds
       // (e.g. ScrollTrigger miscalculated positions, rAF was throttled, or a

@@ -175,6 +175,12 @@
     });
 
     measure();
+    // is-default-open is only a pre-JS resting hint (it hides the vertical
+    // heading and shows the horizontal label from CSS alone). Now that the
+    // script drives state via .ag-panel--active, drop it so a panel that was
+    // the default no longer keeps its vertical heading suppressed after the
+    // visitor hovers a different rung.
+    panels.forEach(function (p) { p.classList.remove("is-default-open"); });
     if (window.ResizeObserver) new ResizeObserver(measure).observe(root);
   }
 

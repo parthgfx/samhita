@@ -1,6 +1,9 @@
 node_modules/
 .DS_Store
 *.jpg
+# Used live by the "From the field" section (Mushroom Lady of Tipri) - the
+# blanket *.jpg rule above was silently dropping it from every commit.
+!docs/images/index/fromthefield/Sunita-Devi.jpg
 *.zip
 .claude/settings.local.json
 

@@ -131,16 +131,19 @@
 }
 
 /* .u-text-size-large's own values (2.25rem / 300 / 110%) so the rung titles
-   read at exactly the weight and size the slide titles do. Still nowrap: the
-   supporting line below carries the detail, so no title needs to wrap, and
-   nowrap is what keeps a title from reflowing mid-transition. */
+   read at exactly the weight and size the slide titles do. Wraps rather than
+   nowrap: at the desktop expand-ratio (0.34 of the row) an expanded panel is
+   only ~34% of the row's width, and the longer rung names ("Access to
+   Finance", "Market Linkages") don't fit that on one line at every viewport
+   from tablet up - nowrap let them overflow/clip instead of wrapping. The
+   label's own max-width (below) caps the wrap width. */
 .ag-panel__text {
   color: var(--ag-text);
   font-family: inherit;
   font-weight: 300;
   font-size: 2.25rem;
   line-height: 110%;
-  white-space: nowrap;
+  white-space: normal;
   opacity: 0;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
@@ -185,10 +188,95 @@
   .ag-panel {
     min-height: 84px;
     transform: none !important;
+    /* On mobile the open panel's height comes from the min-height toggled by
+       .ag-panel--active (flex-grow adds no height in this auto-height column),
+       and a raw class toggle snaps. Transition it so the expand/collapse glides
+       like the desktop flex-grow tween. The reduced-motion block below still
+       forces transition:none. */
+    transition: min-height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
+  /* Fill the whole panel: stacked mobile panels grow to fit their expanded text,
+     which can exceed --ag-media-size and leave the fixed-height, centre-anchored
+     media not covering the top/bottom. Pin it to the panel box (inset 0, 100%)
+     so the photo always covers, however tall the panel gets. !important overrides
+     the inline centring transform the script sets for the desktop parallax. */
   .accordion-gallery .ag-panel__media {
-    width: 100%;
-    height: var(--ag-media-size);
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+  }
+}
+
+/* ADDITION 5 — vertical heading on collapsed panels.
+   Each rung shows its name running vertically while collapsed; on hover/focus
+   the panel becomes active and the horizontal label (.ag-panel__label) fades in
+   while this fades out. */
+.ag-panel__vlabel {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 2;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: var(--ag-text);
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+/* Hidden on the open panel — both the pre-JS default-open state and the
+   JS-driven active state — so it never sits on top of the horizontal label. */
+.ag-panel.is-default-open .ag-panel__vlabel,
+.ag-panel.ag-panel--active .ag-panel__vlabel {
+  opacity: 0;
+}
+/* On the OPEN panel, give the caption room so a long stat wraps to a couple of
+   lines instead of the narrow, many-line column the collapsed cap would force. */
+.ag-panel--active .ag-panel__label,
+.ag-panel.is-default-open .ag-panel__label {
+  max-width: min(90%, 24rem);
+}
+.ag-panel__desc {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+@media screen and (max-width: 520px) {
+  /* Panels stack into short horizontal strips on mobile, where a vertical
+     heading would be clipped — lay it out horizontally instead. */
+  .ag-panel__vlabel {
+    writing-mode: horizontal-tb;
+    left: 1.5rem;
+    bottom: auto;
+    top: 1.25rem;
+    font-size: 1.35rem;
+  }
+  /* Tap to expand: the flex-grow that widens panels on desktop adds no height in
+     this auto-height column, so give the open/active panel an explicit height
+     that fits its heading + full stat. The caption is also uncapped (the
+     desktop cap is ~92px on mobile, which clipped the stat) and revealed. */
+  .ag-panel.ag-panel--active,
+  .ag-panel.is-default-open {
+    min-height: 15rem;
+  }
+  .ag-panel__label {
+    max-width: calc(100% - 3rem);
+  }
+  .ag-panel--active .ag-panel__text,
+  .ag-panel--active .ag-panel__desc,
+  .ag-panel.is-default-open .ag-panel__text,
+  .ag-panel.is-default-open .ag-panel__desc {
+    opacity: 1;
+  }
+  .ag-panel__text {
+    white-space: normal;
   }
 }
 

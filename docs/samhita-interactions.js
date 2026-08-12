@@ -87,7 +87,16 @@
         .map(function (el) {
           return el.getAttribute("data-bg-src");
         });
-      var imgAssets = Array.prototype.slice.call(document.images);
+      // Exclude loading="lazy" images: the browser doesn't fetch them until
+      // they scroll near the viewport, so they never fire load/error while the
+      // page sits at the top - counting them parked the bar at (total - lazy)
+      // (~93%) until the 8s safety net. They're below the fold by design, so
+      // the loader has no business waiting on them.
+      var imgAssets = Array.prototype.slice
+        .call(document.images)
+        .filter(function (img) {
+          return (img.getAttribute("loading") || "").toLowerCase() !== "lazy";
+        });
       var total = imgAssets.length + bgAssets.length;
 
       if (total === 0) {
@@ -559,6 +568,143 @@
       });
     }
 
+    // --- Testimonials ticker (auto-scroll + working prev/next arrows) ---
+    // The track holds two copies of the cards; the container scrolls slowly and
+    // wraps at the halfway point for a seamless loop. The arrows scroll it a
+    // card at a time; hovering pauses the drift. Driven by scrollLeft (not a CSS
+    // transform) so the arrows and the auto-drift share one mechanism.
+    var tMarquee = document.querySelector("[data-testimonial-marquee]");
+    if (tMarquee) {
+      var tTrack = tMarquee.querySelector(".testimonial-marquee-track");
+      var tPrev = document.querySelector("[data-testimonial-prev]");
+      var tNext = document.querySelector("[data-testimonial-next]");
+      var tReduce =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var tPaused = false;
+
+      var tHalf = function () { return tTrack.scrollWidth / 2; };
+      var tStep = function () {
+        var card = tTrack.querySelector(".testimonial-card");
+        var styles = getComputedStyle(tTrack);
+        var gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        return card ? card.getBoundingClientRect().width + gap : 320;
+      };
+      // Keep scrollLeft within the first copy; the reset lands on the identical
+      // card in the other copy, so it's visually seamless.
+      var tWrap = function () {
+        var h = tHalf();
+        if (h <= 0) return;
+        if (tMarquee.scrollLeft >= h) tMarquee.scrollLeft -= h;
+        else if (tMarquee.scrollLeft < 0) tMarquee.scrollLeft += h;
+      };
+
+      if (tPrev) tPrev.addEventListener("click", function () {
+        tMarquee.scrollBy({ left: -tStep(), behavior: "smooth" });
+      });
+      if (tNext) tNext.addEventListener("click", function () {
+        tMarquee.scrollBy({ left: tStep(), behavior: "smooth" });
+      });
+      tMarquee.addEventListener("mouseenter", function () { tPaused = true; });
+      tMarquee.addEventListener("mouseleave", function () { tPaused = false; });
+      tMarquee.addEventListener("focusin", function () { tPaused = true; });
+      tMarquee.addEventListener("focusout", function () { tPaused = false; });
+
+      if (!tReduce) {
+        var tAuto = function () {
+          if (!tPaused) {
+            tMarquee.scrollLeft += 0.4; // slow drift
+            tWrap();
+          }
+          requestAnimationFrame(tAuto);
+        };
+        requestAnimationFrame(tAuto);
+      }
+    }
+
+    // --- Partner logo strips: guarantee a seamless (endless) loop ---
+    // The CSS animates each .partner-marquee-track by -50%, which only reads as
+    // an endless circular strip when the track is at least as wide as its frame
+    // (otherwise a short strip - e.g. two logos - scrolls off and leaves an
+    // empty gap before it restarts). The markup already ships two copies of each
+    // set; here we clone those current children (always an even number of sets,
+    // so the -50% boundary stays identical) until the track is >= 2x its frame,
+    // so there is never a visible start or end point regardless of logo count.
+    document.querySelectorAll(".partner-marquee").forEach(function (marq) {
+      var track = marq.querySelector(".partner-marquee-track");
+      if (!track) return;
+      var originals = Array.prototype.slice.call(track.children);
+      if (!originals.length) return;
+      var guard = 0;
+      while (track.scrollWidth < marq.clientWidth * 2 && guard < 30) {
+        originals.forEach(function (node) {
+          track.appendChild(node.cloneNode(true));
+        });
+        guard++;
+      }
+    });
+
+    // --- "This is the ladder": make all three columns the same height ---
+    // Three columns sit side by side: the heading+ticks (left), the 3:4 image
+    // carousel (centre), and the "17 years" story card (right). They must end up
+    // the same height. The carousel's height is derived from its width via the
+    // CSS aspect-ratio, so it can't simply stretch; we drive everything from a
+    // single measured target instead.
+    //
+    // Target = the tallest of the two text columns' *content* heights (measured,
+    // not their grid-stretched box heights - stretching is exactly what we're
+    // trying to compute). The carousel is then sized to that height at 3:4
+    // (width = target x 3/4), and both text columns are pinned to it with a
+    // min-height. Portrait 3:4 is why this is possible at all: at the target
+    // height its width (~target x 0.75) still fits the centre track. Runs after
+    // fonts load, because web-font swap changes the text columns' heights and an
+    // early measurement (the old bug) left the carousel undersized.
+    var ladderStory = document.querySelector("#section-story");
+    if (ladderStory) {
+      var ladderHeader = ladderStory.querySelector(".overview-header");
+      var ladderTitle = ladderStory.querySelector(".overview-header .title-wrap");
+      var ladderCarousel = ladderStory.querySelector(".slider-wrap");
+      var ladderCard = ladderStory.querySelector(".overview-story-card");
+      if (ladderHeader && ladderCarousel && ladderCard) {
+        var equalizeLadder = function () {
+          // Reset so every measurement is of natural content, not a prior pass.
+          ladderCarousel.style.height = "";
+          ladderCard.style.minHeight = "";
+          ladderHeader.style.minHeight = "";
+          if (window.innerWidth < 992) return;
+          // Height comes from the taller of the two text columns' content; the
+          // image has no fixed aspect, so it just fills its column's width (CSS)
+          // and takes this height. The nested Webflow slider carries its own
+          // height, so the explicit height here is what actually sizes the tile.
+          //
+          // The card is a stretch grid item, so its scrollHeight would report the
+          // row height, not its own content - a feedback loop. Un-stretch it
+          // (align-self:start) just for the measurement, then restore.
+          var headerH = ladderTitle ? ladderTitle.offsetHeight : ladderHeader.scrollHeight;
+          ladderCard.style.alignSelf = "start";
+          var cardH = ladderCard.offsetHeight;
+          ladderCard.style.alignSelf = "";
+          var contentH = Math.max(headerH, cardH);
+          // Floor the tile at a 16:9 box (height = width x 9/16) so its slide,
+          // badge and arrows stay visible at tablet widths, where the adjacent
+          // text columns can be shorter than that. All three columns take the
+          // larger of the two so they stay equal.
+          var floor = Math.round(ladderCarousel.offsetWidth * 9 / 16);
+          var target = Math.max(contentH, floor);
+          if (target <= 0) return;
+          ladderCarousel.style.height = target + "px";
+          ladderCard.style.minHeight = target + "px";
+          ladderHeader.style.minHeight = target + "px";
+        };
+        equalizeLadder();
+        window.addEventListener("resize", equalizeLadder);
+        window.addEventListener("load", equalizeLadder);
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(equalizeLadder);
+        }
+      }
+    }
+
     // --- Scroll progress bar ---
     // Fills 0-100% left-to-right as the page scrolls. See HANDOVER.md
     // "Scroll progress bar" - site-wide component, add to every future page.
@@ -606,6 +752,86 @@
       window.matchMedia &&
       window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+    // --- Hero banner text: fixed line counts on every banner and viewport ---
+    // Each banner's heading must always read as exactly one line, and its
+    // sub-heading as exactly two, on any screen size - the three banners have
+    // different copy lengths and the same font-size can't hit that target for
+    // all of them at every viewport, so each element's own font-size is
+    // solved for independently.
+    //
+    // Inactive banners are visibility:hidden, not display:none (see
+    // .hero-slide below), so they still lay out and can be measured/sized -
+    // this runs across all three regardless of which is currently shown.
+    var fitTextLines = function (el, targetLines, minPx, maxPx) {
+      if (!el || !el.textContent.trim()) return;
+      var countLines = function (px) {
+        el.style.fontSize = px + "px";
+        // Measured fresh at each size, not cached once before the loop: with a
+        // unitless line-height this is genuinely a different pixel value at
+        // every font-size, so a value captured up front would go stale the
+        // moment the first candidate size is tried.
+        var lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+        if (!lineHeight) return targetLines;
+        return Math.round(el.scrollHeight / lineHeight);
+      };
+      // Binary search for the LARGEST font-size at which the element wraps to
+      // at most targetLines. Line count only grows as font-size grows (same
+      // width, bigger glyphs), so that boundary is single and monotonic.
+      var lo = minPx, hi = maxPx, best = minPx;
+      for (var i = 0; i < 16; i++) {
+        var mid = (lo + hi) / 2;
+        if (countLines(mid) <= targetLines) { best = mid; lo = mid; } else { hi = mid; }
+      }
+      el.style.fontSize = best + "px";
+    };
+
+    var fitHeroText = function () {
+      var slides = document.querySelectorAll(".hero-slide");
+      slides.forEach(function (slide) {
+        var heading = slide.querySelector(".hero-slide__heading");
+        var sub = slide.querySelector(".hero-slide__sub");
+        // Headings target 1 line via a different technique: measure the
+        // unwrapped width (nowrap) against the available width, rather than
+        // scrollHeight/lineHeight - a single line's own line-count is always 1
+        // by definition, so the earlier line-counting method can't detect
+        // "would this wrap" the way it can for 2+ lines.
+        if (heading && heading.textContent.trim()) {
+          var container = heading.closest(".hero-slides") || heading.parentElement;
+          // -2px safety margin: scrollWidth is reported as an integer, rounded
+          // from the element's true fractional layout width. A search that
+          // targets the exact boundary (scrollWidth <= available) can land on
+          // a size whose rounded-down scrollWidth just barely passes while its
+          // true width is a hair over - enough to still force a wrap once
+          // white-space goes back to normal. The margin keeps the chosen size
+          // clear of that edge.
+          var available = container.clientWidth - 2;
+          var prevWhiteSpace = heading.style.whiteSpace;
+          heading.style.whiteSpace = "nowrap";
+          // Floor of 12px (not 20px): on the narrowest phones the longest
+          // banner heading doesn't fit on one line even at 20px, and staying
+          // single-line is the explicit requirement - so the search is allowed
+          // to go smaller rather than give up and wrap.
+          var lo = 12, hi = 52, best = 12;
+          for (var i = 0; i < 16; i++) {
+            var mid = (lo + hi) / 2;
+            heading.style.fontSize = mid + "px";
+            if (heading.scrollWidth <= available) { best = mid; lo = mid; } else { hi = mid; }
+          }
+          heading.style.fontSize = best + "px";
+          heading.style.whiteSpace = prevWhiteSpace;
+        }
+        if (sub) fitTextLines(sub, 2, 14, 32);
+      });
+    };
+
+    if (document.querySelector(".hero-slides")) {
+      fitHeroText();
+      window.addEventListener("resize", fitHeroText);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(fitHeroText);
+      }
+    }
+
     // --- Hero banner rotation ---
     // Three text banners cycle in the same spot. Deliberately plain CSS class
     // toggling plus a CSS transition rather than a GSAP tween: the hero must
@@ -621,69 +847,109 @@
       var heroSlides = Array.prototype.slice.call(
         heroSlidesRoot.querySelectorAll(".hero-slide")
       );
-      var heroDots = Array.prototype.slice.call(
-        document.querySelectorAll("[data-hero-dots] .hero-slide-dot")
+      var heroBars = Array.prototype.slice.call(
+        document.querySelectorAll("[data-hero-dots] .hero-slide-bar")
+      );
+      var heroFills = heroBars.map(function (b) {
+        return b.querySelector(".hero-slide-bar__fill");
+      });
+      // The per-banner tick sets pinned to the bottom of the fold; swapped in
+      // lockstep with the banner so the bottom row always matches what's shown.
+      var heroTickSets = Array.prototype.slice.call(
+        document.querySelectorAll("[data-hero-ticks] .hero-ticks__set")
+      );
+      // Each slide carries its own CTA label (data-cta); the button itself is
+      // one shared element outside the rotation (it opens the same popup
+      // regardless of banner), so only its text swaps.
+      var heroCtaText = heroSlidesRoot.parentElement.querySelector(
+        ".primary-button .button-text"
       );
       var reduceMotionHero =
         window.matchMedia &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+      var heroIndex = 0;
+      var setHeroActive = function (next) {
+        heroSlides.forEach(function (el, i) {
+          el.classList.toggle("is-active", i === next);
+        });
+        heroBars.forEach(function (b, i) {
+          b.classList.toggle("is-active", i === next);
+          b.setAttribute("aria-selected", i === next ? "true" : "false");
+        });
+        heroTickSets.forEach(function (s, i) {
+          s.classList.toggle("is-active", i === next);
+        });
+        if (heroCtaText) {
+          var cta = heroSlides[next].getAttribute("data-cta");
+          if (cta) heroCtaText.textContent = cta;
+        }
+        // Reset every bar's fill; the active one refills from 0 (driven by the
+        // rAF loop, or set full immediately under reduced motion).
+        heroFills.forEach(function (f) {
+          if (f) f.style.transform = "scaleX(0)";
+        });
+        heroIndex = next;
+      };
+
       if (heroSlides.length > 1 && !reduceMotionHero) {
         var HERO_SLIDE_MS = 6000;
-        var heroIndex = 0;
-        var heroTimer = null;
-
-        var showHeroSlide = function (next) {
-          heroSlides.forEach(function (el, i) {
-            el.classList.toggle("is-active", i === next);
-          });
-          heroDots.forEach(function (d, i) {
-            d.classList.toggle("is-active", i === next);
-            d.setAttribute("aria-selected", i === next ? "true" : "false");
-          });
-          heroIndex = next;
-        };
-        var advanceHero = function () {
-          showHeroSlide((heroIndex + 1) % heroSlides.length);
-        };
-        // Paused is a state, not just "timer cleared". Clicking a dot restarts
-        // the interval, and without tracking this a click while the pointer is
-        // still over the hero would resume rotation - defeating pause-on-hover
-        // and changing the banner out from under whoever just chose it.
         var heroPaused = false;
-        var stopHero = function () {
-          if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
-        };
-        var startHero = function () {
-          stopHero();
-          if (!heroPaused) heroTimer = setInterval(advanceHero, HERO_SLIDE_MS);
-        };
-        var pauseHero = function () { heroPaused = true; stopHero(); };
-        var resumeHero = function () { heroPaused = false; startHero(); };
+        var progress = 0; // ms elapsed on the current banner
+        var lastTs = null;
 
-        // Dots jump straight to a banner. The timer restarts on click so the
-        // chosen banner gets a full interval rather than whatever was left of
-        // the previous one.
-        heroDots.forEach(function (dot, i) {
-          dot.addEventListener("click", function () {
-            showHeroSlide(i);
-            startHero();
+        // One rAF loop drives BOTH the auto-advance and the bar fill, so the
+        // fill can never drift out of sync with the rotation, and pausing
+        // freezes the fill exactly where it is (a CSS transition couldn't).
+        var heroFrame = function (ts) {
+          if (lastTs === null) lastTs = ts;
+          // Clamp dt so a backgrounded tab returning can't skip banners.
+          var dt = Math.min(ts - lastTs, 100);
+          lastTs = ts;
+          if (!heroPaused) {
+            progress += dt;
+            if (progress >= HERO_SLIDE_MS) {
+              progress = 0;
+              setHeroActive((heroIndex + 1) % heroSlides.length);
+            }
+          }
+          var fill = heroFills[heroIndex];
+          if (fill) {
+            fill.style.transform =
+              "scaleX(" + Math.min(progress / HERO_SLIDE_MS, 1) + ")";
+          }
+          requestAnimationFrame(heroFrame);
+        };
+
+        // Bars jump straight to a banner and restart its progress from 0.
+        heroBars.forEach(function (bar, i) {
+          bar.addEventListener("click", function () {
+            progress = 0;
+            setHeroActive(i);
           });
         });
 
-        startHero();
-        var heroSection = document.querySelector(".section-hero");
-        if (heroSection) {
-          heroSection.addEventListener("mouseenter", pauseHero);
-          heroSection.addEventListener("mouseleave", resumeHero);
-          heroSection.addEventListener("focusin", pauseHero);
-          heroSection.addEventListener("focusout", resumeHero);
-        }
-        // Nothing is animating off-screen: a background tab throttles the
-        // timer anyway, but this stops it advancing several banners at once
-        // the moment the tab is restored.
+        setHeroActive(0);
+        requestAnimationFrame(heroFrame);
+
+        // Deliberately no pause-on-hover/focus: the bars keep advancing while
+        // the pointer is over the hero, and a click just jumps to that banner
+        // and lets its progress run from 0 (per request).
+        // Still pause accrual while the tab is hidden; lastTs advances each
+        // frame regardless, so there's no jump on return.
         document.addEventListener("visibilitychange", function () {
-          if (document.hidden) stopHero(); else startHero();
+          heroPaused = document.hidden;
+        });
+      } else {
+        // Reduced motion (or a single banner): no auto-advance. Show banner 1
+        // with its bar filled, and let clicks switch banners.
+        setHeroActive(0);
+        if (heroFills[heroIndex]) heroFills[heroIndex].style.transform = "scaleX(1)";
+        heroBars.forEach(function (bar, i) {
+          bar.addEventListener("click", function () {
+            setHeroActive(i);
+            if (heroFills[i]) heroFills[i].style.transform = "scaleX(1)";
+          });
         });
       }
     }

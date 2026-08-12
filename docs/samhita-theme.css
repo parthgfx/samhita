@@ -1265,9 +1265,9 @@ html {
    clean single column - never a partial wrap. */
 .section-stats-bar {
   background: #fff;
-  /* 3rem = the 48px every other fold's .padding-vertical resolves to, so this
-     band matches the rest rather than sitting 8px taller on each side. */
-  padding: 3rem 0;
+  /* Sits directly under the hero as a thin strip, so the band is tighter than
+     the 3rem every other fold's .padding-vertical resolves to. */
+  padding: 1.5rem 0;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -1319,19 +1319,57 @@ html {
   }
 }
 
+/* Single row of four from landscape-tablet widths up (was 1320px). Equal 1fr
+   columns keep all four on one line at ~992px; the numbers shrink to fit and
+   scale back up at desktop. */
+@media screen and (min-width: 992px) {
+  .stats-bar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 1.75rem;
+    row-gap: 0;
+  }
+  .stats-bar-item {
+    justify-content: flex-start;
+    text-align: left;
+    gap: 0.7rem;
+  }
+  .stats-bar-number {
+    font-size: 2rem;
+  }
+  .stats-bar-label {
+    font-size: 0.7rem;
+    max-width: 115px;
+  }
+}
+
 @media screen and (min-width: 1320px) {
   .stats-bar {
     grid-template-columns: repeat(4, auto);
     justify-content: space-between;
   }
-  .stats-bar-item {
-    justify-content: flex-start;
-    text-align: left;
-  }
   .stats-bar-number {
     /* 20% down from 4.25rem */
     font-size: 3.4rem;
   }
+  .stats-bar-label {
+    font-size: 0.72rem;
+    max-width: 120px;
+  }
+}
+
+/* "View our full impact dashboard" CTA below the stats row - just the
+   accordion/tile CTA style (text + the circular arrow button that turns blue
+   on hover), no tile background or pattern; the stats bar itself stays plain
+   white like the rest of the strip. */
+.stats-bar-dashboard-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e5e7eb;
+}
+.stats-bar-dashboard-cta .secondary-button {
+  display: inline-flex;
 }
 
 
@@ -1788,7 +1826,10 @@ html {
 .hero-slide__heading {
   font-size: 3rem;
   font-weight: 300;
-  line-height: 110%;
+  /* Unitless, not a percentage: samhita-interactions.js resizes this element's
+     own font-size per banner/viewport, and a unitless ratio recomputes live
+     against the current font-size on the same element either way. */
+  line-height: 1.1;
   letter-spacing: -0.01em;
 }
 .hero-slide__stages {
@@ -1804,6 +1845,15 @@ html {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color--base--white);
+  /* Without its own line-height this inherited body's `130%` - a PERCENTAGE
+     line-height computes to a fixed px value on the element it's specified on
+     (body, at body's 1rem font-size) and that fixed px is what's inherited,
+     not the percentage itself. samhita-interactions.js scales this element's
+     own font-size up well past body's, so the inherited ~21px line box became
+     shorter than the enlarged glyphs and the wrapped lines visually
+     overlapped. An explicit unitless ratio here recomputes against this
+     element's own (dynamically changing) font-size instead. */
+  line-height: 1.3;
 }
 .hero-slide__body {
   max-width: 46rem;
@@ -1812,43 +1862,57 @@ html {
   opacity: 0.92;
 }
 
-.hero-slide-dots {
+/* Progress bars replace the old dots: each banner has a bar, the active one
+   fills over the slide's own duration (driven per-frame by samhita-interactions
+   .js so it pauses exactly when the rotation does), and every bar is a real
+   click target that jumps to its banner. */
+.hero-slide-bars {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 22rem;
+  margin: 0 auto;
 }
-.hero-slide-dot {
+.hero-slide-bar {
   position: relative;
-  width: 8px;
-  height: 8px;
+  flex: 1 1 0;
+  height: 4px;
   padding: 0;
   border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.38);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
 }
-/* The dot itself stays small, but the tappable area is padded out to 44px so
-   it clears the minimum touch-target size without changing how it looks. */
-.hero-slide-dot::before {
+/* The bar stays 4px tall, but the tappable area is padded out to 44px so it
+   clears the minimum touch-target size without changing how it looks. */
+.hero-slide-bar::before {
   content: "";
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 50%;
-  width: 44px;
+  width: 100%;
   height: 44px;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
 }
-.hero-slide-dot:hover {
-  background: rgba(255, 255, 255, 0.75);
-}
-.hero-slide-dot:focus-visible {
-  outline: 2px solid var(--color--base--white);
-  outline-offset: 4px;
-}
-.hero-slide-dot.is-active {
+.hero-slide-bar__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   background: var(--color--base--white);
-  transform: scale(1.4);
+  transform: scaleX(0);
+  transform-origin: left center;
+  /* JS sets transform each frame; no CSS transition so the rAF loop is the only
+     thing driving the fill (and pause freezes it precisely). */
+  pointer-events: none;
+}
+.hero-slide-bar:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+.hero-slide-bar:focus-visible {
+  outline: 2px solid var(--color--base--white);
+  outline-offset: 6px;
 }
 
 /* Screen-reader-only, for the page's real <h1> above. */
@@ -1865,11 +1929,53 @@ html {
   border: 0;
 }
 
-/* Content sits 25% of its own height above centre, per request. A percentage
-   translate resolves against the element itself, so this holds regardless of
-   which banner is showing (they differ in height). */
+/* Hero content sits 25% of its own height above centre, per request (its
+   original position). Deliberately NOT position:relative on .layout-centered
+   .is-hero: that would make it the containing block for the full-bleed photo
+   (.hero-bg-fixed) and inset the photo by .padding-horizontal's padding -
+   edge-to-edge on desktop but visible grey bands on mobile. .hero-ticks below
+   is absolute too, so it anchors to .section-hero (which owns the containing
+   block via its perspective), exactly like the photo does. */
 .layout-centered.is-hero .hero-content {
   transform: translateY(-25%);
+}
+
+/* Per-banner ticks pinned to the bottom of the fold (matching where the
+   original trust row sat), independent of the vertically-centred content
+   above. Anchored to .section-hero (the perspective containing block), so it
+   spans the full fold width like the photo. Only the .is-active set shows; the
+   sets are stacked in one grid cell so the row height never jumps as banners
+   with different tick counts swap. */
+.hero-ticks {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 2.5rem;
+  z-index: 1;
+  display: grid;
+}
+.hero-ticks__set {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.6rem 2.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.hero-ticks__set.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+.hero-ticks__set strong { font-weight: 700; }
+@media screen and (max-width: 767px) {
+  .hero-ticks { bottom: 1.5rem; }
+  .hero-ticks__set { gap: 0.5rem 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-ticks__set { transition: none; }
 }
 
 @media screen and (max-width: 767px) {
@@ -2249,6 +2355,42 @@ html {
   line-height: 1.35;
   color: var(--color--base--accent);
 }
+/* The "Who / Outcome" column is a flex column so the image tile beneath the
+   outcome can flex-grow into whatever height is left. Because the two panel
+   columns are a stretch grid, this column is already as tall as the (taller)
+   steps column, so the growing tile's bottom edge lands exactly on the steps'
+   bottom edge. */
+.pathways-who {
+  display: flex;
+  flex-direction: column;
+}
+.pathways-who-image {
+  flex: 1 1 auto;
+  min-height: 12rem;
+  margin-top: 2rem;
+  border-radius: var(--border--color-size--radius-outer);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color--base--accent) 8%, #eef0f2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Placeholder label; swap the whole <div> for an <img class="pathways-who-image">
+   (or nest one inside) when the real photo is ready. */
+.pathways-who-image span {
+  font-family: var(--font--primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color--text--text-muted);
+}
+.pathways-who-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .pathways-step {
   display: grid;
   grid-template-columns: 3rem minmax(0, 1fr);
@@ -2376,29 +2518,26 @@ html {
 /* ═══════════════════════════════════════════════════════════════════════
    FROM THE FIELD (#section-field)
 
-   Two stories side by side, deliberately staggered: the right-hand one starts
-   lower and its photo is shorter, so the pair reads as an editorial spread
-   rather than a symmetrical two-up card grid. Same brand type and accent as
-   the rest of the site rather than the reference's rust-on-cream.
+   Three columns: the section heading in its own leftmost column (matching the
+   big-heading pattern used by every other section), then the two stories to
+   its right, staggered - the second one starts lower and its photo is
+   shorter, so the pair reads as an editorial spread rather than a symmetrical
+   two-up card grid. Same brand type and accent as the rest of the site rather
+   than the reference's rust-on-cream.
    ═══════════════════════════════════════════════════════════════════════ */
 .section-field {
   background: var(--color--backgrounds--bg-page);
 }
-.field-eyebrow {
-  margin: 0 0 2.5rem;
-  font-family: var(--font--primary);
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color--text--text-muted);
-}
 .field-grid {
   display: grid;
   /* minmax(0,...) so a long title cannot widen its column past its track */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   gap: 4rem;
   align-items: start;
 }
+/* No padding here: the box top already lands exactly on the story columns'
+   top (the grid's align-items:start), so the heading's own top edge is what
+   should align with the media - any padding here just pushes it back down. */
 /* The stagger. The offset is on the second story only, so the first sits at
    the top of the section and the second drops below it. */
 .field-story--2 {
@@ -2436,7 +2575,9 @@ html {
   font-size: 1.0625rem;
   line-height: 1.6;
   color: var(--color--text--text-muted);
-  max-width: 32rem;
+  /* No max-width: the body should read the same width as the photo above it
+     (previously capped at 32rem, narrower than every photo). */
+  width: 100%;
 }
 
 @media screen and (max-width: 991px) {
@@ -2450,9 +2591,6 @@ html {
   }
   .field-story-title {
     font-size: 1.5rem;
-  }
-  .field-eyebrow {
-    margin-bottom: 1.75rem;
   }
 }
 
@@ -2505,4 +2643,576 @@ html {
     border-top: 1px solid rgba(255, 255, 255, 0.35);
     padding-top: 1.75rem;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HERO TICKS BOTTOM ROW + "THIS IS THE LADDER" (reverted to template layout)
+   The hero tick styling lives up with the rest of the hero rules
+   (.hero-ticks / .hero-ticks__set, near .layout-centered.is-hero above).
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* "This is the ladder": three equal-height columns (heading+ticks | 3:4 image |
+   "17 years" card). The Webflow overview layout nests three grids, and two of
+   them carry a phantom empty second row left over from the original design:
+   .overview-header resolves to rows `423px 0px` (+24px gap) and
+   .overview-body--pair to `624px 0px` (+40px gap). Those empty rows inflated the
+   columns ~40px past their content, so the image (sized to content height by JS)
+   never matched the text columns. Collapse each nested grid to a single
+   content row, and pin the whole block to one outer row, so all three columns
+   resolve to the same height. Desktop only; below 992px the layout stacks.
+   Pairs with the equalizeLadder() sizing in samhita-interactions.js. */
+@media screen and (min-width: 992px) {
+  #section-story .layout-grid {
+    grid-template-rows: auto;
+  }
+  #section-story .overview-header {
+    grid-row: 1 / 2;
+    grid-template-rows: auto;
+    row-gap: 0;
+  }
+  #section-story .overview-body--pair {
+    grid-row: 1 / 2;
+    align-self: stretch;
+    grid-template-rows: auto;
+    row-gap: 0;
+  }
+}
+
+/* ── Catalytic Initiatives: two CTAs side by side ──
+   The dashboard link joins the "Explore Catalytic Finance" button. Both sit on
+   the dark tractor photo, so the secondary link is forced white to read. */
+.cta-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 1.75rem;
+}
+#section-catalytic .secondary-button.is-on-photo {
+  color: #fff;
+}
+#section-catalytic .secondary-button.is-on-photo .arrow-tail-button {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Navbar above the footer ──
+   The template footer is z-index:100 and the navbar 99, so a dropdown opened
+   while scrolled near the bottom was painted OVER by the footer. The navbar
+   (and its open dropdowns) should be the top-most non-modal layer, so it goes
+   above the footer; the popup modal is lifted just above the navbar so an open
+   inquiry form still covers it, and the loader (1000) / scroll bar (105) are
+   already higher. */
+.navbar-wrap {
+  z-index: 101;
+}
+.popup-form {
+  z-index: 102;
+}
+
+/* ── Footer: two full office addresses ──
+   Replaces the one-line "Mumbai & Bengaluru" note. <address> defaults to
+   italic; reset it and give the two blocks room to breathe. */
+.footer-address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer-address {
+  font-style: normal;
+  line-height: 1.5;
+  max-width: 22rem;
+}
+.footer-address strong {
+  color: var(--color--base--white);
+}
+
+/* ── Catalytic Initiatives: two coloured tiles, no background box ──
+   Navy + coral cards sitting directly on the page (the tractor photo / card box
+   was removed). Each carries a mono eyebrow, a serif heading, a body line and a
+   mono tagline, with a faint ring in the top-right corner. */
+#section-catalytic .layout-centered.is-cta.is-plain {
+  display: block;
+  min-height: 0;
+}
+/* Drop the section's bottom padding so it sits flush against the next fold. */
+#section-catalytic .padding-vertical {
+  padding-bottom: 0;
+}
+.catalytic-heading {
+  color: var(--color--base--black);
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+/* The two tiles together span the page's full content width. The base
+   .cta-content carries max-width:640px (sized for a single-column CTA body),
+   which was capping the two-tile grid to less than half the page - override it. */
+#section-catalytic .cta-content {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+}
+.catalytic-tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  text-align: left;
+}
+@media screen and (min-width: 768px) {
+  .catalytic-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+/* Two bright, horizontal cards: wordmark top-left, a line of plain text and an
+   accordion-style "Learn More" CTA anchored bottom-left, over a faint diagonal
+   line pattern. Brand fonts and brand colours only (coral / yellow). */
+/* No fixed aspect-ratio: a locked 16:9 box clipped its own text (overflow is
+   hidden, for the rounded corners and diagonal pattern) once the body copy
+   needed more height than that ratio gave it at in-between viewport widths -
+   min-height sets the visual floor and the tile grows with its content
+   instead of cropping it. */
+.catalytic-tile {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  min-height: 20rem;
+  border-radius: var(--border--color-size--radius-inner);
+}
+/* A faint repeating diagonal line pattern (both diagonals => soft cross-hatch)
+   across the whole card. currentColor so it tints to each tile's text colour. */
+.catalytic-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  color: inherit;
+  opacity: 0.07;
+  background-image:
+    repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(-45deg, currentColor 0 1px, transparent 1px 22px);
+}
+/* Whole tile is a link to its initiative. */
+a.catalytic-tile {
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+a.catalytic-tile:hover,
+a.catalytic-tile:focus-visible {
+  transform: translateY(-5px);
+}
+/* Bright brand colours: coral and yellow. */
+.catalytic-tile--coral {
+  background: linear-gradient(135deg, #ff6f7d 0%, var(--color--base--accent) 55%, #d92f52 100%);
+  color: var(--color--base--white);
+}
+.catalytic-tile--yellow {
+  background: linear-gradient(135deg, #ffe27a 0%, var(--color--base--accent-yellow) 55%, #f4b81f 100%);
+  /* Dark warm text: white is illegible on the bright yellow. */
+  color: #3a2c00;
+}
+.catalytic-tile-mark {
+  font-family: var(--font--primary);
+  font-weight: 700;
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+/* Text + CTA pinned to the bottom of the card. */
+.catalytic-tile-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.catalytic-tile-text {
+  color: inherit;
+  font-family: var(--font--primary);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin: 0;
+  max-width: 32rem;
+}
+/* CTA matches the architects accordions: "Learn More" + a circular arrow
+   button, recoloured to the tile via currentColor. */
+.catalytic-tile-cta.secondary-button {
+  color: inherit;
+  align-self: flex-start;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+.catalytic-tile-cta .arrow-tail-button {
+  background: rgba(255, 255, 255, 0.2);
+}
+.catalytic-tile--yellow .catalytic-tile-cta .arrow-tail-button {
+  background: rgba(17, 24, 39, 0.12);
+}
+/* The site-wide hover rule (.secondary-button:hover .arrow-tail-button, up
+   near the arrow-tail-button definitions) turns the button blue on hover, and
+   ties in specificity with the yellow override above (3 class-level selectors
+   each) - CSS then falls back to source order, and the yellow rule comes
+   later, silently winning and blocking the hover colour on the CPMH tile only
+   (Samyak's plain-coral override has lower specificity, so it never fought the
+   hover rule). Restated here, after the yellow override, so hover wins on
+   both tiles again. */
+.catalytic-tile-cta:hover .arrow-tail-button,
+.catalytic-tile-cta:focus-visible .arrow-tail-button {
+  /* !important: empirically, the equal-specificity/later-source-order fix
+     above did not win the cascade in testing, so force it rather than keep
+     guessing at an invisible earlier rule. */
+  background: var(--color--base--accent-blue-dark) !important;
+}
+@media screen and (max-width: 767px) {
+  .catalytic-tile {
+    padding: 1.75rem;
+    min-height: 16rem;
+  }
+  .catalytic-tile-mark {
+    font-size: 1.875rem;
+  }
+  .catalytic-tile-text {
+    font-size: 1.25rem;
+  }
+}
+
+/* ── Testimonials (was "What our partners say" persona cards) ──
+   Five quote cards; 3-up on desktop so five read as a clean 3 + 2, matching the
+   supplied layout. */
+/* Ticker driven by JS scrollLeft (so the prev/next arrows can step it): an
+   overflow-x scroll container holding two copies of the five cards. Auto-
+   scrolls slowly, pauses on hover, and the arrows scroll it a card at a time.
+   Edge-faded; native scrollbar hidden; smooth for the arrow clicks. */
+.testimonial-marquee {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* No CSS scroll-behavior: the auto-drift sets scrollLeft directly each frame
+     and must apply instantly; the arrow buttons pass behavior:"smooth" per
+     click for an animated step. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.testimonial-marquee::-webkit-scrollbar {
+  display: none;
+}
+.testimonial-marquee-track {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  width: max-content;
+}
+/* Left + right prev/next controls beneath the ticker. */
+.testimonial-marquee-arrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+.testimonial-marquee-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--border--color-size--border-subtle);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color--base--accent);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.testimonial-marquee-arrow:hover,
+.testimonial-marquee-arrow:focus-visible {
+  background: var(--color--base--accent);
+  color: #fff;
+  border-color: var(--color--base--accent);
+}
+.testimonial-marquee-arrow svg {
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee { scroll-behavior: auto; }
+}
+.testimonial-card {
+  flex: 0 0 auto;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  background: #fff;
+  border-radius: var(--border--color-size--radius-inner);
+  border: 1px solid var(--border--color-size--border-subtle);
+  box-shadow: 0 12px 24px -18px rgba(17, 24, 39, 0.25);
+}
+@media screen and (max-width: 479px) {
+  .testimonial-card { width: 280px; }
+}
+.testimonial-quote {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--color--base--black);
+}
+.testimonial-quote::before {
+  content: "\201C";
+  color: var(--color--base--accent);
+  font-weight: 700;
+}
+.testimonial-quote::after {
+  content: "\201D";
+  color: var(--color--base--accent);
+  font-weight: 700;
+}
+.testimonial-author {
+  margin-top: auto;
+}
+.testimonial-name {
+  font-weight: 700;
+  color: var(--color--base--black);
+}
+.testimonial-role {
+  font-size: 0.85rem;
+  color: var(--color--text--text-muted);
+  line-height: 1.35;
+  margin-top: 0.15rem;
+}
+
+/* The intro statement now carries the section in heading font (with "9 in 10
+   Indians" greyed via .heading-accent). Sized down from the full h2 display so
+   the long sentence stays readable in the narrow left column. */
+.ladder-statement {
+  font-size: 1.9rem;
+  line-height: 1.25;
+  overflow: visible;
+}
+@media screen and (max-width: 767px) {
+  .ladder-statement { font-size: 1.6rem; }
+}
+
+/* ── Brand-pink ladder (in "This is the ladder" intro) ──
+   The named-rung ladder SVG sways slowly from a fixed base. Held to a modest
+   width so it reads as a supporting graphic under the intro copy. */
+.brand-ladder {
+  position: relative;
+  /* Centred in its column, 30% smaller than before (200px -> 140px). */
+  margin: -2.5rem auto 0;
+  align-self: center;
+  width: 100%;
+  max-width: 140px;
+  /* Rotates around its base. The infinite sway is gone: samhita-motion.js
+     scrubs the rotation from its leftmost tilt (as the top enters the viewport)
+     to its rightmost tilt (once it's fully in view) on scroll. Starts at the
+     leftmost tilt so the pre-JS / no-JS state matches the animation start. */
+  transform-origin: 50% 100%;
+  transform: rotate(-7deg);
+}
+.brand-ladder__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* Each sector name sits on its rung as a small light chip so it stays clearly
+   legible over the wood. The chip is centred horizontally on the ladder; the
+   per-rung vertical position is the inline top:% on each span (tuned once the
+   ladder image is in place). */
+.brand-ladder__rung {
+  position: absolute;
+  left: 50%;
+  /* Centred on each rung: every span's top:% is the measured centre of its rung
+     in the ladder image, so the label sits right on the bar. */
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.6rem;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75), 0 0 2px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+@keyframes brand-ladder-tilt {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(7deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-ladder { animation: none; }
+}
+
+/* ── Final CTA ("Ready to build the ladder with us?") vertical balance ──
+   The two framed photos are staggered, so the lower one sat ~4px off the
+   section's bottom edge while the top had ~13px — visibly bottom-heavy. Extra,
+   slightly-larger-at-the-bottom padding gives the block ~40px of optically
+   even breathing room top and bottom (measured at desktop). */
+/* Top pad raised to 74px so the art is framed evenly: the lower-left photo
+   overhangs the body's bottom (absorbed by the larger bottom pad), and this
+   matching top pad leaves the same ~39px of breathing above the upper-right
+   photo. Measured equal top/bottom at desktop. */
+.section-final-cta .padding-vertical {
+  padding-top: 74px;
+  padding-bottom: 84px;
+}
+@media screen and (max-width: 767px) {
+  .section-final-cta .padding-vertical {
+    padding-top: 24px;
+    padding-bottom: 56px;
+  }
+}
+/* The two framed photos stay at their original size (10rem x 14rem, from the
+   base theme) - at 1.5x they overlapped the centred heading and spilled past
+   the section edges below ~1130px, so they were reverted. */
+
+/* ── "The architects of the ladder": sticky heading + scrolling accordions ──
+   The image carousel was removed; the heading now holds the left column and
+   sticks in place while the accordion list scrolls past on the right (matching
+   the sticky-header pattern used elsewhere). Single column below desktop. */
+/* The template .layout-stack is a grid whose single track sized our new grid to
+   ~576px; a plain block lets the architects grid fill the container's full
+   width (it's the only child of the stack now). */
+#section-partners .layout-stack {
+  display: block;
+}
+.architects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+}
+@media screen and (min-width: 992px) {
+  .architects-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 3.5rem;
+  }
+  .architects-heading {
+    position: sticky;
+    top: 120px; /* clears the fixed navbar */
+    align-self: start;
+  }
+}
+
+/* ── "This is the ladder" right column: story card + carousel aspect ──
+   The 17-years line reads as a heading (with "17 years" greyed) and the avatar
+   is gone; the second sentence is the supporting body. */
+/* Same size as .ladder-statement ("9 in 10 Indians...") in the left column, so
+   the two headings that bookend the row read at the same visual weight. */
+.story-card-heading {
+  font-size: 1.9rem;
+  line-height: 1.25;
+  overflow: visible;
+}
+@media screen and (max-width: 767px) {
+  .story-card-heading { font-size: 1.6rem; }
+}
+.story-card-body {
+  margin: 0;
+  color: var(--color--text--text-muted);
+}
+
+/* Carousel has no fixed aspect ratio: it fills its column's width and takes its
+   height from the taller of the two text columns' content, so all three columns
+   match. samhita-interactions.js measures that content height and sets the
+   tile's height on load/resize; align-self:stretch makes it fill the grid row as
+   a backstop, and the Samhita card is pinned to the same height. */
+#section-story .slider-wrap {
+  width: 100%;
+  margin: 0 auto;
+  align-self: stretch;
+}
+/* Below 992px the two text columns stack instead of sitting beside the
+   carousel, so samhita-interactions.js's equalizeLadder() doesn't run here (it
+   only measures/sets height >=992px) and the tile would fall back to whatever
+   height the nested Webflow slider gives it. Floor it at ~1.4:1 (matches the
+   reference at mobile/tablet) so the slide's heading, badge and arrows always
+   have room. */
+@media screen and (max-width: 991px) {
+  #section-story .slider-wrap {
+    aspect-ratio: 1.4 / 1;
+  }
+}
+#section-story .slider-wrap .slider.is-overview,
+#section-story .slider-wrap .slider.is-overview .w-slider-mask,
+#section-story .slider-wrap .slider.is-overview .slide {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.overview-body--pair {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-areas: none !important;
+  gap: 2rem;
+  align-items: stretch;
+}
+@media screen and (min-width: 992px) {
+  .overview-body--pair {
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 2.5rem;
+  }
+}
+
+/* Ladder carousel slide captions: a big stat (bold, white - matches the label
+   and caption below it), its label, and an italic "observed in sample
+   cohorts" note - replaces the earlier headline + description pairing. */
+.ladder-slide-stat {
+  font-family: var(--font--primary);
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  color: var(--color--base--white);
+}
+.ladder-slide-label {
+  font-family: var(--font--primary);
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+/* Reads as a disclaimer/footnote rather than a third line of the caption
+   proper: smaller, muted, separated from the label above by a thin rule
+   rather than just spacing. */
+.ladder-slide-caption {
+  font-family: var(--font--primary);
+  font-style: italic;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  opacity: 0.65;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .ladder-slide-stat { font-size: 2rem; }
+  .ladder-slide-label { font-size: 1rem; }
+}
+
+/* "From the field" View Story links: the template .secondary-button is a
+   space-between flex that stretched to the full card width, flinging the arrow
+   to the far edge. Shrink it to its own content so text + arrow sit together. */
+#section-field .field-story .secondary-button {
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  /* More breathing room from the body text above it than the default flow
+     spacing gave it. */
+  margin-top: 1.25rem;
+}
+
+/* Ladder-fold sector list: one ticked rung per line (single column). */
+.tag-list.tag-list--stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
 }
