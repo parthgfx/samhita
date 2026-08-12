@@ -239,9 +239,20 @@
   opacity: 0;
 }
 /* On the OPEN panel, give the caption room so a long stat wraps to a couple of
-   lines instead of the narrow, many-line column the collapsed cap would force. */
+   lines instead of the narrow, many-line column the collapsed cap would force.
+   The base rule (above) is left-anchored only (right:auto; width:max-content),
+   so the box shrinks to whatever the widest wrapped line happens to be - the
+   gap on the right is just leftover space, not a real padding, and varies
+   with wherever the text happened to wrap. Pinning `right` too, with
+   width:auto, makes both edges genuinely 1.5rem in from the panel; max-width
+   still caps the line length on very wide expanded panels (once that cap
+   binds, the box reverts to left-anchored - the standard over-constrained
+   resolution for an absolutely positioned box with left+right+width all
+   set). */
 .ag-panel--active .ag-panel__label,
 .ag-panel.is-default-open .ag-panel__label {
+  right: 1.5rem;
+  width: auto;
   max-width: min(90%, 24rem);
 }
 .ag-panel__desc {
@@ -266,7 +277,13 @@
   .ag-panel.is-default-open {
     min-height: 15rem;
   }
+  /* Same right-anchoring as the desktop active-state rule above: pin both
+     edges so the padding is symmetric regardless of where the text happens
+     to wrap, rather than a max-width that only reads as symmetric when the
+     widest wrapped line happens to reach it. */
   .ag-panel__label {
+    right: 1.5rem;
+    width: auto;
     max-width: calc(100% - 3rem);
   }
   .ag-panel--active .ag-panel__text,
