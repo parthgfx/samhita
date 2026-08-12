@@ -1842,8 +1842,8 @@ html {
 }
 .hero-slide__sep { opacity: 0.45; font-weight: 200; }
 .hero-slide__sub {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 500;
   color: var(--color--base--white);
   /* Without its own line-height this inherited body's `130%` - a PERCENTAGE
      line-height computes to a fixed px value on the element it's specified on

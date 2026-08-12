@@ -820,7 +820,10 @@
           heading.style.fontSize = best + "px";
           heading.style.whiteSpace = prevWhiteSpace;
         }
-        if (sub) fitTextLines(sub, 2, 14, 32);
+        // Max lowered from 32 to 24: at the old cap the auto-fit (which picks
+        // the LARGEST size that still wraps to exactly 2 lines) was landing on
+        // a subheading that read too big/heavy against the heading above it.
+        if (sub) fitTextLines(sub, 2, 12, 24);
       });
     };
 
