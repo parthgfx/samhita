@@ -2739,13 +2739,18 @@ html {
    name, plain body copy and a "Learn More" CTA identical to the architects
    accordions'. Brand fonts and brand colours throughout; no dark/bright tile
    backgrounds. */
-#section-catalytic .padding-vertical {
-  padding-bottom: 0;
-}
 .catalytic-divider {
   height: 2px;
   margin-bottom: 3rem;
   background: linear-gradient(90deg, var(--color--base--accent) 0 12%, #d1d5db 12% 100%);
+}
+/* The closing rule below the initiative list, mirroring the opening one
+   above the heading: same 3rem gap from the content it sits next to, on
+   both sides this time (was previously the only divider, with the section's
+   own bottom padding zeroed so it sat flush against the next fold). */
+.catalytic-divider--bottom {
+  margin-top: 3rem;
+  margin-bottom: 0;
 }
 .catalytic-layout {
   display: grid;
