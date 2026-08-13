@@ -31,9 +31,11 @@ docs/images/index/footer/Footer-01.jpg
 docs/images/index/footer/Footer-02.jpg
 
 # Same deal again: the raw source photos for the Pathways personas
-# (7MB+ each), now shipped from docs/images/index/pathways/ as ~135-204KB
-# .webp files.
+# (7MB+ each), now shipped from docs/images/index/pathways/ as ~132-198KB
+# .webp files. Two locations: the original drop folder, and the replacement
+# PNGs dropped straight into pathways/ alongside the .webp files they update.
 docs/images/index/from the field/
+docs/images/index/pathways/*.png
 
 # Superseded hero stills, no longer referenced by any page.
 docs/new-hero copy.webp
