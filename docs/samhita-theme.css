@@ -2734,15 +2734,28 @@ html {
    was removed). Each carries a mono eyebrow, a serif heading, a body line and a
    mono tagline, with a faint ring in the top-right corner. */
 /* ── Catalytic Initiatives: editorial layout on the page's own white ──
-   A thin coral-to-grey divider, a big left-aligned heading, and a two-column
-   list of initiatives on the right - each with a coloured left rule, a bold
-   name, plain body copy and a "Learn More" CTA identical to the architects
+   A thin grey divider, a big left-aligned heading, and a two-column list of
+   initiatives on the right - each with a coloured left rule, a bold name,
+   plain body copy and a "Learn More" CTA identical to the architects
    accordions'. Brand fonts and brand colours throughout; no dark/bright tile
    backgrounds. */
 .catalytic-divider {
   height: 2px;
   margin-bottom: 3rem;
-  background: linear-gradient(90deg, var(--color--base--accent) 0 12%, #d1d5db 12% 100%);
+  background: #d1d5db;
+}
+/* Top padding raised so the gap above the top divider matches the gap below
+   the bottom one optically: below is 48px (this section's own default
+   bottom padding) + 74px (Final CTA's own top padding, tuned separately for
+   its tilted photos) = 122px total. Matching it here, rather than shrinking
+   Final CTA's padding, keeps that unrelated photo-framing untouched. */
+#section-catalytic .padding-vertical {
+  padding-top: 122px;
+}
+@media screen and (max-width: 767px) {
+  #section-catalytic .padding-vertical {
+    padding-top: 72px;
+  }
 }
 /* The closing rule below the initiative list, mirroring the opening one
    above the heading: same 3rem gap from the content it sits next to, on
