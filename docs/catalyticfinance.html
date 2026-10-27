@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samhita-CGF | Catalytic Finance</title>
+<meta name="author" content="Samhita-CGF">
+<meta name="description" content="Make your CSR rupee work harder. Catalytic finance from Samhita-CGF: Returnable Grants, Interest Subvention and Credit Guarantees.">
+<meta property="og:title" content="Samhita-CGF | Catalytic Finance">
+<meta property="og:description" content="Make your CSR rupee work harder. Catalytic finance from Samhita-CGF: Returnable Grants, Interest Subvention and Credit Guarantees.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cG9seWdvbiBmaWxsPSIjMDBhNWNmIiBwb2ludHM9IjEyMCAwIDYwIDYwIDYwIDAgMTIwIDAiLz48cG9seWdvbiBmaWxsPSIjZWY0MzY3IiBwb2ludHM9IjE4MCAwIDE4MCA2MCAxMjAgMTIwIDEyMCA2MCA2MCA2MCAxMjAgMCAxODAgMCIvPjxwb2x5Z29uIGZpbGw9IiNmZmQzNDAiIHBvaW50cz0iMTgwIDYwIDE4MCAxMjAgMTIwIDEyMCAxODAgNjAiLz48cG9seWdvbiBmaWxsPSIjNTRjMGE2IiBwb2ludHM9IjkwIDkwIDQ1IDEzNSA0NSA5MCA5MCA5MCIvPjxwb2x5Z29uIGZpbGw9IiMwMGE1Y2YiIHBvaW50cz0iOTAgOTAgOTAgMTM1IDQ1IDE4MCA0NSAxMzUgOTAgOTAiLz48cG9seWdvbiBmaWxsPSIjZmZkMzQwIiBwb2ludHM9IjQ1IDkwIDQ1IDEzNSAwIDEzNSA0NSA5MCIvPjxyZWN0IGZpbGw9IiNlZjQzNjciIHk9IjEzNSIgd2lkdGg9IjQ1IiBoZWlnaHQ9IjQ1Ii8+PHBvbHlnb24gZmlsbD0iI2ZmZDM0MCIgcG9pbnRzPSI2MCAwIDYwIDYwIDAgNjAgNjAgMCIvPjxwb2x5Z29uIGZpbGw9IiM1NGMwYTYiIHBvaW50cz0iNjAgMCAwIDYwIDAgMCA2MCAwIi8+PHBvbHlnb24gZmlsbD0iIzU0YzBhNiIgcG9pbnRzPSIxODAgMTIwIDEyMCAxODAgMTIwIDEyMCAxODAgMTIwIi8+PHBvbHlnb24gZmlsbD0iIzAwYTVjZiIgcG9pbnRzPSIxODAgMTIwIDE4MCAxODAgMTIwIDE4MCAxODAgMTIwIi8+PC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<link rel="preload" as="image" href="assets/img/cine/cf-hero.webp?v=2">
+<style>
+/* ============================================================
+   Samhita-CGF home — charity: water layout, component for component
+   1  Hero: full-bleed photo, serif headline on the photo, white widget card
+   2  Statement block: centred serif statement, yellow buttons, bordered
+      cream card with a progress ring            (their "696 million…")
+   3  Dashboard: colour band + white panel straddling it, figures across
+      the top, an explorer below                 (their impact map)
+   4  "Ready to take action?" photo-card carousel bleeding off the right edge
+   5  "Why water?" big photo with pill tabs on it + white corner card
+   6  Donation-style widget: tabs, tile grid, outcome line, full-width button
+   7  Newsletter-style split cards; table-style dashboard; column footer
+   Yellow = the logo's yellow. Tying element: a yellow ladder (rails + a rung
+   at every section boundary) that fills as you scroll.
+   ============================================================ */
+:root{
+  --ink:#222520;
+  --ink-2:#4d5048;
+  --muted:#7a7c72;
+  --cream:#fff8e6;
+  --cream-2:#fdf0c8;
+  --line:#e9e3cf;
+  --yellow:#ffd340;
+  --yellow-2:#ffc90a;
+  --yellow-ink:#e0a800;
+  --pink:#ef4266;
+  --blue:#00a5cf;
+  --serif:"Newsreader",Georgia,serif;
+  --sans:"Figtree",ui-sans-serif,system-ui,sans-serif;
+  --wrap:1180px;
+  --pad:clamp(20px,4vw,40px);
+  --hdr:64px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--hdr);-webkit-text-size-adjust:100%;scrollbar-color:var(--blue) var(--cream);scrollbar-width:thin}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--blue);border:2px solid var(--cream);border-radius:10px}
+body{background:#fff;color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.nav-lock{overflow:hidden}
+img,svg{display:block;max-width:100%}
+img{height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul,ol{list-style:none}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.12;text-wrap:balance}
+p{text-wrap:pretty}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.pk{color:var(--pink)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);position:relative}
+.caps{font-size:12px;font-weight:800;letter-spacing:.01em;text-transform:none}
+.center{text-align:center}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:48px;padding:0 26px;border-radius:4px;background:var(--yellow);color:var(--ink);font-weight:800;font-size:13px;letter-spacing:.01em;text-transform:none;white-space:nowrap;transition:background .2s,transform .15s,box-shadow .2s}
+.btn:hover{background:var(--yellow-2);box-shadow:0 10px 22px -12px rgba(224,168,0,.9)}
+.btn:active{transform:scale(.98)}
+.btn svg{width:16px;height:16px}
+@media (max-width:520px){.btn{white-space:normal;height:auto;min-height:48px;padding:12px 18px;line-height:1.35;text-align:center}}
+.btn-line{background:#fff;box-shadow:inset 0 0 0 2px var(--ink)}
+.btn-line:hover{background:var(--ink);color:#fff;box-shadow:inset 0 0 0 2px var(--ink)}
+.tl{display:inline-flex;align-items:center;gap:.4rem;font-size:12px;font-weight:800;letter-spacing:.01em;text-transform:none;border-bottom:2px solid var(--yellow);padding-bottom:3px;transition:gap .25s,border-color .25s}
+.tl:hover{gap:.7rem;border-color:var(--yellow-ink)}
+
+/* sections */
+.sec{position:relative;padding:clamp(64px,8vw,104px) 0}
+.cream{background:var(--cream)}
+.shead{text-align:center;max-width:44rem;margin:0 auto}
+.shead .caps{color:var(--ink-2)}
+.shead .caps b{color:var(--yellow-ink);margin-right:.6em}
+.shead h2{margin-top:10px;font-size:clamp(32px,3.4vw,44px)}
+.shead p.sub{margin:14px auto 0;color:var(--ink-2);max-width:36rem}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+.shadow{box-shadow:0 1px 2px rgba(34,37,32,.06),0 18px 44px -22px rgba(34,37,32,.35)}
+
+/* progress + ladder */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:90;pointer-events:none}
+.progress i{display:block;height:100%;background:var(--yellow);transform-origin:0 50%;transform:scaleX(0)}
+main{position:relative;overflow-x:clip}
+.ladder{position:absolute;top:0;height:0;left:var(--lx);right:var(--lx);pointer-events:none;z-index:5;--lx:max(8px,calc((100% - var(--wrap))/2 - 4px))}
+.ladder .rail{position:absolute;top:0;bottom:0;width:2px;background:rgba(239,66,102,.22)}
+.ladder .rail.l{left:0}.ladder .rail.r{right:0}
+.ladder .rail i{position:absolute;left:0;right:0;top:0;height:0;background:var(--pink)}
+.ladder .lrung{position:absolute;left:-100vw;right:-100vw;height:2px;transform:translateY(-50%);background:rgba(239,66,102,.22);transition:background .45s}
+.ladder .lrung.on{background:var(--pink)}
+.ladder .lrung::before,.ladder .lrung::after{content:"";position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid rgba(239,66,102,.4);transition:border-color .45s,background .45s}
+.ladder .lrung::before{left:calc(100vw - 4px)}
+.ladder .lrung::after{right:calc(100vw - 4px)}
+.ladder .lrung.on::before,.ladder .lrung.on::after{border-color:var(--pink);background:var(--pink)}
+@media (max-width:1240px){.ladder{--lx:8px}}
+@media (max-width:640px){.ladder{--lx:5px}.ladder .rail{width:1px}.ladder .lrung{height:1px}.ladder .lrung::before,.ladder .lrung::after{width:7px;height:7px;top:-3px}.ladder .lrung::before{left:calc(100vw - 3px)}.ladder .lrung::after{right:calc(100vw - 3px)}}
+
+/* ---------- header (charity: water) ---------- */
+.hdr{position:sticky;top:0;z-index:70;background:#fff;box-shadow:0 1px 0 var(--line)}
+.hdr-in{height:var(--hdr);display:flex;align-items:center;gap:16px;max-width:1440px;margin:0 auto;padding:0 var(--pad)}
+.brand{flex:none}
+.brand svg{height:36px;width:98px}
+.nav{display:flex;align-items:center;margin:0 auto}
+.nav-item{position:relative}
+.nav-top{display:inline-flex;align-items:center;gap:6px;height:var(--hdr);padding:0 10px;font-size:11.5px;font-weight:800;letter-spacing:.01em;text-transform:none;white-space:nowrap}
+.nav-top .chev{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.nav-item.open .chev{transform:translateY(1px) rotate(-135deg)}
+.nav-menu{position:absolute;top:100%;left:0;min-width:240px;background:#fff;box-shadow:0 18px 40px -16px rgba(34,37,32,.3);padding:12px 0;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .18s,transform .18s,visibility .18s;border-radius:0 0 6px 6px}
+.nav-item:nth-last-of-type(-n+3) .nav-menu{left:auto;right:0}
+.nav-item.open .nav-menu{opacity:1;visibility:visible;transform:none}
+.nav-menu a{display:block;padding:8px 20px;font-size:14px;color:var(--ink-2);transition:background .15s,color .15s}
+.nav-menu a:hover{background-color:var(--cream);color:var(--ink)}
+.hdr-right{display:flex;align-items:center;gap:14px;flex:none}
+.hdr-right .sep{width:1px;height:22px;background:var(--line)}
+.give{height:32px;padding:0 14px;font-size:11.5px}
+.ham{display:none;width:42px;height:42px;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.ham span{width:20px;height:2px;background:var(--ink);transition:transform .25s,opacity .25s}
+.ham[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham[aria-expanded="true"] span:nth-child(2){opacity:0}
+.ham[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drawer{position:fixed;inset:var(--hdr) 0 0 0;z-index:65;background:#fff;overflow-y:auto;padding:8px var(--pad) 40px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.drawer.open{opacity:1;visibility:visible}
+.d-grp{border-bottom:1px solid var(--line)}
+.d-grp>button{width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-size:12.5px;font-weight:800;letter-spacing:.01em;text-transform:none;text-align:left}
+.d-grp>button::after{content:"+";font-size:20px;font-weight:400;transition:transform .25s}
+.d-grp.open>button::after{transform:rotate(45deg)}
+.d-sub{display:none;padding:0 0 12px}
+.d-grp.open .d-sub{display:block}
+.d-sub a{display:block;padding:8px 0;color:var(--ink-2)}
+.drawer .btn{margin-top:24px;width:100%}
+@media (max-width:1280px){.nav{display:none}.hdr-right{margin-left:auto}.ham{display:flex}}
+
+/* ---------- 1. hero ---------- */
+.hero{position:relative;height:clamp(620px,calc(100svh - var(--hdr)),900px);overflow:hidden;background:#3a3a33}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 50%;opacity:0;transform:scale(1.04);transition:opacity 1s ease,transform 9s linear}
+.hero-media img.on{opacity:1;transform:scale(1.1)}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,20,16,.55) 0%,rgba(20,20,16,.32) 34%,rgba(20,20,16,0) 58%),linear-gradient(0deg,rgba(20,20,16,.18),rgba(20,20,16,0) 40%)}
+@media (prefers-reduced-motion:reduce){.hero-media img,.hero-media img.on{transform:none;transition:opacity .3s}}
+.hero .wrap{height:100%;display:flex;align-items:center}
+.hero-col{position:relative;z-index:2;width:min(520px,100%);display:flex;flex-direction:column;align-items:stretch}
+.hero h1{color:#fff;text-align:center;font-size:clamp(34px,3.4vw,46px);line-height:1.1;text-shadow:0 2px 18px rgba(0,0,0,.25);min-height:2.25em;display:flex;align-items:flex-end;justify-content:center}
+.hero h1 .pk{color:var(--yellow)}
+.widget{margin-top:22px;background:#fff;border-radius:6px;padding:18px 20px 20px;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
+.wtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;background:#f3f1ea;border-radius:4px}
+.wtabs button{position:relative;height:34px;border-radius:3px;font-size:11.5px;font-weight:800;letter-spacing:.14em;color:var(--muted);overflow:hidden;transition:background .2s,color .2s}
+.wtabs button[aria-selected="true"]{background:var(--yellow);color:var(--ink)}
+.wtabs button i{position:absolute;left:0;bottom:0;height:3px;width:0;background:rgba(34,37,32,.35)}
+.wtabs button[aria-selected="true"] i{animation:track var(--dur,7s) linear forwards}
+.hero.paused .wtabs button[aria-selected="true"] i{animation-play-state:paused}
+@keyframes track{to{width:100%}}
+.hero-body{margin-top:16px;font-size:15px;color:var(--ink-2);min-height:7.2em}
+.widget .btn{width:100%;margin-top:16px;height:52px;font-size:12.5px;letter-spacing:.1em}
+.swap{transition:opacity .35s ease,transform .35s ease}
+.swap.out{opacity:0;transform:translateY(6px)}
+@media (max-width:860px){
+  .hero{height:auto;background:#fff}
+  .hero-media{position:relative;height:52svh}
+  .hero-media img{object-position:50% 40%}
+  .hero .wrap{display:block;height:auto}
+  .hero-col{margin:-120px auto 24px;width:100%}
+  .hero h1{min-height:0;font-size:clamp(28px,7.4vw,36px)}
+  .hero-body{min-height:0}
+  .widget .btn{white-space:normal;height:auto;min-height:52px;padding:12px 16px;line-height:1.35}
+}
+
+/* ---------- 2. statement block ---------- */
+.stmt{text-align:center;max-width:46rem;margin:0 auto}
+.stmt h2{margin-top:12px;font-size:clamp(34px,3.8vw,48px)}
+.stmt .lead{margin:16px auto 0;color:var(--ink-2);max-width:34rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);max-width:52rem;margin:36px auto 0;text-align:left}
+.two p:first-child{font-size:14.5px;color:var(--ink-2)}
+.two p+p{margin-top:8px;font-family:var(--serif);font-size:20px;line-height:1.3}
+.climax{margin:36px auto 0;max-width:36rem;text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(21px,2.2vw,26px);line-height:1.35}
+.stmt-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
+.ringcard{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;max-width:44rem;margin:40px auto 0;padding:20px 26px;background:var(--cream);border:1px solid var(--cream-2);border-radius:6px;text-align:left}
+.ring{width:84px;height:84px;position:relative}
+.ring svg{width:84px;height:84px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6}
+.ring .bg{stroke:#efe6c8}
+.ring .fg{stroke:var(--blue);stroke-linecap:round;stroke-dasharray:226;stroke-dashoffset:226;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.7,.2,1)}
+.ringcard.in .ring .fg{stroke-dashoffset:0}
+.ring .rung-ico{position:absolute;inset:0;display:grid;place-items:center}
+.ring .rung-ico svg{width:30px;height:30px;transform:none}
+.ringcard h3{font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:0;line-height:1.4}
+.ringcard h3 .pk{color:var(--pink)}
+.ringcard p{margin-top:4px;font-size:14px;color:var(--ink-2)}
+@media (max-width:700px){.two{grid-template-columns:1fr}.ringcard{grid-template-columns:1fr;justify-items:center;text-align:center}}
+
+/* ---------- 3. dashboard ---------- */
+#impact{padding:0 0 clamp(64px,8vw,104px)}
+.band{background:var(--yellow);padding:clamp(56px,7vw,88px) 0 190px;text-align:center}
+.band .caps{color:var(--ink)}
+.band h2{margin-top:10px;font-size:clamp(34px,3.6vw,46px)}
+.band .tl{margin-top:16px;border-color:var(--ink)}
+.dash{position:relative;margin-top:-150px;background:#fff;border-radius:8px;overflow:hidden}
+.dash-head{display:grid;grid-template-columns:150px repeat(6,1fr);align-items:stretch;border-bottom:1px solid var(--line)}
+.dash-head .who{display:flex;align-items:center;justify-content:center;padding:14px;border-right:1px solid var(--line)}
+.dash-head .who svg{width:110px;height:40px}
+.st{padding:18px 14px;text-align:center}
+.st+.st{border-left:1px solid var(--line)}
+.st dd{font-family:var(--serif);font-size:clamp(26px,2.4vw,32px);line-height:1}
+.st dd .u{color:var(--yellow-ink)}
+.st dt{margin-top:6px;font-size:11.5px;color:var(--muted);line-height:1.3}
+.explore{display:grid;grid-template-columns:330px 1fr;min-height:520px}
+.elist{border-right:1px solid var(--line);display:flex;flex-direction:column}
+.ehead{padding:18px 22px;border-bottom:1px solid var(--line);text-align:center;font-size:clamp(22px,2vw,26px);background:var(--cream)}
+.ebtn{display:grid;grid-template-columns:30px 1fr 16px;align-items:center;gap:10px;padding:11px 18px;text-align:left;border-bottom:1px solid var(--line);transition:background .2s}
+.ebtn:last-child{border-bottom:0}
+.ebtn:hover{background-color:var(--cream)}
+.ebtn[aria-selected="true"]{background-color:var(--cream-2)}
+.ebtn .n{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--cream);font-size:11px;font-weight:800;transition:background .2s}
+.ebtn[aria-selected="true"] .n{background:var(--yellow)}
+.ebtn .t{font-family:var(--serif);font-size:17px;line-height:1.2}
+.ebtn .ar{width:14px;height:14px;opacity:0;transform:translateX(-4px);transition:opacity .2s,transform .2s}
+.ebtn[aria-selected="true"] .ar{opacity:1;transform:none}
+.emap{position:relative;overflow:hidden}
+.emap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+.dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
+.dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
+.etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
+.etip.out{opacity:0;transform:translateY(6px)}
+.etip h3{font-size:22px}
+.etip p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
+.etip .go{display:inline-grid;place-items:center;margin-top:12px;width:40px;height:40px;border-radius:50%;background:var(--yellow);transition:transform .2s,background .2s}
+.etip .go:hover{background:var(--yellow-2);transform:translateX(2px)}
+.etip .go svg{width:16px;height:16px}
+@media (max-width:1060px){.dash-head{grid-template-columns:repeat(3,1fr)}.dash-head .who{grid-column:1/-1;border-right:0;border-bottom:1px solid var(--line)}.st:nth-child(5){border-left:0}.st:nth-child(n+5){border-top:1px solid var(--line)}}
+@media (max-width:860px){.explore{grid-template-columns:1fr}.elist{border-right:0;border-bottom:1px solid var(--line)}.emap{min-height:440px}}
+@media (max-width:520px){.dash-head{grid-template-columns:1fr 1fr}.st{border-left:0!important}.st:nth-child(odd){border-left:1px solid var(--line)!important}.st:nth-child(n+2){border-top:1px solid var(--line)}.st:nth-child(2){border-top:0}}
+
+/* ---------- 4. take-action carousel ---------- */
+/* the carousel scrolls inside the ladder frame, so cards never pass under the rails */
+.rail-wrap{max-width:var(--wrap);margin:clamp(32px,4vw,44px) auto 0;padding:0 var(--pad)}
+.rail-clip{overflow:hidden}
+.track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px 0 18px}
+.track::-webkit-scrollbar{display:none}
+.tcard{flex:0 0 clamp(250px,24vw,290px);scroll-snap-align:start}
+.tph{position:relative;aspect-ratio:3/4;border-radius:6px;overflow:hidden;background:var(--cream-2)}
+.tph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.tcard:hover .tph img{transform:scale(1.05)}
+.tph h3{position:absolute;left:12px;right:12px;bottom:12px}
+.tph h3 a{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(255,255,255,.95);font-family:var(--sans);font-size:11.5px;font-weight:800;letter-spacing:.01em;text-transform:none;line-height:1.2;width:max-content;max-width:100%}
+.tph h3 i{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--yellow);flex:none;transition:transform .25s}
+.tph h3 i svg{width:13px;height:13px}
+.tcard:hover .tph h3 i{transform:rotate(-45deg)}
+.tcard p{margin-top:12px;font-size:14.5px;color:var(--ink-2)}
+.tcard .tl{margin-top:12px}
+.arrows{display:flex;justify-content:center;gap:34px;margin-top:8px}
+.arrows button{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;transition:background .2s,opacity .2s}
+.arrows button:hover{background:var(--cream-2)}
+.arrows button[disabled]{opacity:.3;cursor:default;background:none}
+.arrows svg{width:28px;height:28px}
+
+/* ---------- 5. why-water tabbed photo ---------- */
+.why{position:relative;margin-top:clamp(32px,4vw,44px);aspect-ratio:21/10;border-radius:6px;overflow:hidden;background:var(--cream-2)}
+.why .imgs{position:absolute;inset:0}
+.why img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
+.why img.on{opacity:1}
+.pills{position:absolute;top:18px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:8px;z-index:2;width:max-content;max-width:calc(100% - 32px)}
+.pill{height:30px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.9);font-size:11px;font-weight:800;letter-spacing:.01em;text-transform:none;white-space:nowrap;transition:background .2s,transform .2s;font-family:var(--sans)}
+.pill:hover{transform:translateY(-1px)}
+.pill[aria-selected="true"]{background:var(--yellow)}
+.wcard{position:absolute;right:22px;bottom:22px;width:min(380px,calc(100% - 44px));background:#fff;border-radius:6px;padding:20px 22px;z-index:2;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
+.wcard.out{opacity:0;transform:translateY(6px)}
+.wcard p{font-size:14.5px;color:var(--ink-2)}
+.wcard .tl{margin-top:14px}
+.why-more{text-align:center;margin-top:26px}
+@media (max-width:760px){.why{aspect-ratio:auto;display:flex;flex-direction:column;background:#fff;overflow:visible}.why .imgs{position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden}.pills{position:relative;top:auto;left:auto;transform:none;max-width:100%;margin:0 auto 12px;order:-1}.pill{background:var(--cream)}.wcard{position:relative;right:auto;bottom:auto;width:auto;margin:-36px 12px 0}}
+
+/* ---------- 6. donation-style widget — sized to fit one screen ---------- */
+#pathways{padding:clamp(18px,4vh,56px) 0;min-height:min(calc(100svh - var(--hdr)),860px);display:flex;align-items:center}
+#pathways>.wrap{width:100%}
+#pathways .shead h2{margin-top:6px;font-size:clamp(28px,2.8vw,38px)}
+#pathways .shead p.sub{margin-top:8px;font-size:15px}
+.pw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);margin-top:clamp(18px,2.4vw,26px);background:#fff;border-radius:8px;overflow:hidden}
+.pw-l{display:flex;flex-direction:column;border-right:1px solid var(--line);min-width:0}
+.pw-photo{background:var(--cream-2)}
+.pw-photo img{display:block;width:100%;height:auto;transition:opacity .22s}
+.pw-foot{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:18px 22px;background:var(--cream);transition:opacity .22s}
+.pw-out{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-2)}
+.pw-num{font-family:var(--serif);font-size:clamp(34px,3vw,42px);line-height:1;color:var(--ink);flex:none}
+.pw-out .drop{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--yellow);flex:none}
+.pw-out .drop svg{width:15px;height:15px}
+.pw .btn{width:100%;height:50px}
+.pw-body{padding:18px 22px 20px;min-width:0;transition:opacity .22s}
+.pw.swap .pw-body>*:not(.pw-tabs),.pw.swap .pw-photo img,.pw.swap .pw-foot{opacity:0}
+.pw-tabs{display:grid;grid-template-columns:repeat(3,auto);gap:4px;padding:4px;background:#f3f1ea;border-radius:4px;overflow-x:auto;scrollbar-width:none}
+.pw-tabs::-webkit-scrollbar{display:none}
+.ptab{height:34px;padding:0 12px;border-radius:3px;font-size:11px;font-weight:800;letter-spacing:.01em;text-transform:none;color:var(--muted);white-space:nowrap;transition:background .2s,color .2s}
+.ptab:hover{color:var(--ink)}
+.ptab[aria-selected="true"]{background:var(--yellow);color:var(--ink)}
+.pw-eyebrow{margin-top:14px;color:var(--yellow-ink);font-size:11px}
+.pw-who{margin-top:2px;font-size:clamp(20px,1.8vw,24px)}
+.pw-intro{margin-top:8px;font-size:10.5px;color:var(--ink-2);letter-spacing:.1em;line-height:1.5}
+.pw-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:10px}
+.pw-step{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;padding:9px 11px;border-radius:4px;background:#f6f4ee;transition:background .2s,transform .2s}
+.pw-step:hover{background:var(--cream-2);transform:translateY(-1px)}
+.pw-step:first-child{background:var(--yellow)}
+.pw-step:last-child:nth-child(odd){grid-column:1/-1}
+.pw-n{font-size:10.5px;font-weight:800;letter-spacing:.06em;padding-top:2px}
+.pw-st{display:block;font-weight:800;font-size:13.5px;line-height:1.3}
+.pw-sd{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.4}
+@media (max-width:900px){#pathways{min-height:0;display:block;padding:clamp(56px,8vw,80px) 0}.pw{grid-template-columns:minmax(0,1fr)}.pw-l{border-right:0;border-bottom:1px solid var(--line)}.pw-body{order:-1}}
+@media (max-width:560px){.pw-steps{grid-template-columns:1fr}.pw-step:last-child:nth-child(odd){grid-column:auto}.ptab{padding:0 9px;font-size:10px}}
+
+/* ---------- 7a. newsletter-style split card (incubating) ---------- */
+.news{display:grid;grid-template-columns:1fr 1px 1fr;margin-top:clamp(32px,4vw,44px);background:#fff;border-radius:8px;padding:28px}
+.news .vr{background:var(--line)}
+.org{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;padding:6px 22px;transition:transform .3s}
+.org:hover{transform:translateY(-2px)}
+.org .logo{width:110px;height:84px;border-radius:6px;background:var(--cream);display:grid;place-items:center;padding:10px}
+.org .logo img{max-height:56px;width:auto;object-fit:contain}
+.org .tag{color:var(--yellow-ink);font-size:11px}
+.org h3{margin-top:2px;font-size:26px}
+.org p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
+.org .tl{margin-top:12px}
+@media (max-width:860px){.news{grid-template-columns:1fr;padding:18px}.news .vr{height:1px;margin:14px 0}.org{padding:6px}}
+@media (max-width:480px){.org{grid-template-columns:1fr}}
+
+/* ---------- 7b. collaboratives: dashboard table ---------- */
+.table{margin-top:clamp(32px,4vw,44px);background:#fff;border-radius:8px;overflow:hidden}
+.trow{display:grid;grid-template-columns:minmax(0,2.1fr) repeat(4,minmax(0,1fr));align-items:stretch;border-bottom:1px solid var(--line);transition:background .2s}
+.trow:last-child{border-bottom:0}
+.trow:hover{background-color:var(--cream)}
+.tname{padding:22px 24px}
+.tname h3{font-size:24px}
+.tname p{margin-top:6px;font-size:14px;color:var(--ink-2)}
+.tcell{border-left:1px solid var(--line);padding:22px 12px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.tcell dd{font-family:var(--serif);font-size:26px;line-height:1;white-space:nowrap}
+.tcell dt{margin-top:6px;font-size:11.5px;color:var(--muted);line-height:1.3}
+.tcell.empty{background:repeating-linear-gradient(135deg,transparent 0 8px,rgba(233,227,207,.45) 8px 9px)}
+@media (max-width:900px){.trow{grid-template-columns:repeat(4,minmax(0,1fr))}.tname{grid-column:1/-1}.tcell{border-top:1px solid var(--line)}.tcell:nth-child(2){border-left:0}}
+@media (max-width:480px){.trow{grid-template-columns:1fr 1fr}.tcell:nth-child(4){border-left:0}}
+
+/* ---------- 7c. connect: newsletter split ---------- */
+.join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
+.join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
+.join .ph img{width:100%;height:100%;object-fit:cover}
+.join h2{font-size:clamp(30px,3vw,40px)}
+.join p{margin-top:10px;color:var(--ink-2);max-width:34rem}
+@media (max-width:900px){.join{grid-template-columns:1fr;text-align:center}.join .ph{aspect-ratio:16/9}.join p{margin-left:auto;margin-right:auto}}
+
+/* ---------- footer (charity: water) ---------- */
+.ftr{background:#fff;border-top:1px solid var(--line);padding:clamp(44px,6vw,64px) 0 28px}
+.fcols{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;max-width:960px;margin:0 auto}
+.ftr h4{font-size:13px;font-weight:800;margin-bottom:12px}
+.ftr address{font-style:normal;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.ftr ul li+li{margin-top:7px}
+.ftr ul a{font-size:13.5px;color:var(--ink-2);transition:color .2s}
+.ftr ul a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
+.fbottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;max-width:960px;margin:44px auto 0;padding-top:22px;border-top:1px solid var(--line)}
+.fbottom .brand svg{height:40px;width:110px}
+.ftr-tel{font-weight:800;font-size:13px;letter-spacing:.06em}
+.fbottom .legal{font-size:12.5px;color:var(--muted);text-align:right}
+@media (max-width:860px){.fcols{grid-template-columns:1fr 1fr}.fcols>div:nth-child(-n+2){grid-column:1/-1}.fbottom{flex-direction:column;align-items:flex-start}.fbottom .legal{text-align:left}}
+
+/* ================= page ================= */
+
+.hero h1{min-height:0}
+.hero-media img.on{object-position:30% 45%}
+.hero-body{min-height:0;margin-top:0}
+.widget .alt{display:flex;justify-content:center;margin-top:14px}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.badges span{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ink-2);padding:5px 10px;border-radius:999px;background:var(--cream)}
+.badges span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--yellow-ink)}
+
+/* gap: statement + bar card */
+.gapcard{max-width:50rem;margin:36px auto 0;padding:26px 28px;background:var(--cream);border:1px solid var(--cream-2);border-radius:6px}
+.gapcard>p:first-child{font-size:15.5px;color:var(--ink-2)}
+.gapcard strong{color:var(--ink)}
+.bars{margin-top:20px;display:grid;gap:10px}
+.bar{position:relative;height:42px;background:#efe6c8;border-radius:4px;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:4px;transition:width 1.6s cubic-bezier(.3,.7,.2,1)}
+.bar:first-child i{background:var(--yellow)}
+.bar:last-child i{background:var(--pink)}
+.gapcard.in .bar i{width:var(--w)}
+.bar span{position:relative;display:flex;align-items:center;height:100%;padding:0 14px;font-family:var(--serif);font-size:20px}
+.bar:last-child span{color:#fff}
+.gapcard .src{margin-top:12px;font-size:12px;color:var(--muted)}
+
+/* move: two principles */
+.prin{padding:6px 22px}
+.prin .tag{color:var(--yellow-ink);font-size:12px}
+.prin h3{margin-top:4px;font-size:clamp(26px,2.4vw,32px)}
+.prin .tagline{margin-top:4px;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink)}
+.prin p:last-child{margin-top:8px;font-size:14.5px;color:var(--ink-2)}
+#move .shead p.sub+p.sub{margin-top:8px}
+
+/* instruments: dashboard table, multiplier column */
+.inst .trow{grid-template-columns:minmax(0,1fr) minmax(0,2.6fr)}
+.inst .mult{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 16px;background:var(--cream);border-right:1px solid var(--line);text-align:center}
+.inst .trow:nth-child(3) .mult{background:var(--yellow)}
+.inst .mult h3{font-size:22px}
+.inst .mult .x{margin-top:6px;font-family:var(--serif);font-size:clamp(40px,4vw,54px);line-height:1}
+.inst .tname .tagline{font-family:var(--serif);font-size:22px;line-height:1.25}
+.inst .tname .best{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px;font-weight:600;color:var(--ink)}
+@media (max-width:760px){.inst .trow{grid-template-columns:1fr}.inst .mult{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* pathways: photo fills the left half; tabs, title and steps on the right */
+.pw-cf{display:block}
+.pwp[hidden]{display:none}
+.pwp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:clamp(420px,36vw,500px)}
+.pwp .pw-photo{position:relative;overflow:hidden;border-right:1px solid var(--line)}
+.pwp .pw-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.pw-cf .pw-body{display:flex;flex-direction:column;padding:22px 26px 26px}
+.pw-cf .pw-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pw-cf .ptab{padding:0 8px}
+.pw-cf .pw-eyebrow{margin-top:20px}
+.pw-cf .pw-who{font-size:clamp(26px,2.4vw,32px)}
+.pw-cf .pw-steps{flex:1;grid-template-columns:1fr;grid-auto-rows:1fr;gap:8px;margin-top:16px}
+.pw-cf .pw-step{align-items:center;padding:12px 16px;grid-template-columns:30px 1fr;background:#f6f4ee}
+.pw-cf .pw-step:first-child{background:#f6f4ee}
+.pw-cf .pw-step.done{grid-template-columns:1fr;background:var(--yellow)}
+.pw-cf .pw-n{font-size:12px;padding-top:0}
+.pw-cf .pw-st{font-size:15px;font-weight:600;line-height:1.4}
+.pw-cf .pw-step.done .pw-st{font-weight:800}
+@media (max-width:900px){.pwp{grid-template-columns:minmax(0,1fr);min-height:0}.pwp .pw-photo{aspect-ratio:4/3;border-right:0;border-bottom:1px solid var(--line)}}
+@media (max-width:560px){.pw-cf .pw-body{padding:16px}.pw-cf .ptab{font-size:10px;padding:0 4px}}
+
+/* features: why-water photo + proof ring card */
+.feat-why{aspect-ratio:2/1}
+.feat-why .pills{max-width:min(860px,calc(100% - 32px))}
+.wcard h3{font-size:24px}
+.wcard h3+p{margin-top:6px}
+.proof{align-items:start}
+.proof h3{font-family:var(--serif);font-weight:400;font-size:26px}
+.proof ul{margin-top:12px;display:grid;gap:9px}
+.proof li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14.5px;color:var(--ink-2)}
+.proof li svg{width:20px;height:20px;margin-top:2px}
+.proof .tl{margin-top:14px}
+@media (max-width:760px){.feat-why{aspect-ratio:auto}.proof li{text-align:left}}
+
+/* partners: photo + numbered list, logo marquee */
+.net{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);padding:0;overflow:hidden}
+.net .ph{position:relative;min-height:320px}
+.net .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.net ol{padding:10px 26px}
+.net li{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0}
+.net li+li{border-top:1px solid var(--line)}
+.net .n{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--yellow);font-size:11px;font-weight:800}
+.net h3{font-size:21px}
+.net p{margin-top:4px;font-size:14px;color:var(--ink-2)}
+@media (max-width:860px){.net{grid-template-columns:1fr}.net .ph{min-height:0;aspect-ratio:16/9}.net ol{padding:6px 18px}}
+.marq{margin-top:clamp(28px,4vw,40px);overflow:hidden;background:#fff;border-radius:8px;padding:20px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-in{display:flex;width:max-content;animation:marq 70s linear infinite}
+.marq:hover .marq-in{animation-play-state:paused}
+.marq ul{display:flex;align-items:center;gap:52px;padding-right:52px}
+.marq img{height:38px;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1);opacity:.75;transition:filter .25s,opacity .25s}
+.marq img:hover{filter:none;opacity:1}
+@keyframes marq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marq-in{animation:none;flex-wrap:wrap}.marq ul[aria-hidden]{display:none}.marq ul{flex-wrap:wrap;justify-content:center;gap:28px;padding:0 20px}}
+
+/* impact: band + dashboard */
+#cf-impact{padding:0 0 clamp(64px,8vw,104px)}
+#cf-impact .dash-head{grid-template-columns:repeat(5,1fr)}
+#cf-impact .st{display:flex;flex-direction:column-reverse;justify-content:flex-end}
+#cf-impact .tname{display:flex;align-items:center}
+#cf-impact .tcell p:first-child{font-family:var(--serif);font-size:26px;line-height:1;white-space:nowrap}
+#cf-impact .tcell p+p{margin-top:6px;font-size:11.5px;color:var(--muted);line-height:1.3}
+.reach{margin-top:22px;text-align:center;color:var(--ink-2)}
+@media (max-width:1060px){#cf-impact .dash-head{grid-template-columns:repeat(3,1fr)}#cf-impact .st:nth-child(4){border-left:0}#cf-impact .st:nth-child(n+4){border-top:1px solid var(--line)}}
+@media (max-width:520px){#cf-impact .dash-head{grid-template-columns:1fr 1fr}#cf-impact .st:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* cases: take-action carousel */
+.ccard{flex:0 0 clamp(280px,30vw,350px);display:flex;flex-direction:column}
+.ccard .tph{aspect-ratio:4/3}
+.ccard .meta{margin-top:14px;font-size:12px;font-weight:700;color:var(--yellow-ink)}
+.ccard h3{margin-top:6px}
+#cases .track{align-items:flex-start}
+.ccard h3 button{min-height:calc(3 * 1.22em);display:flex;gap:10px;align-items:flex-start;text-align:left;font-family:var(--serif);font-size:21px;line-height:1.22}
+.ccard h3 button .pm{flex:none;display:grid;place-items:center;width:26px;height:26px;margin-top:2px;border-radius:50%;background:var(--yellow);transition:transform .25s}
+.ccard h3 button .pm svg{width:12px;height:12px}
+.ccard h3 button[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.ccard .desc{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.ccard .desc>div{overflow:hidden}
+.ccard .desc p{padding-top:12px;font-size:14px;color:var(--ink-2)}
+.ccard.open .desc{grid-template-rows:1fr}
+.cstats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;background:#fff;border-radius:6px}
+.cstats div{padding:12px 8px;text-align:center}
+.cstats div+div{border-left:1px solid var(--line)}
+.cstats span{display:block}
+.cstats span:first-child{font-family:var(--serif);font-size:22px;line-height:1}
+.cstats span+span{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
+.cpart{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:12px;font-size:11.5px;color:var(--muted)}
+.cpart img{height:24px;width:auto;max-width:120px;object-fit:contain}
+
+/* validated */
+#validated .stmt h2 .pk{color:var(--pink)}
+#validated .stmt .caps{color:var(--yellow-ink)}
+
+/* services: photo + accordion */
+.svc{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);padding:0;overflow:hidden;align-items:stretch}
+.svc .ph{position:relative;min-height:340px}
+.svc .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.svc ul{padding:8px 26px}
+.svc li+li{border-top:1px solid var(--line)}
+.svc button{width:100%;display:grid;grid-template-columns:34px 1fr 26px;gap:12px;align-items:center;padding:18px 0;text-align:left}
+.svc .n{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--cream);font-size:11px;font-weight:800;transition:background .2s}
+.svc .t{font-family:var(--serif);font-size:21px;line-height:1.2}
+.svc .pl{font-size:22px;line-height:1;text-align:center;transition:transform .25s}
+.svc li.open .n{background:var(--yellow)}
+.svc li.open .pl{transform:rotate(45deg)}
+.svc .panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.svc .panel>div{overflow:hidden}
+.svc li.open .panel{grid-template-rows:1fr}
+.svc .panel p{padding-left:46px;font-size:14.5px;color:var(--ink-2)}
+.svc .panel p.best{margin-top:10px;padding-bottom:18px;font-size:13.5px}
+.svc .panel p.best span:first-child{font-weight:800;color:var(--ink);margin-right:6px}
+@media (max-width:860px){.svc{grid-template-columns:1fr}.svc .ph{min-height:0;aspect-ratio:16/9}.svc ul{padding:4px 16px}.svc .panel p{padding-left:0}}
+
+/* why now: three open columns */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(32px,4vw,44px);background:#fff;border-radius:8px}
+.three>div{padding:28px 26px}
+.three>div+div{border-left:1px solid var(--line)}
+.three .k{display:block;width:34px;height:4px;background:var(--yellow);margin-bottom:16px}
+.three h3{font-size:clamp(24px,2.2vw,28px)}
+.three .tagline{margin-top:8px;font-weight:700;font-size:15px}
+.three p:last-child{margin-top:8px;font-size:14.5px;color:var(--ink-2)}
+@media (max-width:860px){.three{grid-template-columns:1fr}.three>div+div{border-left:0;border-top:1px solid var(--line)}}
+
+/* faqs */
+.faq{max-width:56rem;margin:clamp(32px,4vw,44px) auto 0;background:#fff;border-radius:8px;overflow:hidden}
+.faq details+details{border-top:1px solid var(--line)}
+.faq summary{list-style:none;display:grid;grid-template-columns:1fr 30px;gap:16px;align-items:center;padding:20px 26px;cursor:pointer;transition:background .2s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{background:var(--cream)}
+.faq summary h3{font-size:clamp(19px,1.8vw,22px)}
+.faq summary .pl{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--yellow);font-size:18px;line-height:1;transition:transform .25s}
+.faq details[open] summary .pl{transform:rotate(45deg)}
+.faq .ans{padding:0 26px 22px;font-size:15px;color:var(--ink-2)}
+.faq .ans p+p,.faq .ans p+ul,.faq .ans ul+p{margin-top:10px}
+.faq .ans ul{display:grid;gap:8px}
+.faq .ans li{position:relative;padding-left:18px}
+.faq .ans li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--yellow-ink)}
+.faq .ans a{border-bottom:2px solid var(--yellow)}
+
+/* inquiry: newsletter-style split with form */
+.inq{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);margin-top:clamp(32px,4vw,44px);background:#fff;border-radius:8px;overflow:hidden}
+.inq>div{padding:28px}
+.inq .sec2{background:var(--cream);border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.inq .intro h2{font-size:clamp(30px,2.8vw,38px)}
+.inq .intro p{margin-top:12px;font-size:15px;color:var(--ink-2)}
+.inq .intro p.comp{font-weight:700;color:var(--ink);font-size:13.5px}
+.inq .call{display:flex;flex-direction:column;gap:10px;padding-top:22px;border-top:2px solid var(--yellow)}
+.inq .tag{color:var(--yellow-ink);font-size:12px}
+.inq h3{font-size:clamp(26px,2.4vw,32px)}
+.inq .call p{font-size:14.5px;color:var(--ink-2)}
+.inq .call .btn{align-self:flex-start;margin-top:6px}
+.inq .call a.mail{border-bottom:2px solid var(--yellow)}
+.inq .pri>p{margin-top:8px;font-size:14.5px;color:var(--ink-2)}
+#cf-form{margin-top:18px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+#cf-form label{display:block;font-size:12.5px;font-weight:800}
+#cf-form label>input,#cf-form label>select,#cf-form label>textarea{display:block;margin-top:6px}
+#cf-form label span{color:var(--muted);font-weight:600}
+#cf-form .req{color:var(--pink)}
+#cf-form input[type=text],#cf-form input[type=email],#cf-form select,#cf-form textarea{width:100%;height:44px;padding:0 12px;border:1px solid var(--line);border-radius:4px;background:#fff;font:inherit;font-size:14.5px;font-weight:400;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+#cf-form textarea{height:auto;padding:10px 12px;resize:vertical}
+#cf-form input:focus,#cf-form select:focus,#cf-form textarea:focus{outline:none;border-color:var(--yellow-ink);box-shadow:0 0 0 3px rgba(255,211,64,.35)}
+#cf-form .cf-invalid{border-color:var(--pink)!important;box-shadow:0 0 0 3px rgba(239,66,102,.15)!important}
+#cf-form fieldset{border:0;margin-top:18px}
+#cf-form legend{font-size:12.5px;font-weight:800;margin-bottom:8px}
+#cf-form legend span{color:var(--muted);font-weight:600}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+#cf-form .opts label{display:inline-flex;align-items:center;font-weight:700;font-size:12.5px}
+.opts input{position:absolute;opacity:0;width:1px;height:1px}
+.opts label{position:relative;padding:8px 13px;border-radius:999px;background:#f3f1ea;cursor:pointer;transition:background .2s}
+.opts label:hover{background:var(--cream-2)}
+.opts label:has(input:checked){background:var(--yellow)}
+.opts label:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
+#cf-form>label{margin-top:18px}
+#cf-form .btn{width:100%;margin-top:20px;height:52px}
+#cf-form .note{margin-top:10px;font-size:12px;color:var(--muted);text-align:center}
+#cf-success{margin-top:18px;padding:24px;border-radius:6px;background:var(--cream)}
+#cf-success p{margin-top:6px;color:var(--ink-2)}
+.inq-foot{margin-top:clamp(36px,4vw,52px);padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+@media (max-width:900px){.inq{grid-template-columns:1fr}.inq .sec2{border-right:0;border-bottom:1px solid var(--line)}}
+@media (max-width:560px){.fgrid{grid-template-columns:1fr}.inq>div{padding:20px}}
+/* inquiry, balanced: intro + call option across the top, the form full width below */
+.inq{display:block}
+.inq .sec2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start;border-right:0;border-bottom:1px solid var(--line)}
+.inq .call{border-top:0;padding-top:0;padding-left:clamp(20px,3vw,36px);border-left:2px solid var(--yellow)}
+.inq .pri{padding:28px}
+#cf-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:28px}
+#cf-form>.fgrid,#cf-form>label,#cf-form>.btn,#cf-form>.note{grid-column:1/-1}
+.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#cf-form .btn{max-width:420px;justify-self:center}
+@media (max-width:900px){.inq .sec2{grid-template-columns:1fr}.inq .call{border-left:0;padding-left:0;padding-top:20px;border-top:2px solid var(--yellow)}.fgrid{grid-template-columns:1fr 1fr}#cf-form{grid-template-columns:1fr}}
+@media (max-width:560px){.fgrid{grid-template-columns:1fr}.inq .pri{padding:20px}}
+#end{height:0}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<!-- ================= HEADER ================= -->
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="home.html" aria-label="Samhita-CGF home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 180" role="img" aria-label="Samhita-CGF"><g><path fill="#08273a" d="M251.2,57.9c-2.1,0-3.9.4-5.2,1.2-1.4.8-2,1.9-2,3.3s.5,2.1,1.4,2.9,2.2,1.4,3.9,1.8l6.2,1.3c1.9.4,3.4.7,4.7,1.1s2.7.8,4.3,1.6c1.7.7,3,1.5,4,2.4,1,.9,1.9,2.1,2.6,3.5.7,1.5,1.1,3.2,1.1,5,0,4.6-1.9,8.3-5.8,11.1s-8.3,4.2-13.4,4.2-10.6-1.4-14.3-4.2-5.9-6.7-6.8-11.7h10.7c1.2,4.7,4.7,7.1,10.6,7.1s4-.4,5.5-1.2c1.5-.8,2.3-2.1,2.3-3.8s-.7-2.5-2.2-3.4-3.6-1.6-6.3-2.2l-5.5-1.2c-9.4-2.1-14.2-6.6-14.2-13.5s1-5.6,2.9-7.7c1.9-2.2,4.3-3.7,7.1-4.7,2.8-1,5.8-1.4,8.9-1.4,4.9,0,9.1,1.2,12.6,3.5,3.5,2.3,5.7,5.9,6.4,10.7h-10.6c-.5-1.7-1.6-3-3.2-4s-3.5-1.4-5.8-1.4h0Z"/><path fill="#08273a" d="M297.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM286,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/><path fill="#08273a" d="M325.1,96.3h-10.4v-34.4h10.4v4.5c.8-1.4,2.2-2.7,4-3.7s3.9-1.6,6.3-1.6c5.1,0,8.4,1.9,10.1,5.8,2.6-3.9,6.5-5.8,11.6-5.8s7.1,1.2,8.9,3.6c1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.3-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.4-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h0Z"/><path fill="#08273a" d="M396.2,61.1c4.2,0,7.1,1.2,8.9,3.6,1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9s-.1-1.5-.3-2.4-.4-1.6-.8-2c-.4-.4-.9-.8-1.5-1.2-.7-.3-1.5-.5-2.5-.5-2.2,0-3.8.8-4.8,2.3-1,1.5-1.5,3.9-1.5,7.1v17.7h-10.4v-46.4h10.4v16.5c.8-1.4,2.2-2.7,4.1-3.7s4-1.6,6.5-1.6h0Z"/><path fill="#08273a" d="M424.8,49.9v8.5h-10.4v-8.5h10.4ZM424.8,61.8v34.4h-10.5v-34.4s10.5,0,10.5,0Z"/><path fill="#08273a" d="M433.9,52.4h10.4v9.4h7.4v7.5h-7.4v15.4c0,1.6.3,2.6.9,3.1.6.5,1.8.8,3.6.8h3v7.6h-6.6c-4.3,0-7.3-.6-8.9-1.9s-2.4-3.8-2.4-7.8v-17.3h-5.4v-7.5h5.4v-9.4h0Z"/><path fill="#08273a" d="M477.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM466.1,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/></g><g><path fill="#08273a" d="M243.7,126.4c-.3,1.5-.9,2.6-1.9,3.4s-2.2,1.2-3.8,1.2-3.4-.6-4.4-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.6-1.8,4.5-1.8s2.7.4,3.6,1.2c1,.8,1.6,1.9,1.8,3.4h-2.2c-.2-.9-.6-1.5-1.2-2-.6-.5-1.3-.7-2.2-.7s-2,.4-2.7,1.3-1,2-1,3.6.3,2.7,1,3.6c.7.9,1.6,1.3,2.7,1.3s1.6-.2,2.2-.7c.6-.5,1-1.1,1.2-2h2.3Z"/><path fill="#08273a" d="M254.2,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM249,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M260.4,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M265.9,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M270.7,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM270.7,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M289.1,124.4h-2.1c0-.5-.4-.9-.8-1.3s-.9-.5-1.5-.5-1.3.3-1.8.8c-.5.6-.7,1.4-.7,2.4s.2,1.9.7,2.5c.5.6,1.1.8,1.8.8s1.1-.1,1.5-.4c.4-.3.7-.7.9-1.3h2.1c-.2,1.1-.7,2-1.6,2.6s-1.8,1-2.9,1-2.5-.5-3.4-1.4c-.9-1-1.3-2.2-1.3-3.6s.4-2.7,1.3-3.6,2-1.4,3.4-1.4,2,.3,2.8,1c.8.6,1.3,1.5,1.5,2.6v-.2Z"/><path fill="#08273a" d="M292,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M300.9,117.7v2.2h-2.1v-2.2h2.1ZM300.9,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M307.6,128l2.2-6.9h2.2l-3.5,9.7h-2l-3.5-9.7h2.4l2.2,6.9h0Z"/><path fill="#08273a" d="M315.5,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM315.5,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M341.8,121.8h-2.2c-.2-.8-.6-1.4-1.2-1.9-.6-.4-1.3-.6-2.2-.6s-2.1.4-2.8,1.3c-.7.8-1.1,2-1.1,3.6s.3,2.8,1,3.6c.7.9,1.6,1.3,2.8,1.3s.8,0,1.2-.2c.4-.1.8-.3,1.1-.5.4-.2.6-.5.9-.9.2-.4.3-.9.3-1.4v-.3h-3.3v-1.9h5.5v6.8h-1.8v-1.6c-.9,1.2-2.2,1.8-4.1,1.8s-3.3-.6-4.3-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.7-1.8,4.6-1.8s2.7.4,3.7,1.2,1.6,1.8,1.9,3.2h-.1Z"/><path fill="#08273a" d="M352.7,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM347.6,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M364.4,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM359.2,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M375,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM372.6,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M385.6,117.7h9.1v1.9h-6.8v3.5h6.4v1.9h-6.4v5.8h-2.3v-13h0Z"/><path fill="#08273a" d="M404.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM399.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M414.4,129.4c-.6,1-1.5,1.6-2.9,1.6-2.2,0-3.2-1.3-3.2-3.8v-6.1h2.1v6.6c0,.3.1.5.2.8s.3.5.5.6.6.2,1,.2c1.5,0,2.2-1,2.2-3v-5.2h2.1v9.7h-2.1v-1.3h0Z"/><path fill="#08273a" d="M422,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/><path fill="#08273a" d="M437.8,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM435.3,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M442.6,128.1c0-.5.1-.9.4-1.2.2-.4.5-.7.9-.9.4-.2.9-.4,1.4-.6.6-.2,1.2-.3,1.8-.4s1.3-.2,2.1-.3v-.2c0-.8-.2-1.3-.6-1.7s-.9-.5-1.5-.5-1,0-1.4.4-.5.7-.6,1.3h-2.1c0-1,.5-1.8,1.2-2.4.8-.6,1.7-.9,2.9-.9s2.3.3,3,1,1.1,1.7,1.1,3.2v2.5c0,1.3,0,2.4.3,3.3h-2c-.1-.6-.2-1-.2-1.3-.6,1-1.7,1.5-3.2,1.5s-1.9-.3-2.6-.8-1-1.2-1-2.1h.1ZM449.2,126.2c-1.6,0-2.7.4-3.3.6-.6.3-1,.7-1,1.2s.2.8.5,1c.3.2.8.4,1.3.4.8,0,1.4-.2,1.9-.6.4-.4.7-1,.7-1.8v-.7h-.1Z"/><path fill="#08273a" d="M454.7,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M463.5,117.7v2.2h-2.1v-2.2h2.1ZM463.5,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M474.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM469.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M480.5,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/></g><polygon fill="#00a5cf" points="120 0 60 60 60 0 120 0"/><polygon fill="#ef4367" points="180 0 180 60 120 120 120 60 60 60 120 0 180 0"/><polygon fill="#ffd340" points="180 60 180 120 120 120 180 60"/><polygon fill="#54c0a6" points="90 90 45 135 45 90 90 90"/><polygon fill="#00a5cf" points="90 90 90 135 45 180 45 135 90 90"/><polygon fill="#ffd340" points="45 90 45 135 0 135 45 90"/><rect fill="#ef4367" y="135" width="45" height="45"/><polygon fill="#ffd340" points="60 0 60 60 0 60 60 0"/><polygon fill="#54c0a6" points="60 0 0 60 0 0 60 0"/><polygon fill="#54c0a6" points="180 120 120 180 120 120 180 120"/><polygon fill="#00a5cf" points="180 120 180 180 120 180 180 120"/></svg></a>
+    <nav class="nav" aria-label="Main">
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">About <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="about.html">Our story</a></li><li><a href="about.html#structure">Samhita &amp; CGF</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">CGF <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="#">CGF Home</a></li><li><a href="#">About us</a></li><li><a href="#">Annual Reports</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">Livelihood Innovation <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="livelihoodnetwork.html">Livelihood Network</a></li><li><a href="livelihoodaccount.html">Livelihood Account</a></li><li><a href="catalyticfinance.html">Catalytic Finance</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">What we do <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="womenseconomicempowerment.html">Women’s Economic Empowerment</a></li><li><a href="healtheconomicresilience.html">Health &amp; Nutrition</a></li><li><a href="climateresilientlivelihoods.html">Climate-resilient Livelihoods</a></li><li><a href="educationtoemployment.html">Education-to-Employment</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">How we build <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="alliancescollaboratives.html">Alliances &amp; Collaboratives</a></li><li><a href="designrunprograms.html">Design &amp; Run Programs</a></li><li><a href="technologydata.html">Technology &amp; Data</a></li><li><a href="measurementevaluationlearning.html">Measurement, Evaluation &amp; Learning</a></li><li><a href="communications.html">Communications</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">Partner with us <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="partnerscsr.html">CSR</a></li><li><a href="partnersfoundations.html">Foundations &amp; HNIs</a></li><li><a href="partnersgovernment.html">Government</a></li><li><a href="partnersfinancialinstitutions.html">Financial Institutions</a></li><li><a href="partnersemployers.html">Employers</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">Impact <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="impact.html">Dashboard</a></li><li><a href="#">Impact Stories</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">Knowledge Centre <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="#">Reports</a></li><li><a href="#">Media</a></li></ul></div>
+      <div class="nav-item"><button class="nav-top" aria-expanded="false">Careers <span class="chev" aria-hidden="true"></span></button>
+        <ul class="nav-menu"><li><a href="careers.html">Life at Samhita</a></li></ul></div>
+    </nav>
+    <div class="hdr-right">
+      <span class="sep" aria-hidden="true"></span>
+      <a class="btn give" href="connect.html">Connect</a>
+      <button class="ham" aria-label="Toggle navigation" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" aria-label="Mobile navigation"></div>
+
+<main>
+<div class="ladder" aria-hidden="true"><span class="rail l"><i></i></span><span class="rail r"><i></i></span></div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img class="on" src="assets/img/cine/cf-hero.webp?v=2" alt="A woman entrepreneur at work in her shop" width="2000" height="1234">
+  </div>
+  <div class="wrap">
+    <div class="hero-col">
+      <h1><span>Make your CSR rupee work harder. <span class="pk">Up to 20x harder.</span></span></h1>
+      <div class="widget">
+        <p class="hero-body">For CSR leaders and philanthropic funders. Make every rupee go further by reaching more people and unlocking additional funding.</p>
+        <a class="btn" href="#inquiry">Submit a funding inquiry <span aria-hidden="true">→</span></a>
+        <div class="alt"><a class="tl" href="https://calendar.google.com/appointments/schedules/AcZssZ2vfudVPjVvIZkSg9Tjj5zAZz09Km_ax5bssuiMBpeyelNecPVuPXeV9-f-bhP9j8Mq6cdKLiB3" target="_blank" rel="noopener noreferrer">Or book a 30-minute discussion call <span aria-hidden="true">→</span></a></div>
+        <p class="badges"><span>CSR &amp; FCRA compliant</span><span>Independently reviewed by CAP &amp; KPMG</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE GAP: statement block ================= -->
+<section class="sec" id="gap">
+  <div class="wrap">
+    <div class="stmt rv">
+      <p class="caps" style="color:var(--yellow-ink)">The gap</p>
+      <h2>India needs more, <span class="pk">2x more.</span></h2>
+      <p class="lead">From farmers, gig workers, and micro-entrepreneurs to youth and women from underserved communities.</p>
+    </div>
+    <div class="gapcard rv">
+      <p>Funding exists, from government, philanthropic organisations, and the private sector. Together, they contribute <strong>₹13 lakh crore</strong>, but we need <strong>₹28 lakh crore</strong> more to meet our Sustainable Development Goals. No single sector can close the gap alone. Each plays a role. None can do it by itself.</p>
+      <div class="bars" aria-hidden="true">
+        <div class="bar"><i style="--w:46%"></i><span>₹13 lakh crore</span></div>
+        <div class="bar"><i style="--w:100%"></i><span>₹28 lakh crore</span></div>
+      </div>
+      <p class="src">Source: Unlocking SDG Finance in India, UN Global Compact Network India.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE MOVE: split card ================= -->
+<section class="sec cream" id="move">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">The move</p>
+      <h2>Catalytic finance does <span class="pk">more</span> with the same money.</h2>
+      <p class="sub">It ensures every rupee of philanthropic funding creates outsized impact by reaching more people as well as unlocking larger pools of public and private funding for underserved communities.</p>
+      <p class="sub">Delivered through two key principles, working independently or in tandem.</p>
+    </div>
+    <div class="news shadow rv">
+      <div class="prin">
+        <p class="caps tag">01</p>
+        <h3>Multiplier effect.</h3>
+        <p class="tagline">The same money, used again and again.</p>
+        <p>By giving people the option to repay the grants they receive, the same funding can be recycled to support more and more people over time.</p>
+      </div>
+      <span class="vr" aria-hidden="true"></span>
+      <div class="prin">
+        <p class="caps tag">02</p>
+        <h3>Leverage.</h3>
+        <p class="tagline">A little unlocks a lot.</p>
+        <p>A small amount of philanthropic capital addresses market challenges and unlocks vast amounts of public and private capital.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTRUMENTS: dashboard table ================= -->
+<section class="sec" id="instruments">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">Our instruments</p>
+      <h2>Three tools, each with a clear catalytic effect.</h2>
+      <p class="sub">Used alone or combined into a single program, depending on the funder's goals and the community being served.</p>
+    </div>
+    <div class="table inst shadow rv">
+      <div class="trow">
+        <div class="mult"><h3>Returnable Grant</h3><p class="x">Up to 3×</p></div>
+        <div class="tname"><p class="tagline">Zero interest. Zero collateral.</p><p>Capital for people who have never taken a formal loan. Repayment is a moral obligation, not a legal one. Borrowers repay if they can, when they can, and the same pool funds the next person. 75–100% of borrowers have repaid across programs.</p><p class="best">Best for: first-time, small-ticket capital for borrowers outside the formal financial system.</p></div>
+      </div>
+      <div class="trow">
+        <div class="mult"><h3>Interest Subvention</h3><p class="x">~6×</p></div>
+        <div class="tname"><p class="tagline">Affordable credit, where it matters.</p><p>Philanthropic capital brings down the interest on a commercial loan, making it affordable for low-income borrowers. Working capital, skilling, asset financing.</p><p class="best">Best for: borrowers who can access loans but cannot afford the interest rates.</p></div>
+      </div>
+      <div class="trow">
+        <div class="mult"><h3>Credit Guarantee</h3><p class="x">Up to 20×</p></div>
+        <div class="tname"><p class="tagline">The biggest leverage in the toolkit.</p><p>Philanthropic capital absorbs a small portion of a bank's lending risk, unlocking commercial loans for borrowers who would otherwise be declined. ₹10,000 of guarantee can unlock ₹1–2 lakh in lending. Nil philanthropic guarantees have been invoked till March 2026.</p><p class="best">Best for: borrowers who are rejected from formal loans due to high risk perception.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PATHWAYS: donation-style widget ================= -->
+<section class="sec cream" id="pathways-cf">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">Illustrative pathways</p>
+      <h2>Same instruments. <span class="pk">Different lives.</span></h2>
+      <p class="sub">Each pathway follows a different route from the informal to the formal economy, ending in the same place, financial independence from philanthropic support.</p>
+    </div>
+    <div class="pw pw-cf shadow rv" id="pcf">
+      <div class="pwp" role="tabpanel">
+        <div class="pw-photo"><img src="assets/img/cine/cf-path-01.webp?v=2" alt="A micro-entrepreneur at her workshop." width="1200" height="1500" loading="lazy"></div>
+        <div class="pw-body"><div class="pw-tabs" role="tablist" aria-label="Pathways"><button class="ptab" role="tab" aria-selected="true">Micro-entrepreneur</button><button class="ptab" role="tab" aria-selected="false" tabindex="-1">Youth</button><button class="ptab" role="tab" aria-selected="false" tabindex="-1">Farmer</button><button class="ptab" role="tab" aria-selected="false" tabindex="-1">Gig worker</button></div><p class="caps pw-eyebrow">Pathway 01</p><h3 class="pw-who">Entrepreneurship</h3>
+          <ol class="pw-steps"><li class="pw-step"><span class="pw-n">01.</span><span class="pw-st">Receives a credit-guarantee-backed loan.</span></li><li class="pw-step"><span class="pw-n">02.</span><span class="pw-st">Invests in equipment and working capital. Productivity grows.</span></li><li class="pw-step"><span class="pw-n">03.</span><span class="pw-st">Repays on time. Builds a formal credit history.</span></li><li class="pw-step done"><span class="pw-st">✓ Qualifies for commercial loans without a guarantee.</span></li></ol></div>
+      </div>
+      <div class="pwp" role="tabpanel" hidden>
+        <div class="pw-photo"><img src="assets/img/cine/cf-path-02.webp?v=2" alt="A young job seeker in a vocational training environment." width="1125" height="1500" loading="lazy"></div>
+        <div class="pw-body"><p class="caps pw-eyebrow">Pathway 02</p><h3 class="pw-who">Skills &amp; Jobs</h3>
+          <ol class="pw-steps"><li class="pw-step"><span class="pw-n">01.</span><span class="pw-st">Receives a Returnable Grant for a skilling program.</span></li><li class="pw-step"><span class="pw-n">02.</span><span class="pw-st">Completes the program and secures employment.</span></li><li class="pw-step done"><span class="pw-st">✓ Repays in instalments from steady income.</span></li></ol></div>
+      </div>
+      <div class="pwp" role="tabpanel" hidden>
+        <div class="pw-photo"><img src="assets/img/cine/cf-path-03.webp?v=2" alt="A smallholder farmer at work in the field." width="1200" height="1500" loading="lazy"></div>
+        <div class="pw-body"><p class="caps pw-eyebrow">Pathway 03</p><h3 class="pw-who">Climate Resilience</h3>
+          <ol class="pw-steps"><li class="pw-step"><span class="pw-n">01.</span><span class="pw-st">Receives a Returnable Grant plus credit-backed financing.</span></li><li class="pw-step"><span class="pw-n">02.</span><span class="pw-st">Adopts climate-resilient practices. Farm income rises.</span></li><li class="pw-step"><span class="pw-n">03.</span><span class="pw-st">Repays RG and CG backed loan in a timely manner</span></li><li class="pw-step done"><span class="pw-st">✓ Qualifies for loans without guarantees in future seasons.</span></li></ol></div>
+      </div>
+      <div class="pwp" role="tabpanel" hidden>
+        <div class="pw-photo"><img src="assets/img/cine/cf-path-04.webp?v=2" alt="An Indian family in their home." width="1200" height="1500" loading="lazy"></div>
+        <div class="pw-body"><p class="caps pw-eyebrow">Pathway 04</p><h3 class="pw-who">Healthcare</h3>
+          <ol class="pw-steps"><li class="pw-step"><span class="pw-n">01.</span><span class="pw-st">Receives a Returnable Grant for an essential procedure.</span></li><li class="pw-step"><span class="pw-n">02.</span><span class="pw-st">Regains health and workforce participation.</span></li><li class="pw-step done"><span class="pw-st">✓ Repays in small instalments from steady income.</span></li></ol></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES: why-water photo + proof card ================= -->
+<section class="sec" id="features">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">What makes it work</p>
+      <h2>Key features of our approach.</h2>
+      <p class="sub">Eight design principles that run through every program we build, from ideation to execution.</p>
+    </div>
+    <div class="why feat-why rv">
+      <div class="imgs"><img class="on" src="assets/img/cine/cf-proof.webp?v=2" alt="Samhita-CGF team members working with community partners" width="1448" height="1086" loading="lazy"></div>
+      <div class="pills" role="tablist" aria-label="Key features">
+        <button class="pill" role="tab" aria-selected="true">Diverse instruments.</button>
+        <button class="pill" role="tab" aria-selected="false">Customised pathways.</button>
+        <button class="pill" role="tab" aria-selected="false">Holistic support.</button>
+        <button class="pill" role="tab" aria-selected="false">Formalisation support.</button>
+        <button class="pill" role="tab" aria-selected="false">Technology-led delivery.</button>
+        <button class="pill" role="tab" aria-selected="false">Data &amp; MEL-driven insights.</button>
+        <button class="pill" role="tab" aria-selected="false">Sustainability.</button>
+        <button class="pill" role="tab" aria-selected="false">Scale.</button>
+      </div>
+      <div class="wcard" aria-live="polite">
+        <p class="w-p">Designed for people with varying needs, backgrounds, and levels of credit readiness. No single tool is forced on every person.</p>
+      </div>
+    </div>
+    <ul class="sr-feat" hidden>
+      <li>Modular sequencing of grants, Returnable Grants, and Credit Guarantees tailored to each borrower’s journey and graduation timeline.</li>
+      <li>Integrated with livelihood programs, finance paired with financial literacy, skilling, entrepreneurship development, and market linkages.</li>
+      <li>Structured support for KYC, digital onboarding, bank disbursements, and UPI repayments, building people’s familiarity with formal finance.</li>
+      <li>Faster, more efficient, lower-cost delivery at scale, enabled by India's Digital Public Infrastructure and our own delivery systems.</li>
+      <li>Embedded measurement, evaluation, and learning systems enable robust tracking, outcome attribution, and continuous improvement.</li>
+      <li>People graduate from philanthropic support into stable, self-sustaining incomes, reducing long-term dependence on grants and external funding.</li>
+      <li>Delivery through government and private sector partnerships and enabling technology allows funding to reach more people at lower cost and greater speed.</li>
+    </ul>
+    <div class="ringcard proof rv">
+      <div class="ring" aria-hidden="true">
+        <svg viewBox="0 0 84 84"><circle class="bg" cx="42" cy="42" r="36"/><circle class="fg" cx="42" cy="42" r="36"/></svg>
+        <span class="rung-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#222520" stroke-width="1.8"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10"/></svg></span>
+      </div>
+      <div>
+        <h3>What good catalytic finance should prove</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Did the capital reach someone who would otherwise have been excluded?</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>What additional capital did it unlock?</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Did the person’s income, resilience, enterprise or formal financial access improve?</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>How did the portfolio perform? repayment, utilisation, guarantee claims and credit progression</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Could the model eventually operate with less philanthropic support?</span></li>
+        </ul>
+        <a class="tl" href="#cases">See our catalytic-finance evidence →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARTNERS: split card + logo marquee ================= -->
+<section class="sec cream" id="partners">
+  <div class="wrap">
+    <div class="shead rv">
+      <h2>The network behind every program.</h2>
+      <p class="sub">We design and run catalytic finance programs in partnership with five kinds of organisations.</p>
+    </div>
+    <div class="news net shadow rv">
+      <div class="ph"><img src="assets/img/cine/cf-network.webp?v=2" alt="The Samhita-CGF team with partners" width="1898" height="958" loading="lazy"></div>
+      <ol>
+        <li><span class="n">01</span><div><h3>Philanthropic, CSR &amp; HNIs.</h3><p>Funders who partner with us to design and execute catalytic finance programs across skilling, entrepreneurship, women's economic empowerment and climate resilience.</p></div></li>
+        <li><span class="n">02</span><div><h3>Banks, NBFCs &amp; Financial Institutions.</h3><p>Commercial lenders who extend credit to underserved borrowers, backed by our guarantees and risk structures.</p></div></li>
+        <li><span class="n">03</span><div><h3>Government &amp; Public Sector.</h3><p>Public institutions and schemes that extend our reach and help us scale programs rapidly across India.</p></div></li>
+        <li><span class="n">04</span><div><h3>Grassroots &amp; Community Partners.</h3><p>NGOs and community organisations who have spent years building trust on the ground, directly supporting farmers, micro-entrepreneurs, gig workers, women and youth in their networks.</p></div></li>
+        <li><span class="n">05</span><div><h3>Private Sector Partnerships.</h3><p>Companies partnering with us to bring catalytic finance to the workers, farmers, vendors and micro-entrepreneurs across their workforce and supply chains.</p></div></li>
+      </ol>
+    </div>
+    <div class="marq shadow rv"><div class="marq-in" id="marq"></div></div>
+  </div>
+</section>
+
+<!-- ================= IMPACT: band + dashboard ================= -->
+<section id="cf-impact">
+  <div class="band">
+    <div class="wrap rv"><h2>What the numbers say.</h2></div>
+  </div>
+  <div class="wrap">
+    <div class="dash shadow rv">
+      <dl class="dash-head">
+        <div class="st"><dt>Entrepreneurs, workers, and farmers supported</dt><dd>1 lakh+</dd></div>
+        <div class="st"><dt>Growth in incomes</dt><dd>70–100%</dd></div>
+        <div class="st"><dt>Funding partners</dt><dd>21</dd></div>
+        <div class="st"><dt>Grassroots partners</dt><dd>27</dd></div>
+        <div class="st"><dt>Financial institutions</dt><dd>4</dd></div>
+      </dl>
+      <div class="trow">
+        <div class="tname"><h3>Returnable Grants</h3></div>
+        <div class="tcell"><p>₹67 cr</p><p>Disbursed</p></div>
+        <div class="tcell"><p>1 lakh+</p><p>informal workers, job seekers, micro-entrepreneurs and women supported</p></div>
+        <div class="tcell"><p>75–100%</p><p>Repayment rates</p></div>
+        <div class="tcell"><p>Up to 3×</p><p>Multiplier to philanthropic funders</p></div>
+      </div>
+      <div class="trow">
+        <div class="tname"><h3>Philanthropic Credit Guarantees</h3></div>
+        <div class="tcell"><p>₹20 cr+</p><p>Unlocked in loans</p></div>
+        <div class="tcell"><p>3</p><p>Guarantees managed</p></div>
+        <div class="tcell"><p>3,800+</p><p>Micro-entrepreneurs and farmers supported</p></div>
+        <div class="tcell"><p>Up to 20×</p><p>Leverage to funders</p></div>
+      </div>
+    </div>
+    <p class="caps reach rv">17M+ lives impacted · 28 states · 15 years · 250+ funders</p>
+  </div>
+</section>
+
+<!-- ================= CASES: take-action carousel ================= -->
+<section class="sec cream" id="cases">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">Case studies</p>
+      <h2>Six programs. <span class="pk">Real outcomes.</span></h2>
+    </div>
+  </div>
+  <div class="rail-wrap rv" data-carousel>
+    <div class="rail-clip"><div class="track">
+      <article class="tcard ccard">
+        <div class="tph"><img src="assets/img/cine/cf-case-01.webp?v=2" alt="A smallholder farmer in a field in Maharashtra." width="1600" height="1200" loading="lazy"></div>
+        <p class="meta">FY 23–26 · Climate Resilience · Maharashtra</p>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Building climate-resilient farmer livelihoods through catalytic financing</span></button></h3>
+        <div class="cstats"><div><span>95%</span><span>RG repayment rate</span></div><div><span>20×</span><span>Leverage to funder</span></div><div><span>159%</span><span>Farm income growth</span></div></div>
+        <div class="cpart"><span>In partnership with</span><img src="assets/catalytic-finance/logos/partners/walmart.webp" alt="Walmart.org" loading="lazy"></div>
+        <div class="desc"><div><p>In Maharashtra, <strong>6,000 farmers</strong> across <strong>12 Farmer Producer Organisations</strong> received a combination of returnable grants and guarantee-backed loans. The returnable grants, averaging ₹9,000 each, achieved a <strong>95% repayment rate</strong>. Average annual farm income grew <strong>159%</strong>. Average annual revenue grew <strong>77%</strong>. On the guarantee side, ₹25 lakh of philanthropic capital unlocked ₹5 crore in formal bank loans, a <strong>20x leverage</strong>, with not a single invocation to date. At the FPO level, average revenue tripled from ₹5 crore to ₹15 crore in three years.</p></div></div>
+      </article>
+      <article class="tcard ccard">
+        <div class="tph"><img src="assets/img/cine/cf-case-02.webp?v=2" alt="A woman entrepreneur in Maharashtra at her business." width="1600" height="1200" loading="lazy"></div>
+        <p class="meta">FY 23–24 · Women Entrepreneurs · Maharashtra</p>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Returnable Grants for women entrepreneurs</span></button></h3>
+        <div class="cstats"><div><span>85%+</span><span>Repayment rate</span></div><div><span>132%</span><span>Revenue growth</span></div><div><span>1 in 3</span><span>Started a second venture</span></div></div>
+        <div class="cpart"><span>In partnership with</span><img src="assets/catalytic-finance/logos/partners/avendus.webp" alt="Avendus" loading="lazy"></div>
+        <div class="desc"><div><p>A returnable grant program in Maharashtra supported 450 women entrepreneurs, many of them marginal farmers, with zero-interest, zero-collateral capital. They were informed that there is no legal obligation to repay, but any money repaid would help additional peer farmers in need. We got back more than 85% of the total funding, which is being used to support additional women entrepreneurs. Their average annual revenue more than doubled, growing 132% and incomes grew 148%. One in three women started a second livelihood venture.</p></div></div>
+      </article>
+      <article class="tcard ccard">
+        <div class="tph"><img src="assets/img/cine/cf-case-03.webp?v=2" alt="A young person at work in a banking or services environment." width="1600" height="1200" loading="lazy"></div>
+        <p class="meta">FY 24–26 · Working Capital &amp; Skilling · Multi-state</p>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Unlocking working capital for entrepreneurs and affordable skilling for youth</span></button></h3>
+        <div class="cstats"><div><span>80%</span><span>Already repaid</span></div><div><span>82%</span><span>Job placement rate</span></div><div><span>500</span><span>Young people skilled</span></div></div>
+        <div class="cpart"><span>In partnership with</span><img src="assets/catalytic-finance/logos/partners/bajaj-finserv.webp" alt="Bajaj Finserv" loading="lazy"></div>
+        <div class="desc"><div><p>We gave 2,000 small business owners in retail, services and local enterprises access to working capital through returnable grants. 80% have already repaid, allowing the funds to be redeployed to new borrowers. Alongside this, a skilling program placed 82% of 500 young people into jobs in banking, finance, and beauty and wellness, at salaries of ₹15,000–₹20,000 a month.</p></div></div>
+      </article>
+      <article class="tcard ccard">
+        <div class="tph"><img src="assets/img/cine/cf-case-04.webp?v=2" alt="An entrepreneur with a disability at their workspace in Delhi NCR." width="1600" height="1200" loading="lazy"></div>
+        <p class="meta">FY 21–24 · Financial Inclusion · Delhi NCR</p>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Enabling financial access for entrepreneurs with disabilities</span></button></h3>
+        <div class="cstats"><div><span>142</span><span>Entrepreneurs supported</span></div><div><span>92%</span><span>Repayment rate</span></div><div><span>₹27 lakh</span><span>In returnable grants deployed</span></div></div>
+        <div class="cpart"><span>In partnership with</span><img src="assets/catalytic-finance/logos/partners/msdf.webp" alt="Michael &amp; Susan Dell Foundation" loading="lazy"><img src="assets/catalytic-finance/logos/partners/usaid.webp" alt="USAID" loading="lazy"></div>
+        <div class="desc"><div><p>In Delhi NCR, 142 underserved entrepreneurs with disabilities received returnable grants totalling ₹27 lakh to start or grow their businesses. The flexibility of these grants allowed them to invest in what they needed most, from business inputs to adaptive equipment that addressed mobility challenges. The program achieved a 92% repayment rate, demonstrating both the viability of the model and the commitment of the entrepreneurs. By enabling access to capital tailored to their needs, the initiative unlocked livelihoods for borrowers that are often excluded from traditional financing systems.</p></div></div>
+      </article>
+      <article class="tcard ccard">
+        <div class="tph"><img src="assets/img/cine/cf-case-05.webp?v=2" alt="A woman entrepreneur in a Gujarat market." width="1600" height="1200" loading="lazy"></div>
+        <p class="meta">FY 24–27 · Formal Credit Access · Gujarat</p>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Access to loans for women locked out of formal financial systems</span></button></h3>
+        <div class="cstats"><div><span>10×</span><span>Guarantee leverage</span></div><div><span>2,600</span><span>Women entrepreneurs reached</span></div><div><span>₹40,000</span><span>Average loan size</span></div></div>
+        <div class="cpart"><span>In partnership with</span><img src="assets/catalytic-finance/logos/partners/360-foundation.webp" alt="360 ONE Foundation" loading="lazy"></div>
+        <div class="desc"><div><p>In Gujarat, 2,600 informal women entrepreneurs, many of them new to credit, gained access to formal loans through a ₹1 crore philanthropic credit guarantee supported by 360 ONE Foundation. This enabled ₹10 crore in lending, with an average loan size of ₹40,000. Over the past two years, the women have demonstrated strong repayment behaviour and the guarantee has been effective in enabling first-time borrowers to access formal finance. By unlocking access to credit at scale, the initiative is helping women entrepreneurs grow their businesses and take a step toward financial inclusion.</p></div></div>
+      </article>
+      <article class="tcard ccard">
+        <div class="tph"><img src="assets/img/cine/cf-case-06.webp?v=2" alt="A woman entrepreneur in an aspirational district." width="1600" height="1200" loading="lazy"></div>
+        <p class="meta">FY 24–27 · Women-led Enterprises · Aspirational Districts</p>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Strengthening women-led enterprises in aspirational districts</span></button></h3>
+        <div class="cstats"><div><span>10,000+</span><span>Women entrepreneurs</span></div><div><span>122%</span><span>Income increase</span></div><div><span>60–80%</span><span>Repayment (ongoing)</span></div></div>
+        <div class="cpart"><span>In partnership with</span><img src="assets/catalytic-finance/logos/partners/indusind-bank.webp" alt="IndusInd Bank" loading="lazy"></div>
+        <div class="desc"><div><p>Across aspirational districts including Dharashiv, Begusarai, Bahraich, Baran, and Virudhunagar, over 10,000 women entrepreneurs are being supported through returnable grants over a five-year period. These grants are enabling a range of livelihood activities, from farming inputs and livestock to inventory for kirana shops and tailoring units, allowing women to invest based on their specific needs. As of March 2026, repayment rates range between 60–80% across districts, reflecting steady business performance. Average annual incomes increased by 122%.</p></div></div>
+      </article>
+    </div></div>
+    <div class="arrows">
+      <button type="button" data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12H3M9 6l-6 6 6 6"/></svg></button>
+      <button type="button" data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 12h18M15 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VALIDATED: statement ================= -->
+<section class="sec" id="validated">
+  <div class="wrap">
+    <div class="stmt rv">
+      <p class="caps">Designed for India. Validated beyond.</p>
+      <h2>An international funder replicated our Returnable Grant model in Afghanistan. <span class="pk">Repayment rates exceeded 90%.</span></h2>
+      <p class="lead">Robust toolkits, playbooks, and a measurement framework let our model travel. Catalytic finance, designed well, is not a pilot, it is an exportable approach to closing financing gaps in any developing economy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES: photo + accordion ================= -->
+<section class="sec cream" id="services">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">How we work with you</p>
+      <h2>Four services.</h2>
+      <p class="sub">Every service works standalone or in combination. We plug in wherever you need us most.</p>
+    </div>
+    <div class="news svc shadow rv">
+      <div class="ph"><img src="assets/img/cine/cf-features.webp?v=2" alt="A Samhita-CGF program team in a working session" width="1448" height="1086" loading="lazy"></div>
+      <ul>
+        <li class="open"><button type="button" aria-expanded="true" aria-controls="svc-0" id="svc-btn-0"><span class="n">01</span><span class="t">Program Ideation and Design.</span><span class="pl" aria-hidden="true">+</span></button>
+          <div class="panel" id="svc-0" role="region" aria-labelledby="svc-btn-0"><div><p>We work with you from scratch to design a catalytic finance program tailored to your goals, community, and context. We help you identify the right instruments, structure measurable outcomes, and build in regulatory compliance.</p><p class="best"><span>Best for:</span><span>Funders exploring catalytic finance for the first time and looking for expert guidance to design the right program.</span></p></div></div></li>
+        <li><button type="button" aria-expanded="false" aria-controls="svc-1" id="svc-btn-1"><span class="n">02</span><span class="t">Execution and Fund Management.</span><span class="pl" aria-hidden="true">+</span></button>
+          <div class="panel" id="svc-1" role="region" aria-labelledby="svc-btn-1"><div><p>We run your catalytic finance program end to end, selecting and onboarding people, managing disbursements, tracking repayments, ensuring compliance, and reporting outcomes. You have full visibility on where funds go and the impact they create.</p><p class="best"><span>Best for:</span><span>Funders looking for a trusted end-to-end execution partner for their catalytic finance program.</span></p></div></div></li>
+        <li><button type="button" aria-expanded="false" aria-controls="svc-2" id="svc-btn-2"><span class="n">03</span><span class="t">Partner Capacity Building.</span><span class="pl" aria-hidden="true">+</span></button>
+          <div class="panel" id="svc-2" role="region" aria-labelledby="svc-btn-2"><div><p>We work with your existing implementation partners to help them transition current programs toward catalytic finance instruments. Whether that means shifting from grants to returnable grants or introducing a credit guarantee structure, we build the capacity your partners need to deliver more impact from the same funding.</p><p class="best"><span>Best for:</span><span>Funders with existing programs and partners who are keen to adopt catalytic finance without starting from scratch.</span></p></div></div></li>
+        <li><button type="button" aria-expanded="false" aria-controls="svc-3" id="svc-btn-3"><span class="n">04</span><span class="t">Convening and Ecosystem Engagement.</span><span class="pl" aria-hidden="true">+</span></button>
+          <div class="panel" id="svc-3" role="region" aria-labelledby="svc-btn-3"><div><p>We design and run curated events and ecosystem convenings, roundtables, workshops, and dialogues, tailored to your goals. We bring the right people into the room, manage everything end to end, and produce the collateral, facilitation, and follow-up reporting that turns a conversation into coordinated action.</p><p class="best"><span>Best for:</span><span>Funders looking to convene the right stakeholders around a shared challenge or opportunity.</span></p></div></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY NOW ================= -->
+<section class="sec" id="why-now">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">Why now</p>
+      <h2>India is uniquely positioned to scale catalytic finance today.</h2>
+    </div>
+    <div class="three shadow rv">
+      <div><span class="k" aria-hidden="true"></span><h3>The money exists.</h3><p class="tagline">India's CSR budget is ready to be put to work.</p><p>Indian companies already spend ₹25,000+ crore on CSR every year. FCRA opens access to global philanthropic capital on top of that. The funding is here.</p></div>
+      <div><span class="k" aria-hidden="true"></span><h3>The infrastructure is ready.</h3><p class="tagline">Critical services can reach anyone, in minutes, at very low cost.</p><p>India's Digital Public Infrastructure, Aadhaar, UPI, ONDC, and Account Aggregator, means we can disburse, track, and recycle capital at a speed and scale that simply wasn't possible five years ago.</p></div>
+      <div><span class="k" aria-hidden="true"></span><h3>The model is proven.</h3><p class="tagline">The blueprint exists. India can replicate and surpass it.</p><p>Catalytic and blended finance has already mobilised over ₹18 lakh crore worldwide. The mechanisms are tested. The question is no longer whether this works, it's how fast India moves.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQS ================= -->
+<section class="sec cream" id="faqs">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps">Frequently asked questions</p>
+      <h2>The questions our partners ask.</h2>
+    </div>
+    <div class="faq shadow rv">
+      <details open><summary><h3>What is catalytic finance, and how is it different from a traditional grant?</h3><span class="pl" aria-hidden="true">+</span></summary><div class="ans">
+        <p>A traditional grant is spent once. Catalytic finance uses the same philanthropic rupee to help multiple people by recycling it, by unlocking commercial capital from banks, or both.</p>
+        <p>Two examples of how this works in practice:</p>
+        <ul><li>A Returnable Grant gives a citizen zero-interest, zero-collateral capital with only a moral obligation to repay. When they do, the same pool supports the next person. Our programs have demonstrated up to a 5× multiplier.</li><li>A Credit Guarantee uses philanthropic capital to absorb a small portion of a bank's lending risk. A ₹10,000 guarantee can unlock ₹1–₹2 lakh in loans for a farmer. As borrowers repay, the same guarantee supports more loans. We have unlocked up to 20× in formal lending this way.</li></ul>
+      </div></details>
+      <details><summary><h3>What is a Returnable Grant, and how does it work in practice?</h3><span class="pl" aria-hidden="true">+</span></summary><div class="ans">
+        <p>A Returnable Grant is zero-interest, zero-collateral capital for citizens who have never taken a formal loan. Typical amounts are ₹5,000 to ₹25,000, put towards skilling, working capital, or essential equipment.</p>
+        <p>Citizens voluntarily repay as their income stabilises, and in doing so, they build a track record of responsible financial behaviour. The repaid funds are redeployed to support the next citizen.</p>
+        <p>There is no legal obligation to repay. But citizens understand that when they do, the next person gets a chance. In our programs, that sense of collective responsibility translates into repayment rates of 75–100%.</p>
+      </div></details>
+      <details><summary><h3>How does a ₹10,000 credit guarantee really unlock 20× or ₹2 lakh in formal loans?</h3><span class="pl" aria-hidden="true">+</span></summary><div class="ans">
+        <p>Banks are willing to lend, provided their risk is manageable. When a bank lends ₹2 lakh to a farmer with no formal credit history, its main concern is what happens if the farmer cannot repay.</p>
+        <p>A ₹10,000 philanthropic guarantee covers 5% of the loan amount, a small portion of the risk, but often enough to make the lending viable from the bank's perspective. The bank extends the full ₹2 lakh; the guarantee sits as a backstop.</p>
+        <p>Depending on the borrower segment and the bank's risk model, the guarantee ratio can range from 5% to 10%, producing the 10–20× leverage we see across our programs.</p>
+      </div></details>
+      <details><summary><h3>Is Catalytic Finance compliant with CSR and FCRA regulations?</h3><span class="pl" aria-hidden="true">+</span></summary><div class="ans">
+        <p>Yes. Compliance is engineered into the design of every catalytic finance instrument we run, not added later.</p>
+        <p>Our instruments have been independently reviewed by the Centre for Advancement of Philanthropy and KPMG, and confirmed compliant with CSR (Companies Act Schedule VII), FCRA (Foreign Contribution Regulation Act, 2010), and RBI frameworks.</p>
+        <p>If your legal or compliance team has specific questions, we can share the written legal opinions and walk through them. Write to <a href="mailto:catalyticfinance@samhita.org">catalyticfinance@samhita.org</a>.</p>
+      </div></details>
+      <details><summary><h3>Can UHNIs, family offices, or private donors use these instruments?</h3><span class="pl" aria-hidden="true">+</span></summary><div class="ans">
+        <p>Yes. Corporate CSR teams, philanthropic foundations, UHNIs, family offices, and institutional funders can all deploy through the catalytic finance architecture, with the same leverage and compliance posture.</p>
+        <p>Typical structures for an individual donor, a family office, or a foundation include:</p>
+        <ul><li>A corpus of Returnable Grants aligned to a cause you care about, for example, women entrepreneurs in a specific state, with repayment and redeployment reported on a defined cadence.</li><li>A First Loss Default Guarantee (FLDG) structured through a partner NBFC, unlocking commercial lending at 10–20× your commitment.</li><li>A blended commitment combining catalytic capital and grant support for an end-to-end program, with Samhita-CGF handling design, compliance, and operations.</li></ul>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INQUIRY: newsletter-style split with form ================= -->
+<section class="sec" id="inquiry">
+  <div class="wrap">
+    <div class="shead rv"><p class="caps">Ready when you are</p></div>
+    <div class="inq shadow rv">
+      <div class="sec2">
+        <div class="intro">
+          <h2>Design a Catalytic Finance program <span class="pk">with our team.</span></h2>
+          <p>We will start with your goals, constraints, and community focus. Within two weeks, you will have a draft program design, an instrument recommendation, and a compliance memo.</p>
+          <p class="comp">CSR &amp; FCRA compliant. Independently reviewed by CAP &amp; KPMG.</p>
+        </div>
+        <div class="call">
+          <p class="caps tag">Secondary path</p>
+        <h3>Or book a discussion call.</h3>
+        <p>Not ready to commit to a program scoping yet? Schedule a 30-minute call with our Catalytic Finance team to talk through what is possible. No deck, no pitch, just a conversation.</p>
+        <a class="btn btn-line" href="https://calendar.google.com/appointments/schedules/AcZssZ2vfudVPjVvIZkSg9Tjj5zAZz09Km_ax5bssuiMBpeyelNecPVuPXeV9-f-bhP9j8Mq6cdKLiB3" target="_blank" rel="noopener noreferrer">Book a 30-minute call →</a>
+        <p>Or write directly: <a class="mail" href="mailto:catalyticfinance@samhita.org?subject=Discussion%20call%20request">catalyticfinance@samhita.org</a></p>
+        </div>
+      </div>
+      <div class="pri">
+        <p class="caps tag">Primary path</p>
+        <h3>Submit a funding inquiry.</h3>
+        <p>Tell us about your priorities. We will respond within three working days with an initial concept note for discussion.</p>
+        <form id="cf-form" novalidate>
+          <div class="fgrid">
+            <label>Name <span class="req">*</span><input type="text" name="name" required autocomplete="name"></label>
+            <label>Role / title <span class="req">*</span><input type="text" name="role" required autocomplete="organization-title"></label>
+            <label>Organisation <span class="req">*</span><input type="text" name="organisation" required autocomplete="organization"></label>
+            <label>Work email <span class="req">*</span><input type="email" name="email" required autocomplete="email"></label>
+            <label>Country<select name="country"><option>India</option><option>United States</option><option>United Kingdom</option><option>Singapore</option><option>UAE</option><option>Other</option></select></label>
+            <label>Indicative budget range <span>(optional)</span><select name="budget"><option value="">Select a range</option><option>Under ₹1 crore</option><option>₹1 – 5 crore</option><option>₹5 – 10 crore</option><option>Over ₹10 crore</option><option>Prefer not to say</option></select></label>
+          </div>
+          <fieldset><legend>What type of funder are you?</legend><div class="opts">
+            <label><input type="radio" name="funder" value="CSR">CSR</label><label><input type="radio" name="funder" value="Philanthropic foundation">Philanthropic foundation</label><label><input type="radio" name="funder" value="UHNI or family office">UHNI or family office</label><label><input type="radio" name="funder" value="Financial institution">Financial institution</label><label><input type="radio" name="funder" value="Government">Government</label><label><input type="radio" name="funder" value="Private Sector (non CSR)">Private Sector (non CSR)</label><label><input type="radio" name="funder" value="Other">Other</label>
+          </div></fieldset>
+          <fieldset><legend>What are you most interested in? <span>(optional)</span></legend><div class="opts">
+            <label><input type="checkbox" name="interest" value="Returnable Grants">Returnable Grants</label><label><input type="checkbox" name="interest" value="Credit Guarantees">Credit Guarantees</label><label><input type="checkbox" name="interest" value="Interest Subvention">Interest Subvention</label><label><input type="checkbox" name="interest" value="A custom-designed program">A custom-designed program</label><label><input type="checkbox" name="interest" value="I am still exploring">I am still exploring</label>
+          </div></fieldset>
+          <label>Tell us briefly what you are trying to achieve <span>(optional)</span><textarea name="goal" rows="4"></textarea></label>
+          <button class="btn" type="submit">Submit inquiry <span aria-hidden="true">→</span></button>
+          <p class="note">We will email a confirmation to the address you provide. Your information is handled per Samhita's privacy policy.</p>
+        </form>
+        <div id="cf-success" role="status" aria-live="polite" hidden><h3>Inquiry received.</h3><p>Thank you. We have received your inquiry and will respond within three working days. A confirmation email is on its way to your inbox.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="end" aria-hidden="true"></div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="fcols">
+      <div><h4>Mumbai</h4><address>Corporate Avenue, 4th Floor, Office Number 412 &amp; 413,<br>Sonawala Road, Sonawala Industrial Estate,<br>Goregaon East, Mumbai 400063</address></div>
+      <div><h4>Bengaluru</h4><address>F2, VBR Astreix 204, Rajeev Gandhi Nagar I Phase,<br>Sahakar Nagar, Kodigehalli,<br>Bengaluru 560092</address></div>
+      <div><h4>Social</h4><ul>
+        <li><a href="https://www.facebook.com/samhitasocialventures" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.linkedin.com/company/samhita-social-ventures/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://x.com/Samhitadotorg" target="_blank" rel="noopener">X</a></li>
+        <li><a href="https://www.youtube.com/channel/UCIwuu7bLNnhcnVytOva9QIg" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="careers.html">Work With Us</a></li>
+        <li><a href="about.html">Who We Are</a></li></ul></div>
+      <div><h4>Resources</h4><ul>
+        <li><a href="#">Stories</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="impact.html">Dashboard</a></li>
+        <li><a href="#">Blogs</a></li>
+        <li><a href="#">In the Media</a></li></ul></div>
+    </div>
+    <div class="fbottom">
+      <a class="brand" href="home.html" aria-label="Samhita-CGF home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 180" role="img" aria-label="Samhita-CGF"><g><path fill="#08273a" d="M251.2,57.9c-2.1,0-3.9.4-5.2,1.2-1.4.8-2,1.9-2,3.3s.5,2.1,1.4,2.9,2.2,1.4,3.9,1.8l6.2,1.3c1.9.4,3.4.7,4.7,1.1s2.7.8,4.3,1.6c1.7.7,3,1.5,4,2.4,1,.9,1.9,2.1,2.6,3.5.7,1.5,1.1,3.2,1.1,5,0,4.6-1.9,8.3-5.8,11.1s-8.3,4.2-13.4,4.2-10.6-1.4-14.3-4.2-5.9-6.7-6.8-11.7h10.7c1.2,4.7,4.7,7.1,10.6,7.1s4-.4,5.5-1.2c1.5-.8,2.3-2.1,2.3-3.8s-.7-2.5-2.2-3.4-3.6-1.6-6.3-2.2l-5.5-1.2c-9.4-2.1-14.2-6.6-14.2-13.5s1-5.6,2.9-7.7c1.9-2.2,4.3-3.7,7.1-4.7,2.8-1,5.8-1.4,8.9-1.4,4.9,0,9.1,1.2,12.6,3.5,3.5,2.3,5.7,5.9,6.4,10.7h-10.6c-.5-1.7-1.6-3-3.2-4s-3.5-1.4-5.8-1.4h0Z"/><path fill="#08273a" d="M297.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM286,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/><path fill="#08273a" d="M325.1,96.3h-10.4v-34.4h10.4v4.5c.8-1.4,2.2-2.7,4-3.7s3.9-1.6,6.3-1.6c5.1,0,8.4,1.9,10.1,5.8,2.6-3.9,6.5-5.8,11.6-5.8s7.1,1.2,8.9,3.6c1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.3-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.4-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h0Z"/><path fill="#08273a" d="M396.2,61.1c4.2,0,7.1,1.2,8.9,3.6,1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9s-.1-1.5-.3-2.4-.4-1.6-.8-2c-.4-.4-.9-.8-1.5-1.2-.7-.3-1.5-.5-2.5-.5-2.2,0-3.8.8-4.8,2.3-1,1.5-1.5,3.9-1.5,7.1v17.7h-10.4v-46.4h10.4v16.5c.8-1.4,2.2-2.7,4.1-3.7s4-1.6,6.5-1.6h0Z"/><path fill="#08273a" d="M424.8,49.9v8.5h-10.4v-8.5h10.4ZM424.8,61.8v34.4h-10.5v-34.4s10.5,0,10.5,0Z"/><path fill="#08273a" d="M433.9,52.4h10.4v9.4h7.4v7.5h-7.4v15.4c0,1.6.3,2.6.9,3.1.6.5,1.8.8,3.6.8h3v7.6h-6.6c-4.3,0-7.3-.6-8.9-1.9s-2.4-3.8-2.4-7.8v-17.3h-5.4v-7.5h5.4v-9.4h0Z"/><path fill="#08273a" d="M477.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM466.1,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/></g><g><path fill="#08273a" d="M243.7,126.4c-.3,1.5-.9,2.6-1.9,3.4s-2.2,1.2-3.8,1.2-3.4-.6-4.4-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.6-1.8,4.5-1.8s2.7.4,3.6,1.2c1,.8,1.6,1.9,1.8,3.4h-2.2c-.2-.9-.6-1.5-1.2-2-.6-.5-1.3-.7-2.2-.7s-2,.4-2.7,1.3-1,2-1,3.6.3,2.7,1,3.6c.7.9,1.6,1.3,2.7,1.3s1.6-.2,2.2-.7c.6-.5,1-1.1,1.2-2h2.3Z"/><path fill="#08273a" d="M254.2,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM249,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M260.4,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M265.9,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M270.7,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM270.7,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M289.1,124.4h-2.1c0-.5-.4-.9-.8-1.3s-.9-.5-1.5-.5-1.3.3-1.8.8c-.5.6-.7,1.4-.7,2.4s.2,1.9.7,2.5c.5.6,1.1.8,1.8.8s1.1-.1,1.5-.4c.4-.3.7-.7.9-1.3h2.1c-.2,1.1-.7,2-1.6,2.6s-1.8,1-2.9,1-2.5-.5-3.4-1.4c-.9-1-1.3-2.2-1.3-3.6s.4-2.7,1.3-3.6,2-1.4,3.4-1.4,2,.3,2.8,1c.8.6,1.3,1.5,1.5,2.6v-.2Z"/><path fill="#08273a" d="M292,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M300.9,117.7v2.2h-2.1v-2.2h2.1ZM300.9,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M307.6,128l2.2-6.9h2.2l-3.5,9.7h-2l-3.5-9.7h2.4l2.2,6.9h0Z"/><path fill="#08273a" d="M315.5,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM315.5,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M341.8,121.8h-2.2c-.2-.8-.6-1.4-1.2-1.9-.6-.4-1.3-.6-2.2-.6s-2.1.4-2.8,1.3c-.7.8-1.1,2-1.1,3.6s.3,2.8,1,3.6c.7.9,1.6,1.3,2.8,1.3s.8,0,1.2-.2c.4-.1.8-.3,1.1-.5.4-.2.6-.5.9-.9.2-.4.3-.9.3-1.4v-.3h-3.3v-1.9h5.5v6.8h-1.8v-1.6c-.9,1.2-2.2,1.8-4.1,1.8s-3.3-.6-4.3-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.7-1.8,4.6-1.8s2.7.4,3.7,1.2,1.6,1.8,1.9,3.2h-.1Z"/><path fill="#08273a" d="M352.7,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM347.6,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M364.4,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM359.2,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M375,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM372.6,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M385.6,117.7h9.1v1.9h-6.8v3.5h6.4v1.9h-6.4v5.8h-2.3v-13h0Z"/><path fill="#08273a" d="M404.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM399.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M414.4,129.4c-.6,1-1.5,1.6-2.9,1.6-2.2,0-3.2-1.3-3.2-3.8v-6.1h2.1v6.6c0,.3.1.5.2.8s.3.5.5.6.6.2,1,.2c1.5,0,2.2-1,2.2-3v-5.2h2.1v9.7h-2.1v-1.3h0Z"/><path fill="#08273a" d="M422,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/><path fill="#08273a" d="M437.8,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM435.3,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M442.6,128.1c0-.5.1-.9.4-1.2.2-.4.5-.7.9-.9.4-.2.9-.4,1.4-.6.6-.2,1.2-.3,1.8-.4s1.3-.2,2.1-.3v-.2c0-.8-.2-1.3-.6-1.7s-.9-.5-1.5-.5-1,0-1.4.4-.5.7-.6,1.3h-2.1c0-1,.5-1.8,1.2-2.4.8-.6,1.7-.9,2.9-.9s2.3.3,3,1,1.1,1.7,1.1,3.2v2.5c0,1.3,0,2.4.3,3.3h-2c-.1-.6-.2-1-.2-1.3-.6,1-1.7,1.5-3.2,1.5s-1.9-.3-2.6-.8-1-1.2-1-2.1h.1ZM449.2,126.2c-1.6,0-2.7.4-3.3.6-.6.3-1,.7-1,1.2s.2.8.5,1c.3.2.8.4,1.3.4.8,0,1.4-.2,1.9-.6.4-.4.7-1,.7-1.8v-.7h-.1Z"/><path fill="#08273a" d="M454.7,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M463.5,117.7v2.2h-2.1v-2.2h2.1ZM463.5,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M474.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM469.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M480.5,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/></g><polygon fill="#00a5cf" points="120 0 60 60 60 0 120 0"/><polygon fill="#ef4367" points="180 0 180 60 120 120 120 60 60 60 120 0 180 0"/><polygon fill="#ffd340" points="180 60 180 120 120 120 180 60"/><polygon fill="#54c0a6" points="90 90 45 135 45 90 90 90"/><polygon fill="#00a5cf" points="90 90 90 135 45 180 45 135 90 90"/><polygon fill="#ffd340" points="45 90 45 135 0 135 45 90"/><rect fill="#ef4367" y="135" width="45" height="45"/><polygon fill="#ffd340" points="60 0 60 60 0 60 60 0"/><polygon fill="#54c0a6" points="60 0 0 60 0 0 60 0"/><polygon fill="#54c0a6" points="180 120 120 180 120 120 180 120"/><polygon fill="#00a5cf" points="180 120 180 180 120 180 180 120"/></svg></a>
+      <a class="ftr-tel" href="tel:+919819701728">+91 98197 01728</a>
+      <div class="legal"><p>© <span id="yr">2026</span> Samhita CGF. All rights reserved.</p><p>CSR and FCRA compliant · Aligned with the UN SDGs</p></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,c){return (c||document).querySelector(s)}, $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- dropdowns ---- */
+var items=$$('.nav-item');
+function closeAll(ex){items.forEach(function(it){if(it!==ex){it.classList.remove('open');$('.nav-top',it).setAttribute('aria-expanded','false')}})}
+items.forEach(function(it){
+  var b=$('.nav-top',it),t;
+  function set(v){it.classList.toggle('open',v);b.setAttribute('aria-expanded',v?'true':'false')}
+  it.addEventListener('mouseenter',function(){clearTimeout(t);closeAll(it);set(true)});
+  it.addEventListener('mouseleave',function(){t=setTimeout(function(){set(false)},140)});
+  b.addEventListener('click',function(){var v=!it.classList.contains('open');closeAll(it);set(v)});
+  it.addEventListener('keydown',function(e){if(e.key==='Escape'){set(false);b.focus()}});
+  it.addEventListener('focusout',function(e){if(!it.contains(e.relatedTarget))set(false)});
+});
+document.addEventListener('click',function(e){if(!e.target.closest('.nav'))closeAll()});
+
+/* ---- mobile drawer ---- */
+var drawer=$('#drawer'),ham=$('.ham'),html='';
+items.forEach(function(it){html+='<div class="d-grp"><button type="button" aria-expanded="false">'+$('.nav-top',it).firstChild.textContent.trim()+'</button><div class="d-sub">'+$$('.nav-menu a',it).map(function(a){return a.outerHTML}).join('')+'</div></div>'});
+html+='<a class="btn" href="connect.html">Connect</a>';
+drawer.innerHTML=html;
+$$('.d-grp>button',drawer).forEach(function(b){b.addEventListener('click',function(){var g=b.parentNode,v=!g.classList.contains('open');g.classList.toggle('open',v);b.setAttribute('aria-expanded',v)})});
+function setDrawer(v){drawer.classList.toggle('open',v);ham.setAttribute('aria-expanded',v);document.body.classList.toggle('nav-lock',v)}
+ham.addEventListener('click',function(){setDrawer(ham.getAttribute('aria-expanded')!=='true')});
+$$('a',drawer).forEach(function(a){a.addEventListener('click',function(){setDrawer(false)})});
+addEventListener('resize',function(){if(innerWidth>1280)setDrawer(false)});
+
+/* ---- reveal ---- */
+var rv=$$('.rv');
+if('IntersectionObserver' in window&&!reduce){
+  var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  rv.forEach(function(el){ro.observe(el)});
+}else rv.forEach(function(el){el.classList.add('in')});
+
+
+/* ---- generic pill/photo tabs: swaps the white corner card ---- */
+(function(){
+  var pills=$$('#features .pill'),card=$('#features .wcard');
+  var data=[$('.w-p',card).textContent].concat($$('.sr-feat li').map(function(li){return li.textContent}));
+  function sel(i){
+    pills.forEach(function(p,j){p.setAttribute('aria-selected',j===i?'true':'false')});
+    card.classList.add('out');
+    setTimeout(function(){$('.w-p',card).textContent=data[i];card.classList.remove('out')},reduce?0:200);
+  }
+  pills.forEach(function(p,i){p.addEventListener('click',function(){sel(i)})});
+})();
+
+/* ---- pathways widget ---- */
+(function(){
+  var tabs=$$('#pcf .ptab'),panels=$$('#pcf .pwp');
+  function go(i){
+    tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===i?'true':'false');t.tabIndex=j===i?0:-1});
+    panels.forEach(function(p,j){p.hidden=j!==i});$('.pw-body',panels[i]).prepend($('#pcf .pw-tabs'));
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){go(i)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();var n=(i+d+tabs.length)%tabs.length;tabs[n].focus();go(n)});
+  });
+})();
+
+/* ---- partner logo marquee (second copy is decorative) ---- */
+(function(){
+  var L=[['360-foundation','360 ONE Foundation'],['akzo','AkzoNobel'],['appreciate','Appreciate'],['arvind','Arvind'],['avendus','Avendus'],['bajaj-finserv','Bajaj Finserv'],['brihati-foundation','Brihati Foundation'],['bwssj','BWSSJ'],['cgtmse','CGTMSE'],['csc','CSC'],['dvara','Dvara Holdings'],['dxc','DXC Technology'],['godrej-capital','Godrej Capital'],['google-org','Google.org'],['indusind-bank','IndusInd Bank'],['infoedge','InfoEdge'],['microsoft','Microsoft'],['msdf','Michael &amp; Susan Dell Foundation'],['omidyar-network','Omidyar Network'],['ondc','ONDC'],['sewa-bank','SEWA Bank'],['sewa-trade','SEWA Trade'],['snp','S&amp;P Global'],['spherule-foundation','Spherule Foundation'],['sure','SURE'],['tides','Tides Foundation'],['tisser','Tisser'],['ugro','UGRO Capital'],['usaid','USAID'],['vinati-organics','Vinati Organics'],['walmart','Walmart.org']];
+  function list(alt){return L.map(function(l){return '<li><img src="assets/catalytic-finance/logos/partners/'+l[0]+'.webp" alt="'+(alt?l[1]:'')+'" loading="lazy"></li>'}).join('')}
+  $('#marq').innerHTML='<ul aria-label="Partners">'+list(true)+'</ul><ul aria-hidden="true">'+list(false)+'</ul>';
+})();
+
+/* ---- case study expanders ---- */
+$$('.ccard h3 button').forEach(function(b){
+  b.querySelector('.pm').innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#222520" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>';
+  b.addEventListener('click',function(){var c=b.closest('.ccard'),v=!c.classList.contains('open');c.classList.toggle('open',v);b.setAttribute('aria-expanded',v)});
+});
+
+/* ---- services accordion (one open at a time) ---- */
+(function(){
+  var lis=$$('.svc li');
+  lis.forEach(function(li){$('button',li).addEventListener('click',function(){
+    var v=!li.classList.contains('open');
+    lis.forEach(function(o){o.classList.remove('open');$('button',o).setAttribute('aria-expanded','false')});
+    li.classList.toggle('open',v);$('button',li).setAttribute('aria-expanded',v);
+  })});
+})();
+
+/* ---- inquiry form ---- */
+(function(){
+  var f=$('#cf-form'),ok=$('#cf-success');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var bad=null;
+    $$('[required]',f).forEach(function(el){var v=el.value.trim(),inv=!v||(el.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));el.classList.toggle('cf-invalid',inv);if(inv&&!bad)bad=el});
+    if(bad){bad.focus();return}
+    f.hidden=true;ok.hidden=false;
+  });
+  $$('[required]',f).forEach(function(el){el.addEventListener('input',function(){el.classList.remove('cf-invalid')})});
+})();
+
+/* ---- carousels ---- */
+$$('[data-carousel]').forEach(function(w){
+  var tr=$('.track',w),btns=$$('.arrows button',w),cards=Array.prototype.slice.call(tr.children);
+  function upd(){btns[0].disabled=tr.scrollLeft<=2;btns[1].disabled=tr.scrollLeft+tr.clientWidth>=tr.scrollWidth-2;$('.arrows',w).style.visibility=tr.scrollWidth>tr.clientWidth+2?'':'hidden'}
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    var base=cards[0].offsetLeft,cur=tr.scrollLeft,idx=0;
+    cards.forEach(function(c,i){if(c.offsetLeft-base<=cur+4)idx=i});
+    var dir=+b.dataset.dir,between=cur-(cards[idx].offsetLeft-base)>4;
+    var n=Math.max(0,Math.min(cards.length-1,(dir<0&&between)?idx:idx+dir));
+    tr.scrollTo({left:cards[n].offsetLeft-base,behavior:reduce?'auto':'smooth'});
+    upd();setTimeout(upd,120);setTimeout(upd,600);
+  })});
+  tr.addEventListener('scrollend',upd);tr.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+});
+
+/* ---- ladder ---- */
+(function(){
+  var main=$('main'),lad=$('.ladder'),fills=$$('.rail i',lad);
+  var secs=['gap','move','instruments','pathways-cf','features','partners','cf-impact','cases','validated','services','why-now','faqs','inquiry','end'].map(function(id){return document.getElementById(id)});
+  var rungs=secs.map(function(){var r=document.createElement('span');r.className='lrung';lad.appendChild(r);return r});
+  var top=0,h=0,pos=[];
+  function layout(){
+    var mt=main.getBoundingClientRect().top+scrollY;
+    var vis=secs.map(function(s){return s.offsetParent!==null});
+    pos=secs.map(function(s,i){return vis[i]?s.getBoundingClientRect().top+scrollY-mt:NaN});
+    var shown=pos.filter(function(v){return !isNaN(v)});
+    top=shown[0]||0;h=(shown[shown.length-1]||0)-top;
+    lad.style.top=top+'px';lad.style.height=h+'px';
+    rungs.forEach(function(r,i){r.style.display=vis[i]?'':'none';r.style.top=(pos[i]-top)+'px'});
+    upd();
+  }
+  function upd(){
+    var mt=main.getBoundingClientRect().top+scrollY;
+    var p=Math.max(0,Math.min(h,scrollY+innerHeight*.62-mt-top));
+    fills.forEach(function(f){f.style.height=p+'px'});
+    rungs.forEach(function(r,i){r.classList.toggle('on',!isNaN(pos[i])&&pos[i]-top<=p+1)});
+  }
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',layout);addEventListener('load',layout);
+  if('ResizeObserver' in window)new ResizeObserver(layout).observe(main);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layout);
+  layout();
+})();
+
+/* ---- progress bar ---- */
+(function(){
+  var bar=$('.progress i'),tick=false;
+  function upd(){tick=false;var max=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(max>0?Math.min(1,scrollY/max):0)+')'}
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});
+  addEventListener('resize',upd);upd();
+})();
+
+$('#yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
