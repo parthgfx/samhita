@@ -359,6 +359,23 @@ main{position:relative;overflow-x:clip}
 @media (max-width:900px){.trow{grid-template-columns:repeat(4,minmax(0,1fr))}.tname{grid-column:1/-1}.tcell{border-top:1px solid var(--line)}.tcell:nth-child(2){border-left:0}}
 @media (max-width:480px){.trow{grid-template-columns:1fr 1fr}.tcell:nth-child(4){border-left:0}}
 
+
+/* flagship collaboratives: one vertical box each */
+.cbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(32px,4vw,44px);align-items:stretch}
+.cb{display:flex;flex-direction:column;background:#fff;border-radius:8px;overflow:hidden}
+.cb-ph{aspect-ratio:4/3;background:var(--cream-2);overflow:hidden}
+.cb-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.cb:hover .cb-ph img{transform:scale(1.05)}
+.cb-body{display:flex;flex-direction:column;flex:1;padding:20px 20px 22px}
+.cb h3{font-size:clamp(22px,1.9vw,26px)}
+.cb p{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.cb-st{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:auto;padding-top:16px}
+.cb-st>div{padding:12px 6px;text-align:center;background:var(--cream)}
+.cb-st dd{font-family:var(--serif);font-size:24px;line-height:1;white-space:nowrap}
+.cb-st dt{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
+@media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cbs{grid-template-columns:1fr}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -395,7 +412,7 @@ main{position:relative;overflow-x:clip}
 /* hero variant: busy photo, so the headline sits in the white card */
 .hero.th-c .wrap{align-items:flex-end;padding-bottom:clamp(28px,5vh,56px)}
 .hero.th-c .hero-media::after{background:linear-gradient(0deg,rgba(20,20,16,.45),rgba(20,20,16,0) 45%)}
-.th-card{margin-top:0;padding:24px 28px 26px;width:min(520px,100%)}
+.th-card{margin-top:0;padding:24px 28px 26px;width:min(680px,100%)}
 .th-card h1{color:var(--ink);text-align:left;text-shadow:none;min-height:0;display:block;font-size:clamp(30px,2.9vw,40px)}
 .th-card h1 .pk{color:var(--pink)}
 .th-card .hero-body{margin-top:14px}
@@ -448,12 +465,13 @@ main{position:relative;overflow-x:clip}
 .cstats span+span{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
 .cpart{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:12px;font-size:11.5px;color:var(--muted);line-height:1.4}
 .cpart img{height:24px;width:auto;max-width:120px;object-fit:contain}
+.cpart img.lg{height:44px;max-width:90px}
 
 /* page */
 .hero-media img.on{object-position:34% 30%}
 .wee-why-ph img{object-position:31% 30%}
 .wee-build{aspect-ratio:2/1}
-.wee-build img{object-position:50% 40%}
+.wee-build img{object-position:50% 62%}
 @media (max-width:760px){.wee-build{aspect-ratio:auto}}
 #evidence .why-more{margin-top:18px}
 #end{height:0}
@@ -500,15 +518,14 @@ main{position:relative;overflow-x:clip}
 <div class="ladder" aria-hidden="true"><span class="rail l"><i></i></span><span class="rail r"><i></i></span></div>
 
 <!-- ================= HERO: headline on the photo, column on the right ================= -->
-<section class="hero th-r" id="top">
+<section class="hero th-c" id="top">
   <div class="hero-media">
     <img class="on" src="assets/img/cine/womenseconomicempowerment-hero.webp?v=2" alt="A woman entrepreneur smiling" width="2000" height="1129">
   </div>
   <div class="wrap">
     <div class="hero-col">
+      <div class="widget th-card">
       <h1><span>When women earn, the effect travels <span class="pk">through families, businesses and communities.</span></span></h1>
-      <div class="widget">
-        <p class="caps th-eyebrow">Women's Economic Empowerment · A climb built around the barriers women face</p>
         <p class="hero-body">Women are central to our livelihood's work. As entrepreneurs, farmers, workers and sellers. We combine skills, finance, markets, health and social protection because the barriers women face arrive simultaneously and continuously.</p>
         <a class="btn" href="connect.html">Fund women’s economic mobility <span aria-hidden="true">→</span></a>
       </div>
@@ -567,14 +584,14 @@ main{position:relative;overflow-x:clip}
       <h2>What we can build with you</h2>
     </div>
     <div class="why wee-build th-pills rv">
-      <div class="imgs"><img class="on" src="assets/img/cine/impact-shg.webp?v=2" alt="Women at a self-help group meeting" width="2000" height="1125" loading="lazy"></div>
+      <div class="imgs"><img class="on" src="assets/img/cine/womenseconomicempowerment-build.webp?v=2" alt="Women farmers gathered around trays of seedlings" width="1448" height="1086" loading="lazy"></div>
       <div class="pills" role="tablist" aria-label="What we can build with you">
         <button class="pill" role="tab" aria-selected="true">Women entrepreneurs.</button>
-        <button class="pill" role="tab" aria-selected="false">Women in jobs.</button>
+        <button class="pill" role="tab" aria-selected="false">Women's livelihoods.</button>
         <button class="pill" role="tab" aria-selected="false">Women farmers.</button>
         <button class="pill" role="tab" aria-selected="false">Women sellers.</button>
-        <button class="pill" role="tab" aria-selected="false">Financial inclusion.</button>
-        <button class="pill" role="tab" aria-selected="false">Health + livelihoods.</button>
+        <button class="pill" role="tab" aria-selected="false">Women's financial inclusion.</button>
+        <button class="pill" role="tab" aria-selected="false">Women's health care.</button>
       </div>
       <div class="wcard" aria-live="polite">
         <p class="w-p">Business capability, flexible capital, formal finance, equipment, market access and formalisation.</p>
@@ -625,14 +642,14 @@ main{position:relative;overflow-x:clip}
         <div class="tph"><img src="assets/img/cine/womenseconomicempowerment-case-04.webp?v=2" alt="Women entrepreneurs at an Udyam Saksharta session in Madhya Pradesh" width="1536" height="1024" loading="lazy"></div>
         <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>25,000 women across 20 rural districts of Madhya Pradesh are building entrepreneurial and financial skills</span></button></h3>
         <div class="cstats"><div><span>25,000</span><span>Women being equipped</span></div><div><span>20</span><span>Rural districts</span></div><div><span>4</span><span>Skill areas: awareness, financial literacy, business planning, digital inclusion</span></div></div>
-        <div class="cpart"><span>In partnership with ITC</span></div>
+        <div class="cpart"><span>In partnership with ITC</span><img class="lg" src="assets/logos/itc-logo.webp" alt="ITC Limited" loading="lazy"></div>
         <div class="desc"><div><p>Many women running farm and non-farm livelihoods in rural Madhya Pradesh have the drive to build a business but little access to the entrepreneurial awareness, financial literacy or formal channels that would let that business grow. Under ITC Mission Sunehra Kal, the Udyam Saksharta initiative was designed to close that gap directly — strengthening entrepreneurial awareness, financial literacy, business planning and digital financial inclusion for women entrepreneurs. The program is equipping 25,000 women across 20 rural districts of Madhya Pradesh with the skills, knowledge and support needed to start, formalise and grow their enterprises.</p></div></div>
       </article>
       <article class="tcard ccard">
         <div class="tph"><img src="assets/img/cine/womenseconomicempowerment-case-05.webp?v=2" alt="Women outside a Nand Ghar centre in Rajasthan" width="1669" height="942" loading="lazy"></div>
         <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>10,000 women across Rajasthan are set to gain livelihood, skilling and credit linkages</span></button></h3>
         <div class="cstats"><div><span>10,000</span><span>Women targeted</span></div><div><span>15–20%</span><span>Income increase targeted</span></div><div><span>2</span><span>Districts: Jaipur and Bhilwara</span></div></div>
-        <div class="cpart"><span>In partnership with Project Nand Ghar</span></div>
+        <div class="cpart"><span>In partnership with Project Nand Ghar</span><img class="lg" src="assets/logos/vedanta-logo.webp" alt="Vedanta" loading="lazy"></div>
         <div class="desc"><div><p>In many parts of rural Rajasthan, women's economic agency is held back less by a single missing piece than by the absence of a coordinated push — livelihood opportunities, skilling, enterprise support and credit or scheme linkages rarely arrive together. Project Tejasvi, implemented by the Anil Agarwal Foundation through its flagship Project Nand Ghar, is designed to bring these together at scale. The program aims to empower 10,000 women across Jaipur and Bhilwara with livelihood opportunities, skilling, enterprise support, and credit or scheme linkages, targeting a 15–20% income increase sustained for at least two months after the intervention.</p></div></div>
       </article>
     </div></div>

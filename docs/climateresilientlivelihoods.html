@@ -359,6 +359,23 @@ main{position:relative;overflow-x:clip}
 @media (max-width:900px){.trow{grid-template-columns:repeat(4,minmax(0,1fr))}.tname{grid-column:1/-1}.tcell{border-top:1px solid var(--line)}.tcell:nth-child(2){border-left:0}}
 @media (max-width:480px){.trow{grid-template-columns:1fr 1fr}.tcell:nth-child(4){border-left:0}}
 
+
+/* flagship collaboratives: one vertical box each */
+.cbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(32px,4vw,44px);align-items:stretch}
+.cb{display:flex;flex-direction:column;background:#fff;border-radius:8px;overflow:hidden}
+.cb-ph{aspect-ratio:4/3;background:var(--cream-2);overflow:hidden}
+.cb-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.cb:hover .cb-ph img{transform:scale(1.05)}
+.cb-body{display:flex;flex-direction:column;flex:1;padding:20px 20px 22px}
+.cb h3{font-size:clamp(22px,1.9vw,26px)}
+.cb p{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.cb-st{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:auto;padding-top:16px}
+.cb-st>div{padding:12px 6px;text-align:center;background:var(--cream)}
+.cb-st dd{font-family:var(--serif);font-size:24px;line-height:1;white-space:nowrap}
+.cb-st dt{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
+@media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cbs{grid-template-columns:1fr}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -422,8 +439,12 @@ main{position:relative;overflow-x:clip}
 .th-grid .r{flex:none;width:22px;height:4px;margin-top:13px;background:var(--yellow)}
 .th-grid h3{font-size:clamp(19px,1.7vw,22px);line-height:1.25;padding-top:2px}
 .th-grid.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
-@media (max-width:860px){.th-grid,.th-grid.n4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.th-grid,.th-grid.n4{grid-template-columns:1fr}.th-grid li{padding:18px}}
+/* seven items: four on top, three below */
+.th-grid.n7{grid-template-columns:repeat(12,minmax(0,1fr))}
+.th-grid.n7 li{grid-column:span 3}
+.th-grid.n7 li:nth-child(n+5){grid-column:span 4}
+@media (max-width:860px){.th-grid,.th-grid.n4{grid-template-columns:repeat(2,minmax(0,1fr))}.th-grid.n7{grid-template-columns:repeat(2,minmax(0,1fr))}.th-grid.n7 li,.th-grid.n7 li:nth-child(n+5){grid-column:auto}}
+@media (max-width:560px){.th-grid,.th-grid.n4,.th-grid.n7{grid-template-columns:1fr}.th-grid li{padding:18px}}
 
 /* evidence: case cards (as catalyticfinance) */
 .ccard{flex:0 0 clamp(280px,30vw,350px);display:flex;flex-direction:column}
@@ -540,7 +561,6 @@ main{position:relative;overflow-x:clip}
   <div class="wrap">
     <div class="hero-col">
       <div class="widget th-card">
-        <p class="caps th-eyebrow">Climate-resilient Livelihoods · A ladder that holds through the next shock</p>
         <h1>A livelihood is not secure if the next climate shock <span class="pk">can wipe it out.</span></h1>
         <p class="hero-body">Climate change is already altering how people farm, work, live and earn. We help vulnerable workers, farmers and enterprises adapt while building new economic opportunities through resilient agriculture, green jobs, finance, insurance and stronger markets.</p>
         <a class="btn" href="connect.html">Build a climate program where resilience also improves incomes <span aria-hidden="true">→</span></a>
@@ -565,23 +585,24 @@ main{position:relative;overflow-x:clip}
   </div>
 </section>
 
-<!-- ================= PROGRESS: photo + numbered list ================= -->
-<section class="sec cream" id="progress">
-  <div class="wrap">
-    <div class="shead rv">
+<!-- ================= PROGRESS: band + straddling panel ================= -->
+<section class="th-prog" id="progress">
+  <div class="band">
+    <div class="wrap rv">
       <p class="caps">The rungs we measure</p>
       <h2>What progress can look like</h2>
     </div>
-    <div class="cri-net shadow rv">
-      <div class="ph"><img src="assets/img/cine/climateresilientlivelihoods-field.webp?v=2" alt="Women farmers working in a field" width="1747" height="900" loading="lazy"></div>
-      <ol>
-        <li><span class="n">01</span><span class="t">Higher and more resilient farm income</span></li>
-        <li><span class="n">02</span><span class="t">Adoption of climate-smart practices</span></li>
-        <li><span class="n">03</span><span class="t">Stronger FPOs and market access</span></li>
-        <li><span class="n">04</span><span class="t">Access to adaptive finance</span></li>
-        <li><span class="n">05</span><span class="t">Entry into green jobs</span></li>
-        <li><span class="n">06</span><span class="t">Insurance and social-protection coverage</span></li>
-        <li><span class="n">07</span><span class="t">Greater resilience to heat, water and other climate risks</span></li>
+  </div>
+  <div class="wrap">
+    <div class="dash shadow rv">
+      <ol class="th-grid n7">
+        <li><span class="n">01</span><h3>Higher and more resilient farm income</h3></li>
+        <li><span class="n">02</span><h3>Adoption of climate-smart practices</h3></li>
+        <li><span class="n">03</span><h3>Stronger FPOs and market access</h3></li>
+        <li><span class="n">04</span><h3>Access to adaptive finance</h3></li>
+        <li><span class="n">05</span><h3>Entry into green jobs</h3></li>
+        <li><span class="n">06</span><h3>Insurance and social-protection coverage</h3></li>
+        <li><span class="n">07</span><h3>Greater resilience to heat, water and other climate risks</h3></li>
       </ol>
     </div>
   </div>

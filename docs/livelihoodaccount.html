@@ -359,6 +359,23 @@ main{position:relative;overflow-x:clip}
 @media (max-width:900px){.trow{grid-template-columns:repeat(4,minmax(0,1fr))}.tname{grid-column:1/-1}.tcell{border-top:1px solid var(--line)}.tcell:nth-child(2){border-left:0}}
 @media (max-width:480px){.trow{grid-template-columns:1fr 1fr}.tcell:nth-child(4){border-left:0}}
 
+
+/* flagship collaboratives: one vertical box each */
+.cbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(32px,4vw,44px);align-items:stretch}
+.cb{display:flex;flex-direction:column;background:#fff;border-radius:8px;overflow:hidden}
+.cb-ph{aspect-ratio:4/3;background:var(--cream-2);overflow:hidden}
+.cb-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.cb:hover .cb-ph img{transform:scale(1.05)}
+.cb-body{display:flex;flex-direction:column;flex:1;padding:20px 20px 22px}
+.cb h3{font-size:clamp(22px,1.9vw,26px)}
+.cb p{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.cb-st{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:auto;padding-top:16px}
+.cb-st>div{padding:12px 6px;text-align:center;background:var(--cream)}
+.cb-st dd{font-family:var(--serif);font-size:24px;line-height:1;white-space:nowrap}
+.cb-st dt{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
+@media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cbs{grid-template-columns:1fr}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -437,13 +454,14 @@ main{position:relative;overflow-x:clip}
 .la-steps li:last-child p{color:var(--ink)}
 .la-safe{margin-top:clamp(28px,3vw,36px);background:#fff;border-radius:8px;padding:26px 28px 30px}
 .la-safe>h3{text-align:center;font-size:clamp(26px,2.4vw,32px)}
-.la-safe ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 30px;margin-top:22px}
+.la-safe ul{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 30px;margin-top:22px}
+.la-safe li{flex:0 0 calc((100% - 60px)/3)}
 .la-safe li{display:grid;grid-template-columns:24px 1fr;gap:12px}
 .la-safe li svg{width:24px;height:24px;margin-top:2px}
 .la-safe li h3{font-family:var(--sans);font-weight:800;font-size:15px;letter-spacing:0;line-height:1.4}
 .la-safe li p{margin-top:2px;font-size:14px;color:var(--ink-2)}
-@media (max-width:900px){.la-how{grid-template-columns:1fr}.la-how .ph{min-height:0;aspect-ratio:4/3}.la-safe ul{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.la-safe ul{grid-template-columns:1fr}.la-how .body,.la-safe{padding:20px}}
+@media (max-width:900px){.la-how{grid-template-columns:1fr}.la-how .ph{min-height:0;aspect-ratio:4/3}.la-safe li{flex-basis:calc((100% - 30px)/2)}}
+@media (max-width:560px){.la-safe li{flex-basis:100%}.la-how .body,.la-safe{padding:20px}}
 
 /* ravi: a six-step staircase */
 .la-stairs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;align-items:end;margin-top:clamp(32px,4vw,48px)}
@@ -456,7 +474,7 @@ main{position:relative;overflow-x:clip}
 @media (max-width:860px){.la-stairs{grid-template-columns:1fr;gap:0;align-items:stretch}.la-stairs li{padding:14px 0 14px calc(var(--i) * 12px + 16px);border-left:4px solid var(--yellow);position:relative}.la-stairs li+li{border-top:1px solid var(--line)}.la-stairs .riser{display:none}}
 
 /* people: four open cards */
-.la-pp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:clamp(32px,4vw,44px)}
+.la-pp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 22px;margin-top:clamp(32px,4vw,44px)}
 .la-pp .tph{aspect-ratio:4/3}
 .la-pp .tph img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
 .la-pp article:hover .tph img{transform:scale(1.05)}
@@ -476,10 +494,11 @@ main{position:relative;overflow-x:clip}
 
 /* institutions: photo with pills + ring card */
 .inst-why{aspect-ratio:2/1}
-.inst-why img{object-position:50% 50%}
+.inst-why img{object-position:50% 45%}
 .inst-why .wcard .w-s{font-family:var(--serif);font-size:22px;line-height:1.25;color:var(--ink)}
 .inst-why .wcard .w-p{margin-top:6px}
 .join-simple h3{font-family:var(--serif);font-weight:400;font-size:26px}
+.join-simple p{margin-top:10px;font-size:14.5px;color:var(--ink-2)}
 .join-simple ul{margin-top:10px;display:grid;gap:9px}
 .join-simple li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14.5px;color:var(--ink-2)}
 .join-simple li svg{width:20px;height:20px;margin-top:2px}
@@ -492,6 +511,34 @@ main{position:relative;overflow-x:clip}
 .la-under dt{font-weight:800;font-size:15px}
 .la-under dd{font-size:14.5px;color:var(--ink-2)}
 @media (max-width:900px){.la-under{grid-template-columns:1fr;text-align:center}}
+
+/* trust labels */
+.la-trust{margin-top:clamp(28px,3vw,36px);background:#fff;border-radius:8px;padding:26px 28px 30px}
+.la-trust>h3{text-align:center;font-size:clamp(26px,2.4vw,32px)}
+.la-trust ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:22px}
+.la-trust .k{display:block;width:34px;height:4px;background:var(--yellow);margin-bottom:12px}
+.la-trust h4{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15}
+.la-trust p{margin-top:6px;font-size:14px;color:var(--ink-2)}
+@media (max-width:900px){.la-trust ul{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.la-trust ul{grid-template-columns:1fr}.la-trust{padding:20px}}
+/* one key: five steps in a row */
+.la-key{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(32px,4vw,44px);background:#fff;border-radius:8px}
+.la-key li{position:relative;padding:34px 22px;text-align:center}
+.la-key li+li{border-left:1px solid var(--line)}
+.la-key h3{font-size:clamp(24px,2.2vw,30px)}
+.la-key p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
+.la-key .arw{position:absolute;left:-15px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--yellow);font-weight:800;font-size:14px;z-index:1}
+@media (max-width:900px){.la-key{grid-template-columns:1fr}.la-key li+li{border-left:0;border-top:1px solid var(--line)}.la-key .arw{left:50%;top:-15px;transform:translateX(-50%) rotate(90deg)}}
+/* underway extras */
+.la-live{display:grid;gap:6px}
+.la-live li{position:relative;padding-left:16px}
+.la-live li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--yellow-ink)}
+.la-side{display:grid;gap:14px;justify-items:stretch}
+.la-goal{padding:16px 22px;border-radius:6px;background:var(--cream);text-align:center}
+.la-goal .big b{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3vw,42px);line-height:1}
+.la-goal p{font-size:14px;color:var(--ink-2)}
+.la-under{grid-template-columns:minmax(220px,300px) 1fr auto}
+@media (max-width:900px){.la-under{grid-template-columns:1fr}}
 #end{height:0}
 </style>
 </head>
@@ -542,7 +589,6 @@ main{position:relative;overflow-x:clip}
   <div class="wrap">
     <div class="hero-col">
       <div class="widget ab-card">
-        <p class="caps eyebrow">Livelihood Account ·</p>
         <h1>Years of training, work and repayment should not be erased by a change of city, job or lender.</h1>
         <p class="badges"><span>Skills</span><span>Jobs</span><span>Credit</span><span>Markets</span><span>Schemes</span></p>
         <a class="btn" href="connect.html">Explore a Livelihood Account pilot <span aria-hidden="true">→</span></a>
@@ -555,7 +601,7 @@ main{position:relative;overflow-x:clip}
 <section class="sec cream" id="lede">
   <div class="wrap">
     <div class="stmt rv">
-      <p class="la-big">Every day, people in India work, learn, sell and repay loans. Proof of all this already exists in training centres, employers, banks, government schemes and women's groups, but the person can't use it.</p>
+      <p class="la-big">Every day, people in India work, learn, sell and repay loans. Proof of all this already exists in training centres, employers, banks, government schemes and women's groups, but the person can't use it. It sits in separate systems, out of the person's reach.</p>
       <span class="la-rung" aria-hidden="true"></span>
       <p class="lead">The Livelihood Account lets them bring that proof together, with their consent, to get their next job, loan, market or scheme.</p>
     </div>
@@ -584,7 +630,8 @@ main{position:relative;overflow-x:clip}
     <div class="la-rich rv">
       <div class="txt">
         <h3>Rich in history. <span class="pk">Poor in proof.</span></h3>
-        <p>Every employer, lender and buyer asks the same question: can I trust this person's record? Today the proof exists, but it can't travel with the person. The Livelihood Account is the layer that lets it.</p>
+        <p>Every employer, lender and buyer asks the same question: can I trust this person's record? Today the proof exists, held in separate systems. A worker registers on one portal for identity, another for training, another for jobs, another for schemes and another for credit. Each asks for the same documents again.</p>
+        <p>The Livelihood Account is the layer that lets the proof travel with the person.</p>
       </div>
       <div class="ph"><img src="assets/img/cine/livelihoodaccount-rich.webp?v=2" alt="" width="1448" height="1086" loading="lazy"></div>
     </div>
@@ -597,64 +644,89 @@ main{position:relative;overflow-x:clip}
     <div class="shead rv">
       <p class="caps"><b>02</b></p>
       <h2>The idea</h2>
-      <p class="sub">The Livelihood Account creates no central database. Records stay where they already are. The account is a key the person holds, which lets them open those records and show them to someone they choose.</p>
+      <p class="sub">Records stay where they already are, at the source. The Livelihood Account is a key the person holds. It opens those records and shows them to someone they choose.</p>
     </div>
     <div class="la-how shadow rv">
       <div class="ph"><img src="assets/img/cine/livelihoodaccount-idea.webp?v=2" alt="A person at work" width="1448" height="1086" loading="lazy"></div>
       <div class="body">
         <h3>How it works</h3>
         <ol class="la-steps">
-          <li><span class="n">01</span><div><h4>The proof already exists.</h4><p>It's held by training centres, employers, banks, women's groups and government schemes.</p></div></li>
-          <li><span class="n">02</span><div><h4>The person decides who sees it.</h4><p>Nothing is shared without their yes. They choose what, with whom, and for what.</p></div></li>
-          <li><span class="n">03</span><div><h4>Every record is verified.</h4><p>Every record is checked at its source, as a tokenised, verifiable credential, and can't be faked.</p></div></li>
+          <li><span class="n">01</span><div><h4>The proof already exists.</h4><p>Training centres, employers, banks, women's groups and government schemes hold it, in systems such as DigiLocker, e-Shram, NCS, SIDH, the Account Aggregator and LokOS.</p></div></li>
+          <li><span class="n">02</span><div><h4>The person decides who sees it.</h4><p>Consent is time-bound and tied to one purpose. The person can view, manage or withdraw it at any time.</p></div></li>
+          <li><span class="n">03</span><div><h4>Every record carries a trust label.</h4><p>The person reading it sees where it came from and how much weight to give it.</p></div></li>
         </ol>
       </div>
+    </div>
+    <div class="la-trust shadow rv">
+      <h3>Four trust labels</h3>
+      <ul>
+        <li><span class="k" aria-hidden="true"></span><h4>Verified.</h4><p>Checked directly at an authoritative source, such as Aadhaar or government data.</p></li>
+        <li><span class="k" aria-hidden="true"></span><h4>Attested.</h4><p>Confirmed by a recognised institution, such as an employer, an SHG or a trainer.</p></li>
+        <li><span class="k" aria-hidden="true"></span><h4>Assessed.</h4><p>Evaluated through a method, such as a skills assessment or a credit score.</p></li>
+        <li><span class="k" aria-hidden="true"></span><h4>Self-declared.</h4><p>Provided by the person.</p></li>
+      </ul>
     </div>
     <div class="la-safe shadow rv">
       <h3>Safeguards built in</h3>
       <ul>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Consent every time.</h3><p>Asked each time, and it can be withdrawn.</p></div></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Data stays at source.</h3><p>No central database, and no copies.</p></div></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Verifiable credentials.</h3><p>Checked at source, so they can't be faked.</p></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Consent based.</h3><p>Time-bound, limited to one purpose, and withdrawable at any time.</p></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Data stays at source.</h3><p>The account pulls records with consent. The originals stay where they are.</p></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Audit, correction and grievance.</h3><p>Every exchange is logged, and a person can ask for a correction or raise a complaint.</p></div></li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Data protection by design.</h3><p>Built in line with India's DPDP Act.</p></div></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Built on India's DPI.</h3><p>Uses existing digital public infrastructure.</p></div></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Works for everyone.</h3><p>On a phone, or with help from a local facilitator.</p></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><div><h3>Built on India's DPI.</h3><p>Reuses existing digital public infrastructure and builds only the missing connections.</p></div></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ================= 03 RAVI: staircase ================= -->
+<!-- ================= 03 ONE KEY: the chain of opportunities ================= -->
+<section class="sec" id="onekey">
+  <div class="wrap">
+    <div class="shead rv">
+      <p class="caps"><b>03</b>One key, many opportunities</p>
+      <h2>One key, many opportunities</h2>
+    </div>
+    <ol class="la-key shadow rv">
+      <li><h3>Training:</h3><p>What they already know</p></li>
+      <li><span class="arw" aria-hidden="true">→</span><h3>Jobs:</h3><p>Skills and work history</p></li>
+      <li><span class="arw" aria-hidden="true">→</span><h3>Loans:</h3><p>Income and repayment</p></li>
+      <li><span class="arw" aria-hidden="true">→</span><h3>Markets:</h3><p>Sales, supply and delivery</p></li>
+      <li><span class="arw" aria-hidden="true">→</span><h3>Schemes:</h3><p>Eligibility</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= 04 RAVI: staircase ================= -->
 <section class="sec" id="ravi">
   <div class="wrap">
     <div class="shead rv">
-      <p class="caps"><b>03</b>Every opportunity builds the next</p>
+      <p class="caps"><b>04</b>Every opportunity builds the next</p>
       <h2>Ravi's story (illustrative)</h2>
     </div>
     <ol class="la-stairs rv">
-      <li style="--i:1"><h3>Training.</h3><p>Ravi finishes a welding course at a training institute in Hubli.</p><span class="riser" aria-hidden="true"></span></li>
-      <li style="--i:2"><h3>Job.</h3><p>With his yes, the institute's record reaches an employer, and he is hired.</p><span class="riser" aria-hidden="true"></span></li>
-      <li style="--i:3"><h3>Record.</h3><p>His wages are paid digitally and become part of his record.</p><span class="riser" aria-hidden="true"></span></li>
-      <li style="--i:4"><h3>Loan.</h3><p>A lender sees a year of steady income and funds his welding kit.</p><span class="riser" aria-hidden="true"></span></li>
+      <li style="--i:1"><h3>Training.</h3><p>Ravi finishes a welding course at a training institute in Hubli. The certificate is Verified at source.</p><span class="riser" aria-hidden="true"></span></li>
+      <li style="--i:2"><h3>Job.</h3><p>With his consent, the institute's record reaches an employer. The employer reviews it and decides independently.</p><span class="riser" aria-hidden="true"></span></li>
+      <li style="--i:3"><h3>Record.</h3><p>His wages are paid digitally and become part of his record, Attested by the employer.</p><span class="riser" aria-hidden="true"></span></li>
+      <li style="--i:4"><h3>Loan.</h3><p>A lender sees a year of steady income and funds his welding kit. Underwriting stays with the lender.</p><span class="riser" aria-hidden="true"></span></li>
       <li style="--i:5"><h3>Market.</h3><p>He takes on his own jobs, and his record wins him a regular client.</p><span class="riser" aria-hidden="true"></span></li>
       <li style="--i:6"><h3>Growth.</h3><p>His next loan is bigger.</p><span class="riser" aria-hidden="true"></span></li>
     </ol>
   </div>
 </section>
 
-<!-- ================= 04 PEOPLE: four open cards ================= -->
+<!-- ================= 05 PEOPLE: four open cards ================= -->
 <section class="sec cream" id="people">
   <div class="wrap">
     <div class="shead rv">
-      <p class="caps"><b>04</b>Real people. Real progress.</p>
+      <p class="caps"><b>05</b>Real people. Real progress.</p>
       <h2>Real people. Real progress.</h2>
     </div>
     <div class="la-pp">
       <article class="rv">
         <div class="tph"><img src="assets/img/cine/livelihoodaccount-rp-grad.webp?v=2" alt="A young woman holding her certificates outside a hiring office" width="1672" height="941" loading="lazy"></div>
         <p class="caps who pk">Who</p>
-        <h3>Training graduate, wants a job</h3>
-        <dl><div><dt>Today</dt><dd>Photocopies sent one by one, and weeks of checks.</dd></div><div><dt>With the account</dt><dd>Verified certificates straight from DigiLocker.</dd></div></dl>
+        <h3>ITI graduate, wants a job</h3>
+        <dl><div><dt>Today</dt><dd>Photocopies sent one by one, and weeks of checks.</dd></div><div><dt>With the account</dt><dd>Verified certificates straight from DigiLocker and SIDH.</dd></div></dl>
         <p class="shift"><span>The shift</span><span>Weeks → seconds</span></p>
       </article>
       <article class="rv" style="--d:.06s">
@@ -665,33 +737,47 @@ main{position:relative;overflow-x:clip}
         <p class="shift"><span>The shift</span><span>Days → minutes</span></p>
       </article>
       <article class="rv" style="--d:.12s">
-        <div class="tph"><img src="assets/img/cine/livelihoodaccount-rp-welder.webp?v=2" alt="A welder at work in a fabrication workshop" width="1672" height="941" loading="lazy"></div>
+        <div class="tph"><img src="assets/img/cine/livelihoodaccount-rp-shg.webp?v=2" alt="A woman entrepreneur at a desk with a loan officer" width="1672" height="941" loading="lazy"></div>
         <p class="caps who pk">Who</p>
-        <h3>Welder, wants more work</h3>
-        <dl><div><dt>Today</dt><dd>Tested from scratch and paid like a beginner.</dd></div><div><dt>With the account</dt><dd>Past work confirmed, and a fair rate.</dd></div></dl>
-        <p class="shift"><span>The shift</span><span>Beginner → experienced</span></p>
+        <h3>Woman entrepreneur, wants a loan</h3>
+        <dl><div><dt>Today</dt><dd>Her record sits with the group, so she is asked for a guarantor.</dd></div><div><dt>With the account</dt><dd>Her own repayment and enterprise record, and a loan in her name.</dd></div></dl>
+        <p class="shift"><span>The shift</span><span>Group → her own name</span></p>
       </article>
       <article class="rv" style="--d:.18s">
-        <div class="tph"><img src="assets/img/cine/livelihoodaccount-rp-shg.webp?v=2" alt="A self-help group member at a desk with a loan officer" width="1672" height="941" loading="lazy"></div>
+        <div class="tph"><img src="assets/img/cine/pw-farmer.webp?v=2" alt="A woman farmer standing in her kitchen garden beside her home" width="1672" height="941" loading="lazy"></div>
         <p class="caps who pk">Who</p>
-        <h3>SHG member, wants a loan</h3>
-        <dl><div><dt>Today</dt><dd>Her record sits with the group, so she is asked for a guarantor.</dd></div><div><dt>With the account</dt><dd>Her own repayment record, and a loan in her name.</dd></div></dl>
-        <p class="shift"><span>The shift</span><span>Group → her own name</span></p>
+        <h3>Farmer, wants credit and buyers</h3>
+        <dl><div><dt>Today</dt><dd>Crop, warehouse, FPO and bank records sit in separate places.</dd></div><div><dt>With the account</dt><dd>One consented profile for the lender or buyer to review.</dd></div></dl>
+        <p class="shift"><span>The shift</span><span>Scattered → one profile</span></p>
+      </article>
+      <article class="rv" style="--d:.24s">
+        <div class="tph"><img src="assets/img/cine/livelihoodaccount-rp-welder.webp?v=2" alt="A welder at work in a fabrication workshop" width="1672" height="941" loading="lazy"></div>
+        <p class="caps who pk">Who</p>
+        <h3>Construction or gig worker, wants jobs and benefits</h3>
+        <dl><div><dt>Today</dt><dd>Registers again with every platform, employer and scheme.</dd></div><div><dt>With the account</dt><dd>e-Shram and work records reused, with scheme eligibility checked faster.</dd></div></dl>
+        <p class="shift"><span>The shift</span><span>Repeat forms → one record</span></p>
+      </article>
+      <article class="rv" style="--d:.30s">
+        <div class="tph"><img src="assets/img/cine/pw-entrepreneur.webp?v=2" alt="A micro-entrepreneur holding up jars of her homemade pickles" width="1672" height="941" loading="lazy"></div>
+        <p class="caps who pk">Who</p>
+        <h3>Small enterprise owner, wants to grow</h3>
+        <dl><div><dt>Today</dt><dd>Udyam, GST, bank and sales records live apart. Every lender and marketplace asks again.</dd></div><div><dt>With the account</dt><dd>Business records shared once, with consent, for credit and market listings.</dd></div></dl>
+        <p class="shift"><span>The shift</span><span>Scattered → portable</span></p>
       </article>
     </div>
     <p class="la-close rv">The same works for street vendors, weavers, farmers, producers in supply chains, gig workers, domestic workers and small shop owners. <strong>If a person earns a living, their record should count.</strong></p>
   </div>
 </section>
 
-<!-- ================= 05 INSTITUTIONS: photo with pills + ring card ================= -->
+<!-- ================= 07 INSTITUTIONS: photo with pills + ring card ================= -->
 <section class="sec" id="institutions">
   <div class="wrap">
     <div class="shead rv">
-      <p class="caps"><b>05</b>Doors it opens</p>
+      <p class="caps"><b>07</b>Doors it opens</p>
       <h2>Why institutions join</h2>
     </div>
     <div class="why inst-why rv">
-      <div class="imgs"><img class="on" src="assets/img/cine/partners-meeting.webp?v=2" alt="Institutions partnering" width="2000" height="857" loading="lazy"></div>
+      <div class="imgs"><img class="on" src="assets/img/cine/livelihoodaccount-inst2.webp?v=2" alt="Institutions partnering" width="1448" height="1086" loading="lazy"></div>
       <div class="pills" role="tablist" aria-label="Why institutions join">
         <button class="pill" role="tab" aria-selected="true">Employers.</button>
         <button class="pill" role="tab" aria-selected="false">Lenders.</button>
@@ -708,7 +794,7 @@ main{position:relative;overflow-x:clip}
     <ul class="sr-inst" hidden>
       <li><p>Lend to people you couldn't see before.</p><p>Trusted income and repayment records mean safer decisions.</p></li>
       <li><p>Build a supply chain you can trust.</p><p>Onboard verified producers, suppliers and workers faster.</p></li>
-      <li><p>Reach the right people.</p><p>And see what happens after enrolment.</p></li>
+      <li><p>Reach the right people.</p><p>And follow the citizen after enrolment.</p></li>
       <li><p>Prove your training works.</p><p>Every placement is on record.</p></li>
       <li><p>Build once, help everyone.</p><p>One shared layer for every livelihood program.</p></li>
     </ul>
@@ -719,10 +805,8 @@ main{position:relative;overflow-x:clip}
       </div>
       <div>
         <h3>Joining is simple.</h3>
-        <ul>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Hold records? Connect once. Records stay with you.</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Offer jobs, loans or orders? Ask for the person's yes.</span></li>
-        </ul>
+        <p>Hold records? Connect once. Records stay with you, and you keep issuing and maintaining them. Offer jobs, loans or orders? Ask for the person's consent, read their records with trust labels, and decide on your own terms. Both start the same way: pick one use case, connect through open APIs, test in a sandbox and go live.</p>
+        <p>Integrate once. Cut duplicate checks, serve more people and keep an audit trail.</p>
       </div>
     </div>
   </div>
@@ -732,17 +816,19 @@ main{position:relative;overflow-x:clip}
 <section class="sec cream" id="underway">
   <div class="wrap">
     <div class="shead rv">
-      <p class="caps"><b>06</b>Already underway</p>
+      <p class="caps"><b>08</b>Already underway</p>
       <h2>Every job, every sale, every repaid loan should count toward the next one.</h2>
     </div>
     <div class="join la-under shadow rv">
       <div class="ph"><img src="assets/img/cine/livelihoodaccount-underway.webp?v=2" alt="A woman shopkeeper giving a thumbs-up at her store" width="1438" height="1094" loading="lazy"></div>
       <dl>
-        <div><dt class="pk">Why it can scale.</dt><dd>It builds on systems that already reach crores, like DigiLocker, e-Shram and LokOS.</dd></div>
+        <div><dt class="pk">Why it can scale.</dt><dd>It builds on systems that already reach crores, like DigiLocker, e-Shram and LokOS. The approach has three moves: reuse existing infrastructure, partner where it helps, and build only the missing pieces.</dd></div>
         <div><dt class="pk">Why now.</dt><dd>The digital rails exist, the records are already digital, and people are ready to grow.</dd></div>
-        <div><dt class="pk">Already underway.</dt><dd>Jobs in Hubli-Dharwad; Mumbai in discussion. Loans planned for 10,000+ SHG women in MP and Rajasthan.</dd></div>
+        <div><dt class="pk">Already underway.</dt><dd><ul class="la-live"><li>Jobs for 500 youth in partnership with EkStep Foundation · Infosys · DXC.</li><li>Warehouse credit for 3,000 farmers in partnership with Finternet · Citi · Sahamati · PSB Alliance · Agri Stack.</li><li>Loans for 10,000+ SHG women in partnership with Accion · Bajaj Finserv · Gates · DXC · Sahamati.</li></ul></dd></div>
+        <div><dt class="pk">The path ahead.</dt><dd>Connect existing systems. Build trust in records. Make progress portable. Then open the network to many providers.</dd></div>
       </dl>
-      <a class="btn" href="connect.html">Co-develop a use case <span aria-hidden="true">→</span></a>
+      <div class="la-side"><div class="la-goal"><p class="big"><b>10 lakh</b> (1 million)</p><p>people by 2029.</p></div>
+      <a class="btn" href="connect.html">Co-develop a use case <span aria-hidden="true">→</span></a></div>
     </div>
   </div>
 </section>
@@ -887,7 +973,7 @@ $$('[data-acc]').forEach(function(w){
 /* ---- ladder ---- */
 (function(){
   var main=$('main'),lad=$('.ladder'),fills=$$('.rail i',lad);
-  var secs=['lede','problem','idea','ravi','people','institutions','underway','end'].map(function(id){return document.getElementById(id)});
+  var secs=['lede','problem','idea','onekey','ravi','people','institutions','underway','end'].map(function(id){return document.getElementById(id)});
   var rungs=secs.map(function(){var r=document.createElement('span');r.className='lrung';lad.appendChild(r);return r});
   var top=0,h=0,pos=[];
   function layout(){

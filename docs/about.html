@@ -359,6 +359,23 @@ main{position:relative;overflow-x:clip}
 @media (max-width:900px){.trow{grid-template-columns:repeat(4,minmax(0,1fr))}.tname{grid-column:1/-1}.tcell{border-top:1px solid var(--line)}.tcell:nth-child(2){border-left:0}}
 @media (max-width:480px){.trow{grid-template-columns:1fr 1fr}.tcell:nth-child(4){border-left:0}}
 
+
+/* flagship collaboratives: one vertical box each */
+.cbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(32px,4vw,44px);align-items:stretch}
+.cb{display:flex;flex-direction:column;background:#fff;border-radius:8px;overflow:hidden}
+.cb-ph{aspect-ratio:4/3;background:var(--cream-2);overflow:hidden}
+.cb-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.cb:hover .cb-ph img{transform:scale(1.05)}
+.cb-body{display:flex;flex-direction:column;flex:1;padding:20px 20px 22px}
+.cb h3{font-size:clamp(22px,1.9vw,26px)}
+.cb p{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.cb-st{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:auto;padding-top:16px}
+.cb-st>div{padding:12px 6px;text-align:center;background:var(--cream)}
+.cb-st dd{font-family:var(--serif);font-size:24px;line-height:1;white-space:nowrap}
+.cb-st dt{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
+@media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cbs{grid-template-columns:1fr}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -394,7 +411,8 @@ main{position:relative;overflow-x:clip}
 @media (max-width:860px){.hero.ab .wrap{padding-bottom:0}.ab-card{margin:-90px auto 24px}}
 
 /* belief: statement + the three climbs */
-.climb-lead{margin-top:40px;text-align:center;color:var(--ink-2)}
+.climb-lead{margin-top:44px;text-align:center;color:var(--ink);font-size:clamp(18px,1.6vw,21px);font-weight:700}
+#belief .stmt .lead{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:40rem}
 .climbs{display:grid;grid-template-columns:repeat(3,1fr);max-width:66rem;margin:16px auto 0;background:#fff;border-radius:8px;overflow:hidden}
 .climbs li{padding:26px 18px;text-align:center;font-family:var(--serif);font-size:clamp(19px,1.75vw,23px);line-height:1.25;white-space:nowrap;transition:background .25s}
 .climbs li+li{border-left:1px solid var(--line)}
@@ -453,7 +471,7 @@ main{position:relative;overflow-x:clip}
 .pgrid{display:grid;gap:18px;margin:clamp(22px,3vw,30px) auto 0}
 .pgrid.n3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:820px}
 .pgrid.n5{grid-template-columns:repeat(5,minmax(0,1fr))}
-/* team: all eight tiles visible, four per row */
+/* team: four per row */
 .pgrid.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .pcard .tph{aspect-ratio:1}
 .pcard .tph img{filter:saturate(1.05)}
@@ -468,6 +486,27 @@ main{position:relative;overflow-x:clip}
 @media (max-width:1000px){.pgrid.n5{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:640px){.pgrid.n3,.pgrid.n4,.pgrid.n5{grid-template-columns:repeat(2,minmax(0,1fr))}.founder{grid-template-columns:1fr}.founder .ph{max-width:280px;margin:0 auto}}
 #end{height:0}
+
+/* team: tiles open a bio popup */
+.tm{display:block;width:100%;text-align:left;cursor:pointer}
+.tm .tph{display:block}
+.tm .chip i{position:relative}
+.tm:hover .tph img{transform:scale(1.05)}
+.tm:hover .chip{background:#fff;box-shadow:0 6px 18px -8px rgba(0,0,0,.45)}
+.pgrid.team{display:flex;flex-wrap:wrap;justify-content:center}
+.pgrid.team>li{flex:0 0 calc((100% - 54px)/4)}
+@media (max-width:640px){.pgrid.team>li{flex-basis:calc((100% - 18px)/2)}}
+.bio-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:rgba(20,20,16,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.bio-modal.open{opacity:1;visibility:visible}
+.bio-card{position:relative;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:28px;width:min(860px,100%);max-height:calc(100svh - 40px);overflow:auto;padding:28px;background:#fff;border-radius:8px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);transform:translateY(10px);transition:transform .25s}
+.bio-modal.open .bio-card{transform:none}
+.bio-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;background:var(--cream-2)}
+.bio-card h3{font-size:clamp(26px,2.6vw,34px)}
+.bio-card .role{margin-top:4px;color:var(--yellow-ink);font-size:13px;font-weight:800}
+.bio-card .bio{margin-top:14px;font-size:15.5px;color:var(--ink-2)}
+.bio-x{position:absolute;top:12px;right:12px;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:var(--cream);font-size:22px;line-height:1;transition:background .2s}
+.bio-x:hover{background:var(--yellow)}
+@media (max-width:640px){.bio-card{grid-template-columns:1fr;gap:16px;padding:20px}.bio-card img{max-width:220px}}
 #end{height:0}
 </style>
 </head>
@@ -518,7 +557,6 @@ main{position:relative;overflow-x:clip}
   <div class="wrap">
     <div class="hero-col">
       <div class="widget ab-card">
-        <p class="caps eyebrow">About us · Who we are</p>
         <h1>Building the ladder that helps people <span class="pk">earn, progress and prosper.</span></h1>
       </div>
     </div>
@@ -551,10 +589,10 @@ main{position:relative;overflow-x:clip}
     <div class="why model-why rv">
       <div class="imgs"><img class="on" src="assets/img/cine/ab-model.webp?v=2" alt="Partners working together at a Samhita-CGF workshop" width="1280" height="960" loading="lazy"></div>
       <div class="pills" role="tablist" aria-label="What makes our model different">
-        <button class="pill" role="tab" aria-selected="true"><b>01</b>Outcome-first.</button>
-        <button class="pill" role="tab" aria-selected="false"><b>02</b>End-to-end execution, built around your strategy.</button>
-        <button class="pill" role="tab" aria-selected="false"><b>03</b>Built around the person.</button>
-        <button class="pill" role="tab" aria-selected="false"><b>04</b>Catalytic.</button>
+        <button class="pill" role="tab" aria-selected="true"><b>01</b>Outcome-led.</button>
+        <button class="pill" role="tab" aria-selected="false"><b>02</b>Customised end-to-end execution.</button>
+        <button class="pill" role="tab" aria-selected="false"><b>03</b>Person-centred.</button>
+        <button class="pill" role="tab" aria-selected="false"><b>04</b>Catalytic capital.</button>
         <button class="pill" role="tab" aria-selected="false"><b>05</b>Ecosystem-led.</button>
         <button class="pill" role="tab" aria-selected="false"><b>06</b>Evidence-led.</button>
       </div>
@@ -673,16 +711,22 @@ main{position:relative;overflow-x:clip}
     </div>
   </div>
   <div class="wrap">
-    <ul class="pgrid n4">
-      <li class="pcard tcard rv" style="--d:0.00s"><div class="tph"><img src="assets/img/about-people/shweta-mehrotra.webp" alt="Shweta Mehrotra" loading="lazy"><p class="chip"><i></i>Shweta Mehrotra</p></div><p class="role">HR</p></li>
-      <li class="pcard tcard rv" style="--d:0.05s"><div class="tph"><img src="assets/img/about-people/dhatri-kotak.webp" alt="Dhatri Kotak" loading="lazy"><p class="chip"><i></i>Dhatri Kotak</p></div><p class="role">Finance</p></li>
-      <li class="pcard tcard rv" style="--d:0.10s"><div class="tph"><img src="assets/img/about-people/akash-roy.webp" alt="Akash Roy" loading="lazy"><p class="chip"><i></i>Akash Roy</p></div><p class="role">Technology</p></li>
-      <li class="pcard tcard rv" style="--d:0.15s"><div class="tph"><img src="assets/img/about-people/natasha-das.webp" alt="Natasha Das" loading="lazy"><p class="chip"><i></i>Natasha Das</p></div><p class="role">Impact Achievement, CSR</p></li>
-      <li class="pcard tcard rv" style="--d:0.00s"><div class="tph"><img src="assets/img/about-people/shadan-mirza.webp" alt="Shadan Mirza" loading="lazy"><p class="chip"><i></i>Shadan Mirza</p></div><p class="role">Growth &amp; Innovation</p></li>
-      <li class="pcard tcard rv" style="--d:0.05s"><div class="tph"><img src="assets/img/about-people/johny-mathew.webp" alt="Johny Mathew" loading="lazy"><p class="chip"><i></i>Johny Mathew</p></div><p class="role">ONDC</p></li>
-      <li class="pcard tcard rv" style="--d:0.10s"><div class="tph"><img src="assets/img/about-people/manglesh-yadav.webp" alt="Manglesh Yadav" loading="lazy"><p class="chip"><i></i>Manglesh Yadav</p></div><p class="role">Strategic Partnerships</p></li>
-      <li class="pcard tcard rv" style="--d:0.15s"><div class="tph"><img src="assets/img/about-people/ranjini-sen.webp" alt="Ranjini Sen" loading="lazy"><p class="chip"><i></i>Ranjini Sen</p></div><p class="role">Catalytic Finance, Strategic Partnerships</p></li>
+    <ul class="pgrid n4 team">
+      <li class="pcard tcard rv" style="--d:0.00s"><button type="button" class="tm" data-bio="bio-0" aria-haspopup="dialog"><span class="tph"><img src="assets/img/about-people/shweta-mehrotra.webp" alt="Shweta Mehrotra" loading="lazy"><span class="chip"><i></i>Shweta Mehrotra</span></span><span class="role">HR</span></button></li>
+      <li class="pcard tcard rv" style="--d:0.05s"><button type="button" class="tm" data-bio="bio-1" aria-haspopup="dialog"><span class="tph"><img src="assets/img/about-people/dhatri-kotak.webp" alt="Dhatri Kotak" loading="lazy"><span class="chip"><i></i>Dhatri Kotak</span></span><span class="role">Finance</span></button></li>
+      <li class="pcard tcard rv" style="--d:0.10s"><button type="button" class="tm" data-bio="bio-2" aria-haspopup="dialog"><span class="tph"><img src="assets/img/about-people/akash-roy.webp" alt="Akash Roy" loading="lazy"><span class="chip"><i></i>Akash Roy</span></span><span class="role">Technology</span></button></li>
+      <li class="pcard tcard rv" style="--d:0.15s"><button type="button" class="tm" data-bio="bio-3" aria-haspopup="dialog"><span class="tph"><img src="assets/img/about-people/natasha-das.webp" alt="Natasha Das" loading="lazy"><span class="chip"><i></i>Natasha Das</span></span><span class="role">Impact Achievement, CSR</span></button></li>
+      <li class="pcard tcard rv" style="--d:0.00s"><button type="button" class="tm" data-bio="bio-4" aria-haspopup="dialog"><span class="tph"><img src="assets/img/about-people/shadan-mirza.webp" alt="Shadan Mirza" loading="lazy"><span class="chip"><i></i>Shadan Mirza</span></span><span class="role">Growth &amp; Innovation</span></button></li>
+      <li class="pcard tcard rv" style="--d:0.05s"><button type="button" class="tm" data-bio="bio-5" aria-haspopup="dialog"><span class="tph"><img src="assets/img/about-people/manglesh-yadav.webp" alt="Manglesh Yadav" loading="lazy"><span class="chip"><i></i>Manglesh Yadav</span></span><span class="role">Strategic Partnerships</span></button></li>
+      <li class="pcard tcard rv" style="--d:0.10s"><button type="button" class="tm" data-bio="bio-6" aria-haspopup="dialog"><span class="tph"><img src="assets/img/about-people/ranjini-sen.webp" alt="Ranjini Sen" loading="lazy"><span class="chip"><i></i>Ranjini Sen</span></span><span class="role">Catalytic Finance, Strategic Partnerships</span></button></li>
     </ul>
+    <div class="bio-src" id="bio-0" hidden><h3>Shweta Mehrotra</h3><p class="role">HR</p><p class="bio">Shweta brings over 11 years of experience in Human Resources and holds an MBA in HR. Her professional journey spans diverse sectors, including oil & gas, real estate, and staffing and recruitment, before she transitioned into the social impact space, driven by a commitment to contribute to meaningful and impactful work. She holds strong expertise in Talent Acquisition and People Management, and believes in fostering a conducive and open communication environment within the organization—one where people can learn, grow, and flourish together.</p></div>
+    <div class="bio-src" id="bio-1" hidden><h3>Dhatri Kotak</h3><p class="role">Finance</p><p class="bio">Dhatri Kotak is a Chartered Account with over 10 years experience managing budgets, auditing, taxes, business strategies and MIS for the organisation. Her expertise is fund management, compliance and due diligence of corporate and partner accounts.</p></div>
+    <div class="bio-src" id="bio-2" hidden><h3>Akash Roy</h3><p class="role">Technology</p><p class="bio">Akash Roy brings over 20 years of experience in building Technology Products and Platforms. He holds expertise in product ownership and project management and is a certified project manager.</p></div>
+    <div class="bio-src" id="bio-3" hidden><h3>Natasha Das</h3><p class="role">Impact Achievement, CSR</p><p class="bio">Natasha has 15 years of experience and engaged in various education and life skills development initiative contributing specifically in social inclusion of vulnerable group. Her passion lies in designing and implementing solutions for complex social problems using design thinking approach. Her last assignment was with Vedantu. Previously she has worked with organizations like Make A Difference, Children International, Dr. Reddy's Foundation and Tata Institute of Social Sciences.</p></div>
+    <div class="bio-src" id="bio-4" hidden><h3>Shadan Mirza</h3><p class="role">Growth &amp; Innovation</p><p class="bio">Shadan brings more than 10 years of experience in social impact consulting, with deep expertise in business development, client relationship management, and program management. In his most recent role as Director at Global Health Strategies, he co-led the public sector engagement vertical. He has successfully worked with prominent organizations such as the Department of Health Research, the Indian Council of Medical Research, AIIMS, the Jal Jeevan Mission, the Bill and Melinda Gates Foundation, and the World Health Organization. His leadership has been instrumental in managing high-impact engagements and program management units, driving meaningful change across sectors and, prominently, public health.</p></div>
+    <div class="bio-src" id="bio-5" hidden><h3>Manglesh Yadav</h3><p class="role">Strategic Partnerships</p><p class="bio">Manglesh has 13 years of experience of working across diverse sectors, designing and implementing national-level initiatives including being part of the core team driving India's G20 efforts. His passion lies in building ecosystems that thrive on long-lasting partnerships and collective purpose. Previously he has worked with Ascent Foundation as a CEO , NITI Aayog,Box8, Wipro and Infosys.</p></div>
+    <div class="bio-src" id="bio-6" hidden><h3>Ranjini Sen</h3><p class="role">Catalytic Finance, Strategic Partnerships</p><p class="bio">Ranjini is an associate director and leads the catalytic finance work at Samhita-CGF. She supports the development and management of large-scale strategic partnerships and the creation of innovative blended financing instruments that unlock affordable credit for underserved participants. Her focus is on increasing the incomes of 10 million workers, entrepreneurs, and farmers, with a specific focus on women. She previously spent over six years with Citi India, working across risk, retail investments, structured products, corporate FX sales, and treasury. In her last role at Citi, she served as the treasurer of Citicorp Finance (India) Limited. Ranjini holds a Bachelor's degree in Mathematics from St. Xavier's College and a Master’s degree in Financial Mathematics from the London School of Economics.</p></div>
   </div>
 </section>
 
@@ -827,7 +871,19 @@ $$('.chip i').forEach(function(i){i.setAttribute('aria-hidden','true')});
   pills.forEach(function(p,i){p.addEventListener('click',function(){sel(i)})});
 })();
 
-
+/* ---- team bio popups ---- */
+(function(){
+  var modal=document.createElement('div');modal.className='bio-modal';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-hidden','true');
+  modal.innerHTML='<div class="bio-card"><button type="button" class="bio-x" aria-label="Close">×</button><div class="bio-img"></div><div class="bio-txt"></div></div>';
+  document.body.appendChild(modal);
+  var img=$('.bio-img',modal),txt=$('.bio-txt',modal),last=null;
+  function open(btn){var src=document.getElementById(btn.dataset.bio);last=btn;img.innerHTML='';img.appendChild($('img',btn).cloneNode());txt.innerHTML=$('h3',src).outerHTML+$('.role',src).outerHTML+$('.bio',src).outerHTML;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('nav-lock');$('.bio-x',modal).focus()}
+  function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('nav-lock');if(last)last.focus()}
+  $$('.tm').forEach(function(b){b.addEventListener('click',function(){open(b)})});
+  $('.bio-x',modal).addEventListener('click',close);
+  modal.addEventListener('click',function(e){if(e.target===modal)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close()});
+})();
 
 /* ---- ladder ---- */
 (function(){

@@ -359,6 +359,23 @@ main{position:relative;overflow-x:clip}
 @media (max-width:900px){.trow{grid-template-columns:repeat(4,minmax(0,1fr))}.tname{grid-column:1/-1}.tcell{border-top:1px solid var(--line)}.tcell:nth-child(2){border-left:0}}
 @media (max-width:480px){.trow{grid-template-columns:1fr 1fr}.tcell:nth-child(4){border-left:0}}
 
+
+/* flagship collaboratives: one vertical box each */
+.cbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(32px,4vw,44px);align-items:stretch}
+.cb{display:flex;flex-direction:column;background:#fff;border-radius:8px;overflow:hidden}
+.cb-ph{aspect-ratio:4/3;background:var(--cream-2);overflow:hidden}
+.cb-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.cb:hover .cb-ph img{transform:scale(1.05)}
+.cb-body{display:flex;flex-direction:column;flex:1;padding:20px 20px 22px}
+.cb h3{font-size:clamp(22px,1.9vw,26px)}
+.cb p{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.cb-st{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:auto;padding-top:16px}
+.cb-st>div{padding:12px 6px;text-align:center;background:var(--cream)}
+.cb-st dd{font-family:var(--serif);font-size:24px;line-height:1;white-space:nowrap}
+.cb-st dt{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
+@media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cbs{grid-template-columns:1fr}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -527,7 +544,6 @@ main{position:relative;overflow-x:clip}
   <div class="wrap">
     <div class="hero-col">
       <div class="widget th-card">
-        <p class="caps th-eyebrow">Education to Employment · The first rungs</p>
         <h1>Education should expand a young person's choices <span class="pk">- and create a credible route into work.</span></h1>
         <p class="hero-body">We help young people move from learning to build a livelihood through career awareness, employability skills, technical training, employer connections and support through the transition into work.</p>
         <a class="btn" href="connect.html">Build a pathway from learning to earning <span aria-hidden="true">→</span></a>
@@ -558,16 +574,16 @@ main{position:relative;overflow-x:clip}
   </div>
   <div class="wrap">
     <div class="dash shadow rv">
-      <ul class="th-grid n4">
-        <li><span class="r" aria-hidden="true"></span><h3>Clearer career choices</h3></li>
-        <li><span class="r" aria-hidden="true"></span><h3>Relevant technical and employability skills</h3></li>
-        <li><span class="r" aria-hidden="true"></span><h3>Certification linked to actual roles</h3></li>
-        <li><span class="r" aria-hidden="true"></span><h3>Placement into formal or higher-quality work</h3></li>
-        <li><span class="r" aria-hidden="true"></span><h3>Starting wages and wage progression</h3></li>
-        <li><span class="r" aria-hidden="true"></span><h3>30/60/90-day retention</h3></li>
-        <li><span class="r" aria-hidden="true"></span><h3>Continuation into further education or apprenticeships</h3></li>
-        <li><span class="r" aria-hidden="true"></span><h3>Career progression over time</h3></li>
-      </ul>
+      <ol class="th-grid n4">
+        <li><span class="n">01</span><h3>Clearer career choices</h3></li>
+        <li><span class="n">02</span><h3>Relevant technical and employability skills</h3></li>
+        <li><span class="n">03</span><h3>Certification linked to actual roles</h3></li>
+        <li><span class="n">04</span><h3>Placement into formal or higher-quality work</h3></li>
+        <li><span class="n">05</span><h3>Starting wages and wage progression</h3></li>
+        <li><span class="n">06</span><h3>30/60/90-day retention</h3></li>
+        <li><span class="n">07</span><h3>Continuation into further education or apprenticeships</h3></li>
+        <li><span class="n">08</span><h3>Career progression over time</h3></li>
+      </ol>
     </div>
   </div>
 </section>
