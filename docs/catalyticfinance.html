@@ -376,6 +376,19 @@ main{position:relative;overflow-x:clip}
 @media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.cbs{grid-template-columns:1fr}}
 
+/* partner logo strips: one look on every page, logos straight on the section background */
+.lstrip{margin-top:clamp(28px,4vw,40px);overflow:hidden;padding:14px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.lstrip-in{display:flex;width:max-content;animation:lstrip 60s linear infinite}
+.lstrip:hover .lstrip-in{animation-play-state:paused}
+.lstrip ul{display:flex;align-items:center;gap:64px;padding-right:64px}
+.lstrip li{display:flex;align-items:center}
+.lstrip img{height:46px;width:auto;max-width:170px;object-fit:contain;transition:transform .25s}
+.lstrip img:hover{transform:scale(1.06)}
+.lstrip .wm-txt{font-family:var(--sans);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@keyframes lstrip{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.lstrip-in{animation:none;width:auto;flex-wrap:wrap}.lstrip ul[aria-hidden]{display:none}.lstrip ul{flex-wrap:wrap;justify-content:center;gap:28px;padding:0 20px}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -508,14 +521,6 @@ main{position:relative;overflow-x:clip}
 .net p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
 @media (max-width:900px){.net li{flex-basis:calc((100% - 36px)/2)}}
 @media (max-width:600px){.net li{flex-basis:100%}}
-.marq{margin-top:clamp(28px,4vw,40px);overflow:hidden;background:#fff;border-radius:8px;padding:20px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.marq-in{display:flex;width:max-content;animation:marq 70s linear infinite}
-.marq:hover .marq-in{animation-play-state:paused}
-.marq ul{display:flex;align-items:center;gap:52px;padding-right:52px}
-.marq img{height:38px;width:auto;max-width:150px;object-fit:contain;transition:transform .25s}
-.marq img:hover{transform:scale(1.06)}
-@keyframes marq{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.marq-in{animation:none;flex-wrap:wrap}.marq ul[aria-hidden]{display:none}.marq ul{flex-wrap:wrap;justify-content:center;gap:28px;padding:0 20px}}
 
 /* impact: band + dashboard */
 #cf-impact{padding:0 0 clamp(64px,8vw,104px)}
@@ -900,7 +905,7 @@ main{position:relative;overflow-x:clip}
         <li><span class="n">05</span><div><h3>Private Sector Partnerships.</h3><p>Companies partnering with us to bring catalytic finance to the workers, farmers, vendors and micro-entrepreneurs across their workforce and supply chains.</p></div></li>
       </ol>
     </div>
-    <div class="marq shadow rv"><div class="marq-in" id="marq"></div></div>
+    <div class="lstrip rv"><div class="lstrip-in" id="marq"></div></div>
   </div>
 </section>
 
@@ -947,10 +952,10 @@ main{position:relative;overflow-x:clip}
   </div>
   <div class="rail-wrap rv" data-carousel>
     <div class="rail-clip"><div class="track">
-      <article class="tcard ccard open">
+      <article class="tcard ccard">
         <div class="tph"><img src="assets/img/cine/cf-case-01.webp?v=2" alt="A smallholder farmer in a field in Maharashtra." width="1600" height="1200" loading="lazy"></div>
         <p class="meta">FY 23–26 · Climate Resilience · Maharashtra</p>
-        <h3><button type="button" aria-expanded="true"><span class="pm" aria-hidden="true"></span><span>Building climate-resilient farmer livelihoods through catalytic financing</span></button></h3>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Building climate-resilient farmer livelihoods through catalytic financing</span></button></h3>
         <div class="cstats"><div><span>95%</span><span>RG repayment rate</span></div><div><span>20×</span><span>Leverage to funder</span></div><div><span>159%</span><span>Farm income growth</span></div></div>
         <div class="cpart"><span>In partnership with</span><img src="assets/catalytic-finance/logos/partners/walmart.webp" alt="Walmart.org" loading="lazy"></div>
         <div class="desc"><div><p>In Maharashtra, <strong>6,000 farmers</strong> across <strong>12 Farmer Producer Organisations</strong> received a combination of returnable grants and guarantee-backed loans. The returnable grants, averaging ₹9,000 each, achieved a <strong>95% repayment rate</strong>. Average annual farm income grew <strong>159%</strong>. Average annual revenue grew <strong>77%</strong>. On the guarantee side, ₹25 lakh of philanthropic capital unlocked ₹5 crore in formal bank loans, a <strong>20x leverage</strong>, with not a single invocation to date. At the FPO level, average revenue tripled from ₹5 crore to ₹15 crore in three years.</p></div></div>

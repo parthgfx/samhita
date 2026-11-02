@@ -376,6 +376,19 @@ main{position:relative;overflow-x:clip}
 @media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.cbs{grid-template-columns:1fr}}
 
+/* partner logo strips: one look on every page, logos straight on the section background */
+.lstrip{margin-top:clamp(28px,4vw,40px);overflow:hidden;padding:14px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.lstrip-in{display:flex;width:max-content;animation:lstrip 60s linear infinite}
+.lstrip:hover .lstrip-in{animation-play-state:paused}
+.lstrip ul{display:flex;align-items:center;gap:64px;padding-right:64px}
+.lstrip li{display:flex;align-items:center}
+.lstrip img{height:46px;width:auto;max-width:170px;object-fit:contain;transition:transform .25s}
+.lstrip img:hover{transform:scale(1.06)}
+.lstrip .wm-txt{font-family:var(--sans);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@keyframes lstrip{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.lstrip-in{animation:none;width:auto;flex-wrap:wrap}.lstrip ul[aria-hidden]{display:none}.lstrip ul{flex-wrap:wrap;justify-content:center;gap:28px;padding:0 20px}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -463,14 +476,7 @@ main{position:relative;overflow-x:clip}
 @media (max-width:860px){.pcs{grid-template-columns:1fr}}
 
 /* partners: name marquee */
-.wmarq{margin-top:clamp(28px,4vw,40px);overflow:hidden;background:#fff;border-radius:8px;padding:24px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.wmarq-in{display:flex;width:max-content;animation:wmarq 60s linear infinite}
-.wmarq:hover .wmarq-in{animation-play-state:paused}
-.wmarq ul{display:flex;align-items:center}
-.wmarq li{display:flex;align-items:center;gap:30px;padding-right:30px;font-family:var(--serif);font-size:clamp(24px,2.4vw,32px);line-height:1.1;white-space:nowrap}
-.wmarq li::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--yellow)}
-@keyframes wmarq{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.wmarq-in{animation:none;width:auto}.wmarq ul[aria-hidden]{display:none}.wmarq ul{flex-wrap:wrap;justify-content:center;row-gap:10px;padding:0 20px}}
+
 #end{height:0}
 </style>
 </head>
@@ -609,9 +615,9 @@ main{position:relative;overflow-x:clip}
 <section class="sec" id="partners">
   <div class="wrap">
     <div class="shead rv"><h2>Partners</h2></div>
-    <div class="wmarq shadow rv"><div class="wmarq-in">
-      <ul aria-label="Partners"><li>DXC</li><li>Cummins India</li><li>Accenture</li><li>Bajaj Finserv</li><li>Michael Hill</li><li>Eureka Forbes Limited</li><li>Adidas</li><li>IndusInd Bank</li><li>Avendus</li><li>ITC</li></ul>
-      <ul aria-hidden="true"><li>DXC</li><li>Cummins India</li><li>Accenture</li><li>Bajaj Finserv</li><li>Michael Hill</li><li>Eureka Forbes Limited</li><li>Adidas</li><li>IndusInd Bank</li><li>Avendus</li><li>ITC</li></ul>
+    <div class="lstrip rv"><div class="lstrip-in">
+      <ul aria-label="Partners"><li><img src="assets/logos/svg/dxc.svg" alt="DXC" loading="lazy"><span class="sr">DXC</span></li><li><img src="assets/logos/cummins-under-csr-initiative-logo.webp" alt="Cummins India" loading="lazy"><span class="sr">Cummins India</span></li><li><img src="assets/logos/svg/accenture-svg.svg" alt="Accenture" loading="lazy"><span class="sr">Accenture</span></li><li><img src="assets/catalytic-finance/logos/partners/bajaj-finserv.webp" alt="Bajaj Finserv" loading="lazy"><span class="sr">Bajaj Finserv</span></li><li><img src="assets/logos/michael-hill.webp" alt="Michael Hill" loading="lazy"><span class="sr">Michael Hill</span></li><li><img src="assets/logos/eureka-forbes.webp" alt="Eureka Forbes Limited" loading="lazy"><span class="sr">Eureka Forbes Limited</span></li><li><span class="wm-txt">Adidas</span></li><li><img src="assets/catalytic-finance/logos/partners/indusind-bank.webp" alt="IndusInd Bank" loading="lazy"><span class="sr">IndusInd Bank</span></li><li><img src="assets/logos/avendus.webp" alt="Avendus" loading="lazy"><span class="sr">Avendus</span></li><li><img src="assets/logos/itc-logo.webp" alt="ITC" loading="lazy"><span class="sr">ITC</span></li></ul>
+      <ul aria-hidden="true"><li><img src="assets/logos/svg/dxc.svg" alt="" loading="lazy"><span class="sr">DXC</span></li><li><img src="assets/logos/cummins-under-csr-initiative-logo.webp" alt="" loading="lazy"><span class="sr">Cummins India</span></li><li><img src="assets/logos/svg/accenture-svg.svg" alt="" loading="lazy"><span class="sr">Accenture</span></li><li><img src="assets/catalytic-finance/logos/partners/bajaj-finserv.webp" alt="" loading="lazy"><span class="sr">Bajaj Finserv</span></li><li><img src="assets/logos/michael-hill.webp" alt="" loading="lazy"><span class="sr">Michael Hill</span></li><li><img src="assets/logos/eureka-forbes.webp" alt="" loading="lazy"><span class="sr">Eureka Forbes Limited</span></li><li><span class="wm-txt">Adidas</span></li><li><img src="assets/catalytic-finance/logos/partners/indusind-bank.webp" alt="" loading="lazy"><span class="sr">IndusInd Bank</span></li><li><img src="assets/logos/avendus.webp" alt="" loading="lazy"><span class="sr">Avendus</span></li><li><img src="assets/logos/itc-logo.webp" alt="" loading="lazy"><span class="sr">ITC</span></li></ul>
     </div></div>
   </div>
 </section>

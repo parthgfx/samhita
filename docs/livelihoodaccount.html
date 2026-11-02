@@ -376,6 +376,19 @@ main{position:relative;overflow-x:clip}
 @media (max-width:1100px){.cbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.cbs{grid-template-columns:1fr}}
 
+/* partner logo strips: one look on every page, logos straight on the section background */
+.lstrip{margin-top:clamp(28px,4vw,40px);overflow:hidden;padding:14px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.lstrip-in{display:flex;width:max-content;animation:lstrip 60s linear infinite}
+.lstrip:hover .lstrip-in{animation-play-state:paused}
+.lstrip ul{display:flex;align-items:center;gap:64px;padding-right:64px}
+.lstrip li{display:flex;align-items:center}
+.lstrip img{height:46px;width:auto;max-width:170px;object-fit:contain;transition:transform .25s}
+.lstrip img:hover{transform:scale(1.06)}
+.lstrip .wm-txt{font-family:var(--sans);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@keyframes lstrip{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.lstrip-in{animation:none;width:auto;flex-wrap:wrap}.lstrip ul[aria-hidden]{display:none}.lstrip ul{flex-wrap:wrap;justify-content:center;gap:28px;padding:0 20px}}
+
 /* ---------- 7c. connect: newsletter split ---------- */
 .join{display:grid;grid-template-columns:240px 1fr auto;gap:clamp(20px,3vw,36px);align-items:center;background:#fff;border-radius:8px;padding:22px}
 .join .ph{border-radius:6px;overflow:hidden;aspect-ratio:1;background:var(--cream-2)}
@@ -504,14 +517,6 @@ main{position:relative;overflow-x:clip}
 .join-simple li svg{width:20px;height:20px;margin-top:2px}
 @media (max-width:760px){.inst-why{aspect-ratio:auto}.join-simple li{text-align:left}}
 
-/* underway: closing join strip */
-.la-under{grid-template-columns:minmax(220px,300px) 1fr auto;margin-top:clamp(32px,4vw,44px)}
-.la-under .ph{aspect-ratio:4/3}
-.la-under dl{display:grid;gap:12px}
-.la-under dt{font-weight:800;font-size:15px}
-.la-under dd{font-size:14.5px;color:var(--ink-2)}
-@media (max-width:900px){.la-under{grid-template-columns:1fr;text-align:center}}
-
 /* trust labels */
 .la-trust{margin-top:clamp(28px,3vw,36px);background:#fff;border-radius:8px;padding:26px 28px 30px}
 .la-trust>h3{text-align:center;font-size:clamp(26px,2.4vw,32px)}
@@ -533,12 +538,20 @@ main{position:relative;overflow-x:clip}
 .la-live{display:grid;gap:6px}
 .la-live li{position:relative;padding-left:16px}
 .la-live li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--yellow-ink)}
-.la-side{display:grid;gap:14px;justify-items:stretch}
-.la-goal{padding:16px 22px;border-radius:6px;background:var(--cream);text-align:center}
-.la-goal .big b{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3vw,42px);line-height:1}
-.la-goal p{font-size:14px;color:var(--ink-2)}
-.la-under{grid-template-columns:minmax(220px,300px) 1fr auto}
-@media (max-width:900px){.la-under{grid-template-columns:1fr}}
+/* underway: text on the left; photo, the 10 lakh goal and the button stacked on the right */
+.la-und{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:stretch;margin-top:clamp(32px,4vw,44px);background:#fff;border-radius:8px;padding:clamp(22px,3vw,34px)}
+.la-und dl{display:grid;gap:18px;align-content:center}
+.la-und dt{font-weight:800;font-size:15px}
+.la-und dd{margin-top:2px;font-size:15px;color:var(--ink-2)}
+.la-side{display:flex;flex-direction:column;gap:14px}
+.la-side .ph{border-radius:6px;overflow:hidden;aspect-ratio:3/2;background:var(--cream-2)}
+.la-side .ph img{width:100%;height:100%;object-fit:cover}
+.la-goal{padding:18px 22px;border-radius:6px;background:var(--yellow);text-align:center}
+.la-goal .big b{font-family:var(--serif);font-weight:400;font-size:clamp(38px,3.6vw,50px);line-height:1;margin-right:6px}
+.la-goal .big{font-size:15px;font-weight:700}
+.la-goal p{font-size:14.5px;font-weight:600;color:var(--ink)}
+.la-side .btn{width:100%}
+@media (max-width:900px){.la-und{grid-template-columns:1fr}}
 #end{height:0}
 </style>
 </head>
@@ -819,16 +832,18 @@ main{position:relative;overflow-x:clip}
       <p class="caps"><b>08</b>Already underway</p>
       <h2>Every job, every sale, every repaid loan should count toward the next one.</h2>
     </div>
-    <div class="join la-under shadow rv">
-      <div class="ph"><img src="assets/img/cine/livelihoodaccount-underway.webp?v=2" alt="A woman shopkeeper giving a thumbs-up at her store" width="1438" height="1094" loading="lazy"></div>
+    <div class="la-und shadow rv">
       <dl>
         <div><dt class="pk">Why it can scale.</dt><dd>It builds on systems that already reach crores, like DigiLocker, e-Shram and LokOS. The approach has three moves: reuse existing infrastructure, partner where it helps, and build only the missing pieces.</dd></div>
         <div><dt class="pk">Why now.</dt><dd>The digital rails exist, the records are already digital, and people are ready to grow.</dd></div>
         <div><dt class="pk">Already underway.</dt><dd><ul class="la-live"><li>Jobs for 500 youth in partnership with EkStep Foundation · Infosys · DXC.</li><li>Warehouse credit for 3,000 farmers in partnership with Finternet · Citi · Sahamati · PSB Alliance · Agri Stack.</li><li>Loans for 10,000+ SHG women in partnership with Accion · Bajaj Finserv · Gates · DXC · Sahamati.</li></ul></dd></div>
         <div><dt class="pk">The path ahead.</dt><dd>Connect existing systems. Build trust in records. Make progress portable. Then open the network to many providers.</dd></div>
       </dl>
-      <div class="la-side"><div class="la-goal"><p class="big"><b>10 lakh</b> (1 million)</p><p>people by 2029.</p></div>
-      <a class="btn" href="connect.html">Co-develop a use case <span aria-hidden="true">→</span></a></div>
+      <div class="la-side">
+        <div class="ph"><img src="assets/img/cine/livelihoodaccount-underway.webp?v=2" alt="A woman shopkeeper giving a thumbs-up at her store" width="1438" height="1094" loading="lazy"></div>
+        <div class="la-goal"><p class="big"><b>10 lakh</b> (1 million)</p><p>people by 2029.</p></div>
+        <a class="btn" href="connect.html">Co-develop a use case <span aria-hidden="true">→</span></a>
+      </div>
     </div>
   </div>
 </section>
