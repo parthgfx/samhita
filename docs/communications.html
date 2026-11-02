@@ -444,23 +444,29 @@ main{position:relative;overflow-x:clip}
 
 .cm-acct{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;font-weight:800;color:var(--ink)}
 .cm-acct i{width:22px;height:22px;border-radius:50%;background:var(--yellow);flex:none}
-/* travels: photo with pill tabs, a post-style chip and a stepping card */
-.cm-why{aspect-ratio:2/1}
-.cm-why .imgs img{object-position:50% 40%}
-.cm-chip{position:absolute;left:22px;bottom:22px;z-index:2;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;background:rgba(255,255,255,.95);font-size:12px;font-weight:800;line-height:1.2}
-.cm-chip i{width:24px;height:24px;border-radius:50%;background:var(--yellow);flex:none}
-.cm-why .wcard{display:flex;flex-direction:column;gap:12px}
-.cm-why .wcard [role=tabpanel][hidden]{display:none}
-.cm-why .wcard h3{font-size:24px}
-.cm-why .wcard h3+p{margin-top:6px}
-.cm-foot{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--line)}
+/* travels: tabs above, media and text side by side below, so nothing overlaps the videos or images */
+.cm-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:clamp(28px,3.4vw,40px)}
+.cm-pills .pill{height:36px;padding:0 16px;font-size:12px;background:#f1f1ef;box-shadow:none}
+.cm-pills .pill:hover{background:#e8e8e5}
+.cm-pills .pill[aria-selected="true"]{background:var(--yellow)}
+.cm-panel[hidden]{display:none}
+.cm-panel{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:22px;align-items:stretch;margin-top:22px}
+.cm-media{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#111;box-shadow:0 1px 2px rgba(34,37,32,.06),0 18px 44px -22px rgba(34,37,32,.35)}
+.cm-media img,.cm-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.cm-media video{object-fit:contain;background:#000}
+.cm-card{display:flex;flex-direction:column;gap:12px;padding:24px 24px 20px;background:#f4f4f2;border-radius:8px}
+.cm-acct{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--ink)}
+.cm-acct i{width:22px;height:22px;border-radius:50%;background:var(--yellow);flex:none}
+.cm-card h3{font-size:clamp(24px,2.2vw,30px)}
+.cm-txt{font-size:14.5px;color:var(--ink-2)}
+.cm-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #dcdcd8}
 .cm-ct{font-size:12px;font-weight:800;color:var(--muted)}
 .cm-ct b{color:var(--ink);font-size:15px}
 .cm-nav{display:flex;gap:6px}
-.cm-nav button{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:var(--cream);transition:background .2s}
+.cm-nav button{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:#fff;transition:background .2s}
 .cm-nav button:hover{background:var(--yellow)}
 .cm-nav svg{width:18px;height:18px}
-@media (max-width:760px){.cm-why{aspect-ratio:auto}.cm-chip{left:12px;bottom:auto;top:12px}}
+@media (max-width:900px){.cm-panel{grid-template-columns:1fr}}
 #end{height:0}
 </style>
 </head>
@@ -545,35 +551,80 @@ main{position:relative;overflow-x:clip}
     <div class="shead rv">
       <h2>How the story travels</h2>
     </div>
-    <div class="why cm-why rv" data-tabs id="cm-why">
-      <div class="imgs">
-        <img class="on" src="assets/img/cine/pw-worker.webp?v=2" alt="Young trainees in hard hats learning at a solar plant" width="1600" height="1080" loading="lazy">
-        <img src="assets/img/cine/communications-films.webp" alt="A woman showing her embroidery work" width="2000" height="1342" loading="lazy">
-        <img src="assets/img/cine/pw-entrepreneur.webp?v=2" alt="A micro-entrepreneur holding up jars of her homemade pickles" width="1376" height="768" loading="lazy">
-        <img src="assets/img/cine/communications-press.webp" alt="Two women artisans showing their handmade products" width="1537" height="1023" loading="lazy">
-        <img src="assets/img/cine/communications-convenings.webp" alt="Participants at a convening on private sector gender action" width="1920" height="1280" loading="lazy">
-        
-      </div>
-      <div class="pills" role="tablist" aria-label="How the story travels">
-        <button class="pill" role="tab" aria-selected="true">Explainer videos.</button>
-        <button class="pill" role="tab" aria-selected="false" tabindex="-1">Impact films.</button>
-        <button class="pill" role="tab" aria-selected="false" tabindex="-1">Social media campaigns.</button>
-        <button class="pill" role="tab" aria-selected="false" tabindex="-1">Press releases and op-eds.</button>
-        <button class="pill" role="tab" aria-selected="false" tabindex="-1">Webinars and convenings.</button>
-      </div>
-      <div class="wcard">
-        <div aria-live="polite">
-          <div role="tabpanel"><p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p><h3>Explainer videos.</h3><p>Three-minute pieces that turn a complex idea into something shareable on LinkedIn and partner platforms. We handle storyboarding, filming, and post-production end to end.</p></div>
-          <div role="tabpanel" hidden><p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p><h3>Impact films.</h3><p>Documentary-style pieces that put real beneficiaries and field footage in front of a funder's board or a journalist's desk. These carry weight in advocacy and partnership conversations in a way a slide deck can't.</p></div>
-          <div role="tabpanel" hidden><p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p><h3>Social media campaigns.</h3><p>A full communications strategy, copywriting, and visual design behind every set of posts, built to carry impact highlights, key data points, and thought-leadership themes.</p></div>
-          <div role="tabpanel" hidden><p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p><h3>Press releases and op-eds.</h3><p>Drafted and placed in premium publications: national business papers, policy journals, and leading digital platforms.</p></div>
-          <div role="tabpanel" hidden><p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p><h3>Webinars and convenings.</h3><p>We design and host convenings and webinars for governments, multilaterals, and global development partners, building the agenda, securing the right voices, and running the session itself.</p></div>
+    <div class="cm-story rv" data-tabs id="cm-why">
+      <div class="cm-pills" role="tablist" aria-label="How the story travels"><button class="pill" role="tab" aria-selected="true">Explainer videos.</button><button class="pill" role="tab" aria-selected="false" tabindex="-1">Impact films.</button><button class="pill" role="tab" aria-selected="false" tabindex="-1">Social media campaigns.</button><button class="pill" role="tab" aria-selected="false" tabindex="-1">Press releases and op-eds.</button><button class="pill" role="tab" aria-selected="false" tabindex="-1">Webinars and convenings.</button></div>
+      <div class="cm-panel" role="tabpanel">
+        <div class="cm-media"><video controls preload="none" playsinline poster="assets/img/comms-explainer-poster.webp"><source src="assets/video/comms-explainer.mp4" type="video/mp4"></video></div>
+        <div class="cm-card">
+          <p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p>
+          <h3>Explainer videos.</h3>
+          <p class="cm-txt">Three-minute pieces that turn a complex idea into something shareable on LinkedIn and partner platforms. We handle storyboarding, filming, and post-production end to end.</p>
+          <div class="cm-foot">
+            <p class="cm-ct" aria-hidden="true"><b>01</b><span>/05</span></p>
+            <div class="cm-nav">
+              <button type="button" data-step="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+              <button type="button" data-step="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
         </div>
-        <div class="cm-foot">
-          <p class="cm-ct" aria-hidden="true"><b>01</b><span>/05</span></p>
-          <div class="cm-nav">
-            <button type="button" data-step="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
-            <button type="button" data-step="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="cm-panel" role="tabpanel" hidden>
+        <div class="cm-media"><video controls preload="none" playsinline poster="assets/img/comms-impact-poster.webp"><source src="assets/video/comms-impact.mp4" type="video/mp4"></video></div>
+        <div class="cm-card">
+          <p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p>
+          <h3>Impact films.</h3>
+          <p class="cm-txt">Documentary-style pieces that put real beneficiaries and field footage in front of a funder's board or a journalist's desk. These carry weight in advocacy and partnership conversations in a way a slide deck can't.</p>
+          <div class="cm-foot">
+            <p class="cm-ct" aria-hidden="true"><b>02</b><span>/05</span></p>
+            <div class="cm-nav">
+              <button type="button" data-step="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+              <button type="button" data-step="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cm-panel" role="tabpanel" hidden>
+        <div class="cm-media"><img src="assets/img/comms-social.webp" alt="A LinkedIn post from Samhita-CGF shown on a phone" width="1920" height="1080" loading="lazy"></div>
+        <div class="cm-card">
+          <p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p>
+          <h3>Social media campaigns.</h3>
+          <p class="cm-txt">A full communications strategy, copywriting, and visual design behind every set of posts, built to carry impact highlights, key data points, and thought-leadership themes.</p>
+          <div class="cm-foot">
+            <p class="cm-ct" aria-hidden="true"><b>03</b><span>/05</span></p>
+            <div class="cm-nav">
+              <button type="button" data-step="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+              <button type="button" data-step="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cm-panel" role="tabpanel" hidden>
+        <div class="cm-media"><img src="assets/img/comms-press.webp" alt="Two women working together on a laptop outdoors" width="1920" height="1080" loading="lazy"></div>
+        <div class="cm-card">
+          <p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p>
+          <h3>Press releases and op-eds.</h3>
+          <p class="cm-txt">Drafted and placed in premium publications: national business papers, policy journals, and leading digital platforms.</p>
+          <div class="cm-foot">
+            <p class="cm-ct" aria-hidden="true"><b>04</b><span>/05</span></p>
+            <div class="cm-nav">
+              <button type="button" data-step="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+              <button type="button" data-step="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cm-panel" role="tabpanel" hidden>
+        <div class="cm-media"><img src="assets/img/cine/communications-convenings.webp" alt="Participants at a convening on private sector gender action" width="1920" height="1280" loading="lazy"></div>
+        <div class="cm-card">
+          <p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p>
+          <h3>Webinars and convenings.</h3>
+          <p class="cm-txt">We design and host convenings and webinars for governments, multilaterals, and global development partners, building the agenda, securing the right voices, and running the session itself.</p>
+          <div class="cm-foot">
+            <p class="cm-ct" aria-hidden="true"><b>05</b><span>/05</span></p>
+            <div class="cm-nav">
+              <button type="button" data-step="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+              <button type="button" data-step="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+            </div>
           </div>
         </div>
       </div>
@@ -706,14 +757,10 @@ $$('[data-acc]').forEach(function(w){
   })});
 });
 
-/* ---- travels: photo + counter follow the pill tabs; arrows step through them ---- */
+/* ---- travels: arrows step through the tabs; leaving a tab pauses its video ---- */
 (function(){
-  var w=$('#cm-why'),imgs=$$('.imgs img',w),tabs=$$('[role=tab]',w),cur=0;
-  w.addEventListener('tabchange',function(e){
-    cur=e.detail;
-    imgs.forEach(function(im,j){im.classList.toggle('on',j===cur)});
-    $('.cm-ct b',w).textContent=('0'+(cur+1)).slice(-2);
-  });
+  var w=$('#cm-why'),tabs=$$('[role=tab]',w),cur=0;
+  w.addEventListener('tabchange',function(e){cur=e.detail;$$('video',w).forEach(function(v){v.pause()})});
   $$('.cm-nav button',w).forEach(function(b){b.addEventListener('click',function(){
     var n=(cur+ +b.dataset.step+tabs.length)%tabs.length;tabs[n].click();
   })});
