@@ -232,6 +232,7 @@ main{position:relative;overflow-x:clip}
 .ebtn[aria-selected="true"] .ar{opacity:1;transform:none}
 .emap{position:relative;overflow:hidden}
 .emap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+.emap .dot{display:none}
 .dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
 .dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
 .etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
@@ -282,6 +283,25 @@ main{position:relative;overflow-x:clip}
 .wcard p{font-size:14.5px;color:var(--ink-2)}
 .wcard .tl{margin-top:14px}
 .why-more{text-align:center;margin-top:26px}
+/* .why.wb: pills above the photo and the card below it, so busy photos keep faces clear */
+.why.wb{aspect-ratio:auto;display:flex;flex-direction:column;background:none;overflow:visible;border-radius:0}
+.why.wb .imgs{position:relative;aspect-ratio:21/9;border-radius:6px;overflow:hidden;background:var(--cream-2)}
+.why.wb .pills{position:relative;top:auto;left:auto;transform:none;max-width:100%;margin:0 auto 14px;order:-1}
+.why.wb .pill{background:var(--cream)}
+.cream .why.wb .pill{background:#fff}
+.why.wb .pill[aria-selected="true"]{background:var(--yellow)}
+.why.wb .wcard{position:relative;right:auto;bottom:auto;width:min(640px,calc(100% - 24px));margin:-44px auto 0}
+@media (max-width:860px){.why.wb .imgs{aspect-ratio:4/3}.why.wb .wcard{margin-top:-36px}}
+/* .hero.hb: busy group photos; the photo runs clear and the headline card sits below it */
+main .hero.hb{height:auto;background:#fff}
+main .hero.hb .hero-media{position:relative;height:clamp(420px,calc(100svh - var(--hdr) - 140px),700px)}
+main .hero.hb .hero-media::before,main .hero.hb .hero-media::after{display:none}
+main .hero.hb .hero-media img{transform:none}
+main .hero.hb .wrap{height:auto;display:block;padding-bottom:0}
+main .hero.hb .hero-col{margin:-96px auto clamp(12px,2vw,24px);width:min(760px,100%)}
+main .hero.hb .widget{margin-top:0;padding:26px 32px 28px;width:100%;text-align:center}
+main .hero.hb .widget h1{text-align:center;justify-content:center}
+@media (max-width:860px){main .hero.hb .hero-media{height:52svh}main .hero.hb .hero-col{margin-top:-80px}main .hero.hb .widget{padding:20px 18px 22px}}
 /* photo-with-pills card, Communications "How the story travels" style: serif title, text, counter + prev/next */
 .wcard .wc-t{font-size:24px;line-height:1.15}
 .wcard .wc-t+*{margin-top:6px}
@@ -625,11 +645,11 @@ main{position:relative;overflow-x:clip}
       <p class="caps"><b>04</b>What makes progress last</p>
       <h2>Three innovations that hold the ladder together</h2>
     </div>
-    <div class="why rv">
+    <div class="why wb rv">
       <div class="imgs">
-        <img class="on" src="assets/img/cine/home-inno-finance.webp" alt="A speaker on stage at the Global Fintech Fest" width="1448" height="1086" loading="lazy">
-        <img src="assets/img/cine/home-inno-network.webp" alt="Women farmers gathered around trays of seedlings" width="1448" height="1086" loading="lazy">
-        <img src="assets/img/cine/home-inno-account.webp" alt="A woman entrepreneur at her stall" width="1665" height="945" loading="lazy">
+        <img class="on" src="assets/img/cine/home-inno-finance.webp?v=5" alt="The Catalytic Finance team gathered on a lawn" width="1898" height="958" loading="lazy" style="object-position:50% 30%">
+        <img src="assets/img/cine/home-inno-network.webp?v=5" alt="Livelihood Network partners together at a conference" width="1448" height="1086" loading="lazy" style="object-position:50% 12%">
+        <img src="assets/img/cine/home-inno-account.webp?v=5" alt="A driver standing beside his milk truck" width="1536" height="1024" loading="lazy" style="object-position:50% 30%">
       </div>
       <div class="pills" role="tablist" aria-label="Innovations">
         <button class="pill" role="tab" aria-selected="true">Catalytic Finance.</button>
@@ -659,7 +679,7 @@ main{position:relative;overflow-x:clip}
     </div>
     <div class="pw shadow rv" id="pbox">
       <div class="pw-l">
-        <div class="pw-photo"><img class="pw-img" src="assets/img/cine/pw-entrepreneur.webp?v=2" alt="A micro-entrepreneur holding up jars of her homemade pickles" width="1376" height="768" loading="lazy"></div>
+        <div class="pw-photo"><img class="pw-img" src="assets/img/cine/pw-entrepreneur.webp?v=4" alt="A micro-entrepreneur holding up jars of her homemade pickles" width="1152" height="768" loading="lazy"></div>
         <div class="pw-foot">
           <div class="pw-out"><span class="drop" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#222520" stroke-width="2"><path d="M4 18l6-6 4 4 6-8"/><path d="M15 8h5v5"/></svg></span><span class="pw-num">147%</span><span class="pw-lbl">Average income rise in sampled programme cohorts</span></div>
           <a class="btn pw-story" href="impact.html#pulse"><span>Read Sunita's story</span> →</a>
@@ -910,7 +930,7 @@ $$('.why').forEach(function(w){
 /* ---- 6. pathways widget ---- */
 (function(){
   var paths=[
-    {tab:'Micro-entrepreneur',who:'Runs a home-based or neighbourhood enterprise',num:'147%',lbl:'Average income rise in sampled programme cohorts',story:"Read Sunita's story",href:'impact.html#pulse',img:'assets/img/cine/pw-entrepreneur.webp?v=2',alt:'A micro-entrepreneur holding up jars of her homemade pickles',
+    {tab:'Micro-entrepreneur',who:'Runs a home-based or neighbourhood enterprise',num:'147%',lbl:'Average income rise in sampled programme cohorts',story:"Read Sunita's story",href:'impact.html#pulse',img:'assets/img/cine/pw-entrepreneur.webp?v=4',alt:'A micro-entrepreneur holding up jars of her homemade pickles',
      steps:[['Access to Finance','Returnable grant or credit-guarantee backed working capital'],['Skilling','Trade and business-management training for her chosen venture'],['Enterprise Support','Equipment, packaging, licensing and certification'],['Social Security',"Health insurance, pension and children's scholarships"],['Financial Health','Savings discipline, credit history, long-term investment'],['Market Linkages','E-commerce onboarding and institutional sales'],['Growth','Hires local workers and expands production']]},
     {tab:'Farmer',who:'Smallholder crop or dairy farmer, dependent on informal credit',num:'117%',lbl:'average income rise in sampled programme cohorts',story:"Read Sangita's story",href:'livelihoodaccount.html#ravi',img:'assets/img/cine/pw-farmer.webp?v=2',alt:'A woman farmer standing in her kitchen garden beside her home',
      steps:[['Access to Finance','Returnable grant that unlocks matching government subsidy'],['Skilling','Cattle and crop management training with vet and extension camps'],['Social Security','Family enrolled in health and insurance schemes'],['Collectives','FPO membership for bulk inputs and shared infrastructure'],['Climate','Climate-smart practices and finance for resilient equipment'],['Enterprise Support','Credit-backed loan to add value-added processing'],['Market Linkages','Sells to larger digital and institutional buyers']]},

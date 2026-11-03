@@ -232,6 +232,7 @@ main{position:relative;overflow-x:clip}
 .ebtn[aria-selected="true"] .ar{opacity:1;transform:none}
 .emap{position:relative;overflow:hidden}
 .emap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+.emap .dot{display:none}
 .dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
 .dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
 .etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
@@ -282,6 +283,25 @@ main{position:relative;overflow-x:clip}
 .wcard p{font-size:14.5px;color:var(--ink-2)}
 .wcard .tl{margin-top:14px}
 .why-more{text-align:center;margin-top:26px}
+/* .why.wb: pills above the photo and the card below it, so busy photos keep faces clear */
+.why.wb{aspect-ratio:auto;display:flex;flex-direction:column;background:none;overflow:visible;border-radius:0}
+.why.wb .imgs{position:relative;aspect-ratio:21/9;border-radius:6px;overflow:hidden;background:var(--cream-2)}
+.why.wb .pills{position:relative;top:auto;left:auto;transform:none;max-width:100%;margin:0 auto 14px;order:-1}
+.why.wb .pill{background:var(--cream)}
+.cream .why.wb .pill{background:#fff}
+.why.wb .pill[aria-selected="true"]{background:var(--yellow)}
+.why.wb .wcard{position:relative;right:auto;bottom:auto;width:min(640px,calc(100% - 24px));margin:-44px auto 0}
+@media (max-width:860px){.why.wb .imgs{aspect-ratio:4/3}.why.wb .wcard{margin-top:-36px}}
+/* .hero.hb: busy group photos; the photo runs clear and the headline card sits below it */
+main .hero.hb{height:auto;background:#fff}
+main .hero.hb .hero-media{position:relative;height:clamp(420px,calc(100svh - var(--hdr) - 140px),700px)}
+main .hero.hb .hero-media::before,main .hero.hb .hero-media::after{display:none}
+main .hero.hb .hero-media img{transform:none}
+main .hero.hb .wrap{height:auto;display:block;padding-bottom:0}
+main .hero.hb .hero-col{margin:-96px auto clamp(12px,2vw,24px);width:min(760px,100%)}
+main .hero.hb .widget{margin-top:0;padding:26px 32px 28px;width:100%;text-align:center}
+main .hero.hb .widget h1{text-align:center;justify-content:center}
+@media (max-width:860px){main .hero.hb .hero-media{height:52svh}main .hero.hb .hero-col{margin-top:-80px}main .hero.hb .widget{padding:20px 18px 22px}}
 /* photo-with-pills card, Communications "How the story travels" style: serif title, text, counter + prev/next */
 .wcard .wc-t{font-size:24px;line-height:1.15}
 .wcard .wc-t+*{margin-top:6px}
@@ -418,8 +438,13 @@ main{position:relative;overflow-x:clip}
 .hero.hc .wrap{align-items:flex-end;justify-content:flex-end;padding-bottom:clamp(28px,5vh,56px)}
 .hero.hc .hero-col{width:min(560px,100%)}
 .hero.hc .hero-media::after{background:linear-gradient(0deg,rgba(20,20,16,.5),rgba(20,20,16,0) 50%)}
-.hero.hc .hero-media img.on{object-position:30% 45%}
+.hero.hc .hero-media img.on{object-position:50% 0}
 .hc-card{margin-top:0;padding:26px 30px 28px}
+.hero.hc.hb .wrap{align-items:initial;justify-content:initial;padding-bottom:0}
+.hero.hc.hb .hero-col{width:min(760px,100%)}
+.hero.hc.hb .hc-card h1{text-align:center}
+.hero.hc.hb .hc-card{text-align:center}
+.hero.hc.hb .hc-card .btn{margin-left:auto;margin-right:auto}
 .hc-card .eyebrow{color:var(--yellow-ink);font-size:12.5px}
 .hc-card h1{margin-top:10px;color:var(--ink);text-align:left;text-shadow:none;min-height:0;display:block;font-size:clamp(30px,3vw,42px)}
 .hc-card h1 .pk{color:var(--pink)}
@@ -540,7 +565,7 @@ main{position:relative;overflow-x:clip}
 <div class="ladder" aria-hidden="true"><span class="rail l"><i></i></span><span class="rail r"><i></i></span></div>
 
 <!-- ================= HERO ================= -->
-<section class="hero hc" id="top">
+<section class="hero hc hb" id="top">
   <div class="hero-media">
     <img class="on" src="assets/img/cine/designrunprograms-hero.webp" alt="A facilitator leading a session with women participants" width="1448" height="1086">
   </div>
@@ -571,7 +596,7 @@ main{position:relative;overflow-x:clip}
           <div class="panel" id="dr-1" role="region" aria-labelledby="dr-b1"><div><p>Identify organisations with the capabilities, footprint and track record required.</p></div></div></li>
         <li><button type="button" aria-expanded="false" aria-controls="dr-2" id="dr-b2"><span class="n" aria-hidden="true"></span><span class="t">Due diligence and program readiness.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="dr-2" role="region" aria-labelledby="dr-b2"><div><p>Assess proposals, delivery capacity, risks and operating requirements before implementation.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="dr-3" id="dr-b3"><span class="n" aria-hidden="true"></span><span class="t">program management.</span><span class="pl" aria-hidden="true">+</span></button>
+        <li><button type="button" aria-expanded="false" aria-controls="dr-3" id="dr-b3"><span class="n" aria-hidden="true"></span><span class="t">Program management.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="dr-3" role="region" aria-labelledby="dr-b3"><div><p>Coordinate timelines, partners, budgets, field execution and decisions.</p></div></div></li>
         <li><button type="button" aria-expanded="false" aria-controls="dr-4" id="dr-b4"><span class="n" aria-hidden="true"></span><span class="t">Fund-utilisation oversight.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="dr-4" role="region" aria-labelledby="dr-b4"><div><p>Track program expenditure and reporting against agreed structures.</p></div></div></li>

@@ -232,6 +232,7 @@ main{position:relative;overflow-x:clip}
 .ebtn[aria-selected="true"] .ar{opacity:1;transform:none}
 .emap{position:relative;overflow:hidden}
 .emap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+.emap .dot{display:none}
 .dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
 .dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
 .etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
@@ -282,6 +283,25 @@ main{position:relative;overflow-x:clip}
 .wcard p{font-size:14.5px;color:var(--ink-2)}
 .wcard .tl{margin-top:14px}
 .why-more{text-align:center;margin-top:26px}
+/* .why.wb: pills above the photo and the card below it, so busy photos keep faces clear */
+.why.wb{aspect-ratio:auto;display:flex;flex-direction:column;background:none;overflow:visible;border-radius:0}
+.why.wb .imgs{position:relative;aspect-ratio:21/9;border-radius:6px;overflow:hidden;background:var(--cream-2)}
+.why.wb .pills{position:relative;top:auto;left:auto;transform:none;max-width:100%;margin:0 auto 14px;order:-1}
+.why.wb .pill{background:var(--cream)}
+.cream .why.wb .pill{background:#fff}
+.why.wb .pill[aria-selected="true"]{background:var(--yellow)}
+.why.wb .wcard{position:relative;right:auto;bottom:auto;width:min(640px,calc(100% - 24px));margin:-44px auto 0}
+@media (max-width:860px){.why.wb .imgs{aspect-ratio:4/3}.why.wb .wcard{margin-top:-36px}}
+/* .hero.hb: busy group photos; the photo runs clear and the headline card sits below it */
+main .hero.hb{height:auto;background:#fff}
+main .hero.hb .hero-media{position:relative;height:clamp(420px,calc(100svh - var(--hdr) - 140px),700px)}
+main .hero.hb .hero-media::before,main .hero.hb .hero-media::after{display:none}
+main .hero.hb .hero-media img{transform:none}
+main .hero.hb .wrap{height:auto;display:block;padding-bottom:0}
+main .hero.hb .hero-col{margin:-96px auto clamp(12px,2vw,24px);width:min(760px,100%)}
+main .hero.hb .widget{margin-top:0;padding:26px 32px 28px;width:100%;text-align:center}
+main .hero.hb .widget h1{text-align:center;justify-content:center}
+@media (max-width:860px){main .hero.hb .hero-media{height:52svh}main .hero.hb .hero-col{margin-top:-80px}main .hero.hb .widget{padding:20px 18px 22px}}
 /* photo-with-pills card, Communications "How the story travels" style: serif title, text, counter + prev/next */
 .wcard .wc-t{font-size:24px;line-height:1.15}
 .wcard .wc-t+*{margin-top:6px}
@@ -417,7 +437,7 @@ main{position:relative;overflow-x:clip}
 /* hero: busy group photo, so the headline sits in the white widget card */
 .hero.ab .wrap{align-items:flex-end;padding-bottom:clamp(28px,5vh,56px)}
 .hero.ab .hero-media::after{background:linear-gradient(0deg,rgba(20,20,16,.45),rgba(20,20,16,0) 45%)}
-.hero.ab .hero-media img.on{object-position:50% 35%}
+.hero.ab .hero-media img.on{object-position:50% 100%}
 .ab-card{margin-top:0;padding:24px 28px 26px;width:min(500px,100%)}
 .ab-card .eyebrow{color:var(--yellow-ink);font-size:12.5px}
 .ab-card h1{margin-top:10px;color:var(--ink);text-align:left;text-shadow:none;min-height:0;display:block;font-size:clamp(32px,3.2vw,44px)}
@@ -518,6 +538,7 @@ main{position:relative;overflow-x:clip}
 .bio-card h3{font-size:clamp(26px,2.6vw,34px)}
 .bio-card .role{margin-top:4px;color:var(--yellow-ink);font-size:13px;font-weight:800}
 .bio-card .bio{margin-top:14px;font-size:15.5px;color:var(--ink-2)}
+.bio-card .bio p+p{margin-top:12px}
 .bio-x{position:absolute;top:12px;right:12px;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:var(--cream);font-size:22px;line-height:1;transition:background .2s}
 .bio-x:hover{background:var(--yellow)}
 @media (max-width:640px){.bio-card{grid-template-columns:1fr;gap:16px;padding:20px}.bio-card img{max-width:220px}}
@@ -573,7 +594,7 @@ main{position:relative;overflow-x:clip}
 <div class="ladder" aria-hidden="true"><span class="rail l"><i></i></span><span class="rail r"><i></i></span></div>
 
 <!-- ================= HERO ================= -->
-<section class="hero ab" id="top">
+<section class="hero ab hb" id="top">
   <div class="hero-media">
     <img class="on" src="assets/img/cine/ab-hero.webp?v=2" alt="Samhita-CGF team and partners at a convening" width="2000" height="1333">
   </div>
@@ -724,10 +745,11 @@ main{position:relative;overflow-x:clip}
         <li class="pcard rv" style="--d:.05s"><button type="button" class="tm" data-bio="bio-104" aria-haspopup="dialog" aria-label="Read bio: Nachiket Mor"><span class="tph"><img src="assets/img/about-people/nachiket-mor.webp" alt="Nachiket Mor" loading="lazy"><span class="chip"><i></i>Nachiket Mor</span><span class="cue" aria-hidden="true">+</span></span></button></li>
         <li class="pcard rv" style="--d:.1s"><button type="button" class="tm" data-bio="bio-105" aria-haspopup="dialog" aria-label="Read bio: Subho Moulik"><span class="tph"><img src="assets/img/about-people/subho-moulik.webp" alt="Subho Moulik" loading="lazy"><span class="chip"><i></i>Subho Moulik</span><span class="cue" aria-hidden="true">+</span></span></button></li>
         <li class="pcard rv" style="--d:.15s"><button type="button" class="tm" data-bio="bio-106" aria-haspopup="dialog" aria-label="Read bio: Paresh S. Parasnis"><span class="tph"><img src="assets/img/about-people/paresh-parasnis.webp" alt="Paresh S. Parasnis" loading="lazy"><span class="chip"><i></i>Paresh S. Parasnis</span><span class="cue" aria-hidden="true">+</span></span></button></li>
-        <li class="pcard rv" style="--d:.2s"><div class="tph"><img src="assets/img/about-people/amita-vyas.webp" alt="Amita Vyas" loading="lazy"><p class="chip"><i></i>Amita Vyas</p></div></li>
+        <li class="pcard rv" style="--d:.2s"><button type="button" class="tm" data-bio="bio-107" aria-haspopup="dialog" aria-label="Read bio: Amita Vyas"><span class="tph"><img src="assets/img/about-people/amita-vyas.webp" alt="Amita Vyas" loading="lazy"><span class="chip"><i></i>Amita Vyas</span><span class="cue" aria-hidden="true">+</span></span></button></li>
       </ul>
     </div>
 
+    <div class="bio-src" id="bio-107" hidden><h3>Amita Vyas</h3><div class="bio"><p>Amita Vyas is Professor of Prevention and Community Health at the Milken Institute School of Public Health, George Washington University, where she also serves as Interim Chair of the department. She directs the school’s Maternal and Child Health program and its Center of Excellence in Maternal and Child Health.</p><p>In 2007, she founded the Global India Fund, a non-profit that has raised millions of dollars for girls’ education, women’s empowerment, violence prevention, public health and nutrition programs in India. She is also a Non-resident Senior Fellow at the Atlantic Council.</p><p>Amita enjoys turning research into real-world change for women and girls. A graduate of the University of Connecticut and the Johns Hopkins Bloomberg School of Public Health, she is a public health researcher, demographer, teacher, mentor, non-profit founder, documentary collaborator and champion for women, children and families. Her path into public health began at 20, when she spent a summer in Calcutta working with Mother Teresa’s Missionaries of Charity.</p></div></div>
     <div class="bio-src" id="bio-100" hidden><h3>Noshir Dadrawala</h3><p class="bio">Mr. Noshir H. Dadrawala is the Chief Executive of the Centre for Advancement of Philanthropy. He has been with the Centre since its inception in 1987. Currently, he serves on international boards as; Member, Asia Pacific Philanthropy Network which is a part of Give2Asia based in San Francisco, member of the Coordinating Committee of Brazil based Worldwide Initiatives & Network of Grant-makers (WINGS), Fellow of the Centre for Study of Philanthropy (New York) which is affiliated to the Graduate School & University Center of the City University of New York, member of the Advisory Council of the U.S. based International Centre for Not-for-profit Law. He is also a trustee of; Resource Alliance (India), India Sponsorship Committee, Make A Wish Foundation India, V Care Foundation, Chronic Care Foundation, Forbes Foundation, Happy Home and School for the Blind, Junoon Foundation initiated by Sanjana Kapoor and the Jai Ho Trust which he established with the Oscar Winning Director, Danny Boyle. He is a permanent invitee on the Board of the Bombay Community Public Trust that CAP helped to incubate in the year 1990.</p></div>
     <div class="bio-src" id="bio-101" hidden><h3>Jagdish Acharya</h3><p class="bio">Mr.Acharya brings over 44 years of executive leadership experience, and is passionate about driving skill development, quality improvement, and innovation in the paint and coatings sector. As the CEO of PAINTS & COATINGS SKILL COUNCIL, he leads a dynamic team of professionals who work with industry stakeholders, government agencies, and training partners to create and implement competency-based standards, curricula, and assessments for the industry. In his current role, he has successfully launched several strategic initiatives, such as the National Apprenticeship Program, the Recognition of Prior Learning, and the Paints and Coatings Academy for the Paints and Coatings Industry. These initiatives have enabled thousands of workers and students to acquire industry-relevant skills, certifications, and career opportunities. He has also established strong partnerships with leading paint manufacturers, associations, and educational institutions to promote the adoption and recognition of the NCVET standards and programs. Additionally, he has represented the industry at various national and international forums and events, showcasing the best practices and achievements of the Indian paint and coatings industry</p></div>
     <div class="bio-src" id="bio-102" hidden><h3>Suman Srivastava</h3><p class="bio">Suman Srivastava is the Founder and Innovation Artist at Marketing Unplugged. He is also the author of Marketing Unplugged: Spotting the elephants in the room. Suman Srivastava enjoys doing new things. A graduate of Delhi University, IIM Ahmedabad and IMD Lausanne, he is an advertising man, strategist, author, marathon runner, teacher, social worker, sports fan, creative bartender and an entrepreneur. Suman has been the CEO of Euro RSCG India for 5 years and also Chief Strategy Officer for Euro RSCG Asia Pacific. He was the Chairman of Euro RSCG's emerging markets planning council and a member of the global management committee. Lastly, he was Vice Chairman & Chief Strategy Officer of FCB Ulka Group in India. In 2011, he started an innovation firm called Marketing Unplugged. The focus of the company is to help Indian companies create marketing innovations and thus achieve extraordinary growth. In this capacity, he has been associated with brands such as Raymond (suitings), CaratLane (online jewellery), Network18 (media), Sweekar (cooking oil), Spuul (entertainment app), Johnson & Johnson (OTC), Navneet (stationery) and FCB Ulka to name a few.</p></div>

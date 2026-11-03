@@ -232,6 +232,7 @@ main{position:relative;overflow-x:clip}
 .ebtn[aria-selected="true"] .ar{opacity:1;transform:none}
 .emap{position:relative;overflow:hidden}
 .emap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+.emap .dot{display:none}
 .dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
 .dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
 .etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
@@ -282,6 +283,25 @@ main{position:relative;overflow-x:clip}
 .wcard p{font-size:14.5px;color:var(--ink-2)}
 .wcard .tl{margin-top:14px}
 .why-more{text-align:center;margin-top:26px}
+/* .why.wb: pills above the photo and the card below it, so busy photos keep faces clear */
+.why.wb{aspect-ratio:auto;display:flex;flex-direction:column;background:none;overflow:visible;border-radius:0}
+.why.wb .imgs{position:relative;aspect-ratio:21/9;border-radius:6px;overflow:hidden;background:var(--cream-2)}
+.why.wb .pills{position:relative;top:auto;left:auto;transform:none;max-width:100%;margin:0 auto 14px;order:-1}
+.why.wb .pill{background:var(--cream)}
+.cream .why.wb .pill{background:#fff}
+.why.wb .pill[aria-selected="true"]{background:var(--yellow)}
+.why.wb .wcard{position:relative;right:auto;bottom:auto;width:min(640px,calc(100% - 24px));margin:-44px auto 0}
+@media (max-width:860px){.why.wb .imgs{aspect-ratio:4/3}.why.wb .wcard{margin-top:-36px}}
+/* .hero.hb: busy group photos; the photo runs clear and the headline card sits below it */
+main .hero.hb{height:auto;background:#fff}
+main .hero.hb .hero-media{position:relative;height:clamp(420px,calc(100svh - var(--hdr) - 140px),700px)}
+main .hero.hb .hero-media::before,main .hero.hb .hero-media::after{display:none}
+main .hero.hb .hero-media img{transform:none}
+main .hero.hb .wrap{height:auto;display:block;padding-bottom:0}
+main .hero.hb .hero-col{margin:-96px auto clamp(12px,2vw,24px);width:min(760px,100%)}
+main .hero.hb .widget{margin-top:0;padding:26px 32px 28px;width:100%;text-align:center}
+main .hero.hb .widget h1{text-align:center;justify-content:center}
+@media (max-width:860px){main .hero.hb .hero-media{height:52svh}main .hero.hb .hero-col{margin-top:-80px}main .hero.hb .widget{padding:20px 18px 22px}}
 /* photo-with-pills card, Communications "How the story travels" style: serif title, text, counter + prev/next */
 .wcard .wc-t{font-size:24px;line-height:1.15}
 .wcard .wc-t+*{margin-top:6px}
@@ -491,7 +511,7 @@ main{position:relative;overflow-x:clip}
 .her-acc ul{padding:8px 26px}
 .her-acc li+li{border-top:1px solid var(--line)}
 .her-acc button{width:100%;display:grid;grid-template-columns:34px 1fr 26px;gap:12px;align-items:center;padding:18px 0;text-align:left}
-.her-acc .n{display:block;width:22px;height:4px;margin-left:6px;background:var(--cream-2);transition:background .2s}
+.her-acc .n{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--cream);font-size:11px;font-weight:800;transition:background .2s}
 .her-acc .t{font-family:var(--serif);font-size:21px;line-height:1.2}
 .her-acc .pl{font-size:22px;line-height:1;text-align:center;transition:transform .25s}
 .her-acc li.open .n{background:var(--yellow)}
@@ -614,17 +634,17 @@ main{position:relative;overflow-x:clip}
     <div class="her-acc shadow rv">
       <div class="ph"><img src="assets/img/cine/healtheconomicresilience-centre.webp?v=2" alt="Children and caregivers at a community centre" width="1086" height="1448" loading="lazy"></div>
       <ul data-acc>
-        <li class="open"><button type="button" aria-expanded="true" aria-controls="her-0" id="her-b0"><span class="n" aria-hidden="true"></span><span class="t">Preventive and primary health.</span><span class="pl" aria-hidden="true">+</span></button>
+        <li class="open"><button type="button" aria-expanded="true" aria-controls="her-0" id="her-b0"><span class="n" aria-hidden="true">01</span><span class="t">Preventive and primary health.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="her-0" role="region" aria-labelledby="her-b0"><div><p>Screening, referrals, awareness and access to quality services.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="her-1" id="her-b1"><span class="n" aria-hidden="true"></span><span class="t">Women's health and nutrition.</span><span class="pl" aria-hidden="true">+</span></button>
+        <li><button type="button" aria-expanded="false" aria-controls="her-1" id="her-b1"><span class="n" aria-hidden="true">02</span><span class="t">Women's health and nutrition.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="her-1" role="region" aria-labelledby="her-b1"><div><p>Including menstrual health, reproductive health and nutrition programs.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="her-2" id="her-b2"><span class="n" aria-hidden="true"></span><span class="t">Health protection.</span><span class="pl" aria-hidden="true">+</span></button>
+        <li><button type="button" aria-expanded="false" aria-controls="her-2" id="her-b2"><span class="n" aria-hidden="true">03</span><span class="t">Health protection.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="her-2" role="region" aria-labelledby="her-b2"><div><p>Insurance, social-protection and eligible government-scheme linkages.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="her-3" id="her-b3"><span class="n" aria-hidden="true"></span><span class="t">Community health models.</span><span class="pl" aria-hidden="true">+</span></button>
+        <li><button type="button" aria-expanded="false" aria-controls="her-3" id="her-b3"><span class="n" aria-hidden="true">04</span><span class="t">Community health models.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="her-3" role="region" aria-labelledby="her-b3"><div><p>Training and supporting community-based health workers and entrepreneurs.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="her-4" id="her-b4"><span class="n" aria-hidden="true"></span><span class="t">Health systems strengthening.</span><span class="pl" aria-hidden="true">+</span></button>
+        <li><button type="button" aria-expanded="false" aria-controls="her-4" id="her-b4"><span class="n" aria-hidden="true">05</span><span class="t">Health systems strengthening.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="her-4" role="region" aria-labelledby="her-b4"><div><p>program-management teams, field capacity, data, technology and coordination with public systems.</p></div></div></li>
-        <li><button type="button" aria-expanded="false" aria-controls="her-5" id="her-b5"><span class="n" aria-hidden="true"></span><span class="t">Integrated health + livelihood programs.</span><span class="pl" aria-hidden="true">+</span></button>
+        <li><button type="button" aria-expanded="false" aria-controls="her-5" id="her-b5"><span class="n" aria-hidden="true">06</span><span class="t">Integrated health + livelihood programs.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="her-5" role="region" aria-labelledby="her-b5"><div><p>Where health barriers materially affect earning capacity or economic security.</p></div></div></li>
       </ul>
     </div>

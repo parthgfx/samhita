@@ -232,6 +232,7 @@ main{position:relative;overflow-x:clip}
 .ebtn[aria-selected="true"] .ar{opacity:1;transform:none}
 .emap{position:relative;overflow:hidden}
 .emap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+.emap .dot{display:none}
 .dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
 .dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
 .etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
@@ -282,6 +283,25 @@ main{position:relative;overflow-x:clip}
 .wcard p{font-size:14.5px;color:var(--ink-2)}
 .wcard .tl{margin-top:14px}
 .why-more{text-align:center;margin-top:26px}
+/* .why.wb: pills above the photo and the card below it, so busy photos keep faces clear */
+.why.wb{aspect-ratio:auto;display:flex;flex-direction:column;background:none;overflow:visible;border-radius:0}
+.why.wb .imgs{position:relative;aspect-ratio:21/9;border-radius:6px;overflow:hidden;background:var(--cream-2)}
+.why.wb .pills{position:relative;top:auto;left:auto;transform:none;max-width:100%;margin:0 auto 14px;order:-1}
+.why.wb .pill{background:var(--cream)}
+.cream .why.wb .pill{background:#fff}
+.why.wb .pill[aria-selected="true"]{background:var(--yellow)}
+.why.wb .wcard{position:relative;right:auto;bottom:auto;width:min(640px,calc(100% - 24px));margin:-44px auto 0}
+@media (max-width:860px){.why.wb .imgs{aspect-ratio:4/3}.why.wb .wcard{margin-top:-36px}}
+/* .hero.hb: busy group photos; the photo runs clear and the headline card sits below it */
+main .hero.hb{height:auto;background:#fff}
+main .hero.hb .hero-media{position:relative;height:clamp(420px,calc(100svh - var(--hdr) - 140px),700px)}
+main .hero.hb .hero-media::before,main .hero.hb .hero-media::after{display:none}
+main .hero.hb .hero-media img{transform:none}
+main .hero.hb .wrap{height:auto;display:block;padding-bottom:0}
+main .hero.hb .hero-col{margin:-96px auto clamp(12px,2vw,24px);width:min(760px,100%)}
+main .hero.hb .widget{margin-top:0;padding:26px 32px 28px;width:100%;text-align:center}
+main .hero.hb .widget h1{text-align:center;justify-content:center}
+@media (max-width:860px){main .hero.hb .hero-media{height:52svh}main .hero.hb .hero-col{margin-top:-80px}main .hero.hb .widget{padding:20px 18px 22px}}
 /* photo-with-pills card, Communications "How the story travels" style: serif title, text, counter + prev/next */
 .wcard .wc-t{font-size:24px;line-height:1.15}
 .wcard .wc-t+*{margin-top:6px}
@@ -461,11 +481,9 @@ main{position:relative;overflow-x:clip}
 .la-steps{flex:1;display:grid;grid-auto-rows:1fr;gap:8px;margin-top:16px}
 .la-steps li{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:center;padding:14px 16px;border-radius:4px;background:#f6f4ee;transition:background .2s}
 .la-steps li:hover{background:var(--cream-2)}
-.la-steps li:last-child{background:var(--yellow)}
-.la-steps .n{font-size:12px;font-weight:800}
+.la-steps .n{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--yellow);font-size:11px;font-weight:800}
 .la-steps h4{font-size:15px;font-weight:800;line-height:1.35}
 .la-steps p{margin-top:2px;font-size:14px;color:var(--ink-2)}
-.la-steps li:last-child p{color:var(--ink)}
 .la-safe{margin-top:clamp(28px,3vw,36px);background:#fff;border-radius:8px;padding:26px 28px 30px}
 .la-safe>h3{text-align:center;font-size:clamp(26px,2.4vw,32px)}
 .la-safe ul{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 30px;margin-top:22px}
@@ -632,7 +650,7 @@ main{position:relative;overflow-x:clip}
       <p class="sub">This happens to millions of people every day.</p>
     </div>
     <div class="la-prob shadow rv">
-      <div class="ph"><img src="assets/img/cine/livelihoodaccount-driver.webp?v=2" alt="A driver leaning on his milk-delivery truck" width="1536" height="1024" loading="lazy"></div>
+      <div class="ph"><img src="assets/img/cine/livelihoodaccount-driver.webp?v=2" alt="A driver leaning on his milk-delivery truck" width="1536" height="1024"></div>
       <div class="la-rows">
         <div class="la-row"><div><p class="v">32 crore</p><p class="e pk">(319 million)</p></div><div><p class="caps lbl">What it means</p><p>Informal workers registered with the government. We know who they are, but not what they can do.</p></div></div>
         <div class="la-row"><div><p class="v">1 crore+</p><p class="e pk">(10 million)</p></div><div><p class="caps lbl">What it means</p><p>Young people trained under the national skilling program. Their certificates need to count with the next employer.</p></div></div>
@@ -772,7 +790,7 @@ main{position:relative;overflow-x:clip}
         <p class="shift"><span>The shift</span><span>Repeat forms → one record</span></p>
       </article>
       <article class="rv" style="--d:.30s">
-        <div class="tph"><img src="assets/img/cine/pw-entrepreneur.webp?v=2" alt="A micro-entrepreneur holding up jars of her homemade pickles" width="1672" height="941" loading="lazy"></div>
+        <div class="tph"><img src="assets/img/cine/pw-entrepreneur.webp?v=4" alt="A micro-entrepreneur holding up jars of her homemade pickles" width="1152" height="768" loading="lazy"></div>
         <p class="caps who pk">Who</p>
         <h3>Small enterprise owner, wants to grow</h3>
         <dl><div><dt>Today</dt><dd>Udyam, GST, bank and sales records live apart. Every lender and marketplace asks again.</dd></div><div><dt>With the account</dt><dd>Business records shared once, with consent, for credit and market listings.</dd></div></dl>
@@ -819,8 +837,10 @@ main{position:relative;overflow-x:clip}
       </div>
       <div>
         <h3>Joining is simple.</h3>
-        <p>Hold records? Connect once. Records stay with you, and you keep issuing and maintaining them. Offer jobs, loans or orders? Ask for the person's consent, read their records with trust labels, and decide on your own terms. Both start the same way: pick one use case, connect through open APIs, test in a sandbox and go live.</p>
-        <p>Integrate once. Cut duplicate checks, serve more people and keep an audit trail.</p>
+        <p><b>Hold records?</b> Connect once. Records stay with you, and you keep issuing and maintaining them.</p>
+        <p><b>Offer jobs, loans or orders?</b> Ask for the person's consent, read their records with trust labels, and decide on your own terms.</p>
+        <p>Both start the same way: pick one use case, connect through open APIs, test in a sandbox and go live.</p>
+        <p><b>Integrate once. Cut duplicate checks, serve more people and keep an audit trail.</b></p>
       </div>
     </div>
   </div>
