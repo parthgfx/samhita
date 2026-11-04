@@ -485,17 +485,17 @@ main .hero.ml.hb .hero-col{margin-top:-24px}
 #do{padding:0 0 clamp(64px,8vw,104px)}
 #do .band{padding-bottom:150px}
 #do .dash{margin-top:-110px}
-.ml-shot{border-bottom:1px solid var(--line)}
-.ml-shot div{height:clamp(200px,26vw,340px);overflow:hidden;background:var(--cream-2)}
-.ml-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
-.ml-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+#do .dash{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.ml-shot{position:relative;min-height:420px;border-right:1px solid var(--line)}
+.ml-shot div{position:absolute;inset:0;overflow:hidden;background:var(--cream-2)}
+.ml-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.ml-steps{display:grid;grid-template-columns:1fr;align-content:stretch}
 .ml-steps li{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:center;padding:20px 24px;transition:background .2s}
 .ml-steps li:hover{background:var(--cream)}
-.ml-steps li:not(:nth-child(3n+1)){border-left:1px solid var(--line)}
-.ml-steps li:nth-child(n+4){border-top:1px solid var(--line)}
+.ml-steps li+li{border-top:1px solid var(--line)}
 .ml-steps .n{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--yellow);font-size:11px;font-weight:800}
 .ml-steps h3{font-size:clamp(18px,1.6vw,21px);line-height:1.22}
-@media (max-width:860px){.ml-steps{grid-template-columns:1fr}.ml-steps li:not(:nth-child(3n+1)){border-left:0}.ml-steps li+li{border-top:1px solid var(--line)}}
+@media (max-width:860px){#do .dash{grid-template-columns:1fr}.ml-shot{min-height:0;aspect-ratio:4/3;border-right:0;border-bottom:1px solid var(--line)}}
 
 /* principle: statement */
 #principle .stmt .caps{color:var(--yellow-ink)}
