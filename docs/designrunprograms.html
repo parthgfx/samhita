@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
-<link rel="preload" as="image" href="assets/img/cine/designrunprograms-hero.webp">
+<link rel="preload" as="image" href="assets/img/cine/designrunprograms-hero.webp?v=2">
 <style>
 /* ============================================================
    Samhita-CGF home — charity: water layout, component for component
@@ -187,6 +187,16 @@ main{position:relative;overflow-x:clip}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);max-width:52rem;margin:36px auto 0;text-align:left}
 .two p:first-child{font-size:14.5px;color:var(--ink-2)}
 .two p+p{margin-top:8px;font-family:var(--serif);font-size:20px;line-height:1.3}
+#narrative .two{max-width:50rem;gap:clamp(28px,5vw,64px)}
+#narrative .two p,#narrative .two p+p,#narrative .two p:first-child{font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--ink-2);margin-top:12px}
+#narrative .two p:first-child{margin-top:0}
+#narrative .two>div:last-child p+p{margin-top:0}
+.cmore{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:6px 0;font-size:13px;font-weight:800;border-bottom:2px solid var(--yellow)}
+.cmore .t::before{content:"Read the full case study"}
+.cmore[aria-expanded="true"] .t::before{content:"Show less"}
+.cmore svg{width:15px;height:15px;transition:transform .25s}
+.cmore[aria-expanded="true"] svg{transform:rotate(180deg)}
+.cmore:hover{border-bottom-color:var(--pink)}
 .climax{margin:36px auto 0;max-width:36rem;text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(21px,2.2vw,26px);line-height:1.35}
 .stmt-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
 .ringcard{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;max-width:44rem;margin:40px auto 0;padding:20px 26px;background:var(--cream);border:1px solid var(--cream-2);border-radius:6px;text-align:left}
@@ -218,7 +228,7 @@ main{position:relative;overflow-x:clip}
 .st dd{font-family:var(--serif);font-size:clamp(26px,2.4vw,32px);line-height:1}
 .st dd .u{color:var(--yellow-ink)}
 .st dt{margin-top:6px;font-size:11.5px;color:var(--muted);line-height:1.3}
-.explore{display:grid;grid-template-columns:330px 1fr;min-height:520px}
+.explore{display:grid;grid-template-columns:330px 1fr}
 .elist{border-right:1px solid var(--line);display:flex;flex-direction:column}
 .ehead{padding:18px 22px;border-bottom:1px solid var(--line);text-align:center;font-size:clamp(22px,2vw,26px);background:var(--cream)}
 .ebtn{display:grid;grid-template-columns:30px 1fr 16px;align-items:center;gap:10px;padding:11px 18px;text-align:left;border-bottom:1px solid var(--line);transition:background .2s}
@@ -235,7 +245,7 @@ main{position:relative;overflow-x:clip}
 .emap .dot{display:none}
 .dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
 .dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
-.etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
+.etip{position:absolute;left:20px;bottom:20px;width:min(340px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
 .etip.out{opacity:0;transform:translateY(6px)}
 .etip h3{font-size:22px}
 .etip p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
@@ -428,7 +438,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .ftr ul a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
 .fbottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;max-width:960px;margin:44px auto 0;padding-top:22px;border-top:1px solid var(--line)}
 .fbottom .brand svg{height:40px;width:110px}
-.ftr-tel{font-weight:800;font-size:13px;letter-spacing:.06em}
+.ftr-tel{display:inline-block;margin-top:10px;font-weight:800;font-size:13px;letter-spacing:.06em}
 .fbottom .legal{font-size:12.5px;color:var(--muted);text-align:right}
 @media (max-width:860px){.fcols{grid-template-columns:1fr 1fr}.fcols>div:nth-child(-n+2){grid-column:1/-1}.fbottom{flex-direction:column;align-items:flex-start}.fbottom .legal{text-align:left}}
 
@@ -438,13 +448,18 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .hero.hc .wrap{align-items:flex-end;justify-content:flex-end;padding-bottom:clamp(28px,5vh,56px)}
 .hero.hc .hero-col{width:min(560px,100%)}
 .hero.hc .hero-media::after{background:linear-gradient(0deg,rgba(20,20,16,.5),rgba(20,20,16,0) 50%)}
-.hero.hc .hero-media img.on{object-position:50% 0}
+.hero.hc .hero-media img.on{object-position:50% 52%}
 .hc-card{margin-top:0;padding:26px 30px 28px}
 .hero.hc.hb .wrap{align-items:initial;justify-content:initial;padding-bottom:0}
 .hero.hc.hb .hero-col{width:min(760px,100%)}
 .hero.hc.hb .hc-card h1{text-align:center}
 .hero.hc.hb .hc-card{text-align:center}
 .hero.hc.hb .hc-card .btn{margin-left:auto;margin-right:auto}
+/* hero photo shown at its own aspect ratio, never cropped */
+main .hero.hc.hb .hero-media{height:auto;aspect-ratio:1448/693}
+main .hero.hc.hb .hero-media img.on{object-position:50% 50%}
+main .hero.hc.hb .hero-col{margin-top:-24px}
+@media (max-width:860px){main .hero.hc.hb .hero-media{height:auto}main .hero.hc.hb .hero-col{margin-top:-14px}}
 .hc-card .eyebrow{color:var(--yellow-ink);font-size:12.5px}
 .hc-card h1{margin-top:10px;color:var(--ink);text-align:left;text-shadow:none;min-height:0;display:block;font-size:clamp(30px,3vw,42px)}
 .hc-card h1 .pk{color:var(--pink)}
@@ -522,6 +537,33 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .dr-story p+p{margin-top:12px}
 @media (max-width:860px){.dr-top{grid-template-columns:1fr}.dr-top .ph{min-height:0;aspect-ratio:16/9}.dr-story{column-count:1}}
 @media (max-width:420px){.dr-tabs{grid-template-columns:1fr 1fr;width:100%}.dr-tabs .ptab{padding:0 6px;font-size:10px}}
+/* impact cases: same expandable case-study cards as Catalytic Finance */
+.xcs{display:flex;justify-content:center;align-items:flex-start;flex-wrap:wrap;gap:clamp(18px,2.4vw,28px);margin-top:clamp(32px,4vw,44px)}
+.ccard{flex:0 1 min(480px,100%);display:flex;flex-direction:column}
+.xcs.x1 .ccard{flex-basis:min(600px,100%)}
+.ccard .tph{aspect-ratio:4/3}
+.ccard h3{margin-top:16px}
+.ccard h3 button{display:flex;gap:10px;align-items:flex-start;text-align:left;font-family:var(--serif);font-size:clamp(21px,1.9vw,24px);line-height:1.22}
+.ccard h3 button .pm{flex:none;display:grid;place-items:center;width:26px;height:26px;margin-top:2px;border-radius:50%;background:var(--yellow);transition:transform .25s}
+.ccard h3 button .pm svg{width:12px;height:12px}
+.ccard h3 button[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.ccard .desc{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.ccard .desc>div{overflow:hidden}
+.ccard .desc p{padding-top:12px;font-size:14.5px;color:var(--ink-2)}
+.ccard.open .desc{grid-template-rows:1fr}
+.cpart{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.cpart .pl{flex:1 1 200px;font-size:12.5px;font-weight:700;line-height:1.4;color:var(--ink)}
+.cpart img{height:26px;width:auto;max-width:120px;object-fit:contain}
+.ccard .meta{margin-top:14px;font-size:12px;font-weight:700;color:var(--yellow-ink)}
+.ccard .meta+h3{margin-top:6px}
+.ccard .cstats{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:6px}
+.ccard .cstats div{padding:12px 8px;text-align:center}
+.ccard .cstats div+div{border-left:1px solid var(--line)}
+.ccard .cstats span{display:block}
+.ccard .cstats span:first-child{font-family:var(--serif);font-size:22px;line-height:1.05}
+.ccard .cstats span+span{margin-top:5px;font-size:11px;color:var(--muted);line-height:1.25}
+.cpart .pl{font-weight:600;color:var(--ink-2);font-size:12.5px}
+.ccard .desc p b{color:var(--ink);font-weight:800}
 #end{height:0}
 </style>
 </head>
@@ -567,7 +609,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 <!-- ================= HERO ================= -->
 <section class="hero hc hb" id="top">
   <div class="hero-media">
-    <img class="on" src="assets/img/cine/designrunprograms-hero.webp" alt="A facilitator leading a session with women participants" width="1448" height="1086">
+    <img class="on" src="assets/img/cine/designrunprograms-hero.webp?v=2" alt="A facilitator leading a session with women participants" width="1448" height="693">
   </div>
   <div class="wrap">
     <div class="hero-col">
@@ -677,50 +719,26 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
   </div>
 </section>
 
-<!-- ================= CASE STUDIES: tabbed panel ================= -->
+<!-- ================= CASE STUDIES: expandable cards ================= -->
 <section class="sec cream" id="cases">
   <div class="wrap">
     <div class="shead rv"><p class="caps">Proof of the climb</p></div>
-    <div class="rv" data-tabs>
-      <div class="pw-tabs dr-tabs" role="tablist" aria-label="Case studies">
-        <button class="ptab" role="tab" aria-selected="true">Case study: Adidas</button>
-        <button class="ptab" role="tab" aria-selected="false" tabindex="-1">Case study: Broadcom</button>
-      </div>
-      <article class="dr-case shadow" role="tabpanel">
-        <div class="dr-top">
-          <div class="ph"><img src="assets/img/cine/cf-features.webp?v=2" alt="Program staff and participants at a field session" width="1448" height="1086" loading="lazy"></div>
-          <div class="dr-head">
-            <h3>How Adidas' CSR strategy outperformed its own scope</h3>
-            <div class="dr-st"><div><span>6</span><span>Live projects in one portfolio</span></div><div><span>71.34 lakh kg</span><span>Waste cleared</span></div><div><span>49,000+</span><span>Children reached by GreenSole</span></div></div>
-            <p class="dr-part">In partnership with Adidas, alongside REEFOP, India Track Foundation, Garv Foundation, GreenSole, Afroz Shah Foundation and Udayan Care</p>
-          </div>
-        </div>
-        <div class="dr-story">
-          <p>Adidas' CSR strategy centres on sport, climate resilience, and equitable outcomes for vulnerable children, three causes that don't share a playbook. Rather than run one generalist program across all three, we picked a specialist for each: Garv Foundation for para-badminton, India Track Foundation for athletics, PDCT for community football in high-altitude Ladakh, Afroz Shah Foundation for coastal cleanup, GreenSole for circular economy, and Udayan Care for residential child welfare.</p>
-          <p>Over three years, that grew into six live projects across multiple geographies, coordinated as one portfolio rather than six separate contracts: shared reporting cadence, one governance structure, and one team accountable for how the pieces added up together.</p>
-          <p>That structure is what lets each specialist push past their original scope instead of just meeting it. Garv's para-badminton program, built for grassroots training, produced two athletes who went on to Olympic competition. Afroz Shah Foundation's cleanup work reached 71.34 lakh kilograms of waste cleared from beaches, mangroves, and inter-tidal zones. GreenSole's footwear upcycling model scaled to 49,000+ children across six states. None of that came from a single implementing partner working in isolation. It came from consistent oversight that caught what was working early enough to double down on it.</p>
-          <p>We also built visibility into the program from the start rather than adding it at reporting time, which is what got 80+ Adidas employees directly involved through donation drives, care-home visits, and time spent with ITF athletes, turning the CSR program into something Adidas' own people could see and take part in, not just fund.</p>
-          <p>That combination, precise partner selection, hands-on portfolio management, and visibility built in from day one, is what moved Samhita-CGF from program manager to strategic advisor on the account.</p>
-        </div>
+    <div class="xcs">
+      <article class="tcard ccard open rv">
+        <div class="tph"><img src="assets/img/cine/designrunprograms-adidas.webp" alt="Adidas employees and children from a partner care home making a rangoli together" width="1600" height="1043" loading="lazy"></div>
+        <p class="meta">CSR Portfolio · Multi-state</p>
+        <h3><button type="button" aria-expanded="true"><span class="pm" aria-hidden="true"></span><span>How Adidas' CSR strategy outperformed its own scope</span></button></h3>
+        <div class="cstats" style="--n:3"><div><span>6</span><span>Live projects</span></div><div><span>71.34 lakh kg</span><span>Waste cleared</span></div><div><span>49,000+</span><span>Children reached</span></div></div>
+        <div class="cpart"><span class="pl">In partnership with Adidas, alongside REEFOP, India Track Foundation, Garv Foundation, GreenSole, Afroz Shah Foundation, and Udayan Care</span><img src="assets/logos/adidas-logo.webp" alt="Adidas" loading="lazy"></div>
+        <div class="desc"><div><p>Adidas' CSR strategy centres on sport, climate resilience, and equitable outcomes for vulnerable children, three causes that do not share a playbook. Rather than run one generalist program across all three, we picked a specialist for each: Garv Foundation for para-badminton, India Track Foundation for athletics, PDCT for community football in high-altitude Ladakh, Afroz Shah Foundation for coastal cleanup, GreenSole for circular economy, and Udayan Care for residential child welfare.</p><p>Over three years, that grew into <b>six live projects</b> across multiple geographies, coordinated as one portfolio rather than six separate contracts: shared reporting cadence, one governance structure, and one team accountable for how the pieces added up together.</p><p>That structure is what lets each specialist push past their original scope instead of just meeting it. Garv's para-badminton program, built for grassroots training, produced <b>two athletes</b> who went on to Olympic competition. Afroz Shah Foundation's cleanup work cleared <b>71.34 lakh kilograms</b> of waste from beaches, mangroves, and inter-tidal zones. GreenSole's footwear upcycling model scaled to <b>49,000+ children</b> across six states. None of that came from a single implementing partner working in isolation. It came from consistent oversight that caught what was working early enough to double down on it.</p><p>We also built visibility into the program from the start rather than adding it at reporting time. That got <b>80+ Adidas employees</b> directly involved through donation drives, care-home visits, and time spent with India Track Foundation athletes, turning the CSR program into something Adidas' own people could see and take part in, not just fund.</p></div></div>
       </article>
-      <article class="dr-case shadow" role="tabpanel" hidden>
-        <div class="dr-top">
-          <div class="ph"><img src="assets/img/cine/designrunprograms-broadcom.webp" alt="Women participants seated together at a community session" width="1870" height="841" loading="lazy"></div>
-          <div class="dr-head">
-            <h3>INR 18.61 crore deployed across five cause areas in a single year</h3>
-            <div class="dr-st"><div><span>INR 18.61 Cr</span><span>Deployed in FY 24-25</span></div><div><span>11.37L</span><span>Meals distributed</span></div><div><span>246</span><span>Anganwadi centres refurbished</span></div></div>
-            <p class="dr-part">In partnership with Broadcom</p>
-          </div>
-        </div>
-        <div class="dr-story">
-          <p>Broadcom's CSR program spans hunger relief, education, water conservation, disaster response, and early childhood care, delivered through a growing network of non-profit partners across India. In FY 24-25 alone, the program funded five projects with four non-profit partners, moving INR 18.61 crore into direct community impact.</p>
-          <p>On hunger relief, the program fed 1,680 pregnant and lactating mothers, referred 97 critical cases for further care, and ran 64 functional community kitchens, distributing 11,37,260 meals in total.</p>
-          <p>On education and skilling, 59,597 students got hands-on science exposure through 7,37,532 interactions, while 1,540 students earned NIIT certification and 701 women completed vocational skills training. Nine STEM centres were set up in government schools.</p>
-          <p>On disaster relief, 76,330 people were reached with support kits following flood and disaster response efforts.</p>
-          <p>On water conservation, 771 percolation wells were constructed, with the potential to conserve 98 million litres of rainwater annually.</p>
-          <p>On early childhood care, 246 Anganwadi centres were refurbished, reaching 27,856 children, mothers, and other beneficiaries directly.</p>
-          <p>What made the difference. One Samhita-CGF team managed the full portfolio across five cause areas: partner selection and due diligence, fund-utilisation tracking, field monitoring and consolidated reporting. Broadcom leadership saw one picture of five projects. The partnership also carried through the move from VMware to Broadcom, so partners and communities kept their momentum.</p>
-        </div>
+      <article class="tcard ccard rv">
+        <div class="tph"><img src="assets/img/cine/designrunprograms-broadcom.webp" alt="Women participants seated together at a community session" width="1870" height="841" loading="lazy"></div>
+        <p class="meta">FY 24-25 · CSR Portfolio · Pan-India</p>
+        <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>₹18.61 crore deployed across five cause areas in a single year</span></button></h3>
+        <div class="cstats" style="--n:3"><div><span>₹18.61 crore</span><span>Deployed in FY 24–25</span></div><div><span>11.37 lakh</span><span>Meals distributed</span></div><div><span>246</span><span>Anganwadi centres refurbished</span></div></div>
+        <div class="cpart"><span class="pl">In partnership with Broadcom</span></div>
+        <div class="desc"><div><p>Broadcom's CSR program spans hunger relief, education, water conservation, disaster response, and early childhood care, delivered through a growing network of non-profit partners across India. In FY 24–25 alone, the program funded five projects with four non-profit partners, moving <b>₹18.61 crore</b> into direct community impact.</p><p>On hunger relief, the program fed <b>1,680 pregnant and lactating mothers</b>, referred 97 critical cases for further care, and ran 64 functional community kitchens, distributing <b>11,37,260 meals</b> in total.</p><p>On education and skilling, <b>59,597 students</b> got hands-on science exposure through 7,37,532 interactions, while 1,540 students earned NIIT certification and 701 women completed vocational skills training. Nine STEM centres were set up in government schools.</p><p>On disaster relief, <b>76,330 people</b> were reached with support kits following flood and disaster response efforts.</p><p>On water conservation, <b>771 percolation wells</b> were constructed, with the potential to conserve 98 million litres of rainwater annually.</p><p>On early childhood care, <b>246 Anganwadi centres</b> were refurbished, reaching 27,856 children, mothers, and other participants directly.</p><p>One Samhita-CGF team managed the full portfolio across five cause areas, covering partner selection and due diligence, fund-utilisation tracking, field monitoring, and consolidated reporting. Broadcom leadership saw one picture of five projects. The partnership also carried through the move from VMware to Broadcom, so partners and communities kept their momentum.</p></div></div>
       </article>
     </div>
   </div>
@@ -733,7 +751,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 <footer class="ftr">
   <div class="wrap">
     <div class="fcols">
-      <div><h4>Mumbai</h4><address>Corporate Avenue, 4th Floor, Office Number 412 &amp; 413,<br>Sonawala Road, Sonawala Industrial Estate,<br>Goregaon East, Mumbai 400063</address></div>
+      <div><h4>Mumbai</h4><address>Corporate Avenue, 4th Floor, Office Number 412 &amp; 413,<br>Sonawala Road, Sonawala Industrial Estate,<br>Goregaon East, Mumbai 400063</address><a class="ftr-tel" href="tel:+919819701728">+91 98197 01728</a></div>
       <div><h4>Bengaluru</h4><address>F2, VBR Astreix 204, Rajeev Gandhi Nagar I Phase,<br>Sahakar Nagar, Kodigehalli,<br>Bengaluru 560092</address></div>
       <div><h4>Social</h4><ul>
         <li><a href="https://www.facebook.com/samhitasocialventures" target="_blank" rel="noopener">Facebook</a></li>
@@ -752,7 +770,6 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
     </div>
     <div class="fbottom">
       <a class="brand" href="index.html" aria-label="Samhita-CGF home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 180" role="img" aria-label="Samhita-CGF"><g><path fill="#08273a" d="M251.2,57.9c-2.1,0-3.9.4-5.2,1.2-1.4.8-2,1.9-2,3.3s.5,2.1,1.4,2.9,2.2,1.4,3.9,1.8l6.2,1.3c1.9.4,3.4.7,4.7,1.1s2.7.8,4.3,1.6c1.7.7,3,1.5,4,2.4,1,.9,1.9,2.1,2.6,3.5.7,1.5,1.1,3.2,1.1,5,0,4.6-1.9,8.3-5.8,11.1s-8.3,4.2-13.4,4.2-10.6-1.4-14.3-4.2-5.9-6.7-6.8-11.7h10.7c1.2,4.7,4.7,7.1,10.6,7.1s4-.4,5.5-1.2c1.5-.8,2.3-2.1,2.3-3.8s-.7-2.5-2.2-3.4-3.6-1.6-6.3-2.2l-5.5-1.2c-9.4-2.1-14.2-6.6-14.2-13.5s1-5.6,2.9-7.7c1.9-2.2,4.3-3.7,7.1-4.7,2.8-1,5.8-1.4,8.9-1.4,4.9,0,9.1,1.2,12.6,3.5,3.5,2.3,5.7,5.9,6.4,10.7h-10.6c-.5-1.7-1.6-3-3.2-4s-3.5-1.4-5.8-1.4h0Z"/><path fill="#08273a" d="M297.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM286,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/><path fill="#08273a" d="M325.1,96.3h-10.4v-34.4h10.4v4.5c.8-1.4,2.2-2.7,4-3.7s3.9-1.6,6.3-1.6c5.1,0,8.4,1.9,10.1,5.8,2.6-3.9,6.5-5.8,11.6-5.8s7.1,1.2,8.9,3.6c1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.3-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.4-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h0Z"/><path fill="#08273a" d="M396.2,61.1c4.2,0,7.1,1.2,8.9,3.6,1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9s-.1-1.5-.3-2.4-.4-1.6-.8-2c-.4-.4-.9-.8-1.5-1.2-.7-.3-1.5-.5-2.5-.5-2.2,0-3.8.8-4.8,2.3-1,1.5-1.5,3.9-1.5,7.1v17.7h-10.4v-46.4h10.4v16.5c.8-1.4,2.2-2.7,4.1-3.7s4-1.6,6.5-1.6h0Z"/><path fill="#08273a" d="M424.8,49.9v8.5h-10.4v-8.5h10.4ZM424.8,61.8v34.4h-10.5v-34.4s10.5,0,10.5,0Z"/><path fill="#08273a" d="M433.9,52.4h10.4v9.4h7.4v7.5h-7.4v15.4c0,1.6.3,2.6.9,3.1.6.5,1.8.8,3.6.8h3v7.6h-6.6c-4.3,0-7.3-.6-8.9-1.9s-2.4-3.8-2.4-7.8v-17.3h-5.4v-7.5h5.4v-9.4h0Z"/><path fill="#08273a" d="M477.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM466.1,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/></g><g><path fill="#08273a" d="M243.7,126.4c-.3,1.5-.9,2.6-1.9,3.4s-2.2,1.2-3.8,1.2-3.4-.6-4.4-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.6-1.8,4.5-1.8s2.7.4,3.6,1.2c1,.8,1.6,1.9,1.8,3.4h-2.2c-.2-.9-.6-1.5-1.2-2-.6-.5-1.3-.7-2.2-.7s-2,.4-2.7,1.3-1,2-1,3.6.3,2.7,1,3.6c.7.9,1.6,1.3,2.7,1.3s1.6-.2,2.2-.7c.6-.5,1-1.1,1.2-2h2.3Z"/><path fill="#08273a" d="M254.2,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM249,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M260.4,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M265.9,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M270.7,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM270.7,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M289.1,124.4h-2.1c0-.5-.4-.9-.8-1.3s-.9-.5-1.5-.5-1.3.3-1.8.8c-.5.6-.7,1.4-.7,2.4s.2,1.9.7,2.5c.5.6,1.1.8,1.8.8s1.1-.1,1.5-.4c.4-.3.7-.7.9-1.3h2.1c-.2,1.1-.7,2-1.6,2.6s-1.8,1-2.9,1-2.5-.5-3.4-1.4c-.9-1-1.3-2.2-1.3-3.6s.4-2.7,1.3-3.6,2-1.4,3.4-1.4,2,.3,2.8,1c.8.6,1.3,1.5,1.5,2.6v-.2Z"/><path fill="#08273a" d="M292,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M300.9,117.7v2.2h-2.1v-2.2h2.1ZM300.9,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M307.6,128l2.2-6.9h2.2l-3.5,9.7h-2l-3.5-9.7h2.4l2.2,6.9h0Z"/><path fill="#08273a" d="M315.5,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM315.5,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M341.8,121.8h-2.2c-.2-.8-.6-1.4-1.2-1.9-.6-.4-1.3-.6-2.2-.6s-2.1.4-2.8,1.3c-.7.8-1.1,2-1.1,3.6s.3,2.8,1,3.6c.7.9,1.6,1.3,2.8,1.3s.8,0,1.2-.2c.4-.1.8-.3,1.1-.5.4-.2.6-.5.9-.9.2-.4.3-.9.3-1.4v-.3h-3.3v-1.9h5.5v6.8h-1.8v-1.6c-.9,1.2-2.2,1.8-4.1,1.8s-3.3-.6-4.3-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.7-1.8,4.6-1.8s2.7.4,3.7,1.2,1.6,1.8,1.9,3.2h-.1Z"/><path fill="#08273a" d="M352.7,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM347.6,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M364.4,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM359.2,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M375,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM372.6,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M385.6,117.7h9.1v1.9h-6.8v3.5h6.4v1.9h-6.4v5.8h-2.3v-13h0Z"/><path fill="#08273a" d="M404.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM399.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M414.4,129.4c-.6,1-1.5,1.6-2.9,1.6-2.2,0-3.2-1.3-3.2-3.8v-6.1h2.1v6.6c0,.3.1.5.2.8s.3.5.5.6.6.2,1,.2c1.5,0,2.2-1,2.2-3v-5.2h2.1v9.7h-2.1v-1.3h0Z"/><path fill="#08273a" d="M422,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/><path fill="#08273a" d="M437.8,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM435.3,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M442.6,128.1c0-.5.1-.9.4-1.2.2-.4.5-.7.9-.9.4-.2.9-.4,1.4-.6.6-.2,1.2-.3,1.8-.4s1.3-.2,2.1-.3v-.2c0-.8-.2-1.3-.6-1.7s-.9-.5-1.5-.5-1,0-1.4.4-.5.7-.6,1.3h-2.1c0-1,.5-1.8,1.2-2.4.8-.6,1.7-.9,2.9-.9s2.3.3,3,1,1.1,1.7,1.1,3.2v2.5c0,1.3,0,2.4.3,3.3h-2c-.1-.6-.2-1-.2-1.3-.6,1-1.7,1.5-3.2,1.5s-1.9-.3-2.6-.8-1-1.2-1-2.1h.1ZM449.2,126.2c-1.6,0-2.7.4-3.3.6-.6.3-1,.7-1,1.2s.2.8.5,1c.3.2.8.4,1.3.4.8,0,1.4-.2,1.9-.6.4-.4.7-1,.7-1.8v-.7h-.1Z"/><path fill="#08273a" d="M454.7,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M463.5,117.7v2.2h-2.1v-2.2h2.1ZM463.5,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M474.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM469.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M480.5,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/></g><polygon fill="#00a5cf" points="120 0 60 60 60 0 120 0"/><polygon fill="#ef4367" points="180 0 180 60 120 120 120 60 60 60 120 0 180 0"/><polygon fill="#ffd340" points="180 60 180 120 120 120 180 60"/><polygon fill="#54c0a6" points="90 90 45 135 45 90 90 90"/><polygon fill="#00a5cf" points="90 90 90 135 45 180 45 135 90 90"/><polygon fill="#ffd340" points="45 90 45 135 0 135 45 90"/><rect fill="#ef4367" y="135" width="45" height="45"/><polygon fill="#ffd340" points="60 0 60 60 0 60 60 0"/><polygon fill="#54c0a6" points="60 0 0 60 0 0 60 0"/><polygon fill="#54c0a6" points="180 120 120 180 120 120 180 120"/><polygon fill="#00a5cf" points="180 120 180 180 120 180 180 120"/></svg></a>
-      <a class="ftr-tel" href="tel:+919819701728">+91 98197 01728</a>
       <div class="legal"><p>© <span id="yr">2026</span> Samhita CGF. All rights reserved.</p><p>CSR and FCRA compliant · Aligned with the UN SDGs</p></div>
     </div>
   </div>
@@ -850,6 +867,15 @@ $$('[data-acc]').forEach(function(w){
     li.classList.toggle('open',v);b.setAttribute('aria-expanded',v?'true':'false');
   })});
 });
+/* ---- shared: case-study cards get a visible "Read the full case study" toggle ---- */
+$$('.ccard').forEach(function(c){
+  var b=$('h3 button',c);if(!b)return;
+  var m=document.createElement('button');m.type='button';m.className='cmore';m.setAttribute('aria-expanded',b.getAttribute('aria-expanded')||'false');
+  m.innerHTML='<span class="t"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  c.appendChild(m);
+  m.addEventListener('click',function(){b.click()});
+  new MutationObserver(function(){m.setAttribute('aria-expanded',b.getAttribute('aria-expanded'))}).observe(b,{attributes:true,attributeFilter:['aria-expanded']});
+});
 
 /* ---- why our programs work: pills swap the white corner card ---- */
 (function(){
@@ -862,6 +888,12 @@ $$('[data-acc]').forEach(function(w){
   }
   pills.forEach(function(p,i){p.addEventListener('click',function(){sel(i)})});
 })();
+/* ---- case study expanders ---- */
+$$('.ccard h3 button').forEach(function(b){
+  b.querySelector('.pm').innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#222520" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>';
+  b.addEventListener('click',function(){var c=b.closest('.ccard'),v=!c.classList.contains('open');c.classList.toggle('open',v);b.setAttribute('aria-expanded',v)});
+});
+
 
 /* ---- ladder ---- */
 (function(){

@@ -187,6 +187,16 @@ main{position:relative;overflow-x:clip}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);max-width:52rem;margin:36px auto 0;text-align:left}
 .two p:first-child{font-size:14.5px;color:var(--ink-2)}
 .two p+p{margin-top:8px;font-family:var(--serif);font-size:20px;line-height:1.3}
+#narrative .two{max-width:50rem;gap:clamp(28px,5vw,64px)}
+#narrative .two p,#narrative .two p+p,#narrative .two p:first-child{font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--ink-2);margin-top:12px}
+#narrative .two p:first-child{margin-top:0}
+#narrative .two>div:last-child p+p{margin-top:0}
+.cmore{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:6px 0;font-size:13px;font-weight:800;border-bottom:2px solid var(--yellow)}
+.cmore .t::before{content:"Read the full case study"}
+.cmore[aria-expanded="true"] .t::before{content:"Show less"}
+.cmore svg{width:15px;height:15px;transition:transform .25s}
+.cmore[aria-expanded="true"] svg{transform:rotate(180deg)}
+.cmore:hover{border-bottom-color:var(--pink)}
 .climax{margin:36px auto 0;max-width:36rem;text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(21px,2.2vw,26px);line-height:1.35}
 .stmt-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
 .ringcard{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;max-width:44rem;margin:40px auto 0;padding:20px 26px;background:var(--cream);border:1px solid var(--cream-2);border-radius:6px;text-align:left}
@@ -218,7 +228,7 @@ main{position:relative;overflow-x:clip}
 .st dd{font-family:var(--serif);font-size:clamp(26px,2.4vw,32px);line-height:1}
 .st dd .u{color:var(--yellow-ink)}
 .st dt{margin-top:6px;font-size:11.5px;color:var(--muted);line-height:1.3}
-.explore{display:grid;grid-template-columns:330px 1fr;min-height:520px}
+.explore{display:grid;grid-template-columns:330px 1fr}
 .elist{border-right:1px solid var(--line);display:flex;flex-direction:column}
 .ehead{padding:18px 22px;border-bottom:1px solid var(--line);text-align:center;font-size:clamp(22px,2vw,26px);background:var(--cream)}
 .ebtn{display:grid;grid-template-columns:30px 1fr 16px;align-items:center;gap:10px;padding:11px 18px;text-align:left;border-bottom:1px solid var(--line);transition:background .2s}
@@ -235,7 +245,7 @@ main{position:relative;overflow-x:clip}
 .emap .dot{display:none}
 .dot{position:absolute;width:var(--sz,46px);height:var(--sz,46px);border-radius:50%;background:rgba(255,211,64,.92);box-shadow:0 0 0 6px rgba(255,211,64,.28);display:grid;place-items:center;font-size:11px;font-weight:800;transform:translate(-50%,-50%);transition:transform .3s,box-shadow .3s}
 .dot.on{transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 10px rgba(255,211,64,.35)}
-.etip{position:absolute;right:20px;bottom:20px;width:min(360px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
+.etip{position:absolute;left:20px;bottom:20px;width:min(340px,calc(100% - 40px));background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transition:opacity .25s,transform .25s}
 .etip.out{opacity:0;transform:translateY(6px)}
 .etip h3{font-size:22px}
 .etip p{margin-top:6px;font-size:14.5px;color:var(--ink-2)}
@@ -428,7 +438,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .ftr ul a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
 .fbottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;max-width:960px;margin:44px auto 0;padding-top:22px;border-top:1px solid var(--line)}
 .fbottom .brand svg{height:40px;width:110px}
-.ftr-tel{font-weight:800;font-size:13px;letter-spacing:.06em}
+.ftr-tel{display:inline-block;margin-top:10px;font-weight:800;font-size:13px;letter-spacing:.06em}
 .fbottom .legal{font-size:12.5px;color:var(--muted);text-align:right}
 @media (max-width:860px){.fcols{grid-template-columns:1fr 1fr}.fcols>div:nth-child(-n+2){grid-column:1/-1}.fbottom{flex-direction:column;align-items:flex-start}.fbottom .legal{text-align:left}}
 
@@ -482,11 +492,16 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .cf-mult-arc{fill:none;stroke:var(--pink);stroke-width:1.4;stroke-dasharray:3 4;opacity:.8}
 .cf-mult-person circle,.cf-mult-person path{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round}
 .cf-mult-token rect{fill:var(--yellow);stroke:#fff;stroke-width:2}
-.cf-lev{gap:14px}
+.cf-lev{gap:16px;align-items:center}
 .cf-block{display:block}
-.cf-block-sm{width:44px;height:44px;background:var(--yellow)}
-.cf-block-lg{width:44px;height:44px;background:var(--pink);will-change:width,height}
-@media (prefers-reduced-motion:reduce){.cf-block-lg{width:80px;height:80px}}
+.cf-block-sm{width:40px;height:40px;background:var(--yellow);flex:none}
+.cf-lock{width:40px;height:56px;flex:none;overflow:visible}
+.cf-lock .shk{fill:none;stroke:var(--ink);stroke-width:4.5}
+.cf-lock .bdy{fill:var(--ink)}
+.cf-lock .key{fill:var(--yellow)}
+.cf-unlock{display:grid;grid-template-columns:repeat(5,18px);grid-auto-rows:18px;gap:4px}
+.cf-unlock i{background:var(--pink);opacity:0}
+@media (prefers-reduced-motion:reduce){.cf-unlock i{opacity:1}.cf-lock .shk{transform:translateY(-7px)}}
 
 /* instruments: dashboard table, multiplier column */
 .inst .trow{grid-template-columns:minmax(0,1fr) minmax(0,2.6fr)}
@@ -788,7 +803,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
       </div>
       <span class="vr" aria-hidden="true"></span>
       <div class="prin">
-        <div class="cf-diagram cf-lev" aria-hidden="true"><span class="cf-block cf-block-sm"></span><span class="cf-block cf-block-lg" data-lev></span></div>
+        <div class="cf-diagram cf-lev" aria-hidden="true"><span class="cf-block cf-block-sm"></span><svg class="cf-lock" viewBox="0 0 40 56" focusable="false"><path class="shk" d="M10 26V17a10 10 0 0 1 20 0v9"/><rect class="bdy" x="3" y="26" width="34" height="27"/><rect class="key" x="17" y="35" width="6" height="10"/></svg><span class="cf-unlock"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
         <p class="caps tag">02</p>
         <h3>Leverage.</h3>
         <p class="tagline">A little unlocks a lot.</p>
@@ -813,7 +828,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
       </div>
       <div class="trow">
         <div class="mult"><h3>Interest Subvention</h3><p class="x">~6×</p></div>
-        <div class="tname"><p class="tagline">Affordable credit, where it matters.</p><p>Philanthropic capital brings down the interest on a commercial loan, making it affordable for low-income borrowers. Working capital, skilling, asset financing.</p><p class="best">Best for: borrowers who can access loans but cannot afford the interest rates.</p></div>
+        <div class="tname"><p class="tagline">Affordable credit, where it matters.</p><p>Philanthropic capital brings down the interest on a commercial loan, making it affordable for low-income borrowers. Ideal for supporting working capital, skilling, and asset financing needs.</p><p class="best">Best for: borrowers who can access loans but cannot afford the interest rates.</p></div>
       </div>
       <div class="trow">
         <div class="mult"><h3>Credit Guarantee</h3><p class="x">Up to 20×</p></div>
@@ -829,7 +844,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
     <div class="shead rv">
       <p class="caps">Illustrative pathways</p>
       <h2>Same instruments. <span class="pk">Different lives.</span></h2>
-      <p class="sub">Each pathway follows a different route from the informal to the formal economy, ending in the same place, financial independence from philanthropic support.</p>
+      <p class="sub">Each pathway follows a different route from the informal to the formal economy, ending in the same place: financial independence through philanthropic support.</p>
     </div>
     <div class="pw pw-cf shadow rv" id="pcf">
       <div class="pwp" role="tabpanel">
@@ -845,7 +860,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
       <div class="pwp" role="tabpanel" hidden>
         <div class="pw-photo"><img src="assets/img/cine/cf-path-03.webp?v=2" alt="A smallholder farmer at work in the field." width="1200" height="1500" loading="lazy"></div>
         <div class="pw-body"><p class="caps pw-eyebrow">Pathway 03</p><h3 class="pw-who">Climate Resilience</h3>
-          <ol class="pw-steps"><li class="pw-step"><span class="pw-n">01.</span><span class="pw-st">Receives a Returnable Grant plus credit-backed financing.</span></li><li class="pw-step"><span class="pw-n">02.</span><span class="pw-st">Adopts climate-resilient practices. Farm income rises.</span></li><li class="pw-step"><span class="pw-n">03.</span><span class="pw-st">Repays RG and CG backed loan in a timely manner</span></li><li class="pw-step done"><span class="pw-st">✓ Qualifies for loans without guarantees in future seasons.</span></li></ol></div>
+          <ol class="pw-steps"><li class="pw-step"><span class="pw-n">01.</span><span class="pw-st">Receives a Returnable Grant plus credit-backed financing.</span></li><li class="pw-step"><span class="pw-n">02.</span><span class="pw-st">Adopts climate-resilient practices. Farm income rises.</span></li><li class="pw-step"><span class="pw-n">03.</span><span class="pw-st">Repays RG and CG-backed loans in a timely manner.</span></li><li class="pw-step done"><span class="pw-st">✓ Qualifies for loans without guarantees in future seasons.</span></li></ol></div>
       </div>
       <div class="pwp" role="tabpanel" hidden>
         <div class="pw-photo"><img src="assets/img/cine/cf-path-04.webp?v=2" alt="An Indian family in their home." width="1200" height="1500" loading="lazy"></div>
@@ -865,7 +880,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
       <p class="sub">Eight design principles that run through every program we build, from ideation to execution.</p>
     </div>
     <div class="why feat-why rv">
-      <div class="imgs"><img class="on" src="assets/img/cine/cf-proof.webp?v=2" alt="Samhita-CGF team members working with community partners" width="1448" height="1086" loading="lazy"></div>
+      <div class="imgs"><img class="on" src="assets/img/cine/hero-farmer.webp?v=2" alt="A woman farmer standing in her irrigated vegetable field" width="2000" height="857" loading="lazy" style="object-position:50% 40%"></div>
       <div class="pills" role="tablist" aria-label="Key features">
         <button class="pill" role="tab" aria-selected="true">Diverse instruments.</button>
         <button class="pill" role="tab" aria-selected="false">Customised pathways.</button>
@@ -900,7 +915,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Did the capital reach someone who would otherwise have been excluded?</span></li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>What additional capital did it unlock?</span></li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Did the person’s income, resilience, enterprise or formal financial access improve?</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>How did the portfolio perform? repayment, utilisation, guarantee claims and credit progression</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>How did the portfolio perform? What did repayment, utilisation, guarantee claims and credit progression look like?</span></li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#ffd340"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#222520" stroke-width="2.2"/></svg><span>Could the model eventually operate with less philanthropic support?</span></li>
         </ul>
         <a class="tl" href="#cases">See our catalytic-finance evidence →</a>
@@ -1171,7 +1186,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 <footer class="ftr">
   <div class="wrap">
     <div class="fcols">
-      <div><h4>Mumbai</h4><address>Corporate Avenue, 4th Floor, Office Number 412 &amp; 413,<br>Sonawala Road, Sonawala Industrial Estate,<br>Goregaon East, Mumbai 400063</address></div>
+      <div><h4>Mumbai</h4><address>Corporate Avenue, 4th Floor, Office Number 412 &amp; 413,<br>Sonawala Road, Sonawala Industrial Estate,<br>Goregaon East, Mumbai 400063</address><a class="ftr-tel" href="tel:+919819701728">+91 98197 01728</a></div>
       <div><h4>Bengaluru</h4><address>F2, VBR Astreix 204, Rajeev Gandhi Nagar I Phase,<br>Sahakar Nagar, Kodigehalli,<br>Bengaluru 560092</address></div>
       <div><h4>Social</h4><ul>
         <li><a href="https://www.facebook.com/samhitasocialventures" target="_blank" rel="noopener">Facebook</a></li>
@@ -1190,7 +1205,6 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
     </div>
     <div class="fbottom">
       <a class="brand" href="index.html" aria-label="Samhita-CGF home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 180" role="img" aria-label="Samhita-CGF"><g><path fill="#08273a" d="M251.2,57.9c-2.1,0-3.9.4-5.2,1.2-1.4.8-2,1.9-2,3.3s.5,2.1,1.4,2.9,2.2,1.4,3.9,1.8l6.2,1.3c1.9.4,3.4.7,4.7,1.1s2.7.8,4.3,1.6c1.7.7,3,1.5,4,2.4,1,.9,1.9,2.1,2.6,3.5.7,1.5,1.1,3.2,1.1,5,0,4.6-1.9,8.3-5.8,11.1s-8.3,4.2-13.4,4.2-10.6-1.4-14.3-4.2-5.9-6.7-6.8-11.7h10.7c1.2,4.7,4.7,7.1,10.6,7.1s4-.4,5.5-1.2c1.5-.8,2.3-2.1,2.3-3.8s-.7-2.5-2.2-3.4-3.6-1.6-6.3-2.2l-5.5-1.2c-9.4-2.1-14.2-6.6-14.2-13.5s1-5.6,2.9-7.7c1.9-2.2,4.3-3.7,7.1-4.7,2.8-1,5.8-1.4,8.9-1.4,4.9,0,9.1,1.2,12.6,3.5,3.5,2.3,5.7,5.9,6.4,10.7h-10.6c-.5-1.7-1.6-3-3.2-4s-3.5-1.4-5.8-1.4h0Z"/><path fill="#08273a" d="M297.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM286,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/><path fill="#08273a" d="M325.1,96.3h-10.4v-34.4h10.4v4.5c.8-1.4,2.2-2.7,4-3.7s3.9-1.6,6.3-1.6c5.1,0,8.4,1.9,10.1,5.8,2.6-3.9,6.5-5.8,11.6-5.8s7.1,1.2,8.9,3.6c1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.3-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h-10.4v-18c0-1.2,0-2.2,0-2.9,0-.7-.2-1.5-.4-2.4-.2-.8-.5-1.5-.8-2-.4-.5-.9-.9-1.5-1.2s-1.5-.5-2.5-.5c-4,0-6,3-6,9.1v17.9h0Z"/><path fill="#08273a" d="M396.2,61.1c4.2,0,7.1,1.2,8.9,3.6,1.7,2.4,2.5,6,2.5,10.9v20.7h-10.4v-18c0-1.2,0-2.2,0-2.9s-.1-1.5-.3-2.4-.4-1.6-.8-2c-.4-.4-.9-.8-1.5-1.2-.7-.3-1.5-.5-2.5-.5-2.2,0-3.8.8-4.8,2.3-1,1.5-1.5,3.9-1.5,7.1v17.7h-10.4v-46.4h10.4v16.5c.8-1.4,2.2-2.7,4.1-3.7s4-1.6,6.5-1.6h0Z"/><path fill="#08273a" d="M424.8,49.9v8.5h-10.4v-8.5h10.4ZM424.8,61.8v34.4h-10.5v-34.4s10.5,0,10.5,0Z"/><path fill="#08273a" d="M433.9,52.4h10.4v9.4h7.4v7.5h-7.4v15.4c0,1.6.3,2.6.9,3.1.6.5,1.8.8,3.6.8h3v7.6h-6.6c-4.3,0-7.3-.6-8.9-1.9s-2.4-3.8-2.4-7.8v-17.3h-5.4v-7.5h5.4v-9.4h0Z"/><path fill="#08273a" d="M477.9,73.4c0-2-.5-3.4-1.4-4.2-.9-.8-2.4-1.3-4.3-1.3s-3.1.4-4.2,1.3c-1.1.9-1.7,2.1-1.9,3.7h-9.7c.2-3.4,1.9-6.2,4.9-8.6s6.9-3.6,11.8-3.6,8.8,1.1,11.4,3.4,3.8,6,3.7,11v7.5c-.2,6.3,0,10.8.6,13.6h-10.2v-4.2c-2.4,3.3-6.2,5-11.5,5s-6.1-.9-8.4-2.8-3.4-4.3-3.4-7.4.5-3.8,1.6-5.3c1.1-1.5,2.6-2.7,4.8-3.6,2.1-.9,4.5-1.6,7-2.1,2.6-.5,5.6-.9,9.1-1.2v-1.3h0ZM466.1,86.2c0,1.1.5,2,1.4,2.7s2,1,3.4,1c4.9,0,7.3-2.7,7.3-8.1v-.8c-4.1.4-7.2.9-9.1,1.6-2,.7-3,1.9-3,3.6Z"/></g><g><path fill="#08273a" d="M243.7,126.4c-.3,1.5-.9,2.6-1.9,3.4s-2.2,1.2-3.8,1.2-3.4-.6-4.4-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.6-1.8,4.5-1.8s2.7.4,3.6,1.2c1,.8,1.6,1.9,1.8,3.4h-2.2c-.2-.9-.6-1.5-1.2-2-.6-.5-1.3-.7-2.2-.7s-2,.4-2.7,1.3-1,2-1,3.6.3,2.7,1,3.6c.7.9,1.6,1.3,2.7,1.3s1.6-.2,2.2-.7c.6-.5,1-1.1,1.2-2h2.3Z"/><path fill="#08273a" d="M254.2,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM249,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M260.4,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M265.9,130.8h-2.1v-13h2.1v13Z"/><path fill="#08273a" d="M270.7,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM270.7,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M289.1,124.4h-2.1c0-.5-.4-.9-.8-1.3s-.9-.5-1.5-.5-1.3.3-1.8.8c-.5.6-.7,1.4-.7,2.4s.2,1.9.7,2.5c.5.6,1.1.8,1.8.8s1.1-.1,1.5-.4c.4-.3.7-.7.9-1.3h2.1c-.2,1.1-.7,2-1.6,2.6s-1.8,1-2.9,1-2.5-.5-3.4-1.4c-.9-1-1.3-2.2-1.3-3.6s.4-2.7,1.3-3.6,2-1.4,3.4-1.4,2,.3,2.8,1c.8.6,1.3,1.5,1.5,2.6v-.2Z"/><path fill="#08273a" d="M292,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M300.9,117.7v2.2h-2.1v-2.2h2.1ZM300.9,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M307.6,128l2.2-6.9h2.2l-3.5,9.7h-2l-3.5-9.7h2.4l2.2,6.9h0Z"/><path fill="#08273a" d="M315.5,126.5c0,.9.4,1.5.9,2s1.1.7,1.8.7c1.2,0,2-.5,2.4-1.4h2.1c-.3.9-.8,1.6-1.5,2.2-.8.6-1.7.9-2.9.9s-2.7-.5-3.6-1.5-1.3-2.2-1.3-3.7.4-2.6,1.3-3.6c.9-.9,2-1.4,3.4-1.4s2.6.5,3.5,1.6,1.2,2.4,1.1,4.1h-7.2,0ZM315.5,125h5c0-.7-.3-1.3-.8-1.8-.5-.4-1-.7-1.7-.7s-1.2.2-1.7.6-.8,1-.9,1.8h.1Z"/><path fill="#08273a" d="M341.8,121.8h-2.2c-.2-.8-.6-1.4-1.2-1.9-.6-.4-1.3-.6-2.2-.6s-2.1.4-2.8,1.3c-.7.8-1.1,2-1.1,3.6s.3,2.8,1,3.6c.7.9,1.6,1.3,2.8,1.3s.8,0,1.2-.2c.4-.1.8-.3,1.1-.5.4-.2.6-.5.9-.9.2-.4.3-.9.3-1.4v-.3h-3.3v-1.9h5.5v6.8h-1.8v-1.6c-.9,1.2-2.2,1.8-4.1,1.8s-3.3-.6-4.3-1.9c-1.1-1.2-1.6-2.9-1.6-5s.6-3.7,1.7-4.9c1.1-1.2,2.7-1.8,4.6-1.8s2.7.4,3.7,1.2,1.6,1.8,1.9,3.2h-.1Z"/><path fill="#08273a" d="M352.7,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM347.6,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M364.4,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM359.2,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M375,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM372.6,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M385.6,117.7h9.1v1.9h-6.8v3.5h6.4v1.9h-6.4v5.8h-2.3v-13h0Z"/><path fill="#08273a" d="M404.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM399.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M414.4,129.4c-.6,1-1.5,1.6-2.9,1.6-2.2,0-3.2-1.3-3.2-3.8v-6.1h2.1v6.6c0,.3.1.5.2.8s.3.5.5.6.6.2,1,.2c1.5,0,2.2-1,2.2-3v-5.2h2.1v9.7h-2.1v-1.3h0Z"/><path fill="#08273a" d="M422,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/><path fill="#08273a" d="M437.8,117.7h2.1v13h-2.1v-1.3c-.6,1-1.6,1.5-2.9,1.5s-2.2-.5-3-1.4-1.2-2.2-1.2-3.7.4-2.7,1.2-3.7c.8-.9,1.8-1.4,3-1.4s2.3.5,2.9,1.5v-4.7.2ZM435.3,122.6c-.7,0-1.3.3-1.8.9s-.7,1.4-.7,2.4.2,1.8.7,2.4c.5.6,1,.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.5s-.2-1.9-.7-2.5-1.1-.9-1.8-.9v.2Z"/><path fill="#08273a" d="M442.6,128.1c0-.5.1-.9.4-1.2.2-.4.5-.7.9-.9.4-.2.9-.4,1.4-.6.6-.2,1.2-.3,1.8-.4s1.3-.2,2.1-.3v-.2c0-.8-.2-1.3-.6-1.7s-.9-.5-1.5-.5-1,0-1.4.4-.5.7-.6,1.3h-2.1c0-1,.5-1.8,1.2-2.4.8-.6,1.7-.9,2.9-.9s2.3.3,3,1,1.1,1.7,1.1,3.2v2.5c0,1.3,0,2.4.3,3.3h-2c-.1-.6-.2-1-.2-1.3-.6,1-1.7,1.5-3.2,1.5s-1.9-.3-2.6-.8-1-1.2-1-2.1h.1ZM449.2,126.2c-1.6,0-2.7.4-3.3.6-.6.3-1,.7-1,1.2s.2.8.5,1c.3.2.8.4,1.3.4.8,0,1.4-.2,1.9-.6.4-.4.7-1,.7-1.8v-.7h-.1Z"/><path fill="#08273a" d="M454.7,118.5h2.1v2.6h1.9v1.5h-1.9v5.3c0,.5,0,.8.2,1s.5.2.9.2h.8v1.6h-1.6c-1,0-1.7-.2-2-.5s-.5-1-.5-2v-5.6h-1.4v-1.5h1.4v-2.6h.1Z"/><path fill="#08273a" d="M463.5,117.7v2.2h-2.1v-2.2h2.1ZM463.5,121.1v9.7h-2.1v-9.7s2.1,0,2.1,0Z"/><path fill="#08273a" d="M474.3,122.2c.9.9,1.4,2.1,1.4,3.8s-.5,2.9-1.4,3.8c-.9.9-2.1,1.3-3.4,1.3s-2.4-.4-3.4-1.3c-.9-.9-1.4-2.1-1.4-3.8s.5-2.9,1.4-3.8,2.1-1.3,3.4-1.3,2.4.4,3.4,1.3ZM469.1,128.4c.5.6,1.1.9,1.8.9s1.3-.3,1.8-.9c.5-.6.7-1.4.7-2.4s-.2-1.9-.7-2.5-1.1-.9-1.8-.9-1.3.3-1.8.9-.7,1.4-.7,2.5.2,1.9.7,2.4Z"/><path fill="#08273a" d="M480.5,122.4c.6-1,1.6-1.6,2.9-1.6,2.2,0,3.3,1.3,3.3,3.8v6.1h-2.1v-6.4c0-.2,0-.5-.1-.7s-.2-.4-.3-.6c-.1,0-.3-.3-.5-.4s-.5-.2-.8-.2c-1.5,0-2.2,1-2.2,3v5.1h-2.1v-9.7h2.1v1.3l-.2.3Z"/></g><polygon fill="#00a5cf" points="120 0 60 60 60 0 120 0"/><polygon fill="#ef4367" points="180 0 180 60 120 120 120 60 60 60 120 0 180 0"/><polygon fill="#ffd340" points="180 60 180 120 120 120 180 60"/><polygon fill="#54c0a6" points="90 90 45 135 45 90 90 90"/><polygon fill="#00a5cf" points="90 90 90 135 45 180 45 135 90 90"/><polygon fill="#ffd340" points="45 90 45 135 0 135 45 90"/><rect fill="#ef4367" y="135" width="45" height="45"/><polygon fill="#ffd340" points="60 0 60 60 0 60 60 0"/><polygon fill="#54c0a6" points="60 0 0 60 0 0 60 0"/><polygon fill="#54c0a6" points="180 120 120 180 120 120 180 120"/><polygon fill="#00a5cf" points="180 120 180 180 120 180 180 120"/></svg></a>
-      <a class="ftr-tel" href="tel:+919819701728">+91 98197 01728</a>
       <div class="legal"><p>© <span id="yr">2026</span> Samhita CGF. All rights reserved.</p><p>CSR and FCRA compliant · Aligned with the UN SDGs</p></div>
     </div>
   </div>
@@ -1288,6 +1302,15 @@ $$('[data-acc]').forEach(function(w){
     li.classList.toggle('open',v);b.setAttribute('aria-expanded',v?'true':'false');
   })});
 });
+/* ---- shared: case-study cards get a visible "Read the full case study" toggle ---- */
+$$('.ccard').forEach(function(c){
+  var b=$('h3 button',c);if(!b)return;
+  var m=document.createElement('button');m.type='button';m.className='cmore';m.setAttribute('aria-expanded',b.getAttribute('aria-expanded')||'false');
+  m.innerHTML='<span class="t"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  c.appendChild(m);
+  m.addEventListener('click',function(){b.click()});
+  new MutationObserver(function(){m.setAttribute('aria-expanded',b.getAttribute('aria-expanded'))}).observe(b,{attributes:true,attributeFilter:['aria-expanded']});
+});
 
 /* ---- generic pill/photo tabs: swaps the white corner card ---- */
 (function(){
@@ -1349,16 +1372,27 @@ $$('.ccard h3 button').forEach(function(b){
   $$('[required]',f).forEach(function(el){el.addEventListener('input',function(){el.classList.remove('cf-invalid')})});
 })();
 
-/* ---- leverage diagram: the big block grows from the small block's size and loops ---- */
+/* ---- leverage diagram: the small block unlocks the lock, which releases a field of blocks; loops ---- */
 (function(){
-  var big=$('[data-lev]');if(!big||reduce)return;
-  var small=big.previousElementSibling,CYCLE=4200,GROW=2000,HOLD=1500;
-  function ease(t){return 1-Math.pow(1-t,3)}
+  var lev=$('.cf-lev');if(!lev||reduce)return;
+  var seed=$('.cf-block-sm',lev),shk=$('.shk',lev),sq=$$('.cf-unlock i',lev),CYCLE=6400;
+  function clamp(x){return x<0?0:x>1?1:x}
+  function ease(x){return 1-Math.pow(1-x,3)}
   function frame(now){
-    var t=now%CYCLE,p,o=1;
-    if(t<GROW)p=ease(t/GROW);else if(t<GROW+HOLD)p=1;else{p=1;o=1-(t-GROW-HOLD)/(CYCLE-GROW-HOLD)}
-    var s0=small.offsetHeight,s1=big.dataset.max?+big.dataset.max:(big.dataset.max=Math.round(s0*1.75),+big.dataset.max);
-    var size=s0+(s1-s0)*p;big.style.width=size+'px';big.style.height=size+'px';big.style.opacity=o;
+    var t=now%CYCLE;
+    /* seed nudges toward the lock, then settles */
+    var n=clamp((t-300)/500),back=clamp((t-800)/400);
+    seed.style.transform='translateX('+(ease(n)*10-ease(back)*10)+'px) scale('+(1+0.1*Math.sin(Math.PI*n)*(1-back))+')';
+    /* shackle lifts open, closes again at the end */
+    var up=ease(clamp((t-900)/450)),dn=ease(clamp((t-5400)/500));
+    shk.style.transform='translateY('+(-7*(up-dn))+'px)';
+    /* blocks pop in one after another, then all fade */
+    var fade=1-clamp((t-5400)/700);
+    sq.forEach(function(el,i){
+      var k=clamp((t-1400-i*85)/260);
+      el.style.opacity=k*fade;
+      el.style.transform='scale('+(0.2+0.8*ease(k)+0.12*Math.sin(Math.PI*k))+')';
+    });
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
