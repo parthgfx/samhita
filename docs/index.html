@@ -173,6 +173,13 @@ main{position:relative;overflow-x:clip}
 .home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
 .home-hero h1 .pk{color:var(--pink)}
 .home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
+@media (min-width:861px){
+  .home-hero{height:auto;background:#fff}
+  .home-hero .hero-media{position:relative;height:clamp(480px,calc(100svh - var(--hdr) - 220px),760px)}
+  .home-hero .hero-media img{object-position:50% 25%}
+  .home-hero .wrap{height:auto;display:block}
+  .home-hero .hero-col{margin:-100px auto clamp(12px,2vw,24px);width:min(540px,calc(100% - 48px))}
+}
 @media (max-width:860px){.home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}}
 .swap{transition:opacity .35s ease,transform .35s ease}
 .swap.out{opacity:0;transform:translateY(6px)}
