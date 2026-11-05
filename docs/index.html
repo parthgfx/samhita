@@ -167,20 +167,32 @@ main{position:relative;overflow-x:clip}
 @keyframes track{to{width:100%}}
 .hero-body{margin-top:16px;font-size:15px;color:var(--ink-2);min-height:7.2em}
 .widget .btn{width:100%;margin-top:16px;height:52px;font-size:12.5px;letter-spacing:.1em}
-/* home hero: photo runs clear and bright (no overlays); the headline sits in a white card joined to the widget */
+/* home hero: full-bleed editorial — photo fills viewport, typographic content strip below */
 .home-hero .hero-media::before,.home-hero .hero-media::after{display:none}
-@media (min-width:861px){.home-hero .hero-col>h1::before{display:none}}
-.home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
+.home-hero .hero-col>h1::before{display:none}
 .home-hero h1 .pk{color:var(--pink)}
-.home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
+/* desktop: flex column — photo grows, content strip below */
 @media (min-width:861px){
-  .home-hero{height:auto;background:#fff}
-  .home-hero .hero-media{position:relative;height:clamp(480px,calc(100svh - var(--hdr) - 220px),760px)}
-  .home-hero .hero-media img{object-position:50% 25%}
-  .home-hero .wrap{height:auto;display:block}
-  .home-hero .hero-col{margin:-100px auto clamp(12px,2vw,24px);width:min(540px,calc(100% - 48px))}
+  .home-hero{height:auto;min-height:100svh;display:flex;flex-direction:column;background:#fff;overflow:visible}
+  .home-hero .hero-media{flex:1 1 auto;position:relative;overflow:hidden;min-height:clamp(380px,calc(100svh - 260px),680px)}
+  .home-hero .hero-media img{object-position:50% 20%;transform:none;transition:opacity 1s ease}
+  .home-hero .hero-media img.on{transform:none}
+  .home-hero .wrap{position:relative;z-index:2;height:auto;display:block;padding:0;background:#fff;border-top:3px solid var(--pink)}
+  .home-hero .hero-col{margin:0 auto;width:min(960px,100%);padding:28px clamp(24px,5vw,64px) 40px;display:flex;flex-direction:column;align-items:flex-start}
+  .home-hero .hero-col>h1{background:transparent;color:var(--ink);text-shadow:none;padding:0;border-radius:0;min-height:0;display:block;box-shadow:none;font-size:clamp(34px,4vw,62px);line-height:1.06}
+  .home-hero .widget{margin-top:22px;background:transparent;border-radius:0;box-shadow:none;padding:0;border-top:1px solid var(--line);padding-top:20px;width:100%}
+  .home-hero .wtabs{background:transparent;padding:0;gap:0;border-bottom:1px solid var(--line);margin-bottom:0;grid-template-columns:none;display:flex;width:100%}
+  .home-hero .wtabs button{background:transparent;color:var(--muted);border-radius:0;padding:9px 20px 9px 0;font-size:11.5px;text-align:left;position:relative;min-height:0}
+  .home-hero .wtabs button[aria-selected="true"]{background:transparent;color:var(--ink)}
+  .home-hero .wtabs button i{height:2px;background:var(--pink);bottom:-1px}
+  .home-hero .hero-body{min-height:0;max-width:520px;margin-top:18px;font-size:15.5px}
+  .home-hero .widget .btn{margin-top:22px;width:auto;height:auto;padding:14px 32px;font-size:12px;letter-spacing:.12em}
 }
-@media (max-width:860px){.home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}}
+/* mobile: image top, card below */
+@media (max-width:860px){
+  .home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 20px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5);font-size:clamp(26px,6.6vw,34px)}
+  .home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
+}
 .swap{transition:opacity .35s ease,transform .35s ease}
 .swap.out{opacity:0;transform:translateY(6px)}
 @media (max-width:860px){
