@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
-<link rel="preload" as="image" href="assets/img/cine/hero-farmer.webp?v=2">
+<link rel="preload" as="image" href="assets/img/cine/home-hero-farmer.webp?v=1">
 <style>
 /* ============================================================
    Samhita-CGF home — charity: water layout, component for component
@@ -167,6 +167,13 @@ main{position:relative;overflow-x:clip}
 @keyframes track{to{width:100%}}
 .hero-body{margin-top:16px;font-size:15px;color:var(--ink-2);min-height:7.2em}
 .widget .btn{width:100%;margin-top:16px;height:52px;font-size:12.5px;letter-spacing:.1em}
+/* home hero: photo runs clear and bright (no overlays); the headline sits in a white card joined to the widget */
+.home-hero .hero-media::before,.home-hero .hero-media::after{display:none}
+@media (min-width:861px){.home-hero .hero-col>h1::before{display:none}}
+.home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
+.home-hero h1 .pk{color:var(--pink)}
+.home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
+@media (max-width:860px){.home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}}
 .swap{transition:opacity .35s ease,transform .35s ease}
 .swap.out{opacity:0;transform:translateY(6px)}
 @media (max-width:860px){
@@ -483,11 +490,11 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 <div class="ladder" aria-hidden="true"><span class="rail l"><i></i></span><span class="rail r"><i></i></span></div>
 
 <!-- ================= 1. HERO ================= -->
-<section class="hero" id="top">
+<section class="hero home-hero" id="top">
   <div class="hero-media">
-    <img class="on" src="assets/img/cine/hero-farmer.webp?v=2" alt="A woman farmer standing in her irrigated vegetable field" width="2000" height="857">
-    <img src="assets/img/cine/hero-entrepreneur.webp?v=2" alt="A woman entrepreneur folding fabric in her tailoring shop" width="2000" height="857">
-    <img src="assets/img/cine/hero-jobs.webp?v=2" alt="Young trainees at a job-training centre" width="2000" height="857">
+    <img class="on" src="assets/img/cine/home-hero-farmer.webp?v=1" alt="A woman farmer standing in her irrigated vegetable field" width="2000" height="857">
+    <img src="assets/img/cine/home-hero-entrepreneur.webp?v=1" alt="A woman entrepreneur folding fabric in her tailoring shop" width="2000" height="857">
+    <img src="assets/img/cine/home-hero-jobs.webp?v=1" alt="Young trainees at a job-training centre" width="2000" height="857">
   </div>
   <div class="wrap">
     <div class="hero-col">
