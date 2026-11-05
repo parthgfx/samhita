@@ -191,7 +191,7 @@ main{position:relative;overflow-x:clip}
 #narrative .two p,#narrative .two p+p,#narrative .two p:first-child{font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--ink-2);margin-top:12px}
 #narrative .two p:first-child{margin-top:0}
 #narrative .two>div:last-child p+p{margin-top:0}
-.cmore{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:6px 0;font-size:13px;font-weight:800;border-bottom:2px solid var(--yellow)}
+.cmore{align-self:stretch;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding:12px 16px;font-size:clamp(15px,1.5vw,18px);font-weight:800;background:var(--cream);border-bottom:3px solid var(--yellow)}
 .cmore .t::before{content:"Read the full case study"}
 .cmore[aria-expanded="true"] .t::before{content:"Show less"}
 .cmore svg{width:15px;height:15px;transition:transform .25s}
@@ -512,7 +512,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
       <div class="nav-item"><button class="nav-top" aria-expanded="false">About <span class="chev" aria-hidden="true"></span></button>
         <ul class="nav-menu"><li><a href="about.html">Our story</a></li><li><a href="about.html#structure">Samhita &amp; CGF</a></li></ul></div>
       <div class="nav-item"><button class="nav-top" aria-expanded="false">CGF <span class="chev" aria-hidden="true"></span></button>
-        <ul class="nav-menu"><li><a href="about.html#structure">CGF Home</a></li><li><a href="about.html">About us</a></li><li><a href="about.html#governance">Annual Reports</a></li></ul></div>
+        <ul class="nav-menu"><li><a href="cgfhome.html">CGF Home</a></li><li><a href="cgfabout.html">About us</a></li><li><a href="cgfannualreports.html">Annual Reports</a></li></ul></div>
       <div class="nav-item"><button class="nav-top" aria-expanded="false">Livelihood Innovation <span class="chev" aria-hidden="true"></span></button>
         <ul class="nav-menu"><li><a href="livelihoodnetwork.html">Livelihood Network</a></li><li><a href="livelihoodaccount.html">Livelihood Account</a></li><li><a href="catalyticfinance.html">Catalytic Finance</a></li></ul></div>
       <div class="nav-item"><button class="nav-top" aria-expanded="false">What we do <span class="chev" aria-hidden="true"></span></button>
@@ -524,7 +524,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
       <div class="nav-item"><button class="nav-top" aria-expanded="false">Impact <span class="chev" aria-hidden="true"></span></button>
         <ul class="nav-menu"><li><a href="impact.html">Dashboard</a></li><li><a href="impact.html#pulse-stories">Impact Stories</a></li></ul></div>
       <div class="nav-item"><button class="nav-top" aria-expanded="false">Knowledge Centre <span class="chev" aria-hidden="true"></span></button>
-        <ul class="nav-menu"><li><a href="impact.html">Reports</a></li><li><a href="communications.html">Media</a></li></ul></div>
+        <ul class="nav-menu"><li><a href="knowledgecentre.html">Reports</a></li><li><a href="communications.html">Media</a></li></ul></div>
       <div class="nav-item"><button class="nav-top" aria-expanded="false">Careers <span class="chev" aria-hidden="true"></span></button>
         <ul class="nav-menu"><li><a href="careers.html">Life at Samhita</a></li></ul></div>
     </nav>
@@ -630,7 +630,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
         </div>
       </div>
       <div class="cm-panel" role="tabpanel" hidden>
-        <div class="cm-media"><img src="assets/img/comms-press.webp" alt="Two women working together on a laptop outdoors" width="1920" height="1080" loading="lazy"></div>
+        <div class="cm-media"><img src="assets/img/cine/communications-press.webp?v=1" style="object-position:50% 0" alt="NDTV Profit article: Catalytic CSR key to financing India's Viksit Bharat ambition" width="1600" height="1200" loading="lazy"></div>
         <div class="cm-card">
           <p class="cm-acct"><i aria-hidden="true"></i>Samhita-CGF</p>
           <h3>Press releases and op-eds.</h3>
@@ -682,7 +682,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
         <li><a href="about.html">Who We Are</a></li></ul></div>
       <div><h4>Resources</h4><ul>
         <li><a href="impact.html#pulse-stories">Stories</a></li>
-        <li><a href="impact.html">Reports</a></li>
+        <li><a href="knowledgecentre.html">Reports</a></li>
         <li><a href="impact.html">Dashboard</a></li>
         <li><a href="impact.html#pulse-stories">Blogs</a></li>
         <li><a href="communications.html">In the Media</a></li></ul></div>
@@ -787,11 +787,11 @@ $$('[data-acc]').forEach(function(w){
   })});
 });
 /* ---- shared: case-study cards get a visible "Read the full case study" toggle ---- */
-$$('.ccard').forEach(function(c){
+$$('.ccard,.ln-case,.ete-case,.cs').forEach(function(c){
   var b=$('h3 button',c);if(!b)return;
   var m=document.createElement('button');m.type='button';m.className='cmore';m.setAttribute('aria-expanded',b.getAttribute('aria-expanded')||'false');
   m.innerHTML='<span class="t"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
-  c.appendChild(m);
+  ($('.body,.tx,.cs-main',c)||c).appendChild(m);
   m.addEventListener('click',function(){b.click()});
   new MutationObserver(function(){m.setAttribute('aria-expanded',b.getAttribute('aria-expanded'))}).observe(b,{attributes:true,attributeFilter:['aria-expanded']});
 });
