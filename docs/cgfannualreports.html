@@ -771,7 +771,7 @@ $$('.ccard,.ln-case,.ete-case,.cs').forEach(function(c){
 /* ---- ladder ---- */
 (function(){
   var main=$('main'),lad=$('.ladder'),fills=$$('.rail i',lad);
-  var secs=['top','reports','end'].map(function(id){return document.getElementById(id)});
+  var secs=['reports','end'].map(function(id){return document.getElementById(id)});
   var rungs=secs.map(function(){var r=document.createElement('span');r.className='lrung';lad.appendChild(r);return r});
   var top=0,h=0,pos=[];
   function layout(){
