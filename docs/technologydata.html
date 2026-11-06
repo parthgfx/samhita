@@ -325,6 +325,14 @@ main .hero.hb .wrap{height:auto;display:block;padding-bottom:0}
 main .hero.hb .hero-col{margin:-96px auto clamp(12px,2vw,24px);width:min(760px,100%)}
 main .hero.hb .widget{margin-top:0;padding:26px 32px 28px;width:100%;text-align:center}
 main .hero.hb .widget h1{text-align:center;justify-content:center}
+/* hero photos run clear on every page: no dark overlay (client) */
+main .hero .hero-media::before,main .hero .hero-media::after{display:none}
+/* .hcard: pages whose eyebrow + headline used to sit on the photo; now inside the white card */
+main .hero.hb .widget.hcard .hero-eyebrow{margin:0 0 10px;color:var(--yellow-ink);text-shadow:none;text-align:center}
+main .hero.hb .widget.hcard h1{color:var(--ink);text-shadow:none;min-height:0;display:block;font-size:clamp(30px,3vw,42px)}
+main .hero.hb .widget.hcard h1::before{display:none}
+main .hero.hb .widget.hcard h1 .pk{color:var(--pink)}
+main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget-body{margin-top:14px}
 @media (max-width:860px){main .hero.hb .hero-media{height:52svh}main .hero.hb .hero-col{margin-top:-80px}main .hero.hb .widget{padding:20px 18px 22px}}
 /* photo-with-pills card, Communications "How the story travels" style: serif title, text, counter + prev/next */
 .wcard .wc-t{font-size:24px;line-height:1.15}
@@ -578,15 +586,15 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 <div class="ladder" aria-hidden="true"><span class="rail l"><i></i></span><span class="rail r"><i></i></span></div>
 
 <!-- ================= HERO ================= -->
-<section class="hero svh rt" id="top">
+<section class="hero svh rt hb" id="top">
   <div class="hero-media">
     <img class="on" src="assets/img/cine/technologydata-hero.webp" alt="Young women using a tablet together" width="1536" height="1024">
   </div>
   <div class="wrap">
     <div class="hero-col">
-      <p class="caps eb">The wiring between rungs</p>
-      <h1><span>Technology should make programs easier to run <span class="pk">and easier to improve.</span></span></h1>
-      <div class="widget">
+      <div class="widget hcard">
+        <p class="caps hero-eyebrow">The wiring between rungs</p>
+        <h1><span>Technology should make programs easier to run <span class="pk">and easier to improve.</span></span></h1>
         <p class="hero-body">We build and use technology where it solves a real delivery problem: tracking people, coordinating workflows, supporting learning, connecting services and giving partners better visibility into outcomes. Technology is the means. Better delivery is the goal.</p>
         <a class="btn" href="connect.html">Tell us where technology is slowing your program down <span aria-hidden="true">→</span></a>
       </div>
