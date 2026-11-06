@@ -167,13 +167,20 @@ main{position:relative;overflow-x:clip}
 @keyframes track{to{width:100%}}
 .hero-body{margin-top:16px;font-size:15px;color:var(--ink-2);min-height:7.2em}
 .widget .btn{width:100%;margin-top:16px;height:52px;font-size:12.5px;letter-spacing:.1em}
-/* home hero: photo runs clear and bright (no overlays); the headline sits in a white card joined to the widget */
+/* home hero: photo runs clear, white card overlays on the right */
 .home-hero .hero-media::before,.home-hero .hero-media::after{display:none}
-@media (min-width:861px){.home-hero .hero-col>h1::before{display:none}}
-.home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
+.home-hero .hero-col>h1::before{display:none}
+.home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5);text-align:center}
 .home-hero h1 .pk{color:var(--pink)}
 .home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
-@media (max-width:860px){.home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}}
+@media (min-width:861px){
+  .home-hero .wrap{justify-content:flex-end}
+  .home-hero .hero-media img{object-position:30% 20%}
+}
+@media (max-width:860px){
+  .home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}
+  .home-hero .hero-media img:nth-child(3){object-position:left 30%}
+}
 .swap{transition:opacity .35s ease,transform .35s ease}
 .swap.out{opacity:0;transform:translateY(6px)}
 @media (max-width:860px){
@@ -442,6 +449,9 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .ftr address{font-style:normal;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .ftr ul li+li{margin-top:7px}
 .ftr ul a{font-size:13.5px;color:var(--ink-2);transition:color .2s}
+/* not-yet-live links (Blogs): shown, disabled, tagged */
+.soon-off{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);cursor:default}
+.soon{display:inline-block;padding:2px 7px;border-radius:3px;background:var(--cream-2);color:var(--ink-2);font-size:10.5px;font-weight:800;letter-spacing:.04em;line-height:1.5;white-space:nowrap}
 .ftr ul a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
 .fbottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;max-width:960px;margin:44px auto 0;padding-top:22px;border-top:1px solid var(--line)}
 .fbottom .brand svg{height:40px;width:110px}
@@ -741,6 +751,15 @@ main .hero.ab.hb .hero-col{margin-top:-24px}
 <section class="sec cream" id="people">
   <div class="wrap">
     <div class="shead rv"><p class="caps"><b>04</b>The people behind the ladder</p></div>
+    <div class="join founder shadow rv" style="margin-top:clamp(24px,3vw,32px)">
+      <div class="ph"><img src="assets/img/about-people/priya-naik.webp" alt="Priya Naik" width="1000" height="1000" loading="lazy"></div>
+      <div>
+        <h2>Priya Naik</h2>
+        <p class="caps role">Founder &amp; CEO</p>
+        <p class="bio">Priya has worked with the International Finance Corporation, the Poverty Action Lab at the Massachusetts Institute of Technology, and Arthur Andersen. Social entrepreneurship, economic development, non-profit, social enterprise, education and micro-finance are her areas of expertise.</p>
+      </div>
+    </div>
+
     <div class="grp">
       <h2 class="rv">Our Trustees</h2>
       <ul class="pgrid n3">
@@ -779,7 +798,6 @@ main .hero.ab.hb .hero-col{margin-top:-24px}
       <li class="pcard tcard rv" style="--d:0.10s"><button type="button" class="tm" data-bio="bio-2" aria-haspopup="dialog" aria-label="Read bio: Akash Roy"><span class="tph"><img src="assets/img/about-people/akash-roy.webp" alt="Akash Roy" loading="lazy"><span class="chip"><i></i><span class="ct"><b>Akash Roy</b><span class="rl">Technology</span></span></span></span><span class="cue" aria-hidden="true">+</span></button></li>
       <li class="pcard tcard rv" style="--d:0.15s"><button type="button" class="tm" data-bio="bio-3" aria-haspopup="dialog" aria-label="Read bio: Natasha Das"><span class="tph"><img src="assets/img/about-people/natasha-das.webp" alt="Natasha Das" loading="lazy"><span class="chip"><i></i><span class="ct"><b>Natasha Das</b><span class="rl">Impact Achievement, CSR</span></span></span></span><span class="cue" aria-hidden="true">+</span></button></li>
       <li class="pcard tcard rv" style="--d:0.00s"><button type="button" class="tm" data-bio="bio-4" aria-haspopup="dialog" aria-label="Read bio: Shadan Mirza"><span class="tph"><img src="assets/img/about-people/shadan-mirza.webp" alt="Shadan Mirza" loading="lazy"><span class="chip"><i></i><span class="ct"><b>Shadan Mirza</b><span class="rl">Growth &amp; Innovation</span></span></span></span><span class="cue" aria-hidden="true">+</span></button></li>
-      <li class="pcard tcard rv" style="--d:0.10s"><span class="tm"><span class="tph"><img src="assets/img/about-people/johny-mathew.webp" alt="Johny Mathew" loading="lazy"><span class="chip"><i></i><span class="ct"><b>Johny Mathew</b><span class="rl">ONDC</span></span></span></span></span></li>
       <li class="pcard tcard rv" style="--d:0.05s"><button type="button" class="tm" data-bio="bio-5" aria-haspopup="dialog" aria-label="Read bio: Manglesh Yadav"><span class="tph"><img src="assets/img/about-people/manglesh-yadav.webp" alt="Manglesh Yadav" loading="lazy"><span class="chip"><i></i><span class="ct"><b>Manglesh Yadav</b><span class="rl">Strategic Partnerships</span></span></span></span><span class="cue" aria-hidden="true">+</span></button></li>
       <li class="pcard tcard rv" style="--d:0.10s"><button type="button" class="tm" data-bio="bio-6" aria-haspopup="dialog" aria-label="Read bio: Ranjini Sen"><span class="tph"><img src="assets/img/about-people/ranjini-sen.webp" alt="Ranjini Sen" loading="lazy"><span class="chip"><i></i><span class="ct"><b>Ranjini Sen</b><span class="rl">Catalytic Finance, Strategic Partnerships</span></span></span></span><span class="cue" aria-hidden="true">+</span></button></li>
     </ul>
@@ -814,7 +832,7 @@ main .hero.ab.hb .hero-col{margin-top:-24px}
         <li><a href="impact.html#pulse-stories">Stories</a></li>
         <li><a href="knowledgecentre.html">Reports</a></li>
         <li><a href="impact.html">Dashboard</a></li>
-        <li><a href="impact.html#pulse-stories">Blogs</a></li>
+        <li><span class="soon-off" aria-disabled="true">Blogs <span class="soon">Coming soon</span></span></li>
         <li><a href="communications.html">In the Media</a></li></ul></div>
     </div>
     <div class="fbottom">

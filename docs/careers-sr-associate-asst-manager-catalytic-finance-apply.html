@@ -449,6 +449,9 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .ftr address{font-style:normal;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .ftr ul li+li{margin-top:7px}
 .ftr ul a{font-size:13.5px;color:var(--ink-2);transition:color .2s}
+/* not-yet-live links (Blogs): shown, disabled, tagged */
+.soon-off{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);cursor:default}
+.soon{display:inline-block;padding:2px 7px;border-radius:3px;background:var(--cream-2);color:var(--ink-2);font-size:10.5px;font-weight:800;letter-spacing:.04em;line-height:1.5;white-space:nowrap}
 .ftr ul a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
 .fbottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;max-width:960px;margin:44px auto 0;padding-top:22px;border-top:1px solid var(--line)}
 .fbottom .brand svg{height:40px;width:110px}
@@ -598,7 +601,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
         <li><a href="impact.html#pulse-stories">Stories</a></li>
         <li><a href="knowledgecentre.html">Reports</a></li>
         <li><a href="impact.html">Dashboard</a></li>
-        <li><a href="impact.html#pulse-stories">Blogs</a></li>
+        <li><span class="soon-off" aria-disabled="true">Blogs <span class="soon">Coming soon</span></span></li>
         <li><a href="communications.html">In the Media</a></li></ul></div>
     </div>
     <div class="fbottom">

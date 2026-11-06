@@ -167,13 +167,20 @@ main{position:relative;overflow-x:clip}
 @keyframes track{to{width:100%}}
 .hero-body{margin-top:16px;font-size:15px;color:var(--ink-2);min-height:7.2em}
 .widget .btn{width:100%;margin-top:16px;height:52px;font-size:12.5px;letter-spacing:.1em}
-/* home hero: photo runs clear and bright (no overlays); the headline sits in a white card joined to the widget */
+/* home hero: photo runs clear, white card overlays on the right */
 .home-hero .hero-media::before,.home-hero .hero-media::after{display:none}
-@media (min-width:861px){.home-hero .hero-col>h1::before{display:none}}
-.home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
+.home-hero .hero-col>h1::before{display:none}
+.home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5);text-align:center}
 .home-hero h1 .pk{color:var(--pink)}
 .home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
-@media (max-width:860px){.home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}}
+@media (min-width:861px){
+  .home-hero .wrap{justify-content:flex-end}
+  .home-hero .hero-media img{object-position:30% 20%}
+}
+@media (max-width:860px){
+  .home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}
+  .home-hero .hero-media img:nth-child(3){object-position:left 30%}
+}
 .swap{transition:opacity .35s ease,transform .35s ease}
 .swap.out{opacity:0;transform:translateY(6px)}
 @media (max-width:860px){
@@ -442,6 +449,9 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
 .ftr address{font-style:normal;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .ftr ul li+li{margin-top:7px}
 .ftr ul a{font-size:13.5px;color:var(--ink-2);transition:color .2s}
+/* not-yet-live links (Blogs): shown, disabled, tagged */
+.soon-off{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);cursor:default}
+.soon{display:inline-block;padding:2px 7px;border-radius:3px;background:var(--cream-2);color:var(--ink-2);font-size:10.5px;font-weight:800;letter-spacing:.04em;line-height:1.5;white-space:nowrap}
 .ftr ul a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
 .fbottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;max-width:960px;margin:44px auto 0;padding-top:22px;border-top:1px solid var(--line)}
 .fbottom .brand svg{height:40px;width:110px}
@@ -731,7 +741,7 @@ main .hero.hb .widget h1{text-align:center;justify-content:center}
         <li><a href="impact.html#pulse-stories">Stories</a></li>
         <li><a href="knowledgecentre.html">Reports</a></li>
         <li><a href="impact.html">Dashboard</a></li>
-        <li><a href="impact.html#pulse-stories">Blogs</a></li>
+        <li><span class="soon-off" aria-disabled="true">Blogs <span class="soon">Coming soon</span></span></li>
         <li><a href="communications.html">In the Media</a></li></ul></div>
     </div>
     <div class="fbottom">
