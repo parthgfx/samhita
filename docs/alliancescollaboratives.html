@@ -147,6 +147,8 @@ main{position:relative;overflow-x:clip}
 .hero{position:relative;height:clamp(620px,calc(100svh - var(--hdr)),900px);overflow:hidden;background:#3a3a33}
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 50%;opacity:0;transform:scale(1.04);transition:opacity 1s ease,transform 9s linear}
 .hero-media img.on{opacity:1;transform:scale(1.1)}
+/* revised hero photos sit bottom-aligned in the hero frame (the white card overlaps the lower edge) */
+main .hero:not(.home-hero) .hero-media img[src*="/revised/"]{object-position:50% 100% !important}
 /* subtle even darkening so a white headline reads on any photo; directional scrims sit on ::after */
 .hero-media::before{content:"";position:absolute;inset:0;z-index:1;background:rgba(20,20,16,.26);pointer-events:none}
 .hero-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(20,20,16,.55) 0%,rgba(20,20,16,.32) 34%,rgba(20,20,16,0) 58%),linear-gradient(0deg,rgba(20,20,16,.18),rgba(20,20,16,0) 40%)}
