@@ -624,7 +624,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
   <div class="wrap">
     <div class="shead rv"><h2>What we can own end-to-end</h2></div>
     <div class="cs-own rv">
-      <div class="ph"><img src="assets/img/cine/partnerscsr-own.webp" alt="Women in a community group discussion" width="1448" height="1086" loading="lazy"></div>
+      <div class="ph"><img src="assets/img/revised/csr-own.webp" alt="A program run end to end with its partners" width="1942" height="809" loading="lazy"></div>
       <ol class="shadow">
         <li><span class="n">01</span><span class="t">Design a flagship CSR program.</span></li>
         <li><span class="n">02</span><span class="t">Manage a multi-state or multi-partner portfolio.</span></li>
@@ -676,7 +676,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
     </div>
     <div class="xcs">
       <article class="tcard ccard rv">
-        <div class="tph"><img src="assets/img/cine/partnerscsr-case-power.webp" alt="A POWER program participant receiving her certificate" width="1254" height="1254" loading="lazy" style="object-position:40% 46%"></div>
+        <div class="tph"><img src="assets/img/revised/csr-case-1.webp" alt="A program lead receiving a certificate at a training session" width="1376" height="1143" loading="lazy"></div>
         <p class="meta">FY 23 onward · Women's Livelihoods · Multi-state</p>
         <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>810 women placed into jobs at a 90% placement rate, across three states.</span></button></h3>
         <div class="cstats" style="--n:3"><div><span>810</span><span>Women placed</span></div><div><span>90%</span><span>Placement rate</span></div><div><span>76%</span><span>Retention</span></div></div>
@@ -793,6 +793,13 @@ $$('.why').forEach(function(w){
 });
 
 
+/* ---- shared: pill tabs over a photo also swap the photo (one <img> per pill inside .imgs) ---- */
+$$('.why').forEach(function(w){
+  var ims=$$('.imgs img',w),ps=$$('.pill',w);
+  if(ims.length<2||ims.length!==ps.length)return;
+  function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
+  new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){
   var tr=$('.track',w),btns=$$('.arrows button',w),cards=Array.prototype.slice.call(tr.children);

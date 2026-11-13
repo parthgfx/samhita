@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
-<link rel="preload" as="image" href="assets/img/cine/measurementevaluationlearning-hero.webp?v=3">
+<link rel="preload" as="image" href="assets/img/revised/mel-hero.webp">
 <style>
 /* ============================================================
    Samhita-CGF home — charity: water layout, component for component
@@ -624,7 +624,7 @@ main .hero.ml.hb .hero-col{margin-top:-24px}
 <!-- ================= HERO ================= -->
 <section class="hero ml hb" id="top">
   <div class="hero-media">
-    <img class="on" src="assets/img/cine/measurementevaluationlearning-hero.webp?v=3" alt="A field researcher interviewing a group of young women seated on a verandah" width="1448" height="647">
+    <img class="on" src="assets/img/revised/mel-hero.webp" alt="A field researcher interviewing a group of women" width="1877" height="838">
   </div>
   <div class="wrap">
     <div class="hero-col">
@@ -660,7 +660,14 @@ main .hero.ml.hb .hero-col{margin-top:-24px}
       <h2>What we can measure</h2>
     </div>
     <div class="why ml-why rv" data-tabs>
-      <div class="imgs"><img class="on" src="assets/img/cine/measurementevaluationlearning-measure.webp" alt="A woman taking part in a field survey" width="1672" height="941" loading="lazy"></div>
+      <div class="imgs">
+        <img class="on" src="assets/img/revised/mel-measure-jobs.webp" alt="Jobs" width="1786" height="893" loading="lazy">
+        <img src="assets/img/revised/mel-measure-enterprises.webp" alt="Enterprises" width="1774" height="887" loading="lazy">
+        <img src="assets/img/cine/measurementevaluationlearning-measure.webp" alt="A woman taking part in a field survey" width="1672" height="941" loading="lazy">
+        <img src="assets/img/revised/mel-measure-women.webp" alt="Women's empowerment" width="1774" height="887" loading="lazy">
+        <img src="assets/img/revised/mel-measure-resilience.webp" alt="Resilience" width="1774" height="887" loading="lazy">
+        <img src="assets/img/revised/mel-measure-performance.webp" alt="Program performance" width="1786" height="893" loading="lazy">
+      </div>
       <div class="pills" role="tablist" aria-label="What we can measure">
         <button class="pill" role="tab" aria-selected="true">Jobs.</button>
         <button class="pill" role="tab" aria-selected="false" tabindex="-1">Enterprises.</button>
@@ -891,6 +898,13 @@ $$('.why').forEach(function(w){
 });
 
 
+/* ---- shared: pill tabs over a photo also swap the photo (one <img> per pill inside .imgs) ---- */
+$$('.why').forEach(function(w){
+  var ims=$$('.imgs img',w),ps=$$('.pill',w);
+  if(ims.length<2||ims.length!==ps.length)return;
+  function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
+  new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){
   var tr=$('.track',w),btns=$$('.arrows button',w),cards=Array.prototype.slice.call(tr.children);

@@ -667,7 +667,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
       <h2>What we can build with you</h2>
     </div>
     <div class="her-acc shadow rv">
-      <div class="ph"><img src="assets/img/cine/healtheconomicresilience-centre.webp?v=2" alt="Children and caregivers at a community centre" width="1086" height="1448" loading="lazy"></div>
+      <div class="ph"><img src="assets/img/revised/hn-build.webp" alt="A community health programme in action" width="406" height="482" loading="lazy"></div>
       <ul data-acc>
         <li class="open"><button type="button" aria-expanded="true" aria-controls="her-0" id="her-b0"><span class="n" aria-hidden="true">01</span><span class="t">Preventive and primary health.</span><span class="pl" aria-hidden="true">+</span></button>
           <div class="panel" id="her-0" role="region" aria-labelledby="her-b0"><div><p>Screening, referrals, awareness and access to quality services.</p></div></div></li>
@@ -708,13 +708,13 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
   <div class="rail-wrap rv" data-carousel>
     <div class="rail-clip"><div class="track">
       <article class="tcard ccard">
-        <div class="tph"><img src="assets/img/cine/healtheconomicresilience-case-01.webp?v=2" alt="A man at his workspace" width="1400" height="1050" loading="lazy"></div>
+        <div class="tph"><img src="assets/img/revised/hn-case-1.webp" alt="Mental health" width="592" height="444" loading="lazy"></div>
         <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>22 research-backed interventions building India's public mental health system</span></button></h3>
         <div class="cpart"><span>Centre for Public Mental Health (CPMH), incubated by Samhita-CGF.</span><img src="assets/img/home/cpmh-logo.webp" alt="CPMH logo" loading="lazy"></div>
         <div class="desc"><div><p>Mental health support in India is scarce, and the systems needed to scale it are underdeveloped. CPMH researches, tests and scales solutions built for the Indian context. It has developed 22 research-backed interventions to date.</p></div></div>
       </article>
       <article class="tcard ccard">
-        <div class="tph"><img src="assets/img/cine/col-wohla.webp?v=2" alt="Women talking together outside a community centre" width="2000" height="1125" loading="lazy"></div>
+        <div class="tph"><img src="assets/img/revised/hn-case-2.webp" alt="Access to healthcare, skilling and financial inclusion" width="1539" height="1022" loading="lazy"></div>
         <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>291,339 women accessed healthcare, skilling and financial inclusion support together</span></button></h3>
         <div class="cstats"><div><span>$2 Million</span><span>mobilised</span></div><div><span>291,339</span><span>Women reached</span></div></div>
         <div class="cpart"><span>Women's Health and Livelihood Alliance (WOHLA), Co-created with USAID and Chemonics</span><img src="assets/logos/svg/usaid-identity.svg" alt="USAID" loading="lazy"></div>
@@ -728,7 +728,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
         <div class="desc"><div><p>Frontline sanitation and health workers carried India's public health response through the pandemic, often with little protection for themselves. The India Protectors Alliance stepped in with health services, insurance, sanitation support and safety tools. 5.3 million frontline workers have been supported to date. It was co-created with the Gates Foundation, Hindustan Unilever, and RBL Bank, and supported by 56 other funders, including Pernod Ricard India, IKEA, and Crompton Greaves.</p></div></div>
       </article>
       <article class="tcard ccard">
-        <div class="tph"><img src="assets/img/cine/healtheconomicresilience-case-04.webp?v=2" alt="A woman entrepreneur at her sewing machine" width="1400" height="1050" loading="lazy"></div>
+        <div class="tph"><img src="assets/img/revised/hn-case-4.webp" alt="Health and nutrition systems" width="1448" height="1086" loading="lazy"></div>
         <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Health and nutrition systems strengthened across 100 towns in Uttar Pradesh</span></button></h3>
         <div class="cstats"><div><span>100</span><span>Towns covered</span></div><div><span>5</span><span>Demonstration cities</span></div></div>
         <div class="cpart"><span>Samyak, incubated by Samhita-CGF.</span></div>
@@ -829,6 +829,13 @@ $$('.why').forEach(function(w){
 });
 
 
+/* ---- shared: pill tabs over a photo also swap the photo (one <img> per pill inside .imgs) ---- */
+$$('.why').forEach(function(w){
+  var ims=$$('.imgs img',w),ps=$$('.pill',w);
+  if(ims.length<2||ims.length!==ps.length)return;
+  function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
+  new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){
   var tr=$('.track',w),btns=$$('.arrows button',w),cards=Array.prototype.slice.call(tr.children);

@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
-<link rel="preload" as="image" href="assets/img/cine/designrunprograms-hero.webp?v=2">
+<link rel="preload" as="image" href="assets/img/revised/drp-hero.webp">
 <style>
 /* ============================================================
    Samhita-CGF home — charity: water layout, component for component
@@ -635,7 +635,7 @@ main .hero.hc.hb .hero-col{margin-top:-24px}
 <!-- ================= HERO ================= -->
 <section class="hero hc hb" id="top">
   <div class="hero-media">
-    <img class="on" src="assets/img/cine/designrunprograms-hero.webp?v=2" alt="A facilitator leading a session with women participants" width="1448" height="693">
+    <img class="on" src="assets/img/revised/drp-hero.webp" alt="A health worker presenting to women in a community clinic" width="1813" height="868">
   </div>
   <div class="wrap">
     <div class="hero-col">
@@ -702,7 +702,13 @@ main .hero.hc.hb .hero-col{margin-top:-24px}
       <p class="sub">The result, for our longest-running partners, is a shift in what we actually are to them: from a program manager executing a scope, to a strategic advisor shaping what their CSR strategy becomes next.</p>
     </div>
     <div class="why dr-why rv">
-      <div class="imgs"><img class="on" src="assets/img/cine/designrunprograms-why.webp" alt="A Samhita-CGF team member in a field session with women participants" width="1448" height="1086" loading="lazy"></div>
+      <div class="imgs">
+        <img class="on" src="assets/img/cine/designrunprograms-why.webp" alt="A Samhita-CGF team member in a field session with women participants" width="1448" height="1086" loading="lazy">
+        <img src="assets/img/revised/drp-why-engagement.webp" alt="Employees and partners joining in at a celebration" width="1774" height="887" loading="lazy">
+        <img src="assets/img/revised/drp-why-identity.webp" alt="A programme team in front of branded signage" width="1774" height="887" loading="lazy">
+        <img src="assets/img/revised/drp-why-risk.webp" alt="A field team reviewing programme data" width="1774" height="887" loading="lazy">
+        <img src="assets/img/revised/drp-why-ground.webp" alt="Facilitators on the ground with participants" width="1774" height="887" loading="lazy">
+      </div>
       <div class="pills" role="tablist" aria-label="Why our programs work">
         <button class="pill" role="tab" aria-selected="true">Tailored reporting</button>
         <button class="pill" role="tab" aria-selected="false">Built-in employee engagement</button>
@@ -857,6 +863,13 @@ $$('.why').forEach(function(w){
 });
 
 
+/* ---- shared: pill tabs over a photo also swap the photo (one <img> per pill inside .imgs) ---- */
+$$('.why').forEach(function(w){
+  var ims=$$('.imgs img',w),ps=$$('.pill',w);
+  if(ims.length<2||ims.length!==ps.length)return;
+  function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
+  new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){
   var tr=$('.track',w),btns=$$('.arrows button',w),cards=Array.prototype.slice.call(tr.children);

@@ -599,7 +599,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
       <h2>What we do</h2>
     </div>
     <div class="al-wd shadow rv" data-tabs>
-      <div class="al-ban"><img src="assets/img/cine/partners-meeting.webp?v=2" alt="Community members and partners meeting under a tree" width="2000" height="857" loading="lazy"></div>
+      <div class="al-ban"><img src="assets/img/revised/alliances-what-we-do.webp" alt="Community members and partners meeting under a tree" width="2000" height="855" loading="lazy"></div>
         <div class="al-tabs" role="tablist" aria-label="What we do">
           <button class="ptab" role="tab" aria-selected="true"><span class="caps">For anchor partners</span><span class="ln">Build the infrastructure</span></button>
           <button class="ptab" role="tab" aria-selected="false" tabindex="-1"><span class="caps">For program partners</span><span class="ln">We make your money go further than it would alone.</span></button>
@@ -641,7 +641,13 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
       <h2>What makes our alliances work</h2>
     </div>
     <div class="why al-why rv">
-      <div class="imgs"><img class="on" src="assets/img/cine/cf-network.webp?v=2" alt="Alliance partners together at a convening" width="1898" height="958" loading="lazy"></div>
+      <div class="imgs">
+        <img class="on" src="assets/img/cine/cf-network.webp?v=2" alt="Alliance partners together at a convening" width="1898" height="958" loading="lazy">
+        <img src="assets/img/revised/alliances-work-capital.webp" alt="Students in a classroom raising their hands" width="1774" height="887" loading="lazy">
+        <img src="assets/img/revised/alliances-work-governance.webp" alt="Partners around a table at a review meeting" width="2000" height="1000" loading="lazy">
+        <img src="assets/img/revised/alliances-work-network.webp" alt="A lecture hall of partners at an AI programme launch" width="1774" height="887" loading="lazy">
+        <img src="assets/img/revised/alliances-work-scale.webp" alt="Women and children gathered under a tree" width="1774" height="887" loading="lazy">
+      </div>
       <div class="pills" role="tablist" aria-label="What makes our alliances work">
         <button class="pill" role="tab" aria-selected="true">Lifecycle</button>
         <button class="pill" role="tab" aria-selected="false">Capital</button>
@@ -682,7 +688,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
         </div>
       </article>
       <article class="tcard al-ev">
-        <div class="tph"><img src="assets/img/cine/col-ipa.webp?v=2" alt="Frontline health and sanitation workers standing together" width="2000" height="1125" loading="lazy"></div>
+        <div class="tph"><img src="assets/img/revised/alliances-ev-ipa.webp" alt="A health worker checking a woman's blood pressure" width="1341" height="1011" loading="lazy"></div>
         <div class="al-ev-b">
           <h3>India Protectors Alliance.</h3>
           <p>5.3M frontline healthcare and sanitation workers and community members impacted through vaccines, protective equipment, skills and jobs and government benefits.</p>
@@ -691,7 +697,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
         </div>
       </article>
       <article class="tcard al-ev">
-        <div class="tph"><img src="assets/img/cine/alliancescollaboratives-wohla.webp" alt="The WOHLA partners and team" width="596" height="335" loading="lazy" style="object-position:50% 55%"></div>
+        <div class="tph"><img src="assets/img/revised/alliances-ev-wohla.webp" alt="A woman entrepreneur at her stall of handmade goods" width="1452" height="1083" loading="lazy"></div>
         <div class="al-ev-b">
           <h3>Women's Health and Livelihood Alliance.</h3>
           <p>291,339 women received healthcare information and services, employment and entrepreneurship skills and financial-inclusion support to improve their healthcare and economic progression outcomes.</p>
@@ -806,6 +812,13 @@ $$('.why').forEach(function(w){
 });
 
 
+/* ---- shared: pill tabs over a photo also swap the photo (one <img> per pill inside .imgs) ---- */
+$$('.why').forEach(function(w){
+  var ims=$$('.imgs img',w),ps=$$('.pill',w);
+  if(ims.length<2||ims.length!==ps.length)return;
+  function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
+  new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){
   var tr=$('.track',w),btns=$$('.arrows button',w),cards=Array.prototype.slice.call(tr.children);

@@ -638,7 +638,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
   <div class="wrap">
     <div class="shead rv"><h2>Technology</h2></div>
     <div class="ft rv">
-      <img src="assets/img/cine/partnersfinancialinstitutions-tech.webp" alt="Women entrepreneurs working on a laptop during a training session" width="2000" height="1500" loading="lazy">
+      <img src="assets/img/revised/fi-tech.webp" alt="A woman at a bank counter completing a loan application on a laptop" width="1831" height="859" loading="lazy">
       <ul>
         <li><h3>Loan-origination workflows.</h3></li>
         <li><h3>Learning management system.</h3></li>
@@ -688,7 +688,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
         <div class="desc"><div><p>Women running viable nano and micro enterprises in retail, food, and services stay invisible to traditional underwriting, simply because they lack a credit history. A first-loss guarantee program changed what lenders could see. UGRO Capital sourced borrowers against criteria built jointly with Samhita, and every case went through independent review before onboarding. The program has enabled <b>₹5 crore</b> in formal credit, in loan sizes from <b>₹2 lakh to ₹10 lakh</b>.</p></div></div>
       </article>
       <article class="tcard ccard rv">
-        <div class="tph"><img src="assets/img/cine/partnersfinancialinstitutions-case-360.webp" alt="A woman entrepreneur in Gujarat at her home business" width="1200" height="1600" loading="lazy" style="object-position:50% 40%"></div>
+        <div class="tph"><img src="assets/img/revised/fi-case-2.webp" alt="A woman entrepreneur with her loan officer" width="1448" height="1086" loading="lazy"></div>
         <p class="meta">Access to Finance · Gujarat</p>
         <h3><button type="button" aria-expanded="false"><span class="pm" aria-hidden="true"></span><span>Access to loans for women locked out of formal financial systems</span></button></h3>
         <div class="cstats" style="--n:3"><div><span>2,600</span><span>Women entrepreneurs</span></div><div><span>₹10 crore</span><span>Lending enabled</span></div><div><span>₹40,000</span><span>Average loan size</span></div></div>
@@ -786,6 +786,13 @@ $$('.why').forEach(function(w){
 });
 
 
+/* ---- shared: pill tabs over a photo also swap the photo (one <img> per pill inside .imgs) ---- */
+$$('.why').forEach(function(w){
+  var ims=$$('.imgs img',w),ps=$$('.pill',w);
+  if(ims.length<2||ims.length!==ps.length)return;
+  function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
+  new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){
   var tr=$('.track',w),btns=$$('.arrows button',w),cards=Array.prototype.slice.call(tr.children);
