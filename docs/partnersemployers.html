@@ -157,6 +157,12 @@ main .hero .hero-media img,main .hero .hero-media img.on{transform:none !importa
   /* the white headline card always overlaps the same share (12%) of the photo's height, whatever the photo's shape */
   main .hero.hb .hero-media{margin-bottom:calc(-12% / var(--ar,1.78))}
   main .hero.hb .hero-col{margin-top:0 !important}
+  /* overlay-card heroes (card on the photo): when the card no longer fits inside the photo with padding, JS adds .stk -> card centres below and overlaps the photo's bottom edge by the same 12% */
+  main .hero.stk{height:auto;background:#fff}
+  main .hero.stk .hero-media::before,main .hero.stk .hero-media::after{display:none}
+  main .hero.stk .wrap{position:static !important;display:block;height:auto !important;padding-bottom:0}
+  main .hero.stk .hero-media{margin-bottom:calc(-12% / var(--ar,1.78))}
+  main .hero.stk .hero-col{margin:0 auto clamp(12px,2vw,24px) !important}
   main .hero:not(.hb) .wrap{position:absolute;left:0;right:0;top:0;bottom:0;height:auto}
 }
 /* subtle even darkening so a white headline reads on any photo; directional scrims sit on ::after */
@@ -191,7 +197,8 @@ main .hero .hero-media img,main .hero .hero-media img.on{transform:none !importa
 }
 @media (max-width:860px){
   .home-hero .hero-col>h1{font-size:clamp(26px,6.6vw,34px)}
-  .home-hero .hero-media img:nth-child(3){object-position:left 30%}
+  .home-hero .hero-media img:nth-child(1){object-position:left 40%}
+  .home-hero .hero-media img:nth-child(3){object-position:50% 40%}
 }
 .swap{transition:opacity .35s ease,transform .35s ease}
 .swap.out{opacity:0;transform:translateY(6px)}
@@ -747,6 +754,22 @@ $$('.why').forEach(function(w){
   new MutationObserver(function(){sync(true)}).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
   $$('button',foot).forEach(function(b){b.addEventListener('click',function(){pills[(cur()+ +b.dataset.step+n)%n].click()})});
 });
+
+/* ---- hero: an overlay card that does not fit inside the photo (with padding) moves below it, centred ---- */
+(function(){
+  var heroes=$$('.hero').filter(function(h){return !h.classList.contains('hb')&&$('.hero-col',h)&&$('.hero-media',h)});
+  if(!heroes.length)return;
+  function fit(){
+    heroes.forEach(function(h){
+      h.classList.remove('stk');
+      if(innerWidth<=860)return;
+      var col=$('.hero-col',h),med=$('.hero-media',h);
+      if(col.offsetHeight+72>med.offsetHeight)h.classList.add('stk');
+    });
+  }
+  fit();addEventListener('resize',fit);addEventListener('load',fit);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+})();
 
 
 /* ---- shared: pill tabs over a photo also swap the photo (one <img> per pill inside .imgs) ---- */
