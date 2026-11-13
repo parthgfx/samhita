@@ -148,6 +148,16 @@ main{position:relative;overflow-x:clip}
 .hero-media img.on{opacity:1;transform:scale(1.1)}
 /* revised hero photos sit bottom-aligned in the hero frame (the white card overlaps the lower edge) */
 main .hero:not(.home-hero) .hero-media img[src*="/revised/"]{object-position:50% 100% !important}
+/* hero photos are shown whole, at their own aspect ratio (--hr is set from the photo's width/height) */
+main .hero .hero-media img,main .hero .hero-media img.on{transform:none !important}
+@media (min-width:861px){
+  main .hero .hero-media{position:relative;height:auto !important;aspect-ratio:var(--hr,16/9) !important}
+  main .hero:not(.hb){height:auto}
+  /* the white headline card always overlaps the same share (12%) of the photo's height, whatever the photo's shape */
+  main .hero.hb .hero-media{margin-bottom:calc(-12% / var(--ar,1.78))}
+  main .hero.hb .hero-col{margin-top:0 !important}
+  main .hero:not(.hb) .wrap{position:absolute;left:0;right:0;top:0;bottom:0;height:auto}
+}
 /* subtle even darkening so a white headline reads on any photo; directional scrims sit on ::after */
 .hero-media::before{content:"";position:absolute;inset:0;z-index:1;background:rgba(20,20,16,.26);pointer-events:none}
 .hero-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(20,20,16,.55) 0%,rgba(20,20,16,.32) 34%,rgba(20,20,16,0) 58%),linear-gradient(0deg,rgba(20,20,16,.18),rgba(20,20,16,0) 40%)}
