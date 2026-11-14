@@ -4,14 +4,70 @@
     {
       "name": "samhita-preview",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "docs", "-l", "8091", "--no-clipboard"],
+      "runtimeArgs": [
+        "serve",
+        "docs",
+        "-l",
+        "8091",
+        "--no-clipboard"
+      ],
       "port": 8091
+    },
+    {
+      "name": "samhita-preview-b",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        "docs",
+        "-l",
+        "8092",
+        "--no-clipboard"
+      ],
+      "port": 8092
+    },
+    {
+      "name": "samhita-preview-c",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        "docs",
+        "-l",
+        "8093",
+        "--no-clipboard"
+      ],
+      "port": 8093
+    },
+    {
+      "name": "samhita-preview-d",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        "docs",
+        "-l",
+        "8094",
+        "--no-clipboard"
+      ],
+      "port": 8094
     },
     {
       "name": "samhita-cms",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["docs/server.js"],
+      "runtimeArgs": [
+        "docs/server.js"
+      ],
       "port": 3456
+    },
+    {
+      "name": "samhita-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        ".",
+        "-l",
+        "8790",
+        "--no-clipboard"
+      ],
+      "port": 8790
     }
   ]
 }

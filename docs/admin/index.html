@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Samhita-CGF | Website admin</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--ink:#222520;--ink-2:#4d5048;--muted:#7a7c72;--cream:#fff8e6;--cream-2:#fdf0c8;--line:#e9e3cf;--yellow:#ffd340;--yellow-2:#ffc90a;--pink:#ef4266;--pink-t:#fde8ed;--ok:#1f7a4d;--bg:#fffdf7;--r:4px}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font:15px/1.5 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);display:flex;flex-direction:column}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+h1{font-size:26px;line-height:1.2;margin:0 0 4px;font-weight:800}
+h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:26px 0 8px;font-weight:700}
+.sub{color:var(--ink-2);margin:0 0 18px}
+/* top bar */
+.top{display:flex;align-items:center;gap:14px;padding:10px 20px;border-bottom:1px solid var(--line);background:#fff;flex:none}
+.top .logo{display:flex;height:34px}.top .logo svg{height:34px;width:auto}
+.top .ttl{font-weight:800}
+.top .demo{margin-left:auto;font-size:13px;background:var(--cream);border:1px solid var(--line);padding:5px 10px;border-radius:var(--r);color:var(--ink-2)}
+/* shell */
+.shell{flex:1;display:flex;min-height:0}
+.side{width:230px;flex:none;background:var(--cream);border-right:1px solid var(--line);padding:16px 0;overflow:auto}
+.side a{display:flex;justify-content:space-between;align-items:center;padding:11px 20px;text-decoration:none;font-weight:600;border-left:4px solid transparent}
+.side a:hover{background:var(--cream-2)}
+.side a.on{border-left-color:var(--pink);background:#fff}
+.side .n{font-size:12px;font-weight:700;color:var(--muted)}
+.side .n.new{background:var(--pink);color:#fff;padding:1px 7px;border-radius:10px}
+main{flex:1;min-width:0;overflow:auto;padding:28px 32px 60px}
+.shell.editing .side{display:none}.shell.editing main{padding:0;overflow:hidden;display:flex}
+.narrow{max-width:860px}
+/* buttons + inputs */
+.b1,.b2{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;padding:0 16px;border-radius:var(--r);font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;white-space:nowrap;border:1px solid transparent}
+.b1{background:var(--yellow)}.b1:hover{background:var(--yellow-2)}
+.b2{background:#fff;border-color:var(--line)}.b2:hover{border-color:var(--ink)}
+.b2.danger{color:#b3261e}
+.inp,.ce,textarea.inp,select.inp{width:100%;border:1px solid #d9d2ba;border-radius:var(--r);background:#fff;padding:9px 11px;min-height:40px;outline:0}
+.inp:focus,.ce:focus{border-color:var(--ink);box-shadow:0 0 0 3px var(--cream-2)}
+.ce{white-space:pre-wrap;word-break:break-word}
+.ce.multi{min-height:120px}.ce.multi ul{margin:6px 0;padding-left:22px}.ce.multi p{margin:0 0 8px}
+.ce:empty:before{content:attr(data-ph);color:var(--muted)}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 20px;margin-bottom:8px}
+.head>div{flex:1;min-width:240px}.head .sub{margin:0}
+/* lists */
+.list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.list li+li{border-top:1px solid var(--line)}
+.list a,.list .row{display:flex;align-items:center;gap:12px;padding:13px 16px;text-decoration:none;cursor:pointer}
+.list a:hover,.list .row:hover{background:var(--cream)}
+.list .nm{font-weight:700;flex:1;min-width:0}
+.list .fl{color:var(--muted);font-size:13px}
+.list .go{font-weight:700;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.pill{font-size:12px;font-weight:700;padding:2px 9px;border-radius:10px;background:var(--cream-2);white-space:nowrap}
+.pill.pink{background:var(--pink-t);color:#a91c3d}.pill.ok{background:#e2f3ea;color:var(--ok)}.pill.off{background:#eee;color:var(--muted)}
+.empty{border:1px dashed #d9d2ba;border-radius:var(--r);padding:40px 20px;text-align:center;color:var(--ink-2);background:#fff}
+.empty p{margin:0 0 14px}
+/* page editor */
+.ed{flex:1;display:flex;flex-direction:column;min-width:0}
+.edbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 16px;border-bottom:1px solid var(--line);background:#fff}
+.edbar .back{font-weight:700;text-decoration:none;margin-right:6px}.edbar .back:hover{text-decoration:underline}
+.edbar .pn{font-weight:800;font-size:17px}
+.saved{font-size:13px;color:var(--muted)}.saved.ok{color:var(--ok)}
+.sp{flex:1}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+.seg button{border:0;background:none;height:38px;padding:0 13px;font-weight:700;font-size:13px;cursor:pointer}
+.seg button.on{background:var(--ink);color:#fff}
+.edbody{flex:1;display:flex;min-height:0}
+.edform{width:440px;flex:none;overflow:auto;padding:14px 16px 80px;border-right:1px solid var(--line);background:var(--bg)}
+.edprev{flex:1;min-width:0;background:#efeadb;display:flex;justify-content:center;overflow:hidden}
+.frame{width:100%;height:100%;background:#fff;transition:width .2s}
+.frame.phone{width:390px;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.frame iframe{width:100%;height:100%;border:0;display:block}
+.hint{font-size:13px;color:var(--ink-2);margin:8px 2px 12px}
+details.grp{border:1px solid var(--line);border-radius:var(--r);background:#fff;margin-bottom:8px}
+details.grp>summary{cursor:pointer;padding:11px 14px;font-weight:700;display:flex;gap:8px;align-items:center;list-style:none}
+details.grp>summary::-webkit-details-marker{display:none}
+details.grp>summary:before{content:"+";width:14px;font-weight:800;color:var(--pink)}
+details.grp[open]>summary:before{content:"–"}
+details.grp>summary .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+details.grp .body{padding:2px 14px 12px}
+.fld{padding:8px 0 8px 10px;border-left:3px solid transparent;margin-left:-10px}
+.fld.chg{border-left-color:var(--pink)}
+.fld .lb{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.fld .undo{border:0;background:none;padding:0;font-size:12px;font-weight:700;color:var(--pink);cursor:pointer;display:none;text-transform:none;letter-spacing:0}
+.fld.chg .undo{display:inline}
+.fld .lk{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:13px;color:var(--muted)}
+.fld .lk .inp{min-height:34px;padding:5px 9px;font-size:13px}
+.imgf{display:flex;gap:10px;align-items:flex-start}
+.imgf img{width:92px;height:68px;object-fit:cover;border:1px solid var(--line);border-radius:var(--r);background:var(--cream)}
+.imgf>div{flex:1;min-width:0;display:grid;gap:6px}
+.pvbtn{display:none}
+/* forms (jobs, blogs) */
+.form{display:grid;gap:16px;max-width:760px}
+.form label,.form .lab{display:block;font-weight:700;margin-bottom:5px}
+.form .help{font-size:13px;color:var(--ink-2);margin:4px 0 0}
+.form .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tb{display:flex;gap:4px;margin-bottom:4px}
+.tb button{border:1px solid var(--line);background:#fff;border-radius:var(--r);height:30px;padding:0 10px;font-size:13px;font-weight:700;cursor:pointer}
+.sec{border:1px solid var(--line);border-radius:var(--r);background:#fff;padding:12px}
+.sec .sh{display:flex;gap:8px;margin-bottom:8px}
+.sec .sh .inp{font-weight:700}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 20px}
+.box{border:1px solid var(--line);background:var(--cream);border-radius:var(--r);padding:12px 14px}
+/* enquiries */
+.tabs{display:flex;gap:6px;margin:0 0 14px;flex-wrap:wrap}
+.det{padding:4px 16px 16px;background:var(--cream);display:grid;gap:10px}
+.det dl{display:grid;grid-template-columns:150px 1fr;gap:4px 12px;margin:0}
+.det dt{color:var(--muted);font-weight:600}.det dd{margin:0}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#fff;border:1px solid var(--ink);border-left:5px solid var(--pink);padding:12px 18px;border-radius:var(--r);font-weight:600;opacity:0;pointer-events:none;transition:.25s;max-width:min(92vw,560px);z-index:9;box-shadow:0 6px 24px rgba(34,37,32,.14)}
+#toast.on{opacity:1;transform:translateX(-50%)}
+@media (max-width:900px){
+  .shell{flex-direction:column}
+  .side{width:auto;display:flex;overflow-x:auto;padding:0;border-right:0;border-bottom:1px solid var(--line)}
+  .side a{border-left:0;border-bottom:4px solid transparent;padding:11px 14px;gap:6px;white-space:nowrap}
+  .side a.on{border-bottom-color:var(--pink)}
+  main{padding:20px 16px 60px}
+  .top .demo{display:none}
+  .edform{width:100%;border-right:0}
+  .edprev{display:none}
+  .ed.showprev .edform{display:none}.ed.showprev .edprev{display:flex}
+  .pvbtn{display:inline-flex}.seg.w{display:none}
+  .form .two{grid-template-columns:1fr}
+  .det dl{grid-template-columns:1fr}
+  .list .fl{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="logo" id="logo"></span>
+  <span class="ttl">Website admin</span>
+  <span class="demo">Demo mode: changes are saved in this browser only</span>
+</header>
+<div class="shell" id="shell">
+  <nav class="side" id="side" aria-label="Admin sections"></nav>
+  <main id="view"></main>
+</div>
+<div id="toast" role="status"></div>
+
+<script>
+/* =========================================================
+   Samhita-CGF website admin (frontend only).
+   All data goes through `db` below. To connect a backend,
+   replace db.get / db.set / db.del and publishPage().
+   ========================================================= */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SITE=location.origin+location.pathname.replace(/admin(\/(index\.html)?)?$/,'');
+const db={
+  get(k,d){try{const v=localStorage.getItem('samhita-admin:'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('samhita-admin:'+k,JSON.stringify(v));return true}catch(e){toast('Could not save: this browser\'s storage is full.');return false}},
+  del(k){try{localStorage.removeItem('samhita-admin:'+k)}catch(e){}}
+};
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),3800)}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const today=()=>new Date().toISOString().slice(0,10);
+const fmtDate=d=>{const x=new Date(d);return isNaN(x)?(d||''):x.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})};
+const docCache={};
+async function getDoc(file){
+  if(!docCache[file]){const r=await fetch(SITE+file);if(!r.ok)throw new Error(file+' could not be loaded');docCache[file]=await r.text()}
+  return new DOMParser().parseFromString(docCache[file],'text/html');
+}
+
+/* ---------- every page on the website ---------- */
+const PAGES=[
+ ['Main pages',[['index.html','Home'],['about.html','About us'],['impact.html','Impact and evidence'],['careers.html','Careers'],['connect.html','Connect'],['knowledgecentre.html','Knowledge Centre'],['media.html','In the Media'],['communications.html','Communications']]],
+ ['What we do',[['catalyticfinance.html','Catalytic Finance'],['designrunprograms.html','Design & Run Programs'],['measurementevaluationlearning.html','Measurement, Evaluation and Learning'],['technologydata.html','Technology and Data'],['alliancescollaboratives.html','Alliances & Collaboratives'],['livelihoodaccount.html','Livelihood Account'],['livelihoodnetwork.html','Livelihood Network']]],
+ ['Focus areas',[['womenseconomicempowerment.html','Women\'s Economic Empowerment'],['educationtoemployment.html','Education to Employment'],['healtheconomicresilience.html','Health & Economic Resilience'],['climateresilientlivelihoods.html','Climate-resilient Livelihoods']]],
+ ['Partners',[['partnerscsr.html','CSR partners'],['partnersemployers.html','Employer partners'],['partnersfinancialinstitutions.html','Financial institution partners'],['partnersfoundations.html','Foundation partners'],['partnersgovernment.html','Government partners']]],
+ ['CGF',[['cgfhome.html','CGF Home'],['cgfabout.html','CGF About us'],['cgfannualreports.html','CGF Annual Reports']]],
+ ['Job pages',[['careers-asst-manager-communications-remote.html','Job: Asst. Manager Communications'],['careers-asst-manager-communications-remote-apply.html','Apply: Asst. Manager Communications'],['careers-sr-associate-asst-manager-catalytic-finance.html','Job: Sr. Associate/Asst. Manager, Catalytic Finance'],['careers-sr-associate-asst-manager-catalytic-finance-apply.html','Apply: Sr. Associate/Asst. Manager, Catalytic Finance'],['careers-manager-mel-livelihood.html','Job: Manager MEL (Livelihood)'],['careers-manager-mel-livelihood-apply.html','Apply: Manager MEL (Livelihood)']]]
+];
+const pageName=f=>{for(const g of PAGES)for(const p of g[1])if(p[0]===f)return p[1];return f};
+const pageCount=PAGES.reduce((n,g)=>n+g[1].length,0);
+const editCount=f=>Object.keys(db.get('edits:'+f,{})).length;
+
+/* ---------- sidebar + router ---------- */
+function drawSide(tab){
+  const jobs=db.get('jobs',[]),blogs=db.get('blogs',[]),nw=enquiries().filter(e=>e.status==='New').length;
+  $('#side').innerHTML=[['pages','Pages',pageCount],['jobs','Job openings',jobs.length||''],['blogs','Blogs',blogs.length||''],['enquiries','Enquiries',nw,nw?'new':'']]
+   .map(([k,l,n,c])=>`<a href="#${k}" class="${k===tab?'on':''}">${l}<span class="n ${c||''}">${n}</span></a>`).join('');
+}
+function route(){
+  const [tab,...rest]=(location.hash.slice(1)||'pages').split('/');const arg=decodeURIComponent(rest.join('/'));
+  $('#shell').classList.toggle('editing',tab==='edit');
+  drawSide(tab==='edit'?'pages':tab);
+  const v=$('#view');v.scrollTop=0;
+  if(tab==='edit')return viewEditor(arg);
+  if(tab==='jobs')return arg?viewJob(arg):viewJobs();
+  if(tab==='blogs')return arg?viewBlog(arg):viewBlogs();
+  if(tab==='enquiries')return viewEnquiries(arg);
+  viewPages();
+}
+addEventListener('hashchange',route);
+
+/* ================= PAGES ================= */
+function viewPages(){
+  $('#view').innerHTML=`<div class="narrow"><div class="head"><div><h1>Pages</h1><p class="sub">Pick a page to change its text, links and images.</p></div>
+  <input class="inp" id="pq" type="search" placeholder="Search pages…" style="max-width:260px" aria-label="Search pages"></div><div id="pl"></div></div>`;
+  const draw=()=>{const q=$('#pq').value.trim().toLowerCase();
+    $('#pl').innerHTML=PAGES.map(([g,ps])=>{const rows=ps.filter(p=>!q||(p[1]+' '+p[0]).toLowerCase().includes(q));
+      return rows.length?`<h2>${esc(g)}</h2><ul class="list">${rows.map(([f,n])=>{const c=editCount(f);
+        return `<li><a href="#edit/${f}"><span class="nm">${esc(n)}</span>${c?`<span class="pill pink">${c} unpublished change${c>1?'s':''}</span>`:''}<span class="fl">${f}</span><span class="go">Edit</span></a></li>`}).join('')}</ul>`:''}).join('')
+      ||'<div class="empty"><p>No page matches your search.</p></div>'};
+  $('#pq').oninput=draw;draw();
+}
+
+/* ---------- field extraction: works on any page ---------- */
+const INLINE=new Set(['A','SPAN','STRONG','EM','B','I','BR','SUP','SUB','U','SMALL','MARK','ABBR','WBR']);
+const SKIP=new Set(['SCRIPT','STYLE','SVG','NOSCRIPT','TEMPLATE','IFRAME','VIDEO','AUDIO','CANVAS','SELECT','TEXTAREA','INPUT','OPTION','OBJECT']);
+const TAGNAME={H1:'Heading',H2:'Heading',H3:'Heading',H4:'Heading',H5:'Heading',H6:'Heading',P:'Paragraph',LI:'List item',A:'Button / link',BUTTON:'Button',LABEL:'Form label',BLOCKQUOTE:'Quote',FIGCAPTION:'Caption',TD:'Table cell',TH:'Table heading',SUMMARY:'Question'};
+function extract(doc){
+  const fields=[],groups=[];let e=0;
+  let root=doc.querySelector('main')||doc.body;
+  let blocks=[...root.children];
+  while(blocks.length===1&&blocks[0].children.length)blocks=[...blocks[0].children];
+  const mark=el=>{if(!el.dataset.cmsE)el.dataset.cmsE=++e;return +el.dataset.cmsE};
+  const txt=el=>el.textContent.replace(/\s+/g,' ').trim();
+  function walk(el,g){
+    const tag=el.tagName.toUpperCase();
+    if(SKIP.has(tag)||el.matches('header,footer,nav,.drawer,.op-grid,[hidden]'))return;
+    if(tag==='IMG'){fields.push({kind:'img',el,e:mark(el),g,label:'Image',orig:{src:el.getAttribute('src')||'',alt:el.getAttribute('alt')||''}});return}
+    const kids=[...el.querySelectorAll('*')];
+    const direct=[...el.childNodes].filter(n=>n.nodeType===3&&n.nodeValue.trim());
+    const a=el.closest('a[href]');
+    if(direct.length&&kids.every(k=>INLINE.has(k.tagName.toUpperCase()))){
+      const f={kind:'rich',el,e:mark(el),g,label:TAGNAME[tag]||(a?'Button / link':'Text'),orig:{h:el.innerHTML}};
+      if(a){f.a=a;f.orig.href=a.getAttribute('href')}
+      fields.push(f);return;
+    }
+    let first=true;
+    [...el.childNodes].forEach((n,j)=>{
+      if(n.nodeType===3&&n.nodeValue.trim()){
+        const m=n.nodeValue.match(/^(\s*)([\s\S]*?)(\s*)$/);
+        const f={kind:'text',el,node:n,j,e:mark(el),g,lead:m[1],trail:m[3],label:TAGNAME[tag]||(a?'Button / link':'Text'),orig:{t:m[2]}};
+        if(a&&first){f.a=a;f.orig.href=a.getAttribute('href');first=false}
+        fields.push(f);
+      }else if(n.nodeType===1)walk(n,g);
+    });
+  }
+  blocks.forEach(b=>{
+    const tag=b.tagName.toUpperCase();if(SKIP.has(tag))return;
+    const start=fields.length;walk(b,0);
+    if(fields.length===start)return;
+    /* one group per block, split again at every H1/H2 inside it */
+    const h=b.querySelector('h1,h2,h3,h4');
+    groups.push({title:(h&&txt(h))||txt(fields[start].el).slice(0,60)||'Section'});
+    let gs=start;
+    for(let i=start;i<fields.length;i++){const f=fields[i],hh=f.kind!=='img'&&f.el.closest(i-gs>=25?'h1,h2,h3':'h1,h2');
+      if(hh&&i>start&&txt(hh)!==groups[groups.length-1].title){groups.push({title:txt(hh)});gs=i}
+      f.g=groups.length-1}
+  });
+  fields.forEach((f,i)=>f.i=i);
+  return {fields,groups};
+}
+
+/* ---------- page editor ---------- */
+let ED=null;
+async function viewEditor(file){
+  const v=$('#view');
+  v.innerHTML=`<div class="ed" id="ed"><div class="edbar">
+    <a class="back" href="#pages">← All pages</a><span class="pn">${esc(pageName(file))}</span><span class="saved" id="saved"></span><span class="sp"></span>
+    <button class="b2 pvbtn" id="pvt">Show preview</button>
+    <div class="seg w" role="group" aria-label="Preview size"><button data-w="" class="on">Desktop</button><button data-w="phone">Phone</button></div>
+    <a class="b2" href="${SITE+file}" target="_blank" rel="noopener">Open live page</a>
+    <button class="b2" id="dl">Download page</button>
+    <button class="b2 danger" id="reset">Undo all changes</button>
+    <button class="b1" id="pub">Publish</button></div>
+    <div class="edbody"><div class="edform"><input class="inp" id="fq" type="search" placeholder="Find text on this page…" aria-label="Find text on this page">
+    <p class="hint">Click anything in the preview to jump to its field. Changes save as you type.</p><div id="groups">Loading page…</div></div>
+    <div class="edprev"><div class="frame" id="frame"><iframe id="pv" title="Page preview"></iframe></div></div></div></div>`;
+  let doc;try{doc=await getDoc(file)}catch(err){$('#groups').innerHTML=`<div class="empty"><p>${esc(err.message)}.</p></div>`;return}
+  const {fields,groups}=extract(doc);
+  const edits=db.get('edits:'+file,{});
+  ED={file,doc,fields,groups,edits,idoc:null};
+  Object.keys(edits).forEach(i=>fields[i]&&applyTo(fields[i],edits[i],false));
+  drawFields();buildPreview();status();
+  $('#fq').oninput=filterFields;
+  $('#pvt').onclick=e=>{const on=$('#ed').classList.toggle('showprev');e.target.textContent=on?'Back to editing':'Show preview'};
+  $$('.seg.w button').forEach(b=>b.onclick=()=>{$$('.seg.w button').forEach(x=>x.classList.toggle('on',x===b));$('#frame').className='frame '+b.dataset.w});
+  $('#dl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([exportHtml()],{type:'text/html'}));a.download=file;a.click();toast('Downloaded '+file+' with your changes.')};
+  $('#reset').onclick=()=>{if(!Object.keys(ED.edits).length)return toast('There are no changes to undo.');
+    if(confirm('Undo every change on this page? This cannot be reversed.')){db.del('edits:'+file);viewEditor(file)}};
+  $('#pub').onclick=()=>publishPage(file);
+}
+function publishPage(file){
+  const n=Object.keys(ED.edits).length;
+  toast(n?`${n} change${n>1?'s are':' is'} saved here. Publishing to the live site switches on when the backend is connected.`:'Nothing to publish: this page has no changes.');
+}
+function status(){const n=Object.keys(ED.edits).length,s=$('#saved');if(!s)return;s.textContent=n?`${n} unpublished change${n>1?'s':''}, saved`:'No changes yet';s.classList.toggle('ok',!!n)}
+function current(f){const o={};
+  if(f.kind==='img'){o.src=f.el.getAttribute('src')||'';o.alt=f.el.getAttribute('alt')||''}
+  else if(f.kind==='rich')o.h=f.el.innerHTML;else o.t=f.node.nodeValue.trim();
+  if(f.a)o.href=f.a.getAttribute('href');return o}
+function liveEl(f,el){return ED.idoc&&ED.idoc.querySelector(`[data-cms-e="${(el||f.el).dataset.cmsE}"]`)}
+function applyTo(f,val,live){
+  const targets=[[f.el,f.kind==='text'?f.node:null,f.a]];
+  if(live){const L=liveEl(f);if(L)targets.push([L,f.kind==='text'?L.childNodes[f.j]:null,f.a?(f.a===f.el?L:L.closest('a[href]')):null])}
+  targets.forEach(([el,node,a])=>{
+    if('h' in val)el.innerHTML=val.h;
+    if('t' in val&&node&&node.nodeType===3)node.nodeValue=f.lead+val.t+f.trail;
+    if('href' in val&&a)a.setAttribute('href',val.href);
+    if('alt' in val)el.setAttribute('alt',val.alt);
+    if('src' in val){el.setAttribute('src',val.src);el.removeAttribute('srcset');
+      if(val.src!==f.orig.src&&el.parentElement&&el.parentElement.tagName==='PICTURE')$$('source',el.parentElement).forEach(s=>s.remove())}
+  });
+}
+function change(f,part){
+  applyTo(f,part,true);
+  const cur=current(f),diff={};Object.keys(f.orig).forEach(k=>{if(cur[k]!==f.orig[k])diff[k]=cur[k]});
+  if(Object.keys(diff).length)ED.edits[f.i]=diff;else delete ED.edits[f.i];
+  db.set('edits:'+ED.file,ED.edits);
+  const row=$(`.fld[data-i="${f.i}"]`);if(row)row.classList.toggle('chg',!!ED.edits[f.i]);
+  status();
+}
+function fieldHtml(f){
+  const c=current(f),chg=ED.edits[f.i]?' chg':'';
+  let body;
+  if(f.kind==='img')body=`<div class="imgf"><img src="${esc(new URL(c.src,SITE).href)}" alt=""><div>
+    <input class="inp" data-p="alt" value="${esc(c.alt)}" placeholder="Describe the image (for accessibility)" aria-label="Image description">
+    <label class="b2" style="width:max-content">Replace image<input type="file" accept="image/*" data-p="file" hidden></label></div></div>`;
+  else body=`<div class="ce" contenteditable="${f.kind==='rich'?'true':'plaintext-only'}" data-p="${f.kind==='rich'?'h':'t'}" role="textbox" aria-label="${f.label}">${f.kind==='rich'?c.h:esc(c.t)}</div>`;
+  if(f.a)body+=`<div class="lk"><span>Link</span><input class="inp" data-p="href" value="${esc(c.href)}" aria-label="Link address"></div>`;
+  return `<div class="fld${chg}" data-i="${f.i}"><div class="lb"><span>${f.label}</span><button class="undo" type="button">Undo</button></div>${body}</div>`;
+}
+function drawFields(){
+  const {fields,groups,file}=ED,box=$('#groups');
+  if(!fields.length){box.innerHTML='<div class="empty"><p>This page has no editable text.</p></div>';return}
+  box.innerHTML=(file==='careers.html'?'<p class="hint box">The job cards on this page are managed under <a href="#jobs"><b>Job openings</b></a>.</p>':'')+
+   groups.map((g,gi)=>{const fs=fields.filter(f=>f.g===gi);
+    return `<details class="grp"${gi===0?' open':''}><summary><span class="t">${esc(g.title)}</span><span class="pill">${fs.length}</span></summary><div class="body">${fs.map(fieldHtml).join('')}</div></details>`}).join('');
+  const fOf=t=>fields[t.closest('.fld').dataset.i];
+  box.oninput=e=>{const p=e.target.dataset.p;if(!p||p==='file')return;const f=fOf(e.target);
+    let v=p==='h'?e.target.innerHTML:p==='t'?e.target.textContent:e.target.value;if(p==='h'&&v==='<br>')v='';
+    change(f,{[p]:v})};
+  box.onchange=e=>{if(e.target.dataset.p!=='file')return;const f=fOf(e.target),file=e.target.files[0];if(!file)return;
+    const r=new FileReader();r.onload=()=>{change(f,{src:r.result});e.target.closest('.imgf').querySelector('img').src=r.result};r.readAsDataURL(file)};
+  box.onclick=e=>{if(!e.target.classList.contains('undo'))return;const f=fOf(e.target);change(f,f.orig);
+    e.target.closest('.fld').outerHTML=fieldHtml(f)};
+  box.onkeydown=e=>{if(e.key==='Enter'&&e.target.classList.contains('ce'))e.preventDefault()};
+  box.onpaste=e=>{if(!e.target.closest('.ce'))return;e.preventDefault();document.execCommand('insertText',false,(e.clipboardData.getData('text/plain')||'').replace(/\s*\n\s*/g,' '))};
+  box.addEventListener('focusin',e=>{const r=e.target.closest('.fld');if(r)highlight(fields[r.dataset.i])});
+}
+function filterFields(){
+  const q=$('#fq').value.trim().toLowerCase();
+  $$('#groups details.grp').forEach((d,gi)=>{let any=false;
+    $$('.fld',d).forEach(r=>{const hit=!q||r.textContent.toLowerCase().includes(q)||$$('input',r).some(i=>i.value.toLowerCase().includes(q));r.style.display=hit?'':'none';any=any||hit});
+    d.style.display=any?'':'none';if(q)d.open=any;});
+}
+function highlight(f){
+  if(!ED.idoc)return;$$('[data-cms-hl]',ED.idoc).forEach(x=>x.removeAttribute('data-cms-hl'));
+  const L=liveEl(f);if(L){L.setAttribute('data-cms-hl','');L.scrollIntoView({block:'center',behavior:'smooth'})}
+}
+function buildPreview(){
+  const c=ED.doc.cloneNode(true);
+  const base=c.createElement('base');base.href=SITE;c.head.prepend(base);
+  const st=c.createElement('style');st.textContent='.rv{opacity:1!important;transform:none!important}[data-cms-e]{cursor:pointer}[data-cms-hl]{outline:3px solid #ef4266!important;outline-offset:3px}';c.head.append(st);
+  const fr=$('#pv');
+  fr.onload=()=>{ED.idoc=fr.contentDocument;
+    const stop=e=>{e.preventDefault();e.stopPropagation()};
+    ED.idoc.addEventListener('submit',stop,true);
+    ED.idoc.addEventListener('click',e=>{stop(e);
+      const t=e.target.closest&&(e.target.closest('[data-cms-e]')||e.target.querySelector('[data-cms-e]'));if(!t)return;
+      const f=ED.fields.find(x=>x.e==t.dataset.cmsE);if(f)focusField(f)},true)};
+  fr.srcdoc='<!DOCTYPE html>'+c.documentElement.outerHTML;
+}
+function focusField(f){
+  if($('#fq').value){$('#fq').value='';filterFields()}
+  $('#ed').classList.remove('showprev');$('#pvt').textContent='Show preview';
+  const row=$(`.fld[data-i="${f.i}"]`);if(!row)return;row.closest('details').open=true;
+  row.scrollIntoView({block:'center'});(row.querySelector('.ce')||row.querySelector('input.inp')).focus();
+}
+function exportHtml(){const c=ED.doc.cloneNode(true);$$('[data-cms-e]',c).forEach(x=>x.removeAttribute('data-cms-e'));return '<!DOCTYPE html>\n'+c.documentElement.outerHTML}
+
+/* ================= shared form pieces (jobs, blogs) ================= */
+const richBox=(k,html,ph,tools)=>`<div class="tb" data-for="${k}">${(tools||['Bold','List','Link']).map(t=>`<button type="button" data-cmd="${t}">${t}</button>`).join('')}</div><div class="ce multi" contenteditable="true" data-k="${k}" data-ph="${esc(ph||'')}">${html||''}</div>`;
+function wireRich(root){
+  root.addEventListener('mousedown',e=>{const b=e.target.closest('.tb button');if(!b)return;e.preventDefault();
+    const box=b.closest('.tb').nextElementSibling;box.focus();
+    const c=b.dataset.cmd;
+    if(c==='Bold')document.execCommand('bold');
+    if(c==='List')document.execCommand('insertUnorderedList');
+    if(c==='Heading')document.execCommand('formatBlock',false,document.queryCommandValue('formatBlock')==='h2'?'p':'h2');
+    if(c==='Link'){const u=prompt('Paste the link address (leave empty to remove the link):','https://');if(u===null)return;u&&u!=='https://'?document.execCommand('createLink',false,u):document.execCommand('unlink')}
+    box.dispatchEvent(new Event('input',{bubbles:true}))});
+  root.addEventListener('paste',e=>{if(!e.target.closest('.ce'))return;e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain')||'')});
+}
+const statusSeg=(cur,opts)=>`<div class="seg" id="st">${opts.map(o=>`<button type="button" data-v="${o}" class="${o===cur?'on':''}">${o}</button>`).join('')}</div>`;
+const statusPill=s=>`<span class="pill ${s==='Live'||s==='Published'?'ok':s==='Closed'?'off':''}">${s}</span>`;
+function savedTick(){const s=$('#saved');if(s){s.textContent='All changes saved';s.classList.add('ok')}}
+
+/* ================= JOB OPENINGS ================= */
+const STD_SECTIONS=['Organization Overview','Role Overview','Responsibilities','Skills-Qualifications and Experience','Why Samhita?'];
+async function ensureJobs(){
+  if(db.get('jobs'))return;
+  const jobs=[];
+  try{const doc=await getDoc('careers.html');
+    for(const card of $$('.op-card',doc)){
+      const a=card.querySelector('h3 a'),meta=$$('.op-meta li',card).map(li=>{const c=li.cloneNode(true);$$('.vh,svg',c).forEach(x=>x.remove());return c.textContent.trim()});
+      const j={id:uid(),title:a.textContent.trim(),page:a.getAttribute('href'),summary:(card.querySelector('.sum')||{}).textContent||'',posted:'',location:meta[1]||'',experience:meta[2]||'',status:'Live',applyTo:'careers@samhita.org',sections:[]};
+      const d=new Date(meta[0]+' UTC');j.posted=isNaN(d)?today():d.toISOString().slice(0,10);
+      try{const jd=await getDoc(j.page);j.sections=$$('.jb-sec',jd).map(s=>({h:s.querySelector('h2').textContent.trim(),html:(s.querySelector('.jb-rich')||s).innerHTML}));
+        const f=(await getDoc(j.page.replace('.html','-apply.html'))).querySelector('form[data-to]');if(f)j.applyTo=f.dataset.to}catch(e){}
+      jobs.push(j)}
+  }catch(e){}
+  db.set('jobs',jobs);
+}
+async function viewJobs(){
+  const v=$('#view');v.innerHTML='<p class="sub">Loading openings…</p>';await ensureJobs();
+  const jobs=db.get('jobs',[]);drawSide('jobs');
+  v.innerHTML=`<div class="narrow"><div class="head"><div><h1>Job openings</h1><p class="sub">The roles shown on the Careers page.</p></div><a class="b1" href="#jobs/new">+ New opening</a></div><br>`+
+  (jobs.length?`<ul class="list">${jobs.map(j=>`<li><a href="#jobs/${j.id}"><span class="nm">${esc(j.title||'Untitled opening')}</span><span class="fl">${esc(j.location)}${j.experience?' · '+esc(j.experience):''} · ${fmtDate(j.posted)}</span>${statusPill(j.status)}<span class="go">Edit</span></a></li>`).join('')}</ul>`
+   :'<div class="empty"><p>There are no openings yet.</p><a class="b1" href="#jobs/new">+ New opening</a></div>')+'</div>';
+}
+async function viewJob(id){
+  await ensureJobs();let jobs=db.get('jobs',[]);
+  if(id==='new'){const last=jobs[0];
+    const j={id:uid(),title:'',summary:'',posted:today(),location:'',experience:'',status:'Draft',applyTo:last?last.applyTo:'careers@samhita.org',
+      sections:STD_SECTIONS.map(h=>{const p=last&&last.sections.find(s=>s.h===h);return {h,html:p&&(h==='Organization Overview'||h==='Why Samhita?')?p.html:''}})};
+    jobs.unshift(j);db.set('jobs',jobs);return location.replace('#jobs/'+j.id)}
+  const j=jobs.find(x=>x.id===id);if(!j)return location.replace('#jobs');
+  const v=$('#view');
+  const secHtml=(s,i)=>`<div class="sec" data-s="${i}"><div class="sh"><input class="inp" data-sh value="${esc(s.h)}" placeholder="Section heading" aria-label="Section heading"><button type="button" class="b2 danger" data-rm>Remove</button></div>${richBox('s'+i,s.html,'Write this section…')}</div>`;
+  v.innerHTML=`<div class="narrow"><div class="bar"><a class="back" href="#jobs" style="font-weight:700;text-decoration:none">← All openings</a><span class="saved" id="saved"></span><span class="sp"></span>
+    ${j.page?`<a class="b2" href="${SITE+j.page}" target="_blank" rel="noopener">Open live page</a>`:''}<button class="b2 danger" id="del">Delete opening</button></div>
+   <h1>${j.title?'Edit opening':'New opening'}</h1><p class="sub">Fill this in like a form. It saves as you type.</p>
+   <form class="form" id="jf" onsubmit="return false">
+    <div><span class="lab">Status</span>${statusSeg(j.status,['Draft','Live','Closed'])}<p class="help">Draft: not shown. Live: shown on the Careers page. Closed: hidden, kept for later.</p></div>
+    <div><label for="j-title">Job title</label><input class="inp" id="j-title" data-k="title" value="${esc(j.title)}" placeholder="e.g. Manager, Communications"></div>
+    <div class="two"><div><label for="j-loc">Location</label><input class="inp" id="j-loc" data-k="location" value="${esc(j.location)}" placeholder="e.g. Mumbai/Delhi/Bengaluru"></div>
+     <div><label for="j-exp">Experience</label><input class="inp" id="j-exp" data-k="experience" value="${esc(j.experience)}" placeholder="e.g. 3-5 years"></div></div>
+    <div class="two"><div><label for="j-date">Posted on</label><input class="inp" id="j-date" type="date" data-k="posted" value="${esc(j.posted)}"></div>
+     <div><label for="j-to">Applications are sent to</label><input class="inp" id="j-to" type="email" data-k="applyTo" value="${esc(j.applyTo)}"><p class="help">The email ID that receives each application.</p></div></div>
+    <div><label for="j-sum">Short summary</label><textarea class="inp" id="j-sum" data-k="summary" rows="4" placeholder="Two or three lines shown on the job card.">${esc(j.summary)}</textarea></div>
+    <div><span class="lab">Job description</span><div id="secs" style="display:grid;gap:10px">${j.sections.map(secHtml).join('')}</div>
+     <button type="button" class="b2" id="adds" style="margin-top:10px">+ Add section</button></div>
+   </form></div>`;
+  const form=$('#jf');wireRich(form);
+  const save=()=>{$$('[data-k]',form).forEach(el=>{const k=el.dataset.k;if(/^s\d+$/.test(k))j.sections[+k.slice(1)].html=el.innerHTML;else j[k]=el.value});
+    $$('[data-sh]',form).forEach((el,i)=>j.sections[i].h=el.value);db.set('jobs',jobs);savedTick()};
+  form.addEventListener('input',save);
+  $('#st').onclick=e=>{const b=e.target.closest('button');if(!b)return;j.status=b.dataset.v;$$('#st button').forEach(x=>x.classList.toggle('on',x===b));save();
+    toast(j.status==='Live'?'Marked Live. It appears on the Careers page once the backend is connected.':'Status set to '+j.status+'.')};
+  $('#adds').onclick=()=>{save();j.sections.push({h:'',html:''});db.set('jobs',jobs);viewJob(id)};
+  $('#secs').onclick=e=>{if(!e.target.matches('[data-rm]'))return;const i=+e.target.closest('.sec').dataset.s;
+    if(confirm('Remove the section "'+(j.sections[i].h||'Untitled')+'"?')){save();j.sections.splice(i,1);db.set('jobs',jobs);viewJob(id)}};
+  $('#del').onclick=()=>{if(confirm('Delete "'+(j.title||'this opening')+'"? This cannot be undone.')){db.set('jobs',jobs.filter(x=>x!==j));location.hash='#jobs';toast('Opening deleted.')}};
+}
+
+/* ================= BLOGS ================= */
+function viewBlogs(){
+  const blogs=db.get('blogs',[]);
+  $('#view').innerHTML=`<div class="narrow"><div class="head"><div><h1>Blogs</h1><p class="sub">Posts for the Knowledge Centre. The Blogs section on the site is still marked "Coming soon".</p></div><a class="b1" href="#blogs/new">+ New blog</a></div><br>`+
+  (blogs.length?`<ul class="list">${blogs.map(b=>`<li><a href="#blogs/${b.id}"><span class="nm">${esc(b.title||'Untitled blog')}</span><span class="fl">${esc(b.author)}${b.author?' · ':''}${fmtDate(b.date)}</span>${statusPill(b.status)}<span class="go">Edit</span></a></li>`).join('')}</ul>`
+   :'<div class="empty"><p>No blogs yet. Write the first one.</p><a class="b1" href="#blogs/new">+ New blog</a></div>')+'</div>';
+}
+function viewBlog(id){
+  let blogs=db.get('blogs',[]);
+  if(id==='new'){const b={id:uid(),title:'',author:'',date:today(),summary:'',body:'',cover:'',status:'Draft'};blogs.unshift(b);db.set('blogs',blogs);return location.replace('#blogs/'+b.id)}
+  const b=blogs.find(x=>x.id===id);if(!b)return location.replace('#blogs');
+  $('#view').innerHTML=`<div class="narrow"><div class="bar"><a href="#blogs" style="font-weight:700;text-decoration:none">← All blogs</a><span class="saved" id="saved"></span><span class="sp"></span><button class="b2 danger" id="del">Delete blog</button></div>
+   <h1>${b.title?'Edit blog':'New blog'}</h1><p class="sub">Fill this in like a form. It saves as you type.</p>
+   <form class="form" id="bf" onsubmit="return false">
+    <div><span class="lab">Status</span>${statusSeg(b.status,['Draft','Published'])}</div>
+    <div><label for="b-title">Title</label><input class="inp" id="b-title" data-k="title" value="${esc(b.title)}" placeholder="Blog title"></div>
+    <div class="two"><div><label for="b-author">Author</label><input class="inp" id="b-author" data-k="author" value="${esc(b.author)}" placeholder="Name of the writer"></div>
+     <div><label for="b-date">Date</label><input class="inp" id="b-date" type="date" data-k="date" value="${esc(b.date)}"></div></div>
+    <div><span class="lab">Cover image</span><div class="imgf"><img id="cv" src="${esc(b.cover)}" alt="" ${b.cover?'':'hidden'}><div><label class="b2" style="width:max-content">${b.cover?'Replace image':'Choose image'}<input type="file" accept="image/*" id="cvf" hidden></label></div></div></div>
+    <div><label for="b-sum">Short summary</label><textarea class="inp" id="b-sum" data-k="summary" rows="3" placeholder="One or two lines shown in the blog list.">${esc(b.summary)}</textarea></div>
+    <div><span class="lab">Blog text</span>${richBox('body',b.body,'Start writing…',['Bold','Heading','List','Link'])}</div>
+   </form></div>`;
+  const form=$('#bf');wireRich(form);
+  const save=()=>{$$('[data-k]',form).forEach(el=>b[el.dataset.k]=el.dataset.k==='body'?el.innerHTML:el.value);if(db.set('blogs',blogs))savedTick()};
+  form.addEventListener('input',save);
+  $('#st').onclick=e=>{const x=e.target.closest('button');if(!x)return;b.status=x.dataset.v;$$('#st button').forEach(y=>y.classList.toggle('on',y===x));save();
+    toast(b.status==='Published'?'Marked Published. It goes live once the backend is connected.':'Saved as a draft.')};
+  $('#cvf').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{b.cover=r.result;const i=$('#cv');i.src=r.result;i.hidden=false;save()};r.readAsDataURL(f)};
+  $('#del').onclick=()=>{if(confirm('Delete "'+(b.title||'this blog')+'"? This cannot be undone.')){db.set('blogs',blogs.filter(x=>x!==b));location.hash='#blogs';toast('Blog deleted.')}};
+}
+
+/* ================= ENQUIRIES (sample rows until the forms are connected) ================= */
+function enquiries(){
+  let e=db.get('enquiries');
+  if(!e){const d=n=>new Date(Date.now()-n*864e5).toISOString().slice(0,10);
+    e=[{id:uid(),form:'Job applications',name:'Sample applicant 1',about:'Manager MEL (Livelihood)',date:d(0),status:'New',notes:'',data:{'Email Address':'sample1@example.com','Phone Number':'00000 00000','City':'Mumbai','Total Experience':'8 years','Notice Period':'60 days','Current CTC':'-','Expected CTC':'-'}},
+       {id:uid(),form:'Job applications',name:'Sample applicant 2',about:'Asst. Manager Communications - (Remote)',date:d(2),status:'In progress',notes:'',data:{'Email Address':'sample2@example.com','Phone Number':'00000 00000','City':'Delhi','Total Experience':'4 years','Notice Period':'30 days','Current CTC':'-','Expected CTC':'-'}},
+       {id:uid(),form:'Catalytic Finance enquiries',name:'Sample enquiry 1',about:'Sample Foundation',date:d(1),status:'New',notes:'',data:{'Role / title':'Programme lead','Work email':'sample3@example.com','Country':'India','Indicative budget range':'-'}},
+       {id:uid(),form:'Catalytic Finance enquiries',name:'Sample enquiry 2',about:'Sample Company',date:d(6),status:'Done',notes:'',data:{'Role / title':'CSR head','Work email':'sample4@example.com','Country':'India','Indicative budget range':'-'}}];
+    db.set('enquiries',e)}
+  return e;
+}
+function viewEnquiries(tab){
+  const all=enquiries(),forms=[...new Set(all.map(e=>e.form))];tab=forms.includes(tab)?tab:forms[0];
+  const rows=all.filter(e=>e.form===tab);
+  $('#view').innerHTML=`<div class="narrow"><div class="head"><div><h1>Enquiries</h1><p class="sub">Everything people send through the website's forms. These are sample rows until the forms are connected.</p></div><button class="b2" id="csv">Download as spreadsheet</button></div>
+   <div class="tabs">${forms.map(f=>`<a class="${f===tab?'b1':'b2'}" href="#enquiries/${encodeURIComponent(f)}">${esc(f)} <span class="pill">${all.filter(e=>e.form===f).length}</span></a>`).join('')}</div>
+   <ul class="list" id="el">${rows.map(e=>`<li data-id="${e.id}"><div class="row"><span class="nm">${esc(e.name)}</span><span class="fl">${esc(e.about)} · ${fmtDate(e.date)}</span>
+     <select class="inp" style="width:auto;min-height:34px;padding:4px 8px" aria-label="Status">${['New','In progress','Done'].map(s=>`<option${s===e.status?' selected':''}>${s}</option>`).join('')}</select><span class="go">Open</span></div><div class="det" hidden>
+     <dl>${Object.entries(e.data).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+     <div><label style="font-weight:700;display:block;margin-bottom:4px">Notes</label><textarea class="inp" rows="3" placeholder="Add a note for your team…">${esc(e.notes)}</textarea></div></div></li>`).join('')}</ul></div>`;
+  const el=$('#el'),item=t=>all.find(e=>e.id===t.closest('li').dataset.id);
+  el.onclick=e=>{if(e.target.closest('select,textarea,.det'))return;const li=e.target.closest('li');if(!li)return;const d=li.querySelector('.det');d.hidden=!d.hidden;li.querySelector('.go').textContent=d.hidden?'Open':'Close'};
+  el.onchange=e=>{if(e.target.tagName==='SELECT'){item(e.target).status=e.target.value;db.set('enquiries',all);drawSide('enquiries');toast('Status updated.')}};
+  el.oninput=e=>{if(e.target.tagName==='TEXTAREA'){item(e.target).notes=e.target.value;db.set('enquiries',all)}};
+  $('#csv').onclick=()=>{const keys=[...new Set(rows.flatMap(r=>Object.keys(r.data)))],q=s=>'"'+String(s??'').replace(/"/g,'""')+'"';
+    const csv=[['Name','About','Received','Status',...keys,'Notes'].map(q).join(','),...rows.map(r=>[r.name,r.about,r.date,r.status,...keys.map(k=>r.data[k]),r.notes].map(q).join(','))].join('\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=tab.toLowerCase().replace(/\s+/g,'-')+'.csv';a.click()};
+}
+
+/* ---------- start ---------- */
+getDoc('index.html').then(d=>{const s=d.querySelector('.brand svg');if(s)$('#logo').innerHTML=s.outerHTML}).catch(()=>{});
+route();
+</script>
+</body>
+</html>
