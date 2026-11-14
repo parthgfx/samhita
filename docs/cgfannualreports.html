@@ -190,7 +190,7 @@ main .hero .hero-media img,main .hero .hero-media img.on{transform:none !importa
 .home-hero .hero-col>h1::before{display:none}
 .home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5);text-align:center}
 .home-hero h1 .pk{color:var(--pink)}
-.home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
+.home-hero .widget{position:relative;z-index:1;margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
 @media (min-width:861px){
   .home-hero .wrap{justify-content:flex-end}
   .home-hero .hero-media img{object-position:30% 20%}
@@ -770,6 +770,12 @@ $$('.why').forEach(function(w){
   if(ims.length<2||ims.length!==ps.length)return;
   function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
   new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
+/* ---- shared: a tabbed banner with one photo per tab (.al-ban img) swaps photo with the tab ---- */
+$$('[data-tabs]').forEach(function(w){
+  var ims=$$('.al-ban img',w);
+  if(ims.length<2)return;
+  w.addEventListener('tabchange',function(e){ims.forEach(function(im,j){im.style.display=j===e.detail?'block':'none'})});
 });
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){

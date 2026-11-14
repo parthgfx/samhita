@@ -190,7 +190,7 @@ main .hero .hero-media img,main .hero .hero-media img.on{transform:none !importa
 .home-hero .hero-col>h1::before{display:none}
 .home-hero .hero-col>h1{background:#fff;color:var(--ink);text-shadow:none;padding:24px 26px 6px;border-radius:6px 6px 0 0;min-height:0;display:block;box-shadow:0 24px 60px -24px rgba(0,0,0,.5);text-align:center}
 .home-hero h1 .pk{color:var(--pink)}
-.home-hero .widget{margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
+.home-hero .widget{position:relative;z-index:1;margin-top:0;border-radius:0 0 6px 6px;box-shadow:0 30px 50px -24px rgba(0,0,0,.4)}
 @media (min-width:861px){
   .home-hero .wrap{justify-content:flex-end}
   .home-hero .hero-media img{object-position:30% 20%}
@@ -618,7 +618,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
       <h2>What we do</h2>
     </div>
     <div class="al-wd shadow rv" data-tabs>
-      <div class="al-ban"><img src="assets/img/revised/alliances-what-we-do.webp" alt="Community members and partners meeting under a tree" width="2000" height="855" loading="lazy"></div>
+      <div class="al-ban"><img src="assets/img/revised/alliances-what-we-do.webp" alt="Community members and partners meeting under a tree" width="2000" height="855" loading="lazy"><img style="display:none" src="assets/img/revised/alliances-what-we-do-2.webp" alt="For program partners" width="1768" height="890" loading="lazy"></div>
         <div class="al-tabs" role="tablist" aria-label="What we do">
           <button class="ptab" role="tab" aria-selected="true"><span class="caps">For anchor partners</span><span class="ln">Build the infrastructure</span></button>
           <button class="ptab" role="tab" aria-selected="false" tabindex="-1"><span class="caps">For program partners</span><span class="ln">We make your money go further than it would alone.</span></button>
@@ -661,7 +661,7 @@ main .hero.hb .widget.hcard h1+.hero-body,main .hero.hb .widget.hcard h1+.widget
     </div>
     <div class="why al-why rv">
       <div class="imgs">
-        <img class="on" src="assets/img/cine/cf-network.webp?v=2" alt="Alliance partners together at a convening" width="1898" height="958" loading="lazy">
+        <img class="on" src="assets/img/revised/alliances-work-lifecycle.webp" alt="Lifecycle" width="2000" height="998" loading="lazy">
         <img src="assets/img/revised/alliances-work-capital.webp" alt="Students in a classroom raising their hands" width="1774" height="887" loading="lazy">
         <img src="assets/img/revised/alliances-work-governance.webp" alt="Partners around a table at a review meeting" width="2000" height="1000" loading="lazy">
         <img src="assets/img/revised/alliances-work-network.webp" alt="A lecture hall of partners at an AI programme launch" width="1774" height="887" loading="lazy">
@@ -853,6 +853,12 @@ $$('.why').forEach(function(w){
   if(ims.length<2||ims.length!==ps.length)return;
   function sync(){ps.forEach(function(p,i){if(p.getAttribute('aria-selected')==='true')ims.forEach(function(im,j){im.classList.toggle('on',j===i)})})}
   new MutationObserver(sync).observe(w,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+});
+/* ---- shared: a tabbed banner with one photo per tab (.al-ban img) swaps photo with the tab ---- */
+$$('[data-tabs]').forEach(function(w){
+  var ims=$$('.al-ban img',w);
+  if(ims.length<2)return;
+  w.addEventListener('tabchange',function(e){ims.forEach(function(im,j){im.style.display=j===e.detail?'block':'none'})});
 });
 /* ---- shared: carousels ---- */
 $$('[data-carousel]').forEach(function(w){
